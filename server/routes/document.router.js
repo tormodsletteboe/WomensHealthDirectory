@@ -22,7 +22,7 @@ router.get('/', (req, res) => { // GET ALL DOCUMENT NAMES AND FILEPATHS FROM DAT
 router.post('/', (req, res) => { // ADD NEW DOCUMENT
   pool.query(`
     INSERT INTO "document" ("name", "file") VALUES ($1, $2)
-    RETURNING "id"
+    RETURNING "id";
   `, [req.body.name, req.body.filePath])
     .then(dbRes => {
       console.log('---- Added new document into database row : ', dbRes.rows);
@@ -36,7 +36,7 @@ router.post('/', (req, res) => { // ADD NEW DOCUMENT
 
 router.delete('/', (req, res) => { // DELETE DOCUMENT VIA ID
   pool.query(`
-    DELETE FROM "document" WHERE "id" = $1
+    DELETE FROM "document" WHERE "id" = $1;
   `, [req.body.id])
     .then(dbRes => {
       console.log('---- Deleted document from row : ', req.body.id);

@@ -4,7 +4,7 @@ const router = express.Router();
 
 router.get('/:id', (req, res) => { // GET ALL CARE GUIDELINES BASED ON AGE RANGE
   pool.query(`
-    SELECT "id", "info" FROM "care_guideline" WHERE "age_id" = $1 ORDER BY "id" ASC
+    SELECT "id", "info" FROM "care_guideline" WHERE "age_id" = $1 ORDER BY "id" ASC;
   `, [req.params.id])
     .then(dbRes => {
       res.send(dbRes.rows);
@@ -18,7 +18,7 @@ router.get('/:id', (req, res) => { // GET ALL CARE GUIDELINES BASED ON AGE RANGE
 router.post('/', (req, res) => { // ADD NEW CARE GUIDELINE BASED ON AGE
   pool.query(`
     INSERT INTO "care_guideline" ("info", "age_id") VALUES ($1, $2)
-    RETURNING "id"
+    RETURNING "id";
   `, [req.body.info, req.body.age_range])
     .then(dbRes => {
       console.log('---- Added new guideline row : ', dbRes.rows);
@@ -46,7 +46,7 @@ router.put('/', (req, res) => { // UPDATE CARE GUIDELINE VIA ID
 
 router.delete('/', (req, res) => { // DELETE CARE GUIDELINE VIA ID
   pool.query(`
-    DELETE FROM "care_guideline" WHERE "id" = $1
+    DELETE FROM "care_guideline" WHERE "id" = $1;
   `, [req.body.id])
     .then(dbRes => {
       console.log('---- Deleted guideline row : ', req.body.id);

@@ -19,7 +19,7 @@ router.post('/', (req, res) => { // ADD NEW QUESTION INTO DATABASE
   pool.query(`
     INSERT INTO "playbook" ("question", "age_range_id", "category_id")
     VALUES ($1, $2, $3)
-    RETURNING "id"
+    RETURNING "id";
   `, [req.body.question, req.body.age_range, req.body.category])
     .then(dbRes => {
       console.log('---- Added new row into "playbook" table ----', dbRes.rows);
