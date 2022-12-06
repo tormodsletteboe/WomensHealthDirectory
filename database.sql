@@ -18,6 +18,7 @@ CREATE TABLE "playbook" ( -- QUESTIONS TO ASK THE DOCTOR
     "category_id" INT REFERENCES "health_category"
 ); -- INSERT INTO "playbook" ("question", "age_range_id", "category_id") VALUES ("Q?", ##, ##);
 -- ADMIN can add, remove, edit
+-- playbook.router.js
 
 CREATE TABLE "care_guideline" ( -- CARE TIMELINE TO FOLLOW
     "id" SERIAL PRIMARY KEY,
@@ -25,6 +26,7 @@ CREATE TABLE "care_guideline" ( -- CARE TIMELINE TO FOLLOW
     "age_id" INT REFERENCES "age_range"
 ); -- INSERT INTO "care_guideline" ("info", "age_id") VALUES ("I?", ##);
 -- ADMIN can add, remove, edit
+-- guideline.router.js
 
 CREATE TABLE "user" ( -- USER INFORMATION
     "id" SERIAL PRIMARY KEY,
@@ -34,17 +36,21 @@ CREATE TABLE "user" ( -- USER INFORMATION
     "age_range_id" INT REFERENCES "age_range",
     "zip_code" INT
 ); -- USER is created upon registration. EMAIL, AGE_RANGE_ID, ZIP_CODE should be editable.
+-- user.router.js
 
-CREATE TABLE "resource" ( -- DOCUMENTS TO UPLOAD / DOWNLOAD
+CREATE TABLE "document" ( -- DOCUMENTS TO UPLOAD / DOWNLOAD
     "id" SERIAL PRIMARY KEY,
-    "document" VARCHAR,
+    "name" VARCHAR,
+    "file" VARCHAR
 ); -- ADMIN can add, remove
+-- document.router.js
 
 CREATE TABLE "physician" ( -- PHYSICIANS TO BE DISPLAYED
     "id" SERIAL PRIMARY KEY,
     "name" VARCHAR,
     "email" VARCHAR
 ); -- ADMIN can add, remove, edit
+-- physician.router.js
 
 CREATE TABLE "feedback" (
     "id" SERIAL PRIMARY KEY,
@@ -53,6 +59,7 @@ CREATE TABLE "feedback" (
     "user_id" INT REFERENCES "user"
 ); -- USER adds rows when submitting a feedback form. user_id = req.user.id;
 -- ADMIN can remove (?)
+-- feedback.router.js
 
 INSERT INTO "age_range" ("age") VALUES ("21-25"), ("26-30"), ("31-35"), ("36-40"), ("41-45"), ("46-50"), ("51-55"), ("56-60");
 /*
