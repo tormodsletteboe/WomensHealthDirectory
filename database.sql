@@ -46,13 +46,6 @@ CREATE TABLE "physician" ( -- PHYSICIANS TO BE DISPLAYED
     "email" VARCHAR
 ); -- ADMIN can add, remove, edit
 
-CREATE TABLE "click_analytics" ( -- KEEP TRACK OF WHAT PAGE IS CLICKED FROM WHAT ZIP CODE A USER IS
-    "id" SERIAL PRIMARY KEY,
-    "page" VARCHAR,
-    "zip_code" INT
-) -- INSERT INTO "click_analytics" ("page", "zip_code") VALUES ("/page_route", ##) ; where zip_code is = req.user.zip_code
--- ADDS A ROW WHENEVER A CLICK HAPPENS IF(req.isAuthenticated());
-
 CREATE TABLE "feedback" (
     "id" SERIAL PRIMARY KEY,
     "rating" INT,
