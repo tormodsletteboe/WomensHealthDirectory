@@ -20,7 +20,7 @@ router.post('/', (req, res) => { // ADD NEW QUESTION INTO DATABASE
     INSERT INTO "playbook" ("question", "age_range_id", "category_id")
     VALUES ($1, $2, $3)
     RETURNING "id";
-  `, [req.body.question, req.body.age_range, req.body.category])
+  `, [req.body.question, req.body.age_range_id, req.body.category_id])
     .then(dbRes => {
       console.log('---- Added new row into "playbook" table ----', dbRes.rows);
       res.sendStatus(201);
@@ -34,7 +34,7 @@ router.post('/', (req, res) => { // ADD NEW QUESTION INTO DATABASE
 router.put('/', (req, res) => { // UPDATE QUESTION INFORMATION
   pool.query(`
     UPDATE "playbook" SET "question" = $1, "age_range_id" = $2, "category_id" = $3 WHERE "id" = $4;
-  `, [req.body.question, req.body.age_range, req.body.category, req.body.id])
+  `, [req.body.question, req.body.age_range_id, req.body.category_id, req.body.id])
     .then(dbRes => {
       console.log('---- Updated in playbook table row : ', req.body.id);
       res.sendStatus(200);

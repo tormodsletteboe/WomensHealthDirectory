@@ -20,7 +20,7 @@ router.get('/avg', (req, res) => { // GET AVERAGE OF ALL RATINGS
     SELECT AVG("rating") as average_rating FROM "feedback";
   `)
     .then(dbRes => {
-      res.send(dbRes.rows);
+      res.send(dbRes.rows[0].average_rating);
     })
     .catch(error => {
       console.log(error);
