@@ -1,13 +1,24 @@
 import axios from "axios";
 import { put, takeLatest } from "redux-saga/effects"
 
+///////////////////////////////////////////////////////////////
+/*
+    This file is scheduled for changes!
+
+    TODO: 
+        delete entirely
+                OR 
+        implement for a different reducer/endpoint
+*/
+///////////////////////////////////////////////////////////////
+
 function* fetchGuidelines() {
     try {
         let res = yield axios.get('/api/guideline');
 
-        yield put({ type:'SET_', payload: res.data });
+        yield put({ type:'SET_GUIDELINE_ARRAY', payload: res.data });
     } catch (err) {
-        console.log('Unable to get ____ from table', err);
+        console.log('Unable to get guidelines from table', err);
     }
 }
 
@@ -21,9 +32,9 @@ function* addToGuidelines({ payload }) {
     try {
         yield axios.post('/api/guideline', payload );
 
-        yield put({ type:'FETCH_' });
+        yield put({ type:'FETCH_GUIDELINES' });
     } catch (err) {
-        console.log('Unable to add ____ to table', err);
+        console.log('Unable to add new guideline to table', err);
     }
 }
 
@@ -38,9 +49,9 @@ function* updateGuidelines({ payload }) {
     try {
         yield axios.put('/api/guideline', payload );
 
-        yield put({ type:'FETCH_' });
+        yield put({ type:'FETCH_GUIDELINES' });
     } catch (err) {
-        console.log('Unable to update ____ to table', err);
+        console.log('Unable to update guideline to table', err);
     }
 }
 
@@ -51,13 +62,13 @@ function* deleteFromGuidelines({ payload }) {
     try {
         yield axios.delete('/api/guideline', {id: payload} );
 
-        yield put({ type:'FETCH_' });
+        yield put({ type:'FETCH_GUIDELINES' });
     } catch (err) {
-        console.log('Unable to delete ____ from table', err);
+        console.log('Unable to delete guideline from table', err);
     }
 }
 
-export default function* Saga() {
+export default function* guidelineSaga() {
     takeLatest('FETCH_GUIDELINES', fetchGuidelines);
     takeLatest('ADD_TO_GUIDELINES', addToGuidelines);
     takeLatest('UPDATE_GUIDELINES', updateGuidelines);

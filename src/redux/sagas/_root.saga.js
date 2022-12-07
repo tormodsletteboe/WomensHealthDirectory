@@ -1,7 +1,9 @@
 import { all } from 'redux-saga/effects';
 import documentSaga from './document.saga';
 import feedbackSaga from './feedback.saga';
+import guidelineSaga from './guideline.saga';
 import loginSaga from './login.saga';
+import physicianSaga from './physician.saga';
 import playbookSaga from './playbook.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
@@ -21,5 +23,7 @@ export default function* rootSaga() {
     playbookSaga(),
     documentSaga(),
     feedbackSaga(),
+    guidelineSaga(),
+    physicianSaga()
   ]);
 }

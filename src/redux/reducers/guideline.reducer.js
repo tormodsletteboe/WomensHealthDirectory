@@ -8,3 +8,14 @@ const array = (state = [], action) => {
 
 // const gl = useSelector(store => store.guideline);
 export default array; // gl[]
+
+///////////////////////////////////////////////////////////////
+/*
+    This file is scheduled for changes!
+
+    TODO: 
+        delete entirely
+                OR 
+        implement for a different endpoint
+*/
+///////////////////////////////////////////////////////////////

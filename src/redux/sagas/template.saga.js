@@ -10,51 +10,53 @@ import { put, takeLatest } from "redux-saga/effects"
         put dispatches, and takeLatest saga points
 
         Be sure to create a corresponding .reducer.js
+
+        Necessary changes will be marked with a commented **
 */
 
-function* fetch() {
+function* fetch() { // **
     try {
-        let res = yield axios.get('/api/');
+        let res = yield axios.get('/api/'); // **
 
-        yield put({ type:'SET_', payload: res.data });
+        yield put({ type:'SET_', payload: res.data }); // **
     } catch (err) {
-        console.log('Unable to get ____ from table', err);
+        console.log('Unable to get ____ from table', err); // **
     }
 }
 
-function* addTo() {
+function* addTo() { // **
     try {
-        yield axios.post('/api/', {} );
+        yield axios.post('/api/', {} ); // **
 
-        yield put({ type:'FETCH_' });
+        yield put({ type:'FETCH_' }); // **
     } catch (err) {
-        console.log('Unable to add ____ to table', err);
+        console.log('Unable to add ____ to table', err); // **
     }
 }
 
-function* update() {
+function* update() { // **
     try {
-        yield axios.put('/api/', {} );
+        yield axios.put('/api/', {} ); // **
 
-        yield put({ type:'FETCH_' });
+        yield put({ type:'FETCH_' }); // **
     } catch (err) {
-        console.log('Unable to update ____ to table', err);
+        console.log('Unable to update ____ to table', err); // **
     }
 }
 
-function* deleteFrom() {
+function* deleteFrom() { // **
     try {
-        yield axios.delete('/api/', {} );
+        yield axios.delete('/api/', {} ); // **
 
-        yield put({ type:'FETCH_' });
+        yield put({ type:'FETCH_' }); // **
     } catch (err) {
-        console.log('Unable to delete ____ from table', err);
+        console.log('Unable to delete ____ from table', err); // **
     }
 }
 
-export default function* Saga() {
-    takeLatest('FETCH_', fetch);
-    takeLatest('ADD_TO_', addTo);
-    takeLatest('UPDATE_', update);
-    takeLatest('DELETE_FROM_', deleteFrom);
+export default function* Saga() { // **
+    takeLatest('FETCH_', fetch); // **
+    takeLatest('ADD_TO_', addTo); // **
+    takeLatest('UPDATE_', update); // **
+    takeLatest('DELETE_FROM_', deleteFrom); // **
 }
