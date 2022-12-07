@@ -8,3 +8,14 @@ const array = (state = [], action) => {
 
 // const pb = useSelector(store => store.playbook);
 export default array; // pb[];
+
+///////////////////////////////////////////////////////////////
+/*
+    This file is scheduled for changes!
+
+    TODO: 
+        delete entirely
+                OR 
+        implement for a different endpoint
+*/
+///////////////////////////////////////////////////////////////

@@ -23,7 +23,7 @@ CREATE TABLE "playbook" ( -- QUESTIONS TO ASK THE DOCTOR
 CREATE TABLE "care_guideline" ( -- CARE TIMELINE TO FOLLOW
     "id" SERIAL PRIMARY KEY,
     "info" VARCHAR,
-    "age_id" INT REFERENCES "age_range"
+    "age_range_id" INT REFERENCES "age_range"
 ); -- INSERT INTO "care_guideline" ("info", "age_id") VALUES ("I?", ##);
 -- ADMIN can add, remove, edit
 -- guideline.router.js
@@ -34,8 +34,7 @@ CREATE TABLE "user" ( -- USER INFORMATION
     "password" VARCHAR,
     "email" VARCHAR,
     "age_range_id" INT REFERENCES "age_range",
-    "zip_code" INT
-); -- USER is created upon registration. EMAIL, AGE_RANGE_ID, ZIP_CODE should be editable.
+); -- USER is created upon registration. EMAIL, AGE_RANGE_ID should be editable.
 -- user.router.js
 
 CREATE TABLE "document" ( -- DOCUMENTS TO UPLOAD / DOWNLOAD
@@ -61,7 +60,16 @@ CREATE TABLE "feedback" (
 -- ADMIN can remove (?)
 -- feedback.router.js
 
-INSERT INTO "age_range" ("age") VALUES ("21-25"), ("26-30"), ("31-35"), ("36-40"), ("41-45"), ("46-50"), ("51-55"), ("56-60");
+INSERT INTO "age_range" ("age") 
+VALUES 
+    ("21-25"), 
+    ("26-30"), 
+    ("31-35"), 
+    ("36-40"), 
+    ("41-45"), 
+    ("46-50"), 
+    ("51-55"), 
+    ("56-60");
 /*
    AGE    RANGE
     1     21 - 25
@@ -74,7 +82,14 @@ INSERT INTO "age_range" ("age") VALUES ("21-25"), ("26-30"), ("31-35"), ("36-40"
     8     56 - 60
 */
 
-INSERT INTO "health_category" ("category") VALUES ("gynecology"), ("cancers"), ("hormone therapy"), ("diseases")
+INSERT INTO "health_category" ("category") 
+VALUES 
+    ("breast health"), 
+    ("cervical health"), 
+    ("hormonal therapy"), 
+    ("mental health"), 
+    ("physical therapy"),
+    ("reproductive health");
 /*
     ID      CATEGORY
     1       gynecology
