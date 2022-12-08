@@ -70,7 +70,7 @@ function* updatePlaybook({ payload }) {
         category_id: int
     };
 */
-function deleteFromPlaybook({ payload }) {
+function* deleteFromPlaybook({ payload }) {
     try {
         yield axios.delete('/api/playbook', { id: payload.id });
 
