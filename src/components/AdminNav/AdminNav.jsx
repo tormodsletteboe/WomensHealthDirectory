@@ -1,7 +1,7 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import LogOutButton from "../LogOutButton/LogOutButton";
-import "../Nav/Nav";
+import './AdminNav';
 import { useSelector } from "react-redux";
 
 function AdminNav() {

@@ -55,7 +55,7 @@ function App() {
             exact
             path="/membership"
           >
-            <Membership />
+            {/* <Membership /> */}
           </Route>
 
     
@@ -69,7 +69,7 @@ function App() {
             exact
             path="/preventativecare"
           >
-            <PreventativeCare />
+            {/* <PreventativeCare /> */}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -77,7 +77,7 @@ function App() {
             exact
             path="/resources"
           >
-            <Resources />
+            {/* <Resources /> */}
           </ProtectedRoute>
 
           <ProtectedRoute

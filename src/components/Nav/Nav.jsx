@@ -87,14 +87,11 @@ function Nav() {
             <Link className="navLink" to="/user">
               Home
             </Link>
-
             <LogOutButton className="logout" />
           </>
         )}
 
-        <Link className="navLink" to="/about">
-          About
-        </Link>
+       
       </div>
       {/* "Hamburger menu" / "Bar icon" to toggle the navigation links */}
       <div className="icon">
