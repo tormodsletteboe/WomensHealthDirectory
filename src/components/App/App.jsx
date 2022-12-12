@@ -20,9 +20,9 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-
 import './App.css';
 import AdminLandingPage from '../AdminLandingPage/AdminLandingPage';
+import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
 
 function App() {
   const dispatch = useDispatch();
@@ -152,6 +152,19 @@ function App() {
             }
           </ProtectedRoute>
 
+          <ProtectedRoute
+            exact
+            path="/adminprevcare"
+          >
+            {user.id && user.access_level==1?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <AdminPreventativeCare />
+              :
+              // Otherwise, show the Landing page
+              <Redirect to="/home" />
+            }
+          </ProtectedRoute>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
