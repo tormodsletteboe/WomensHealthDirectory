@@ -1,15 +1,15 @@
-import React from "react";
-import { Link } from "react-router-dom";
-import LogOutButton from "../LogOutButton/LogOutButton";
-import './AdminNav';
-import { useSelector } from "react-redux";
+import React from 'react';
+import { Link } from 'react-router-dom';
+import LogOutButton from '../LogOutButton/LogOutButton';
+import './AdminNav.css';
+import { useSelector } from 'react-redux';
 
 function AdminNav() {
   const user = useSelector((store) => store.user);
 
   return (
     <div className="nav">
-      <Link to="/admin_home">
+      <Link to="/home">
         <h2 className="nav-title">Prime Solo Project</h2>
       </Link>
       <div>
@@ -22,23 +22,20 @@ function AdminNav() {
         )}
 
         {/* If a user is logged in, show these links */}
-        {user.id && user.access_level ==1 && (
+        {user.id && (
           <>
-            <Link className="navLink" to="/admin_preventative_care">
-              Preventative Care
+            <Link className="navLink" to="/user">
+              Home
             </Link>
 
-            <Link className="navLink" to="/admin_resources">
-              Resources
-            </Link>
-
-            <Link className="navLink" to="/admin">
-             Home
+            <Link className="navLink" to="/info">
+              Info Page
             </Link>
 
             <LogOutButton className="navLink" />
           </>
         )}
+
         <Link className="navLink" to="/about">
           About
         </Link>
