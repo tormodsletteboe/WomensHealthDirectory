@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
+import AdminNav from '../AdminNav/AdminNav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -21,6 +22,7 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 
 import './App.css';
+import AdminLandingPage from '../AdminLandingPage/AdminLandingPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -34,7 +36,7 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        {user.id && user.access_level==1 ? <AdminNav /> : <Nav />}
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -53,7 +55,7 @@ function App() {
             exact
             path="/membership"
           >
-            <Membership />
+            {/* <Membership /> */}
           </Route>
 
     
@@ -67,7 +69,7 @@ function App() {
             exact
             path="/preventativecare"
           >
-            <PreventativeCare />
+            {/* <PreventativeCare /> */}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -75,7 +77,7 @@ function App() {
             exact
             path="/resources"
           >
-            <Resources />
+            {/* <Resources /> */}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -135,6 +137,20 @@ function App() {
               <LandingPage />
             }
           </Route>
+
+          <ProtectedRoute
+            exact
+            path="/admin"
+          >
+            {user.id && user.access_level==1?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <AdminLandingPage />
+              :
+              // Otherwise, show the Landing page
+              <Redirect to="/home" />
+            }
+          </ProtectedRoute>
 
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
