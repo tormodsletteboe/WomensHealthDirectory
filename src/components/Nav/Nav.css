@@ -1,42 +1,76 @@
-.nav {
-  /* flex box layout */
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
 
-  margin: 0 0 30px;
-  background-color: #00acb0;
+/* Style the navigation menu */
+.topnav {
   overflow: hidden;
+  background-color: #8EBBA7;
+  position: relative;
 }
 
-.nav a {
-  text-decoration: none;
+/* Hide the links inside the navigation menu (except for logo/home) */
+.topnav #myLinks {
+  display: none;
+  justify-content: center;
 }
 
-.nav-title {
-  font-size: 24px;
-  font-weight: 700;
-  color: #f2f2f2;
-  padding-left: 10px;
-  margin: 0;
-}
-
-.navLink {
-  display: inline-block;
-  color: #f2f2f2;
-  background-color: #00acb0;
+.navTitle{
+  font-size: 9px;
   text-align: center;
-  padding: 24px 10px;
+  font-weight: lighter;
+}
+
+/* Style navigation menu links */
+.topnav a {
+  color: white;
+  padding: 4px 16px;
   text-decoration: none;
-  font-size: 15px;
+  font-size: 14px;
+  display: block;
+}
 
-  /* these last two make the logout button in
-  the nav bar look like another link */
+/* Style the hamburger menu */
+.icon {
+  background: #8EBBA7;
+  display: block;
+  position: absolute;
+  left: 0;
+  top: 0;
+  margin-left: 14px;
+  margin-top: 14px;
+}
+
+/* Add a grey background color on mouse-over */
+.topnav a:hover {
+  background-color: #276359;
+  color: white;
+}
+
+/* Style the active link (or home/logo) */
+.active {
+  background-color: #8EBBA7;
+  color: white;
+}
+
+.logout{
   border: none;
-  cursor: pointer;
-  outline: 0;
+  background-color: #8EBBA7;
+  color: white;
+  font-size: 14px;
+  padding-bottom: 14px;
+  padding-top: 14px;
+  padding-left: 16px;
+
 }
 
-.navLink:hover {
-  background-color: #008183;
+.join {
+  position: absolute;
+  right: 0px;
+  top: 5px;
 }
+
+Button:hover{
+  background-color: #276359;
+}
+
+
+
+
