@@ -51,6 +51,11 @@ function LandingPage() {
           </CardActions>
         </Card>
 
+        <Box className='grid-col_12' id='newsletter'>
+          <h1>Subscribe to our Newsletter!</h1>
+          <Typography paragraph>Get weekly news and updates of how to advocate for your health!</Typography>
+          <Button sx={({ '&:hover': { opacity: 0.7 }})} variant='outlined'>Subscribe</Button>
+        </Box>
       </div>
     </div>
   );
