@@ -4,63 +4,53 @@ import './LandingPage.css';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
+import { Button, Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
+import { Box } from '@mui/system';
 
 function LandingPage() {
-  const [heading, setHeading] = useState('Welcome');
+  const [heading, setHeading] = useState('Welcome to the ViFi!');
   const history = useHistory();
 
-  const onLogin = (event) => {
-    history.push('/login');
-  };
+  const learnMore = () => {
+    history.push('/membership');
+  }
 
   return (
     <div className="container">
       <h2>{heading}</h2>
 
-      <div className="grid">
-        <div className="grid-col grid-col_8">
-          <p>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur
-            id felis metus. Vestibulum et pulvinar tortor. Morbi pharetra lacus
-            ut ex molestie blandit. Etiam et turpis sit amet risus mollis
-            interdum. Suspendisse et justo vitae metus bibendum fringilla sed
-            sed justo. Aliquam sollicitudin dapibus lectus, vitae consequat odio
-            elementum eget. Praesent efficitur eros vitae nunc interdum, eu
-            interdum justo facilisis. Sed pulvinar nulla ac dignissim efficitur.
-            Quisque eget eros metus. Vestibulum bibendum fringilla nibh a
-            luctus. Duis a sapien metus.
-          </p>
+      <div id="landingPage" className='grid'>
+        <Box className='grid-col_12' id='intro'>
+          <Typography paragraph>
+            A women's health directory created to assist women in
+            advocating for their health by educating users in healthcare
+            guidelines, preventative care, and questions to grill
+            your doctor with in order to make a statement that your health
+            is not to be trifled with. To arms!
+          </Typography>
+          <Button sx={({ align: 'center' })} variant='contained' onClick={() => history.push('/membership')}>Click Here to Learn More</Button>
+        </Box>
+        
+        <Card variant='outlined' className='grid-col_12'>
+          <CardHeader title='Preventative Care' subheader='What to look for before it happens'></CardHeader>
+          <CardContent>
+            <Typography paragraph>Info Info Info</Typography>
+          </CardContent>
+          <CardActions disableSpacing>
+            <Button variant='contained' onClick={() => history.push('/preventativecare')}>Learn More</Button>
+          </CardActions>
+        </Card>
 
-          <p>
-            Praesent consectetur orci dui, id elementum eros facilisis id. Sed
-            id dolor in augue porttitor faucibus eget sit amet ante. Nunc
-            consectetur placerat pharetra. Aenean gravida ex ut erat commodo, ut
-            finibus metus facilisis. Nullam eget lectus non urna rhoncus
-            accumsan quis id massa. Curabitur sit amet dolor nisl. Proin
-            euismod, augue at condimentum rhoncus, massa lorem semper lacus, sed
-            lobortis augue mi vel felis. Duis ultrices sapien at est convallis
-            congue.
-          </p>
+        <Card variant='outlined' className='grid-col_12'>
+          <CardHeader title='Resources' subheader='Educational resources'></CardHeader>
+          <CardContent>
+            <Typography paragraph>Info Info Info</Typography>
+          </CardContent>
+          <CardActions disableSpacing>
+            <Button variant='contained' onClick={() => history.push('/resources')}>Learn More</Button>
+          </CardActions>
+        </Card>
 
-          <p>
-            Fusce porta diam ac tortor elementum, ut imperdiet metus volutpat.
-            Suspendisse posuere dapibus maximus. Aliquam vitae felis libero. In
-            vehicula sapien at semper ultrices. Vivamus sed feugiat libero. Sed
-            sagittis neque id diam euismod, ut egestas felis ultricies. Nullam
-            non fermentum mauris. Sed in enim ac turpis faucibus pretium in sit
-            amet nisi.
-          </p>
-        </div>
-        <div className="grid-col grid-col_4">
-          <RegisterForm />
-
-          <center>
-            <h4>Already a Member?</h4>
-            <button className="btn btn_sizeSm" onClick={onLogin}>
-              Login
-            </button>
-          </center>
-        </div>
       </div>
     </div>
   );
