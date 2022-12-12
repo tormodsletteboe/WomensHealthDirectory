@@ -13,7 +13,7 @@ function RegisterForm() {
 
   const registerUser = (event) => {
     event.preventDefault();
-    console.log('zip',zip);
+   
     dispatch({
       type: 'REGISTER',
       payload: {
