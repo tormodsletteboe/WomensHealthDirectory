@@ -187,7 +187,8 @@ ALTER TABLE "guidelines" ADD CONSTRAINT "guidelines_fk1" FOREIGN KEY ("age_range
 
 
 
-
+INSERT INTO "health_category" ("category")
+VALUES ('Reproductive Health'), ('Cervical Health'), ('Menopause'), ('Mental Health'), ('Physical Therapy'), ('Breast Health');
 
 
 

@@ -14,7 +14,7 @@ function PreventativeCare() {
         console.log('in handleAgeFormSubmit');
         event.preventDefault();
 
-        dispatchEvent({
+        dispatch({
             type: 'SEND_AGE',
             payload: age
         })
