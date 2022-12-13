@@ -23,7 +23,7 @@ function* fetchHealthCategories(action) {
 
 }
 
-function* healthCategoriesCareSaga() {
+function* healthCategoriesSaga() {
     yield takeLatest('SEND_AGE', fetchHealthCategories);
 
 }

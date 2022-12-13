@@ -26,7 +26,7 @@ function PreventativeCare() {
 
     return(
     <>
-    <h1>Recommended Screening Guidelines</h1>
+    <h2>Recommended Screening Guidelines</h2>
 
     <form onSubmit={handleAgeFormSubmit}>
                 <select onChange={handleAgeChange}>
@@ -49,6 +49,14 @@ function PreventativeCare() {
                 </select>
                 <button type="submit">Submit</button>
     </form>
+    
+    {healthCategories.map(category => (
+    <ul key = {category.id}>
+        <li>{category}</li>
+    </ul>
+    ))}
+    
+
     </>
     );
 
