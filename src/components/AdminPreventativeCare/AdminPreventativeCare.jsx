@@ -23,20 +23,23 @@ function AdminPreventativeCare() {
 
     // fetch categories
 
-
     const handleChange = (event) => {
+        event.preventdefault();
         setAge(event.target.value);
     };
 
     return (
         <>
-            <label for="ageRange"> Choose Your Age Range </label>
+            <label htmlFor="ageRange"> Choose Your Age Range </label>
             <select name="ageRange" id="ageRangeSelect">
                 {ageRanges.map(ageRange => 
-                (<option key={ageRange.id} value={`{ageRange.low} - {ageRange.high}`}>
+                (<option key={ageRange.id} value={`{ageRange.low} - {ageRange.high}`} 
+                onClick={eventt=>(handleChange(event))}>
                     {ageRange.low} - {ageRange.high}
                 </option>))}
             </select>
+
+            <h2>{age}</h2>
         </>
     )
 }
