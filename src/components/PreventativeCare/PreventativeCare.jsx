@@ -42,7 +42,7 @@ function PreventativeCare() {
 
     return(
     <>
-    <h2>Recommended Screening Guidelines</h2>
+    <h4>Recommended Screening Guidelines</h4>
 
     <form onSubmit={handleAgeFormSubmit}>
                 <select onChange={handleAgeChange}>
@@ -63,16 +63,14 @@ function PreventativeCare() {
                     <option value="44">44</option>
                     <option value="45">45</option>
                 </select>
-                <button type="submit">Submit</button>
+                <Button variant="contained" style={{backgroundColor:'#276359'}} type="submit">Submit</Button>
     </form>
     
     {healthCategories.map(category => (
     <ul key={category.id}>
-        <li><Button variant="contained" onClick={() => handleCategoryClick(category)} style={{backgroundColor: '#8EBBA7', color: '#FFFFFF' }}>{category.category}</Button></li>
+        <li><Button variant="contained" onClick={() => handleCategoryClick(category)} style={{backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>{category.category}</Button></li>
     </ul>
     ))}
-    
-
     </>
     );
 
