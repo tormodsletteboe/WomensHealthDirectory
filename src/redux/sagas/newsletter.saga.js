@@ -1,7 +1,7 @@
 import axios from "axios";
 import { put, takeLatest } from "redux-saga/effects";
 
-function* fetch() {
+function* fetchNewsletter() {
     try {
         let res = yield axios.get('/api/');
 
@@ -11,15 +11,16 @@ function* fetch() {
     }
 }
 
-function* addToNewsletter({ payload }) {
+function* addToNewsletter(action) {
+    console.log('IN NEWSLETTER SAGA');
     try {
-        yield axios.post('/api/newsletter', {email: payload});
+        yield axios.post('/api/newsletter', {email: action.payload});
     } catch (err) {
         console.log('Unable to add newsletter from table', err);
     }
 }
 
 export default function* newsletterSaga() {
-    takeLatest('FETCH_', fetch);
-    takeLatest('ADD_TO_NEWSLETTER', addToNewsletter);
+    yield takeLatest('FETCH_NEWSLETTER', fetchNewsletter);
+    yield takeLatest('ADD_TO_NEWSLETTER', addToNewsletter);
 }

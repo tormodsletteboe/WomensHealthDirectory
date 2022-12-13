@@ -9,7 +9,7 @@ router.get('/', (req, res) => {
 router.post('/', (req, res) => {
   pool.query(`
     INSERT INTO "newsletter" ("email")
-    VALUES ($1)
+    VALUES ($1);
   `, [req.body.email])
     .then(dbRes => {
       console.log('---- Added new email to newsletter table');
