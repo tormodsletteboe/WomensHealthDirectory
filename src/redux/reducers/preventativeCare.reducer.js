@@ -1,4 +1,4 @@
-const preventativeCare = (state = [], action) => {
+const healthCategories = (state = [], action) => {
 
     if (action.type === 'STORE_HEALTH_CATEGORIES') {
         return action.payload;
@@ -6,4 +6,4 @@ const preventativeCare = (state = [], action) => {
     return state;
 };
 
-export default preventativeCare;
+export default healthCategories;

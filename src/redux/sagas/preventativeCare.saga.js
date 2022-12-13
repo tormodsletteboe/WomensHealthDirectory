@@ -23,9 +23,9 @@ function* fetchHealthCategories(action) {
 
 }
 
-function* preventativeCareSaga() {
+function* healthCategoriesCareSaga() {
     yield takeLatest('SEND_AGE', fetchHealthCategories);
 
 }
 
-export default preventativeCareSaga;
+export default healthCategoriesSaga;

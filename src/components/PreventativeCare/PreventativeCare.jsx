@@ -1,10 +1,13 @@
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {useState} from 'react';
 
 function PreventativeCare() {
     
     const dispatch = useDispatch();
     const [age, setAge] = useState('');
+    const healthCategories = useSelector((store)=>{
+        return store.healthCategories;
+    })
 
     const handleAgeChange  = (event) => {
         setAge(event.target.value);
