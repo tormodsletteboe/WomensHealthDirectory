@@ -6,9 +6,7 @@ import {
   Switch,
 
 } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import Nav from "../Nav/Nav";
 import AdminNav from "../AdminNav/AdminNav";
 import Footer from "../Footer/Footer";
@@ -19,7 +17,6 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import PreventativeCare from '../PreventativeCare/PreventativeCare';
-import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
 import "./App.css";
 import AdminLandingPage from "../AdminLandingPage/AdminLandingPage";
