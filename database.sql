@@ -203,3 +203,11 @@ VALUES ('What is the first step?', 'Depending on your age, you still start with 
 ('How do the tests differ?', 'The sample is collected in the same way with a pap and HPV. The difference is in how the sample is tested and evaluated. The pap is subjective with human reading, while the HPV test is objective using an analyzer.', 7, 5), 
 ('I am positive. Now what?', 'Your test sample will go on for further testing, HPV, Pap, or triage biomarker. From there, you may be asked to come in for a visual examination using a colposcope to better see your cervix. This is called a colposcopy.', 7, 5),
 ('What do these numbers mean?', 'There are 14 identified high-risk HPV genotypes, which is what HPV testing is looking for. HPV causes 99% of all cervical cancers, with HPV 16 and 18 causing 70% of those cases. You will want to follow up with your provider for next steps and more details.', 7, 5);
+
+INSERT INTO "diagnostic_tool" ("name", "info", "health_category_id", "age_range_id")
+VALUES ('Pap smear', 'Developed in the 1970s, subjective screening model--looks for abnormal cells', 7, 5), 
+('HPV Testing', 'FDA approved in 1997, objective--Looks for HPV virus (causes 99% of all cervical cancer', 7, 5),
+('Primary screening', 'HPV test-only', 7, 5),
+('Co-testing', 'HPV and Pap smear ordered at the same time', 7, 5),
+('Triage testing', 'Dual-stain biomarkers--Looks for transformation of cells', 7, 5),
+('Colposcopy', 'Physical exam with camera', 7, 5);
