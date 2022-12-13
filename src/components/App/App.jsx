@@ -9,6 +9,7 @@ import {
 import { useDispatch, useSelector } from 'react-redux';
 
 import Nav from '../Nav/Nav';
+import AdminNav from '../AdminNav/AdminNav';
 import Footer from '../Footer/Footer';
 
 import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
@@ -20,7 +21,9 @@ import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import PreventativeCare from '../PreventativeCare/PreventativeCare';
+import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
 import './App.css';
+import AdminLandingPage from '../AdminLandingPage/AdminLandingPage';
 
 function App() {
   const dispatch = useDispatch();
@@ -34,11 +37,18 @@ function App() {
   return (
     <Router>
       <div>
-        <Nav />
+        {user.id && user.access_level==1 ? <AdminNav /> : <Nav />}
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
 
+
+          <Route 
+            exact
+            path="/adminprevcare">
+            
+            <AdminPreventativeCare />
+          </Route>
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
             // shows AboutPage at all times (logged in or not)
@@ -53,10 +63,14 @@ function App() {
             exact
             path="/membership"
           >
+
             <Membership />
           </Route> */}
 
-    
+            {/* <Membership /> */}
+          
+
+
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -75,6 +89,7 @@ function App() {
             exact
             path="/resources"
           >
+
             <Resources />
           </ProtectedRoute> */}
 
@@ -136,6 +151,33 @@ function App() {
             }
           </Route>
 
+          <ProtectedRoute
+            exact
+            path="/admin"
+          >
+            {user.id && user.access_level==1?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <AdminLandingPage />
+              :
+              // Otherwise, show the Landing page
+              <Redirect to="/home" />
+            }
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/adminprevcare"
+          >
+            {user.id && user.access_level==1?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <AdminPreventativeCare />
+              :
+              // Otherwise, show the Landing page
+              <Redirect to="/home" />
+            }
+          </ProtectedRoute>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>

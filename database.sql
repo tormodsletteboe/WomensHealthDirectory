@@ -194,7 +194,7 @@ VALUES ('Reproductive Health'), ('Cervical Health'), ('Menopause'), ('Mental Hea
 
 
 
-
-
-
+INSERT INTO "age_range" ("low", "high")
+VALUES (15, 19), (20, 24), (25, 29), (30, 34), (35, 39), (40, 44), (45, 49), (50, 54), (55, 59), (60, 64), (65, 69), (70, 74), (75, 79)
+;
 

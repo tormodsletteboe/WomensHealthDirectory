@@ -15,6 +15,7 @@ const guidelineRouter = require('./routes/guideline.router');
 const feedbackRouter = require('./routes/feedback.router');
 const documentRouter = require('./routes/document.router');
 const preventativecareRouter=require('./routes/preventativecare.router');
+const ageRangeRouter = require('./routes/agerange.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -35,6 +36,7 @@ app.use('/api/guideline', guidelineRouter);
 app.use('/api/feedback', feedbackRouter);
 app.use('/api/document', documentRouter);
 app.use('/api/preventativecare', preventativecareRouter);
+app.use('/api/agerange', ageRangeRouter);
 
 // Serve static files
 app.use(express.static('build'));
