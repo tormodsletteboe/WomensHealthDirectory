@@ -1,19 +1,17 @@
-import React, { useEffect } from 'react';
+import React, { useEffect } from "react";
 import {
   HashRouter as Router,
   Redirect,
   Route,
   Switch,
-} from 'react-router-dom';
 
-import { useDispatch, useSelector } from 'react-redux';
+} from "react-router-dom";
 
-import Nav from '../Nav/Nav';
-import AdminNav from '../AdminNav/AdminNav';
-import Footer from '../Footer/Footer';
+import { useDispatch, useSelector } from "react-redux";
 
-import ProtectedRoute from '../ProtectedRoute/ProtectedRoute';
-
+import Nav from "../Nav/Nav";
+import AdminNav from "../AdminNav/AdminNav";
+import Footer from "../Footer/Footer";
 import AboutPage from '../AboutPage/AboutPage';
 import UserPage from '../UserPage/UserPage';
 import InfoPage from '../InfoPage/InfoPage';
@@ -22,22 +20,38 @@ import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
 import PreventativeCare from '../PreventativeCare/PreventativeCare';
 import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
-import './App.css';
-import AdminLandingPage from '../AdminLandingPage/AdminLandingPage';
+import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
+import "./App.css";
+import AdminLandingPage from "../AdminLandingPage/AdminLandingPage";
+import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
+import AdminResources from "../AdminResources/AdminResources";
+
+//function used to redirect if its admin loggin in or user logging in
+function UserOrAdmin(user) {
+  if (user.id && user.access_level == 0) {
+    console.log("user redirect");
+    return (<Redirect to="/user" />);
+  } else if (user.id && user.access_level == 1) {
+    console.log("admin redirect");
+    return (<Redirect to="/admin" />);
+  }
+  return (<LoginPage />);
+}
+
 
 function App() {
   const dispatch = useDispatch();
 
-  const user = useSelector(store => store.user);
+  const user = useSelector((store) => store.user);
 
   useEffect(() => {
-    dispatch({ type: 'FETCH_USER' });
+    dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
 
   return (
     <Router>
       <div>
-        {user.id && user.access_level==1 ? <AdminNav /> : <Nav />}
+        {user.id && user.access_level == 1 ? <AdminNav /> : <Nav />}
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
@@ -71,12 +85,11 @@ function App() {
           
 
 
-
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-           <ProtectedRoute
+          <ProtectedRoute
             // shows AboutPage at all times (logged in or not)
             exact
             path="/preventativecare"
@@ -98,7 +111,7 @@ function App() {
             exact
             path="/user"
           >
-            <UserPage />
+            {user.access_level === 1 ? <Redirect to="/admin" /> : <UserPage />}
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -109,61 +122,59 @@ function App() {
             <InfoPage />
           </ProtectedRoute>
 
-          <Route
-            exact
-            path="/login"
-          >
-            {user.id ?
-              // If the user is already logged in, 
-              // redirect to the /user page
-              <Redirect to="/user" />
-              :
-              // Otherwise, show the login page
-              <LoginPage />
-            }
+          <Route exact path="/login">
+            {UserOrAdmin(user)}
           </Route>
 
-          <Route
-            exact
-            path="/registration"
-          >
-            {user.id ?
-              // If the user is already logged in, 
+          <Route exact path="/registration">
+            {user.id ? (
+              // If the user is already logged in,
               // redirect them to the /user page
               <Redirect to="/user" />
-              :
+            ) : (
               // Otherwise, show the registration page
               <RegisterPage />
-            }
+            )}
           </Route>
 
-          <Route
-            exact
-            path="/home"
-          >
-            {user.id ?
-              // If the user is already logged in, 
+          <Route exact path="/home">
+            {user.id ? (
+              // If the user is already logged in,
               // redirect them to the /user page
               <Redirect to="/user" />
-              :
+            ) : (
               // Otherwise, show the Landing page
               <LandingPage />
-            }
+            )}
           </Route>
-
-          <ProtectedRoute
-            exact
-            path="/admin"
-          >
-            {user.id && user.access_level==1?
-              // If the user is already logged in, 
+          
+          {/* admin landing page */}
+          <ProtectedRoute exact path="/admin">
+            {user.id && user.access_level == 1 ? (
+              // If the user is already logged in,
               // redirect them to the /user page
               <AdminLandingPage />
-              :
+            ) : (
               // Otherwise, show the Landing page
               <Redirect to="/home" />
-            }
+            )}
           </ProtectedRoute>
+
+
+          {/* admin resources page */}
+          <ProtectedRoute
+           exact 
+           path="/adminresources"
+           >
+            {user.id && user.access_level == 1 ? (
+              // If the user is already logged in,
+              // redirect them to the /user page
+              <AdminResources />
+            ) : (
+              // Otherwise, show the Landing page
+              <Redirect to="/home" />
+            )}
+          </ProtectedRoute >
 
           <ProtectedRoute
             exact
@@ -177,6 +188,7 @@ function App() {
               // Otherwise, show the Landing page
               <Redirect to="/home" />
             }
+
           </ProtectedRoute>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
