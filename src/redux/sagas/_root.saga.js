@@ -2,9 +2,14 @@ import { all } from 'redux-saga/effects';
 import loginSaga from './login.saga';
 import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
+<<<<<<< HEAD
 import healthCategoriesSaga from './healthCategoriesSaga';
 import ageRangeSaga from './agerange.saga';
 import specificResourcesSaga from './specificResourcesSaga';
+=======
+import ageRangeSaga from './ageRange.saga';
+import newsletterSaga from './newsletter.saga';
+>>>>>>> 5cf8d62 (complete newsletter subscription)
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -20,6 +25,10 @@ export default function* rootSaga() {
     userSaga(),
     healthCategoriesSaga(),
     ageRangeSaga(), // fetches age ranges
+<<<<<<< HEAD
     specificResourcesSaga(),
+=======
+    newsletterSaga(), // add submitted emails to newsletter table
+>>>>>>> 5cf8d62 (complete newsletter subscription)
   ]);
 }
