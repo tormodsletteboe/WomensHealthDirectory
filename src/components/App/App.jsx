@@ -19,7 +19,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
-
+import PreventativeCare from '../PreventativeCare/PreventativeCare';
 import './App.css';
 
 function App() {
@@ -48,13 +48,13 @@ function App() {
             <AboutPage />
           </Route>
 
-          <Route
+          {/* <Route
             // shows AboutPage at all times (logged in or not)
             exact
             path="/membership"
           >
             <Membership />
-          </Route>
+          </Route> */}
 
     
 
@@ -70,13 +70,13 @@ function App() {
             <PreventativeCare />
           </ProtectedRoute>
 
-          <ProtectedRoute
+          {/* <ProtectedRoute
             // shows AboutPage at all times (logged in or not)
             exact
             path="/resources"
           >
             <Resources />
-          </ProtectedRoute>
+          </ProtectedRoute> */}
 
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
