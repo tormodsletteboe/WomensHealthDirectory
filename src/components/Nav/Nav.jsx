@@ -93,6 +93,7 @@ function Nav() {
 
        
       </div>
+
       {/* "Hamburger menu" / "Bar icon" to toggle the navigation links */}
       <div className="icon">
         <ReorderIcon
@@ -110,6 +111,15 @@ function Nav() {
         >
           Join
         </Button>
+
+        <Link className="navLink" to="/about">
+          About
+        </Link>
+
+        <Link className="navLink" to="/adminprevcare">
+          AdminPrevCare
+        </Link>
+
       </div>
     </div>
   );
