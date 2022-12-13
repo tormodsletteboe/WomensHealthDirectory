@@ -31,6 +31,7 @@ function PreventativeCare() {
     const handleAgeChange  = (event) => {
         setAge(event.target.value);
     }
+    console.log('age is', age);
 
     const handleAgeFormSubmit = (event) => {
         console.log('in handleAgeFormSubmit');
@@ -53,10 +54,10 @@ function PreventativeCare() {
     <h4>Recommended Screening Guidelines</h4>
 
     <form onSubmit={handleAgeFormSubmit}>
-            <select name="agerange" id="ageRangeSelect">
+            <select name="agerange" id="ageRangeSelect" onChange={handleAgeChange}>
                 <option defaultValue="Choose Your Age Range">Choose Your Age Range</option>
             {ageRanges.map(ageRange =>
-                (<option key={ageRange.id} value={`{ageRange.low} - {ageRange.high}`}>
+                (<option key={ageRange.id} value={`${ageRange.low} - ${ageRange.high}`}>
                     {ageRange.low} - {ageRange.high}
                 </option>
                  ))}
