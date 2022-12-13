@@ -1,4 +1,4 @@
-const ageRangeReducer = (state = [], action) => {
+const ageRanges = (state = [], action) => {
     switch (action.type) {
       case 'SET_AGE_RANGES':
         return action.payload;
@@ -9,4 +9,4 @@ const ageRangeReducer = (state = [], action) => {
   
   // user will be on the redux state at:
   // state.user
-  export default ageRangeReducer;
+  export default ageRanges;
