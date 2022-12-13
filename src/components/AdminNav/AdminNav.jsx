@@ -36,6 +36,10 @@ function AdminNav() {
               Resources
             </Link>
 
+            <Link className="navLink" to="/adminprevcare">
+              Preventative Care
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}

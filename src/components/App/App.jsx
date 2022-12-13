@@ -4,6 +4,7 @@ import {
   Redirect,
   Route,
   Switch,
+
 } from "react-router-dom";
 
 import { useDispatch, useSelector } from "react-redux";
@@ -23,6 +24,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 
 import "./App.css";
 import AdminLandingPage from "../AdminLandingPage/AdminLandingPage";
+import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
 
 //function used to redirect if its admin loggin in or user logging in
 function UserOrAdmin(user) {
@@ -35,6 +37,8 @@ function UserOrAdmin(user) {
   }
   return (<LoginPage />);
 }
+
+
 
 
 function App() {
@@ -54,6 +58,13 @@ function App() {
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
 
+
+          <Route 
+            exact
+            path="/adminprevcare">
+            
+            <AdminPreventativeCare />
+          </Route>
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
             // shows AboutPage at all times (logged in or not)
@@ -145,8 +156,12 @@ function App() {
             )}
           </ProtectedRoute>
 
+
           {/* admin resources page */}
-          <ProtectedRoute exact path="/admin_resources">
+          <ProtectedRoute
+           exact 
+           path="/admin_resources"
+           >
             {user.id && user.access_level == 1 ? (
               // If the user is already logged in,
               // redirect them to the /user page
@@ -155,6 +170,21 @@ function App() {
               // Otherwise, show the Landing page
               <Redirect to="/home" />
             )}
+          </ProtectedRoute >
+          
+          <ProtectedRoute
+            exact
+            path="/adminprevcare"
+          >
+            {user.id && user.access_level==1?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <AdminPreventativeCare />
+              :
+              // Otherwise, show the Landing page
+              <Redirect to="/home" />
+            }
+
           </ProtectedRoute>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
