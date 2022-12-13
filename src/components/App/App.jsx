@@ -25,6 +25,7 @@ import RegisterPage from "../RegisterPage/RegisterPage";
 import "./App.css";
 import AdminLandingPage from "../AdminLandingPage/AdminLandingPage";
 import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
+import AdminResources from "../AdminResources/AdminResources";
 
 //function used to redirect if its admin loggin in or user logging in
 function UserOrAdmin(user) {
@@ -160,18 +161,18 @@ function App() {
           {/* admin resources page */}
           <ProtectedRoute
            exact 
-           path="/admin_resources"
+           path="/adminresources"
            >
             {user.id && user.access_level == 1 ? (
               // If the user is already logged in,
               // redirect them to the /user page
-              <AdminLandingPage />
+              <AdminResources />
             ) : (
               // Otherwise, show the Landing page
               <Redirect to="/home" />
             )}
           </ProtectedRoute >
-          
+
           <ProtectedRoute
             exact
             path="/adminprevcare"

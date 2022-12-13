@@ -28,11 +28,7 @@ function AdminNav() {
               Home
             </Link>
 
-            <Link className="navLink" to="/admin_preventativecare">
-              Preventative Care
-            </Link>
-
-            <Link className="navLink" to="/admin_resources">
+            <Link className="navLink" to="/adminresources">
               Resources
             </Link>
 
