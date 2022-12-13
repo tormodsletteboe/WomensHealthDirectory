@@ -14,6 +14,6 @@ function* fetchAgeRanges(action) {
 }
 
 export default function* ageRangeSaga() {
-    takeLatest('FETCH_AGE_RANGES', fetchAgeRanges);
+    yield takeLatest('FETCH_AGE_RANGES', fetchAgeRanges);
 }
 
