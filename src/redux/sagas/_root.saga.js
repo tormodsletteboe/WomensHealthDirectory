@@ -4,6 +4,8 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import healthCategoriesSaga from './healthCategoriesSaga';
 import ageRangeSaga from './ageRange.saga';
+import faqSaga from './faq.saga';
+import diagnosticToolsSaga from './diagnosticTools.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -19,5 +21,7 @@ export default function* rootSaga() {
     userSaga(),
     healthCategoriesSaga(),
     ageRangeSaga(), // fetches age ranges
+    faqSaga(), //fetch FAQ
+    diagnosticToolsSaga(), //fetch diagnostic tools
   ]);
 }

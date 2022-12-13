@@ -2,7 +2,7 @@ import { put, takeLatest } from "@redux-saga/core/effects";
 import axios from "axios";
 
 
-// GET request to send age to database
+// GET request to request health categories from database
 function* fetchHealthCategories(action) {
 
     try {
