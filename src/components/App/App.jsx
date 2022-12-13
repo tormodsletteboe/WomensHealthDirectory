@@ -24,7 +24,6 @@ import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCar
 
 import './App.css';
 import AdminLandingPage from '../AdminLandingPage/AdminLandingPage';
-import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
 
 function App() {
   const dispatch = useDispatch();

@@ -1,7 +1,7 @@
 import axios from "axios";
 import { put, takeLatest } from "redux-saga/effects";
 
-function* fetch(action) {
+function* fetchAgeRanges(action) {
 
     console.log('in fetch');
     try {
@@ -14,6 +14,6 @@ function* fetch(action) {
 }
 
 export default function* ageRangeSaga() {
-    takeLatest('FETCH_AGE_RANGES', fetch);
+    takeLatest('FETCH_AGE_RANGES', fetchAgeRanges);
 }
 
