@@ -116,9 +116,6 @@ function Nav() {
           About
         </Link>
 
-        <Link className="navLink" to="/adminprevcare">
-          AdminPrevCare
-        </Link>
 
       </div>
     </div>
