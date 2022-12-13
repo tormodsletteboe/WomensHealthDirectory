@@ -1,6 +1,6 @@
 const healthCategories = (state = [], action) => {
 
-    if (action.type === 'STORE_HEALTH_CATEGORIES') {
+    if (action.type === 'SET_HEALTH_CATEGORIES') {
         return action.payload;
     }
     return state;

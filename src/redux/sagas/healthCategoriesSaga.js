@@ -2,29 +2,27 @@ import { put, takeLatest } from "@redux-saga/core/effects";
 import axios from "axios";
 
 
-// POST request to send age to database
-
+// GET request to send age to database
 function* fetchHealthCategories(action) {
-
-    console.log('in retrieveSearchResults saga, action.payload is', action.payload);
-
-    let age = action.payload;
 
     try {
 
-        const response = yield axios.post('/api/preventativecare', { data: age });
+        const response = yield axios.get('/api/preventativecare');
         console.log('response.data is', response.data);
 
-        yield put({ type: 'STORE_HEALTH_CATEGORIES', payload: response.data });
+        yield put({ 
+            type: 'SET_HEALTH_CATEGORIES',
+            payload: response.data
+    });
 
     } catch (err) {
-        console.log('Error with posting age to preventativeCare', err);
+        console.log('Error with fetching health categories', err);
     }
 
 }
 
 function* healthCategoriesSaga() {
-    yield takeLatest('SEND_AGE', fetchHealthCategories);
+    yield takeLatest('FETCH_HEALTH_CATEGORIES', fetchHealthCategories);
 
 }
 

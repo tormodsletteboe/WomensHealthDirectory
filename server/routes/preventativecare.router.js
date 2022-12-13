@@ -3,28 +3,21 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const { rejectUnauthenticated } = require('../modules/authentication-middleware');
 
-//POST router to send age  and retrieve health categories database
-router.post('/', rejectUnauthenticated, function (req, res) {
-    console.log('in /preventativecare POST router');
-    console.log('req.body.data is', req.body.data);
+//GET router to fetch health categories database
+router.get('/', rejectUnauthenticated, function (req, res) {
+    console.log('in /preventativecare GET router');
 
-    
-    let age = req.body.data.age;
-    console.log('age is', age);
-
-    let sqlText= `SELECT * FROM "health_category";`;
-
-    let sqlParams = [age];
-
-    pool.query(sqlText, sqlParams)
-    .then((result) => {
-        res.status(200).send(result.rows);
-
+    let sqlText = `SELECT * FROM "health_category";`;
+   
+    pool.query(sqlText)
+   
+    .then(dbRes => {
+      res.send(dbRes.rows);
     })
-    .catch((err) => {
-        console.log('in preventativecare POST router error, error is', err);
+    .catch(error => {
+      console.log(error);
+      res.sendStatus(500);
     })
-
 });
 
 module.exports = router;
