@@ -4,15 +4,29 @@ import './LandingPage.css';
 
 // CUSTOM COMPONENTS
 import RegisterForm from '../RegisterForm/RegisterForm';
-import { Button, Card, CardActions, CardContent, CardHeader, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, CardHeader, Modal, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
+import { useDispatch } from 'react-redux';
+
+const style = {  // modal styling
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: '100%',
+  bgcolor: 'background.paper',
+  boxShadow: 24,
+  p: 4,
+};
 
 function LandingPage() {
   const [heading, setHeading] = useState('Welcome to the ViFi!');
-  const history = useHistory();
+  const [[modalOpen, setModal], [text, setText]] = [useState(false), useState('')];
+  const [history, dispatch] = [useHistory(), useDispatch()];
 
-  const learnMore = () => {
-    history.push('/membership');
+  const submitEmail = () => {
+    dispatch({ type:'ADD_TO_NEWSLETTER', payload: text });
+    setModal(false);
   }
 
   return (
@@ -30,7 +44,7 @@ function LandingPage() {
           </Typography>
           <Button sx={({ align: 'center' })} variant='contained' onClick={() => history.push('/membership')}>Click Here to Learn More</Button>
         </Box>
-        
+
         <Card variant='outlined' className='grid-col_12'>
           <CardHeader title='Preventative Care' subheader='What to look for before it happens'></CardHeader>
           <CardContent>
@@ -54,8 +68,27 @@ function LandingPage() {
         <Box className='grid-col_12' id='newsletter'>
           <h1>Subscribe to our Newsletter!</h1>
           <Typography paragraph>Get weekly news and updates of how to advocate for your health!</Typography>
-          <Button sx={({ '&:hover': { opacity: 0.7 }})} variant='outlined'>Subscribe</Button>
+          <Button sx={({ '&:hover': { opacity: 0.7 } })} variant='outlined' onClick={() => setModal(true)}>Subscribe</Button>
         </Box>
+
+        <Modal
+          open={modalOpen}
+          onClose={() => setModal(false)}
+        >
+          <Box sx={style}>
+            <Card>
+              <CardHeader title='Our Newsletter' sx={({ 'textAlign': 'center' })}></CardHeader>
+              <CardContent>
+                <Typography paragraph></Typography>
+                <TextField variant='standard' onChange={(e) => setText(e.target.value)} sx={({ 'width':'100%' })} placeholder='example@email.com'></TextField>
+              </CardContent>
+              <CardActions sx={({ 'justifyContent':'center' })}>
+                <Button variant='contained' onClick={submitEmail}>Subscribe</Button>
+              </CardActions>
+            </Card>
+          </Box>
+        </Modal>
+
       </div>
     </div>
   );
