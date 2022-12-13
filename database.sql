@@ -198,3 +198,8 @@ INSERT INTO "age_range" ("low", "high")
 VALUES (15, 19), (20, 24), (25, 29), (30, 34), (35, 39), (40, 44), (45, 49), (50, 54), (55, 59), (60, 64), (65, 69), (70, 74), (75, 79)
 ;
 
+INSERT INTO "faq" ("question", "answer", "health_category_id", "age_range_id")
+VALUES ('What is the first step?', 'Depending on your age, you still start with a pap smear. The sample is collected the same way with a pap and HPV. The difference is in how the sample is tested and evaluated.', 7, 5), 
+('How do the tests differ?', 'The sample is collected in the same way with a pap and HPV. The difference is in how the sample is tested and evaluated. The pap is subjective with human reading, while the HPV test is objective using an analyzer.', 7, 5), 
+('I am positive. Now what?', 'Your test sample will go on for further testing, HPV, Pap, or triage biomarker. From there, you may be asked to come in for a visual examination using a colposcope to better see your cervix. This is called a colposcopy.', 7, 5),
+('What do these numbers mean?', 'There are 14 identified high-risk HPV genotypes, which is what HPV testing is looking for. HPV causes 99% of all cervical cancers, with HPV 16 and 18 causing 70% of those cases. You will want to follow up with your provider for next steps and more details.', 7, 5);
