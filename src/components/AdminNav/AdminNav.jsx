@@ -32,6 +32,10 @@ function AdminNav() {
               Info Page
             </Link>
 
+            <Link className="navLink" to="/adminprevcare">
+              Preventative Care
+            </Link>
+
             <LogOutButton className="navLink" />
           </>
         )}

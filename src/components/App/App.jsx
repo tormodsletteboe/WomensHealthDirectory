@@ -20,6 +20,7 @@ import InfoPage from '../InfoPage/InfoPage';
 import LandingPage from '../LandingPage/LandingPage';
 import LoginPage from '../LoginPage/LoginPage';
 import RegisterPage from '../RegisterPage/RegisterPage';
+import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
 
 import './App.css';
 import AdminLandingPage from '../AdminLandingPage/AdminLandingPage';
@@ -41,6 +42,13 @@ function App() {
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
 
+
+          <Route 
+            exact
+            path="/adminprevcare">
+            
+            <AdminPreventativeCare />
+          </Route>
           {/* Visiting localhost:3000/about will show the about page. */}
           <Route
             // shows AboutPage at all times (logged in or not)
@@ -58,7 +66,6 @@ function App() {
             {/* <Membership /> */}
           </Route>
 
-    
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -152,6 +159,19 @@ function App() {
             }
           </ProtectedRoute>
 
+          <ProtectedRoute
+            exact
+            path="/adminprevcare"
+          >
+            {user.id && user.access_level==1?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <AdminPreventativeCare />
+              :
+              // Otherwise, show the Landing page
+              <Redirect to="/home" />
+            }
+          </ProtectedRoute>
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>
