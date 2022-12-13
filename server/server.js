@@ -10,6 +10,8 @@ const passport = require('./strategies/user.strategy');
 // Route includes
 const userRouter = require('./routes/user.router');
 const feedbackRouter = require('./routes/feedback.router');
+const preventativecareRouter=require('./routes/preventativecare.router');
+
 const ageRangeRouter = require('./routes/agerange.router');
 const newsletterRouter = require('./routes/newsletter.router');
 
@@ -27,6 +29,8 @@ app.use(passport.session());
 /* Routes */
 app.use('/api/user', userRouter);
 app.use('/api/feedback', feedbackRouter);
+app.use('/api/preventativecare', preventativecareRouter);
+
 app.use('/api/agerange', ageRangeRouter);
 app.use('/api/newsletter', newsletterRouter);
 

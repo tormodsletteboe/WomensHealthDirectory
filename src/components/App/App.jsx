@@ -6,22 +6,18 @@ import {
   Switch,
 
 } from "react-router-dom";
-
 import { useDispatch, useSelector } from "react-redux";
-
 import Nav from "../Nav/Nav";
 import AdminNav from "../AdminNav/AdminNav";
 import Footer from "../Footer/Footer";
-
+import AboutPage from '../AboutPage/AboutPage';
+import UserPage from '../UserPage/UserPage';
+import InfoPage from '../InfoPage/InfoPage';
+import LandingPage from '../LandingPage/LandingPage';
+import LoginPage from '../LoginPage/LoginPage';
+import RegisterPage from '../RegisterPage/RegisterPage';
+import PreventativeCare from '../PreventativeCare/PreventativeCare';
 import ProtectedRoute from "../ProtectedRoute/ProtectedRoute";
-
-import AboutPage from "../AboutPage/AboutPage";
-import UserPage from "../UserPage/UserPage";
-import InfoPage from "../InfoPage/InfoPage";
-import LandingPage from "../LandingPage/LandingPage";
-import LoginPage from "../LoginPage/LoginPage";
-import RegisterPage from "../RegisterPage/RegisterPage";
-
 import "./App.css";
 import AdminLandingPage from "../AdminLandingPage/AdminLandingPage";
 import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
@@ -38,8 +34,6 @@ function UserOrAdmin(user) {
   }
   return (<LoginPage />);
 }
-
-
 
 
 function App() {
@@ -75,13 +69,18 @@ function App() {
             <AboutPage />
           </Route>
 
-          <Route
+          {/* <Route
             // shows AboutPage at all times (logged in or not)
             exact
             path="/membership"
           >
+
+            <Membership />
+          </Route> */}
+
             {/* <Membership /> */}
-          </Route>
+          
+
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -92,16 +91,17 @@ function App() {
             exact
             path="/preventativecare"
           >
-            {/* <PreventativeCare /> */}
+            <PreventativeCare />
           </ProtectedRoute>
 
-          <ProtectedRoute
+          {/* <ProtectedRoute
             // shows AboutPage at all times (logged in or not)
             exact
             path="/resources"
           >
-            {/* <Resources /> */}
-          </ProtectedRoute>
+
+            <Resources />
+          </ProtectedRoute> */}
 
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage

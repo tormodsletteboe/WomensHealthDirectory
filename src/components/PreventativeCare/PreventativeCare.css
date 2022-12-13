@@ -1,0 +1,16 @@
+/* removes bullet points from list */
+ul {
+    list-style-type: none;
+}
+
+select {
+    height: 2rem;
+    width: 12rem;
+    margin-left: 1rem;
+    margin-right: 1rem;
+    border-radius: 8px;
+}
+
+
+
+
