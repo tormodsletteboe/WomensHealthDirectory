@@ -12,7 +12,7 @@ function* fetchHealthCategories(action) {
 
     try {
 
-        const response = yield axios.post('/api/search', { data: age });
+        const response = yield axios.post('/api/preventativecare', { data: age });
         console.log('response.data is', response.data);
 
         yield put({ type: 'STORE_HEALTH_CATEGORIES', payload: response.data });
