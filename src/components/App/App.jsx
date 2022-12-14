@@ -22,6 +22,7 @@ import "./App.css";
 import AdminLandingPage from "../AdminLandingPage/AdminLandingPage";
 import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
 import AdminResources from "../AdminResources/AdminResources";
+import AdminSpecificResources from "../AdminSpecificResources/AdminSpecificResources";
 
 //function used to redirect if its admin loggin in or user logging in
 function UserOrAdmin(user) {
@@ -52,7 +53,6 @@ function App() {
         <Switch>
           {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
           <Redirect exact from="/" to="/home" />
-
 
           <Route 
             exact
@@ -94,14 +94,6 @@ function App() {
             <PreventativeCare />
           </ProtectedRoute>
 
-          {/* <ProtectedRoute
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/resources"
-          >
-
-            <Resources />
-          </ProtectedRoute> */}
 
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
@@ -187,6 +179,22 @@ function App() {
             }
 
           </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/adminprevcare/specificresources/:categoryId"
+          >
+            {user.id && user.access_level==1?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <AdminSpecificResources />
+              :
+              // Otherwise, show the Landing page
+              <Redirect to="/home" />
+            }
+
+          </ProtectedRoute>
+
           {/* If none of the other routes matched, we will show a 404. */}
           <Route>
             <h1>404</h1>

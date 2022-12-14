@@ -8,7 +8,7 @@ function* fetchHealthCategories(action) {
     try {
 
         const response = yield axios.get('/api/preventativecare');
-        console.log('response.data is', response.data);
+        // console.log('response.data is', response.data);
 
         yield put({ 
             type: 'SET_HEALTH_CATEGORIES',
