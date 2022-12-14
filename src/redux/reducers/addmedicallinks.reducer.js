@@ -1,4 +1,4 @@
-const editMedicalLinks = (state = {}, action) => {
+const addMedicalLinks = (state = {}, action) => {
   switch (action.type) {
     case "SET_MEDICAL_TITLE":
       return { ...state, title: action.payload };
@@ -13,4 +13,4 @@ const editMedicalLinks = (state = {}, action) => {
 
 // user will be on the redux state at:
 // state.user
-export default editMedicalLinks;
+export default addMedicalLinks;

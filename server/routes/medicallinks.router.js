@@ -24,4 +24,27 @@ router.get('/',rejectUnauthenticated,(req,res)=>{
 
 });
 
+router.put('/:medlinkId',rejectUnauthenticated,(req,res)=>{
+
+    const medlinkId = req.params.medlinkId;
+    const sqlText =`
+    UPDATE "medical_links"
+    SET "name" = $1
+    WHERE "id" = $2
+    ;
+    `;
+
+    //this is where I am
+    const sqlParams = [req.body.name, medlinkId];
+    pool.query(sqlText)
+    .then(dbRes =>{
+        res.send(dbRes.rows);
+    })
+    .catch((error)=>{
+        console.log(error);
+        res.sendStatus(500);
+    });
+
+});
+
 module.exports = router;

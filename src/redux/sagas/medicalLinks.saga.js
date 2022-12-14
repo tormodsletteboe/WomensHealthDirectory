@@ -8,7 +8,7 @@ function* fetchMedicalLinks() {
      const response = yield axios.get('/api/medicallinks');
 
      yield put({ 
-        type: 'SET_MEDICALLINKS',
+        type: 'SET_MEDICAL_LINKS',
         payload: response.data
     });
 
@@ -18,8 +18,26 @@ function* fetchMedicalLinks() {
   }
 }
 
+function* updateMedicalLink(action){
+    try {
+        const dataToSend = action.payload;
+        console.log('data is', dataToSend);
+
+        //update the medical link in question
+        yield axios.put(`/api/medicallinks/${action.payload.id}`,dataToSend);
+        
+        //update the store with updated info
+        yield put({ type: 'FETCH_MEDICAL_LINKS'});
+
+    } catch (error) {
+        console.log('update medical link failed',error);
+    }
+
+}
+
 function* medicalLinksSaga() {
-  yield takeLatest("FETCH_MEDICALLINKS", fetchMedicalLinks);
+  yield takeLatest("FETCH_MEDICAL_LINKS", fetchMedicalLinks);
+  yield takeLatest("UPDATE_MEDICAL_LINK",updateMedicalLink);
 }
 
 export default medicalLinksSaga;
