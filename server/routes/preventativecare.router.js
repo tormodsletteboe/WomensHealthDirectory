@@ -20,7 +20,7 @@ router.get('/', rejectUnauthenticated, function (req, res) {
     })
 });
 
-router.get('/:catId/ages/:ageId', async (req, res) => {
+router.get('/:catId/ages/:ageId', rejectUnauthenticated, async (req, res) => {
     console.log('in preventativecare id router');
 
     let faqSQLText = `
