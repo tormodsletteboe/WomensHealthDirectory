@@ -5,7 +5,11 @@ import axios from "axios";
 function* fetchSpecificResources(action) {
 
     try {
+<<<<<<< HEAD
 
+=======
+        console.log('in fetch resources');
+>>>>>>> 92fc521 (resolve merge conflicts)
         const response = yield axios.get(`/api/adminprevcare/specificresources/${action.payload}`);
 
         yield put({ 
@@ -14,6 +18,7 @@ function* fetchSpecificResources(action) {
         });
 
     } catch (err) {
+<<<<<<< HEAD
         console.error('Error with fetching specific resources', err);
     }
 }
@@ -30,13 +35,19 @@ function* updateResource(action) {
 
     } catch (err) {
         console.error('Error updating specific resource', err);
+=======
+        console.log('Error with fetching specific resources', err);
+>>>>>>> 92fc521 (resolve merge conflicts)
     }
 }
 
 function* specificResourcesSaga() {
     yield takeLatest('FETCH_SPECIFIC_RESOURCES', fetchSpecificResources);
+<<<<<<< HEAD
 
     yield takeLatest('SAVE_RESOURCE_UPDATE', updateResource);
+=======
+>>>>>>> 92fc521 (resolve merge conflicts)
 }
 
 export default specificResourcesSaga;

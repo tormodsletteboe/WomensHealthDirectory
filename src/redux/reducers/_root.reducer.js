@@ -19,6 +19,8 @@ const rootReducer = combineReducers({
   ageRanges, // age ranges from the DB table
   specificResources,
   resourceToEdit, 
+  ageRanges,
+  specificResources, // age ranges from the DB table
 });
 
 export default rootReducer;
