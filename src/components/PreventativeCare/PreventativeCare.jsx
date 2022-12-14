@@ -16,9 +16,7 @@ function PreventativeCare() {
     })
     console.log('age ranges is', ageRanges);
 
-    //fetch user's age on page load to autofill form with user's age
-    //TODO: update database (add user_id foreign key to healthcategory table), create new saga function and reducer
-    //add GET router to user router
+    
     useEffect(() => {
         dispatch({
             type: 'FETCH_USER_AGE'
@@ -48,9 +46,6 @@ function PreventativeCare() {
         console.log('in handleCategoryClick, id is',category.id);
         history.push(`./preventativecare/${category.id}/ages/${age}`);
 
-        dispatch({
-            type: 'FETCH_FAQ'
-        })
     }
 
     return(

@@ -4,7 +4,7 @@ import user from './user.reducer';
 import healthCategories from './healthCategories';
 import ageRanges from './agerange.reducer';
 import faq from './faq.reducer';
-import diagnosticTools from './diagnosticTools.reducer';
+
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -18,7 +18,7 @@ const rootReducer = combineReducers({
   healthCategories, //renders health categories for a given age range (right now, renders the same categories for all age ranges)
   ageRanges, // age ranges from the DB table
   faq, //renders faqs for a specific health category
-  diagnosticTools, //renders diagnostic tools for a specific health category
+
 
 
 });
