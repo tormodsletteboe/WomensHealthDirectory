@@ -7,11 +7,11 @@ function* fetchFaq(action) {
 
     try {
 
-        const response = yield axios.get(`/api/preventativecare/${category.id}/${age}`);
+        const response = yield axios.get(`/api/faq/${category.id}/ages/${age}`);
         console.log('response.data is', response.data);
 
         yield put({ 
-            type: 'SET_HEALTH_CATEGORIES',
+            type: 'SET_FAQ',
             payload: response.data
     });
 

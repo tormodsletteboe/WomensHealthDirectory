@@ -46,7 +46,11 @@ function PreventativeCare() {
     //When a category is clicked, it will go to a detail view of the id of the button clicked
     const handleCategoryClick = (category) => {
         console.log('in handleCategoryClick, id is',category.id);
-        history.push(`./preventativecare/${category.id}/${age}`);
+        history.push(`./preventativecare/${category.id}/ages/${age}`);
+
+        dispatch({
+            type: 'FETCH_FAQ'
+        })
     }
 
     return(
