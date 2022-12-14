@@ -32,7 +32,6 @@ function AdminSpecificResources() {
             await alert('edit submitted');
         }
 
-
         await dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
         await dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: params.categoryId });
     }
@@ -65,7 +64,7 @@ function AdminSpecificResources() {
         </form>)
 
     return (
-        <>
+        <> 
             <h1>Specific Resources</h1>
             <ul className="specificResources">
                 {specificResources.map(x => (
@@ -86,17 +85,17 @@ function AdminSpecificResources() {
                     Clicking Add button will send a file with 3 empty lines to edit, 
                     and id will be the highest id in the specific resources reducer plus one
                     */}
+                    { specificResources.id ? 
                     <button type="button" onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', 
                         payload: 
-                        {id: (specificResources[specificResources.length-1].id + 1), 
+                        {id: Number(specificResources[specificResources.length-1].id + 1), 
                         name: '', description:'', link: ''}})}>
                     Add
-                    </button> 
+                    </button> : null }
                     {/* conditional rended to show/not show the form */}
                 { resourceToEdit.id === (specificResources[specificResources.length-1].id + 1) ? addEditForm : null }
                 </li>
             </ul>
-
         </>
     )
 }
