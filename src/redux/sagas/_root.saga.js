@@ -6,8 +6,8 @@ import newsletterSaga from './newsletter.saga';
 import healthCategoriesSaga from './healthCategoriesSaga';
 import ageRangeSaga from './agerange.saga';
 import specificResourcesSaga from './specificResourcesSaga';
-import ageRangeSaga from './ageRange.saga';
-import newsletterSaga from './newsletter.saga';
+
+
 
 
 // rootSaga is the primary saga.
