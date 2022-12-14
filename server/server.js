@@ -15,9 +15,7 @@ const preventativecareRouter=require('./routes/preventativecare.router');
 const ageRangeRouter = require('./routes/agerange.router');
 const newsletterRouter = require('./routes/newsletter.router');
 const specificResourcesRouter = require('./routes/specificresources.router');
-const ageRangeRouter = require('./routes/agerange.router');
-const newsletterRouter = require('./routes/newsletter.router');
-const specificResourcesRouter = require('./routes/specificresources.router');
+
 
 // Body parser middleware
 app.use(bodyParser.json());
