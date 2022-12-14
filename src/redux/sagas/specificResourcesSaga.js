@@ -36,6 +36,8 @@ function* specificResourcesSaga() {
     yield takeLatest('FETCH_SPECIFIC_RESOURCES', fetchSpecificResources);
 
     yield takeLatest('SAVE_RESOURCE_UPDATE', updateResource);
+
+    
 }
 
 export default specificResourcesSaga;

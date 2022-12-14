@@ -24,11 +24,45 @@ function AdminSpecificResources() {
         const updateResoursePayload = {...resourceToEdit, categoryId: params.categoryId}
         console.log(updateResoursePayload);
 
-        await dispatch({ type: 'SAVE_RESOURCE_UPDATE', payload: updateResoursePayload});
-        await alert('edit submitted');
+        if (resourceToEdit.id > specificResources[specificResources.length-1].id) {
+            await dispatch({ type: 'ADD_RESOURCE', payload: updateResoursePayload});
+            await alert('added');
+        } else {
+            await dispatch({ type: 'SAVE_RESOURCE_UPDATE', payload: updateResoursePayload});
+            await alert('edit submitted');
+        }
+
+
         await dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
         await dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: params.categoryId });
     }
+
+    const addEditForm =  (                   
+        <form onSubmit={updateResource}
+            key={resourceToEdit.id}>
+            <input 
+                value={resourceToEdit.name}
+                onChange={(evt) => dispatch({
+                    type: 'UPDATE_FIELD',
+                    payload: {name: evt.target.value}
+            })}/>
+            <input 
+                value={resourceToEdit.description}
+                onChange={(evt) => dispatch({
+                    type: 'UPDATE_FIELD',
+                    payload: {description: evt.target.value}
+            })}/>
+            <input 
+                value={resourceToEdit.link}
+                onChange={(evt) => dispatch({
+                    type: 'UPDATE_FIELD',
+                    payload: {link: evt.target.value}
+            })}/>
+            <button onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: {}})}>
+                Cancel
+            </button>
+            <button type="submit">Save</button>
+        </form>)
 
     return (
         <>
@@ -37,29 +71,7 @@ function AdminSpecificResources() {
                 {specificResources.map(x => (
                     x.id === resourceToEdit.id ? 
                     
-                    <form onSubmit={updateResource}
-                    key={resourceToEdit.id}>
-                    <input 
-                        value={resourceToEdit.name}
-                        onChange={(evt) => dispatch({
-                            type: 'UPDATE_FIELD',
-                            payload: {name: evt.target.value}
-                    })}/>
-                    <input 
-                        value={resourceToEdit.description}
-                        onChange={(evt) => dispatch({
-                            type: 'UPDATE_FIELD',
-                            payload: {description: evt.target.value}
-                    })}/>
-                    <input 
-                        value={resourceToEdit.link}
-                        onChange={(evt) => dispatch({
-                            type: 'UPDATE_FIELD',
-                            payload: {link: evt.target.value}
-                    })}/>
-                    <button onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: {}})}>Cancel</button>
-                    <button type="submit">Save</button>
-                </form>
+                    addEditForm
 
                     : 
                     <li key={x.id}><a href={x.link}>{x.name}</a> {x.description} 
@@ -69,6 +81,20 @@ function AdminSpecificResources() {
                         </button>
                     </li>
                 ))}
+                <li> 
+                    {/* Creates Add button
+                    Clicking Add button will send a file with 3 empty lines to edit, 
+                    and id will be the highest id in the specific resources reducer plus one
+                    */}
+                    <button type="button" onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', 
+                        payload: 
+                        {id: (specificResources[specificResources.length-1].id + 1), 
+                        name: '', description:'', link: ''}})}>
+                    Add
+                    </button> 
+                    {/* conditional rended to show/not show the form */}
+                { resourceToEdit.id === (specificResources[specificResources.length-1].id + 1) ? addEditForm : null }
+                </li>
             </ul>
 
         </>
