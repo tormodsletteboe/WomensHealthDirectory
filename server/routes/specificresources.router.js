@@ -41,7 +41,7 @@ router.put('/:categoryId', (req, res) => {
     ;
     `;
 
-  const sqlParams = [req.body.name, req.body.link, req.body.description, req.body.id.toString(), categoryId];
+  const sqlParams = [req.body.name, req.body.link, req.body.description, req.body.id, categoryId];
   
   console.log('sql params are', sqlParams);
 
