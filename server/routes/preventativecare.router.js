@@ -23,39 +23,47 @@ router.get('/', rejectUnauthenticated, function (req, res) {
 router.get('/:catId/ages/:ageId', async (req, res) => {
     console.log('in preventativecare id router');
 
-    let catId = [req.params.catId];
-    console.log('catId is', catId);
-
-    let ageId = [req.params.ageId];
-    console.log('ageId is', ageId);
-
     let faqSQLText = `
     SELECT ("question"), ("answer") FROM "faq"
     WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
 
-    // Get FAQs
+    let diagSQLText = `SELECT ("name"), ("info") FROM "diagnostic_tool"
+    WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+
+    let guidelinesSQLText = `SELECT ("name"), ("info"), ("grade"), ("date") FROM "guidelines"
+    WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+
+    let drQuestionsSQLText = `SELECT ("question"), ("answer") FROM "doctor_questions"
+    WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+
+    // Get category details
     try{
 
+    //Get FAQs  
     let faqRes = await pool.query(faqSQLText, [req.params.catId, req.params.ageId]);
     console.log('faqRes is', faqRes);
 
+    //Get diagnostic tools
+    let diagRes = await pool.query(diagSQLText, [req.params.catId, req.params.ageId]);
+
+    //Get guidelines
+    let guidelinesRes = await pool.query(guidelinesSQLText, [req.params.catId, req.params.ageId]);
+
+    //Get questions to ask your doctor
+    let drQuestionsRes = await pool.query(drQuestionsSQLText, [req.params.catId, req.params.ageId]);
+
     let apiRes = {
-        faqs: faqRes.rows
+        faqs: faqRes.rows,
+        diagTools: diagRes.rows,
+        guidelines: guidelinesRes.rows,
+        drQuestions: drQuestionsRes.rows,
     }
     res.send(apiRes);
 
     }catch (err) {
-        console.log('Error with fetching FAQ', err);
+        console.log('Error with fetching category details', err);
         res.sendStatus(500);
     }
-
-    //Get Diagnostic Tools
-    // let diagRes= await pool.query(`
-    // SELECT ("question", "answer") FROM "faq"
-    // WHERE "health_category_id" = $1 AND "age_range_id"=$2;`);
-    // let drQuestionRes = await pool.query(`SELECT * FROM dr_qs WHERE ...`);
-    // etc.....
-
 })
 
 module.exports = router;

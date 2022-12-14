@@ -1,12 +1,13 @@
 import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 
 
 function CategoryDetailView(){
+
     const dispatch = useDispatch();
     let params = useParams();
-    console.log('params is', params);
+
 
     useEffect(() => {
         //Todo: add in all other data 
@@ -18,6 +19,11 @@ function CategoryDetailView(){
             }
         })
     }, []);
+
+    let categoryDetails = useSelector((store)=>{
+        return store.categoryDetail;
+    })
+    console.log('categorydetails is', categoryDetails);
 
     return(
     <>
