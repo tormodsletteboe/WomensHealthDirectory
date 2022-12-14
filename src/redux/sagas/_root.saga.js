@@ -8,7 +8,7 @@ import specificResourcesSaga from './specificResourcesSaga';
 import medicalLinksSaga from './medicalLinks.saga';
 
 
-import ageRangeSaga from './ageRange.saga';
+import ageRangeSaga from './agerange.saga';
 import categoryDetailSaga from './categoryDetail.saga';
 
 // rootSaga is the primary saga.
