@@ -46,7 +46,7 @@ function PreventativeCare() {
     //When a category is clicked, it will go to a detail view of the id of the button clicked
     const handleCategoryClick = (category) => {
         console.log('in handleCategoryClick, id is',category.id);
-        history.push(`./preventativecare/${category.id}`);
+        history.push(`./preventativecare/${category.id}/${age}`);
     }
 
     return(
@@ -57,7 +57,7 @@ function PreventativeCare() {
             <select name="agerange" id="ageRangeSelect" onChange={handleAgeChange}>
                 <option defaultValue="Choose Your Age Range">Choose Your Age Range</option>
             {ageRanges.map(ageRange =>
-                (<option key={ageRange.id} value={`${ageRange.low} - ${ageRange.high}`}>
+                (<option key={ageRange.id} value={ageRange.id}>
                     {ageRange.low} - {ageRange.high}
                 </option>
                  ))}

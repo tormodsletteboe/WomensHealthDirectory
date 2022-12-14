@@ -7,7 +7,7 @@ function* fetchFaq(action) {
 
     try {
 
-        const response = yield axios.get('/api/faq');
+        const response = yield axios.get(`/api/preventativecare/${category.id}/${age}`);
         console.log('response.data is', response.data);
 
         yield put({ 
