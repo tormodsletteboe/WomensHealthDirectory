@@ -1,6 +1,16 @@
-import {useEffect} from 'react';
+import {useEffect, useState} from 'react';
 import {useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
+import {
+    Accordion,
+    AccordionButton,
+    AccordionIcon,
+    AccordionItem,
+    AccordionPanel,
+    Box,
+    TableContainer,
+} from "@chakra-ui/react";
+import './CategoryDetailView.css';
 
 
 function CategoryDetailView(){
@@ -10,7 +20,6 @@ function CategoryDetailView(){
 
 
     useEffect(() => {
-        //Todo: add in all other data 
         dispatch({
             type: 'FETCH_CATEGORY_DETAIL',
             payload: {
@@ -25,8 +34,102 @@ function CategoryDetailView(){
     })
     console.log('categorydetails is', categoryDetails);
 
+    let specificresources = useSelector((store)=>{
+        return store.specificresources;
+    })
+    console.log('specific resources is', specificresources);
+
+    
     return(
     <>
+    <div className="accordion">
+        <Accordion allowToggle>
+                        <AccordionItem>
+                            <h2>
+                                <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
+                                    <Box flex='1' textAlign='left'>
+                                        Guidelines
+                                    </Box>
+                                    <AccordionIcon />
+                                </AccordionButton>
+                            </h2>
+                            <AccordionPanel pb={4}>
+                                <Box maxHeight="30vh" overflowY='scroll'>
+                                  render guidelines here
+
+                                </Box>
+                            </AccordionPanel>
+                        </AccordionItem>
+            <AccordionItem>
+                            <h2>
+                                <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
+                                    <Box flex='1' textAlign='left'>
+                                        Diagnostic Tools
+                                    </Box>
+                                    <AccordionIcon />
+                                </AccordionButton>
+                            </h2>
+                            <AccordionPanel pb={4}>
+                                <Box maxHeight="30vh" overflowY='scroll'>
+                                  render tools here
+
+                                </Box>
+                            </AccordionPanel>
+            </AccordionItem>
+            <AccordionItem>
+                            <h2>
+                                <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
+                                    <Box flex='1' textAlign='left'>
+                                        FAQs
+                                    </Box>
+                                    <AccordionIcon />
+                                </AccordionButton>
+                            </h2>
+                            <AccordionPanel pb={4}>
+                                <Box maxHeight="30vh" overflowY='scroll'>
+                                  render FAQs
+
+                                </Box>
+                            </AccordionPanel>
+            </AccordionItem>
+            <AccordionItem>
+                            <h2>
+                                <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
+                                    <Box flex='1' textAlign='left'>
+                                        Questions to Ask your Doctor
+                                    </Box>
+                                    <AccordionIcon />
+                                </AccordionButton>
+                            </h2>
+                            <AccordionPanel pb={4}>
+                                <Box maxHeight="30vh" overflowY='scroll'>
+                                  render questions here
+
+                                </Box>
+                            </AccordionPanel>
+            </AccordionItem>
+
+            <AccordionItem>
+                            <h2>
+                                <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
+                                    <Box flex='1' textAlign='left'>
+                                        Specific resources
+                                    </Box>
+                                    <AccordionIcon />
+                                </AccordionButton>
+                            </h2>
+                            <AccordionPanel pb={4}>
+                                <Box maxHeight="30vh" overflowY='scroll'>
+                                  render specific resources here
+
+                                </Box>
+                            </AccordionPanel>
+            </AccordionItem>
+            </Accordion>
+            </div>
+           
+        
+        
     </>
     );
 }
