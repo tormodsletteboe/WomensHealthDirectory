@@ -32,9 +32,18 @@ router.get('/:categoryId', (req, res) => {
 
 router.put('/:categoryId', (req, res) => {
 
-  const sqlText = ``;
+  const categoryId = req.params.categoryId;
 
-  const sqlParams = [];
+  const sqlText = `
+    UPDATE "resources"
+    SET "name" = $1 , "link" = $2 , "description" = $3 
+    WHERE "id" = $4 AND "health_category_id" = $5
+    ;
+    `;
+
+  const sqlParams = [req.body.name, req.body.link, req.body.description, req.body.id.toString(), categoryId];
+  
+  console.log('sql params are', sqlParams);
 
   pool.query(sqlText, sqlParams)
   .then(dbRes => {

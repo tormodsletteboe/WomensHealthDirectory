@@ -19,11 +19,15 @@ function AdminSpecificResources() {
     }, [params.categoryId]);
 
     // functions
-    const updateResource = (evt) => {
+    async function updateResource(evt) {
         evt.preventDefault();
-        dispatch({ type: 'SAVE_RESOURCE_UPDATE', payload: resourceToEdit});
-        alert('edit submitted');
-        dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
+        const updateResoursePayload = {...resourceToEdit, categoryId: params.categoryId}
+        console.log(updateResoursePayload);
+
+        await dispatch({ type: 'SAVE_RESOURCE_UPDATE', payload: updateResoursePayload});
+        await alert('edit submitted');
+        await dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
+        await dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: params.categoryId });
     }
 
     return (

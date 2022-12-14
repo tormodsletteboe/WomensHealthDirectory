@@ -23,10 +23,10 @@ function* updateResource(action) {
 
     try {
         
-        const data = action.payload;
-        yield axios.put(`/api/adminprevcare/specificresources/${action.payload.id}`,  {data});
+        const dataToSend = action.payload;
+        console.log('data is', dataToSend);
 
-        dispatch({ type: 'FETCH_SPECIFIC_RESOURCES'});
+        yield axios.put(`/api/adminprevcare/specificresources/${action.payload.categoryId}`,  dataToSend );
 
     } catch (err) {
         console.error('Error updating specific resource', err);
