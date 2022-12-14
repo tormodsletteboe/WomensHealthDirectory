@@ -7,7 +7,7 @@ import userSaga from './user.saga';
 import newsletterSaga from './newsletter.saga';
 
 import healthCategoriesSaga from './healthCategoriesSaga';
-import ageRangeSaga from './agerange.saga';
+import ageRangeSaga from './ageRange.saga';
 
 
 // rootSaga is the primary saga.
