@@ -18,32 +18,40 @@ function AdminSpecificResources() {
         dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: params.categoryId });
     }, [params.categoryId]);
 
+    // functions
+    const updateResource = (evt) => {
+        evt.preventDefault();
+        dispatch({ type: 'SAVE_RESOURCE_UPDATE', payload: resourceToEdit});
+        alert('edit submitted');
+        dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
+    }
+
     return (
         <>
-            params: {params.categoryId}
-
+            <h1>Specific Resources</h1>
             <ul className="specificResources">
                 {specificResources.map(x => (
                     x.id === resourceToEdit.id ? 
                     
-                    <form action="post" key={resourceToEdit.id}>
+                    <form onSubmit={updateResource}
+                    key={resourceToEdit.id}>
                     <input 
                         value={resourceToEdit.name}
                         onChange={(evt) => dispatch({
                             type: 'UPDATE_FIELD',
-                            payload: {title: evt.target.value}
+                            payload: {name: evt.target.value}
                     })}/>
                     <input 
                         value={resourceToEdit.description}
                         onChange={(evt) => dispatch({
                             type: 'UPDATE_FIELD',
-                            payload: {title: evt.target.value}
+                            payload: {description: evt.target.value}
                     })}/>
                     <input 
                         value={resourceToEdit.link}
                         onChange={(evt) => dispatch({
                             type: 'UPDATE_FIELD',
-                            payload: {title: evt.target.value}
+                            payload: {link: evt.target.value}
                     })}/>
                     <button onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: {}})}>Cancel</button>
                     <button type="submit">Save</button>
@@ -51,7 +59,8 @@ function AdminSpecificResources() {
 
                     : 
                     <li key={x.id}><a href={x.link}>{x.name}</a> {x.description} 
-                        <button onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: x})}>
+                        <button 
+                        onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: x})}>
                         Edit
                         </button>
                     </li>

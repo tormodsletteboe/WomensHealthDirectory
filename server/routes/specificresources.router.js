@@ -30,4 +30,21 @@ router.get('/:categoryId', (req, res) => {
     })
 });
 
+router.put('/:categoryId', (req, res) => {
+
+  const sqlText = ``;
+
+  const sqlParams = [];
+
+  pool.query(sqlText, sqlParams)
+  .then(dbRes => {
+    res.sendStatus(204);
+  })
+  .catch(error => {
+    console.log(error);
+    res.sendStatus(500);
+  })
+
+});
+
 module.exports = router;

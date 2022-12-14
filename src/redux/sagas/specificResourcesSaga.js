@@ -5,7 +5,7 @@ import axios from "axios";
 function* fetchSpecificResources(action) {
 
     try {
-        console.log('in fetch resources');
+
         const response = yield axios.get(`/api/adminprevcare/specificresources/${action.payload}`);
 
         yield put({ 
@@ -14,12 +14,29 @@ function* fetchSpecificResources(action) {
         });
 
     } catch (err) {
-        console.log('Error with fetching specific resources', err);
+        console.error('Error with fetching specific resources', err);
+    }
+}
+
+function* updateResource(action) {
+    console.log('in update resource');
+
+    try {
+        
+        const data = action.payload;
+        yield axios.put(`/api/adminprevcare/specificresources/${action.payload.id}`,  {data});
+
+        dispatch({ type: 'FETCH_SPECIFIC_RESOURCES'});
+
+    } catch (err) {
+        console.error('Error updating specific resource', err);
     }
 }
 
 function* specificResourcesSaga() {
     yield takeLatest('FETCH_SPECIFIC_RESOURCES', fetchSpecificResources);
+
+    yield takeLatest('SAVE_RESOURCE_UPDATE', updateResource);
 }
 
 export default specificResourcesSaga;
