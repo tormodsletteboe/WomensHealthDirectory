@@ -11,7 +11,7 @@ function CategoryDetailView(){
     useEffect(() => {
         //Todo: add in all other data 
         dispatch({
-            type: 'FETCH_FAQ',
+            type: 'FETCH_CATEGORY_DETAIL',
             payload: {
                 catId: params.catId,
                 ageId: params.ageId

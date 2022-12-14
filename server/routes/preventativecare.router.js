@@ -34,7 +34,20 @@ router.get('/:catId/ages/:ageId', async (req, res) => {
     WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
 
     // Get FAQs
-    let faqRes = await pool.query(faqSQLText, catId, ageId);
+    try{
+
+    let faqRes = await pool.query(faqSQLText, [req.params.catId, req.params.ageId]);
+    console.log('faqRes is', faqRes);
+
+    let apiRes = {
+        faqs: faqRes.rows
+    }
+    res.send(apiRes);
+
+    }catch (err) {
+        console.log('Error with fetching FAQ', err);
+        res.sendStatus(500);
+    }
 
     //Get Diagnostic Tools
     // let diagRes= await pool.query(`
@@ -43,10 +56,6 @@ router.get('/:catId/ages/:ageId', async (req, res) => {
     // let drQuestionRes = await pool.query(`SELECT * FROM dr_qs WHERE ...`);
     // etc.....
 
-    let apiRes = {
-        faqs: faqRes.rows
-    }
-    res.send(apiRes);
 })
 
 module.exports = router;

@@ -3,7 +3,7 @@ import axios from "axios";
 
 
 // GET request to request FAQ from database
-function* fetchFaq(action) {
+function* fetchCategoryDetail(action) {
 
     let catId = action.payload.catId;
     console.log('catId is', catId);
@@ -17,19 +17,19 @@ function* fetchFaq(action) {
         console.log('response.data is', response.data);
 
         yield put({ 
-            type: 'SET_FAQ',
+            type: 'SET_CATEGORY_DETAIL',
             payload: response.data
     });
 
     } catch (err) {
-        console.log('Error with fetching FAQ', err);
+        console.log('Error with fetching category detail', err);
     }
 
 }
 
-function* faqSaga() {
-    yield takeLatest('FETCH_FAQ', fetchFaq);
+function* categoryDetailSaga() {
+    yield takeLatest('FETCH_CATEGORY_DETAIL', fetchCategoryDetail);
 
 }
 
-export default faqSaga;
+export default categoryDetailSaga;
