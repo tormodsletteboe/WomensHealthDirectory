@@ -191,10 +191,21 @@ INSERT INTO "health_category" ("category")
 VALUES ('Reproductive Health'), ('Cervical Health'), ('Menopause'), ('Mental Health'), ('Physical Therapy'), ('Breast Health');
 
 
-
-
-
 INSERT INTO "age_range" ("low", "high")
 VALUES (15, 19), (20, 24), (25, 29), (30, 34), (35, 39), (40, 44), (45, 49), (50, 54), (55, 59), (60, 64), (65, 69), (70, 74), (75, 79)
+;
+
+INSERT INTO "resources" ("name", "link", "description", "health_category_id")
+VALUES ('American Society for Colposcopy and Cervical Pathology', 'https://www.asccp.org/cervicalcancerelimination', 'Additional reading', 2),
+('United States Preventive Services Task Force', 'https://uspreventiveservicestaskforce.org/uspstf/search_results?searchterm=cervical%20cancer', 'Additional reading', 2),
+('American College of Obstetricians and Gynecologists', 'https://www.acog.org/clinical/clinical-guidance/practice-advisory/articles/2021/04/updated-cervical-cancer-screening-guidelines', 'Additional reading', 2)
+;
+
+INSERT INTO "guidelines" ("name", "info", "health_category_id", "age_range_id", "grade", "date")
+VALUES ('USPSTF Recommendation', 'Screen Every 3 years', 1, 5, 'A', '08-21-2018'),
+('USPSTF Recommendation', 'Screen Every 3 years', 2, 2, 'A', '08-21-2018'),
+('USPSTF Recommendation', 'Screen Every 2 years', 2, 2, 'A', '08-21-2018'),
+('USPSTF Recommendation', 'Screen Every 1 years', 2, 2, 'A', '08-21-2018'),
+('USPSTF Recommendation', 'Screen Every 10 years', 2, 1, 'A', '08-21-2018')
 ;
 

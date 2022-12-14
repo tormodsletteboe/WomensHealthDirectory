@@ -4,7 +4,7 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => {
-  console.log('in get request for age range');
+  
   pool.query(`
     SELECT * FROM "age_range" ORDER BY "id" ASC;
   `)
