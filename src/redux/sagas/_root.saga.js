@@ -4,11 +4,12 @@ import registrationSaga from './registration.saga';
 import userSaga from './user.saga';
 import newsletterSaga from './newsletter.saga';
 import healthCategoriesSaga from './healthCategoriesSaga';
-import ageRangeSaga from './agerange.saga';
 import specificResourcesSaga from './specificResourcesSaga';
 import medicalLinksSaga from './medicalLinks.saga';
 
 
+import ageRangeSaga from './ageRange.saga';
+import categoryDetailSaga from './categoryDetail.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -27,5 +28,6 @@ export default function* rootSaga() {
     newsletterSaga(), // add submitted emails to newsletter table
     specificResourcesSaga(),
     medicalLinksSaga(),
+    categoryDetailSaga(), //fetch category details
   ]);
 }
