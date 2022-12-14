@@ -4,10 +4,13 @@ import { useParams } from "react-router-dom";
 
 function AdminSpecificResources() {
 
+    // hooks
     const dispatch = useDispatch();
 
     const params = useParams();
 
+    // selectors
+    const specificResources = useSelector(store => store.specificResources);
 
     // fetch specific resources
     useEffect(() => {
@@ -17,6 +20,12 @@ function AdminSpecificResources() {
     return (
         <>
             params: {params.categoryId}
+
+            <ul className="specificResources">
+                {specificResources.map(x => (
+                    <li key={x.id}><a href={x.link}>{x.name}</a> {x.description} </li>
+                ))}
+            </ul>
         </>
     )
 }

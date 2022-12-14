@@ -12,7 +12,7 @@ router.get('/:categoryId', (req, res) => {
 
   const sqlText = 
   `
-    SELECT "name", "link", "description" FROM "resources" 
+    SELECT "id", "name", "link", "description" FROM "resources" 
     WHERE "health_category_id" = $1
     ORDER BY "id" ASC
     ;
