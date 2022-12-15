@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory } from "react-router-dom";
-import { useParams } from "react-router-dom";
+import { useHistory, useParams } from "react-router-dom";
 
 import Box from '@mui/material/Box';
 import InputLabel from '@mui/material/InputLabel';
@@ -36,33 +35,43 @@ function AdminPreventativeCare() {
 
 
     // functions
-    //When a category is clicked, it will go to a detail view of the id of the button clicked
+    // when a category is clicked, it will go to a detail view of the id of the button clicked
     const handleCategoryClick = (category) => {
         console.log('in handleCategoryClick, id is', category.id);
-        history.push(`./preventativecare/${selectedAgeRange}/category/${category.id}`);
+        history.push(`./adminprevcare/${category.id}/ages/${selectedAgeRange}`);
+    }
+
+    const handleAgeSelection = (event) => {
+        const newAgeRange = JSON.parse(event.target.value);
+        dispatch({type: 'SET_SELECTED_AGE_RANGE', payload: newAgeRange})
     }
 
     return (
         <>
             <label htmlFor="ageRange"> Choose Your Age Range </label>
             <select name="ageRange" id="ageRangeSelect" 
-                onChange={(event)=>dispatch({type: 'SET_SELECTED_AGE_RANGE', payload: event.target.value})}>
+                onChange={(event)=>handleAgeSelection(event)}>
                 {ageRanges.map(ageRange => 
-                (<option key={ageRange.id} value={ageRange.id} 
+                (<option key={ageRange.id} 
+                    value={JSON.stringify(ageRange)}
+                    // value={{id: ageRange.id, text: `${ageRange.low} - ${ageRange.high}`}} 
                 >
                     {ageRange.low} - {ageRange.high}
                 </option>))}
                 
             </select>
-            <Button variant="contained" style={{backgroundColor:'#276359'}} type="submit">Submit</Button>
+            <Button variant="contained" style={{backgroundColor:'#276359'}} 
+                type="submit">
+                Submit
+            </Button>
             <ul>
                 {healthCategories.map(category => (
                     <li key={category.id}>
                         <Button 
-                        onClick={() => handleCategoryClick(category)}
-                        variant="contained"  
-                        style={{backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>
-                            {category.category}
+                            onClick={() => handleCategoryClick(category)}
+                            variant="contained"  
+                            style={{backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>
+                                {category.category}
                         </Button>
                     </li>))}
             </ul>

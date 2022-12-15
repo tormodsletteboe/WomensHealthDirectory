@@ -24,7 +24,7 @@ import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCar
 import AdminResources from "../AdminResources/AdminResources";
 import AdminSpecificResources from "../AdminSpecificResources/AdminSpecificResources";
 import CategoryDetailView from "../CategoryDetailView/CategoryDetailView";
-
+import AdminCategoryDetailView from "../AdminCategoryDetailView/AdminCategoryDetailView";
 
 //function used to redirect if its admin loggin in or user logging in
 function UserOrAdmin(user) {
@@ -183,6 +183,21 @@ function App() {
               // If the user is already logged in, 
               // redirect them to the /user page
               <AdminPreventativeCare />
+              :
+              // Otherwise, show the Landing page
+              <Redirect to="/home" />
+            }
+
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/adminprevcare/:catId/ages/:ageId"
+          >
+            {user.id && user.access_level==1?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <AdminCategoryDetailView />
               :
               // Otherwise, show the Landing page
               <Redirect to="/home" />
