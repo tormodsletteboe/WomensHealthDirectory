@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
 import {
@@ -24,12 +24,6 @@ function CategoryDetailView(){
 
 
     useEffect(() => {
-
-        if(!categoryDetails){
-            console.log('hello');
-        }else{
-            console.log('hi');
-        }
         dispatch({
             type: 'FETCH_CATEGORY_DETAIL',
             payload: {
@@ -37,7 +31,7 @@ function CategoryDetailView(){
                 ageId: params.ageId
             }
         })
-    },);
+    },[]);
 
     let categoryDetails = useSelector((store)=>{
         return store.categoryDetail;
@@ -157,6 +151,5 @@ function CategoryDetailView(){
     </>
     );
 }
-
 
 export default CategoryDetailView;
