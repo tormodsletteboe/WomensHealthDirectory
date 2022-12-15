@@ -62,7 +62,7 @@ function CategoryDetailView(){
                             <TableContainer maxHeight="200vh" overflowY='scroll'>
                                      <Table variant='simple' size='sm'>
                                          <Tbody>
-                                             {categoryDetails && categoryDetails.guidelines.map((guideline) => (
+                                             {categoryDetails.guidelines && categoryDetails.guidelines.map((guideline) => (
                                                  <Tr key={guideline.id}>
                                                      <Td>{guideline.name}</Td>
                                                       <Td>{guideline.info}</Td>
