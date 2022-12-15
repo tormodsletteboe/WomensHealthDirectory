@@ -2,8 +2,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require("../modules/authentication-middleware");
 
-router.get('/:categoryId', (req, res) => {
+router.get('/:categoryId', rejectUnauthenticated, (req, res) => {
 
   const categoryId = req.params.categoryId;
   // const ageRangeId = req.params.ageRangeId;
@@ -30,7 +33,31 @@ router.get('/:categoryId', (req, res) => {
     })
 });
 
-router.put('/:categoryId', (req, res) => {
+router.post('/:categoryId', rejectUnauthenticated, (req, res) => {
+
+  const categoryId = req.params.categoryId;
+
+  const sqlText = `
+    INSERT INTO "resources" ("name", "link", "description", "health_category_id")
+    VALUES ($1 , $2 , $3, $4 )
+    ;
+    `;
+
+  const sqlParams = [req.body.name, req.body.link, req.body.description, categoryId];
+  
+  console.log('sql params are', sqlParams);
+
+  pool.query(sqlText, sqlParams)
+  .then(dbRes => {
+    res.sendStatus(201);
+  })
+  .catch(error => {
+    console.log(error);
+    res.sendStatus(500);
+  })
+});
+
+router.put('/:categoryId', rejectUnauthenticated, (req, res) => {
 
   const categoryId = req.params.categoryId;
 
@@ -41,7 +68,7 @@ router.put('/:categoryId', (req, res) => {
     ;
     `;
 
-  const sqlParams = [req.body.name, req.body.link, req.body.description, req.body.id.toString(), categoryId];
+  const sqlParams = [req.body.name, req.body.link, req.body.description, req.body.id, categoryId];
   
   console.log('sql params are', sqlParams);
 
@@ -53,7 +80,27 @@ router.put('/:categoryId', (req, res) => {
     console.log(error);
     res.sendStatus(500);
   })
+});
 
+router.delete('/:categoryId', rejectUnauthenticated, (req, res) => {
+  const categoryId = req.body.categoryId;
+
+  const sqlText = `
+    DELETE FROM "resources"
+    WHERE "id" = $1
+    ;
+    `;
+
+  const sqlParams = [req.body.id];
+
+  pool.query(sqlText, sqlParams)
+  .then(dbRes => {
+    res.sendStatus(204);
+  })
+  .catch(error => {
+    console.log(error);
+    res.sendStatus(500);
+  })
 });
 
 module.exports = router;
