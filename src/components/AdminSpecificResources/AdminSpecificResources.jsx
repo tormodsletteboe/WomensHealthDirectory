@@ -16,6 +16,7 @@ function AdminSpecificResources() {
     // fetch specific resources
     useEffect(() => {
         dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: params.categoryId });
+        
     }, [params.categoryId]);
 
     // functions
@@ -35,6 +36,15 @@ function AdminSpecificResources() {
         await dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
         await dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: params.categoryId });
     }
+
+    const handleAddClick = () => {
+
+        dispatch({type: 'SET_RESOURCE_TO_EDIT', 
+                    payload: 
+                    {id: Number(specificResources[specificResources.length-1].id + 1), 
+                    name: '', description:'', link: ''}})
+    }
+    
 
     const addEditForm =  (                   
         <form onSubmit={updateResource}
@@ -84,16 +94,12 @@ function AdminSpecificResources() {
                     {/* Creates Add button
                     Clicking Add button will send a file with 3 empty lines to edit, 
                     and id will be the highest id in the specific resources reducer plus one
-                    */}
-                    { specificResources.id ? 
-                    <button type="button" onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', 
-                        payload: 
-                        {id: Number(specificResources[specificResources.length-1].id + 1), 
-                        name: '', description:'', link: ''}})}>
+                    */}                    
+                    <button type="button" onClick={(evt)=>{handleAddClick(evt)}}>
                     Add
-                    </button> : null }
-                    {/* conditional rended to show/not show the form */}
-                { resourceToEdit.id === (specificResources[specificResources.length-1].id + 1) ? addEditForm : null }
+                    </button> 
+                    {/* conditional rendering to show/not show the add form */}
+                { resourceToEdit.id && resourceToEdit.id === (specificResources[specificResources.length-1].id + 1) ? addEditForm : null }
                 </li>
             </ul>
         </>
