@@ -132,7 +132,6 @@ function CategoryDetailView(){
         {categoryDetails.drQuestions && categoryDetails.drQuestions.map((question) => (
             <List key={question.id} style={{backgroundColor: '#FFFFFF'}}>
                 <ListItem>{question.question}</ListItem>
-                <ListItem>{question.answer}</ListItem>
             </List>
         ))}
         </AccordionDetails>
