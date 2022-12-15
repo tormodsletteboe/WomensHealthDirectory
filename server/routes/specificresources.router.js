@@ -2,8 +2,11 @@
 const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
+const {
+  rejectUnauthenticated,
+} = require("../modules/authentication-middleware");
 
-router.get('/:categoryId', (req, res) => {
+router.get('/:categoryId', rejectUnauthenticated, (req, res) => {
 
   const categoryId = req.params.categoryId;
   // const ageRangeId = req.params.ageRangeId;
@@ -30,7 +33,7 @@ router.get('/:categoryId', (req, res) => {
     })
 });
 
-router.post('/:categoryId', (req, res) => {
+router.post('/:categoryId', rejectUnauthenticated, (req, res) => {
 
   const categoryId = req.params.categoryId;
 
@@ -54,7 +57,7 @@ router.post('/:categoryId', (req, res) => {
   })
 });
 
-router.put('/:categoryId', (req, res) => {
+router.put('/:categoryId', rejectUnauthenticated, (req, res) => {
 
   const categoryId = req.params.categoryId;
 
@@ -79,7 +82,7 @@ router.put('/:categoryId', (req, res) => {
   })
 });
 
-router.delete('/:categoryId', (req, res) => {
+router.delete('/:categoryId', rejectUnauthenticated, (req, res) => {
   const categoryId = req.body.categoryId;
 
   const sqlText = `
