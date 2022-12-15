@@ -29,16 +29,16 @@ router.put('/:medlinkId',rejectUnauthenticated,(req,res)=>{
     const medlinkId = req.params.medlinkId;
     const sqlText =`
     UPDATE "medical_links"
-    SET "name" = $1
-    WHERE "id" = $2
+    SET "name" = $1, "link"=$2, "logo_url"=$3
+    WHERE "id" = $4
     ;
     `;
 
-    //this is where I am
-    const sqlParams = [req.body.name, medlinkId];
-    pool.query(sqlText)
+    
+    const sqlParams = [req.body.name,req.body.link,req.body.logo_url, medlinkId];
+    pool.query(sqlText,sqlParams)
     .then(dbRes =>{
-        res.send(dbRes.rows);
+        res.sendStatus(200);
     })
     .catch((error)=>{
         console.log(error);
