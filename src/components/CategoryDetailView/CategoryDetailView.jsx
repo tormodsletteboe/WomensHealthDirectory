@@ -21,6 +21,7 @@ function CategoryDetailView(){
 
     const dispatch = useDispatch();
     let params = useParams();
+    console.log('params is', params);
 
 
     useEffect(() => {
@@ -31,6 +32,12 @@ function CategoryDetailView(){
                 ageId: params.ageId
             }
         })
+        dispatch({
+            type: 'FETCH_SPECIFIC_RESOURCES',
+            payload: {
+                categoryId: params.catId
+            }
+        })
     },[]);
 
     let categoryDetails = useSelector((store)=>{
@@ -38,8 +45,9 @@ function CategoryDetailView(){
     })
 
     let specificresources = useSelector((store)=>{
-        return store.specificresources;
+        return store.specificResources;
     })
+    console.log('specificresources is', specificresources);
    
 
     
@@ -146,115 +154,14 @@ function CategoryDetailView(){
           <Typography>Resources</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Render specific resources here
-          </Typography>
+        {specificresources && specificresources.map((resource) => (
+            <List key={resource.id} style={{backgroundColor: '#FFFFFF'}} overflowX = 'scroll'>
+                <ListItem><a href={resource.link}>{resource.name}</a></ListItem>
+            </List>
+        ))}
         </AccordionDetails>
       </Accordion>
-    </div>
-    {/* <div className="accordion"> */}
-        {/* <Accordion allowToggle>
-                        <AccordionItem>
-                            <h2>
-                                <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
-                                    <Box flex ='1' textAlign='center'>
-                                        Guidelines
-                                    </Box>
-                                   
-                                    <AccordionIcon />
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                            <TableContainer maxHeight="200vh" overflowY='scroll'>
-                                     <Table variant='simple' size='sm'>
-                                         <Tbody>
-                                             {categoryDetails.guidelines && categoryDetails.guidelines.map((guideline) => (
-                                                 <Tr key={guideline.id}>
-                                                     <Td>{guideline.name}</Td>
-                                                      <Td>{guideline.info}</Td>
-                                                     <Td>{guideline.grade}</Td>
-                                                     <Td>{guideline.date}</Td> 
-                                                 </Tr>
-                                             )
-                                            )
-                                         }
-                                          </Tbody>
-                                     </Table>
- 
-                                 </TableContainer> 
-                            </AccordionPanel>
-                        </AccordionItem>
-            <AccordionItem>
-                            <h2>
-                                <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
-                                    <Box flex='1' textAlign='center'>
-                                        Diagnostic Tools
-                                    </Box>
-                                    <AccordionIcon />
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                                <Box maxHeight="30vh" overflowY='scroll'>
-                                  render tools here
-
-                                </Box>
-                            </AccordionPanel>
-            </AccordionItem>
-            <AccordionItem>
-                            <h2>
-                                <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
-                                    <Box flex='1' textAlign='center'>
-                                        FAQs
-                                    </Box>
-                                    <AccordionIcon />
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                                <Box maxHeight="30vh" overflowY='scroll'>
-                                  render FAQs
-
-                                </Box>
-                            </AccordionPanel>
-            </AccordionItem>
-            <AccordionItem>
-                            <h2>
-                                <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
-                                    <Box flex='1' textAlign='center'>
-                                        Questions to Ask your Doctor
-                                    </Box>
-                                    <AccordionIcon />
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                                <Box maxHeight="30vh" overflowY='scroll'>
-                                  render questions here
-
-                                </Box>
-                            </AccordionPanel>
-            </AccordionItem>
-
-            <AccordionItem>
-                            <h2>
-                                <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
-                                    <Box flex='1' textAlign='center'>
-                                        Specific resources
-                                    </Box>
-                                    <AccordionIcon />
-                                </AccordionButton>
-                            </h2>
-                            <AccordionPanel pb={4}>
-                                <Box maxHeight="30vh" overflowY='scroll'>
-                                  render specific resources here
-
-                                </Box>
-                            </AccordionPanel>
-            </AccordionItem>
-            </Accordion>
-            </div> */}
-
-           
-        
-        
+    </div>   
     </>
     );
 }
