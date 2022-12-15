@@ -155,7 +155,7 @@ function CategoryDetailView(){
         </AccordionSummary>
         <AccordionDetails>
         {specificresources && specificresources.map((resource) => (
-            <List key={resource.id} style={{backgroundColor: '#FFFFFF'}} overflowX = 'scroll'>
+            <List key={resource.id} style={{backgroundColor: '#FFFFFF'}}>
                 <ListItem><a href={resource.link}>{resource.name}</a></ListItem>
             </List>
         ))}
