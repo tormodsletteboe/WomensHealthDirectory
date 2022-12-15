@@ -20,21 +20,21 @@ function AdminSpecificResources() {
     }, [params.categoryId]);
 
     // functions
-    async function updateResource(evt) {
+    function updateResource(evt) {
         evt.preventDefault();
         const updateResoursePayload = {...resourceToEdit, categoryId: params.categoryId}
         console.log(updateResoursePayload);
 
         if (resourceToEdit.id > specificResources[specificResources.length-1].id) {
-            await dispatch({ type: 'ADD_RESOURCE', payload: updateResoursePayload});
-            await alert('added');
+            dispatch({ type: 'ADD_RESOURCE', payload: updateResoursePayload});
+            alert('added');
         } else {
-            await dispatch({ type: 'SAVE_RESOURCE_UPDATE', payload: updateResoursePayload});
-            await alert('edit submitted');
+            dispatch({ type: 'SAVE_RESOURCE_UPDATE', payload: updateResoursePayload});
+            alert('edit submitted');
         }
 
-        await dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
-        await dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: params.categoryId });
+        dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
+        dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: params.categoryId });
     }
 
     const handleAddClick = () => {
