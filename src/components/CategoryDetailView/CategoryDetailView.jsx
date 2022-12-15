@@ -46,7 +46,7 @@ function CategoryDetailView(){
     <>
 
 <div className="accordion">
-      <Accordion>
+      <Accordion style={{backgroundColor: '#8EBBA7'}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel1a-content"
@@ -55,7 +55,7 @@ function CategoryDetailView(){
           <Typography>Guidelines</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <TableContainer>
+        <TableContainer style = {{backgroundColor: '#FFFFFF'}}>
         <Table variant='simple' size='sm'>
                 <TableHead>
                     <TableRow>
@@ -81,7 +81,8 @@ function CategoryDetailView(){
                             </TableContainer>
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+
+      <Accordion style={{backgroundColor: '#8EBBA7'}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
@@ -92,6 +93,51 @@ function CategoryDetailView(){
         <AccordionDetails>
           <Typography>
             Render diagnostic tools here
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion style={{backgroundColor: '#8EBBA7'}}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography>FAQs</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Render FAQs here
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion style={{backgroundColor: '#8EBBA7'}}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography>Questions to Ask Your Doctor</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Render questions here
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion style={{backgroundColor: '#8EBBA7'}}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography>Resources</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Render specific resources here
           </Typography>
         </AccordionDetails>
       </Accordion>
