@@ -20,11 +20,11 @@ router.get('/', rejectUnauthenticated, function (req, res) {
     })
 });
 
-router.get('/:ageId/category/:catId/', async (req, res) => {
+router.get('/:catId/ages/:ageId', async (req, res) => {
     console.log('in preventativecare id router');
 
     let faqSQLText = `
-    SELECT * FROM "faq"
+    SELECT ("question"), ("answer") FROM "faq"
     WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
 
     let diagSQLText = `SELECT ("name"), ("info") FROM "diagnostic_tool"

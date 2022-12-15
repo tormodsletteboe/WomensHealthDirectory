@@ -10,4 +10,4 @@ const selectedAgeRange = (state = '', action) => {
 };
   
 
-export default resourceToEdit;
+export default selectedAgeRange;
