@@ -2,6 +2,9 @@ import React from 'react';
 import './About.css';
 
 function AboutPage() {
+
+  const url = "www.linkedin.com/in/lainalatterner";
+
   return (
     <>
     <div className="aboutTitle">
@@ -43,6 +46,13 @@ function AboutPage() {
         good DIY project, wine and spending time with her family. 
         </p>
   </div>
+
+
+  <div className="linkedInLogo">
+  <a href={`//${url}`}><img src="./images/linkedin.png"/></a>
+  </div>
+
+
     </>
   );
 }
