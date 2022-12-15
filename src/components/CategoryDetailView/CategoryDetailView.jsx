@@ -1,19 +1,17 @@
 import {useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import {useDispatch, useSelector} from 'react-redux';
-import {
-    Accordion,
-    AccordionButton,
-    AccordionIcon,
-    AccordionItem,
-    AccordionPanel,
-    Box,
-    Table,
-    TableContainer,
-    Tbody,
-    Td,
-    Tr,
-} from "@chakra-ui/react";
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
+import Typography from '@mui/material/Typography';
+import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import './CategoryDetailView.css';
 
 
@@ -46,8 +44,60 @@ function CategoryDetailView(){
     
     return(
     <>
-    <div className="accordion">
-        <Accordion allowToggle>
+
+<div className="accordion">
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel1a-content"
+          id="panel1a-header"
+        >
+          <Typography>Guidelines</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+        <TableContainer>
+        <Table variant='simple' size='sm'>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Guideline Name</TableCell>
+                        <TableCell>Info</TableCell>
+                        <TableCell>Grade</TableCell>
+                        <TableCell>Last Updated</TableCell>
+                    </TableRow>
+                </TableHead>
+                                         <TableBody>
+                                             {categoryDetails.guidelines && categoryDetails.guidelines.map((guideline) => (
+                                                 <TableRow key={guideline.id}>
+                                                     <TableCell>{guideline.name}</TableCell>
+                                                      <TableCell>{guideline.info}</TableCell>
+                                                     <TableCell>{guideline.grade}</TableCell>
+                                                     <TableCell>{guideline.date}</TableCell> 
+                                                 </TableRow>
+                                             )
+                                            )
+                                         }
+                                          </TableBody>
+                                     </Table>
+                            </TableContainer>
+        </AccordionDetails>
+      </Accordion>
+      <Accordion>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography>Diagnostic Tools</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+            Render diagnostic tools here
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+    </div>
+    {/* <div className="accordion"> */}
+        {/* <Accordion allowToggle>
                         <AccordionItem>
                             <h2>
                                 <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
@@ -144,7 +194,8 @@ function CategoryDetailView(){
                             </AccordionPanel>
             </AccordionItem>
             </Accordion>
-            </div>
+            </div> */}
+
            
         
         
