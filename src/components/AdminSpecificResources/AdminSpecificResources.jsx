@@ -44,6 +44,12 @@ function AdminSpecificResources() {
                     {id: Number(specificResources[specificResources.length-1].id + 1), 
                     name: '', description:'', link: ''}})
     }
+
+    const handleDelete = () => {
+
+        dispatch({type: 'DELETE_RESOURCE', 
+                            payload: {id: x.id, categoryId: params.categoryId}})
+    }
     
 
     const addEditForm =  (                   
@@ -86,10 +92,16 @@ function AdminSpecificResources() {
                     <li key={x.id}><a href={x.link}>{x.name}</a> {x.description} 
                         <button 
                         onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: x})}>
-                        Edit
+                            Edit
+                        </button>
+                        <button 
+                        onClick={()=>{dispatch({type: 'DELETE_RESOURCE', 
+                        payload: {id: x.id, categoryId: params.categoryId}})}}>
+                            Delete
                         </button>
                     </li>
                 ))}
+
                 <li> 
                     {/* Creates Add button
                     Clicking Add button will send a file with 3 empty lines to edit, 

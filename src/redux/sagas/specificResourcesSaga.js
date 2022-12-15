@@ -47,12 +47,25 @@ function* updateResource(action) {
     }
 }
 
+function* deleteResource(action) {
+    try {
+      // console.log('in delete pin saga, pin is', action.payload);
+      yield axios.delete(`/api/adminprevcare/specificresources/${action.payload.categoryId}`, {data: action.payload});
+  
+    } catch (error) {
+      console.error('Error deleting resource:', error);
+      alert('could not delete resource');
+    }
+  }
+
 function* specificResourcesSaga() {
     yield takeLatest('FETCH_SPECIFIC_RESOURCES', fetchSpecificResources);
 
     yield takeLatest('SAVE_RESOURCE_UPDATE', updateResource);
 
     yield takeLatest('ADD_RESOURCE', addResource);
+
+    yield takeLatest('DELETE_RESOURCE', deleteResource)
 }
 
 export default specificResourcesSaga;

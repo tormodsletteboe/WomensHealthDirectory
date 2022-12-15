@@ -46,13 +46,12 @@ router.post('/:categoryId', (req, res) => {
 
   pool.query(sqlText, sqlParams)
   .then(dbRes => {
-    res.sendStatus(204);
+    res.sendStatus(201);
   })
   .catch(error => {
     console.log(error);
     res.sendStatus(500);
   })
-
 });
 
 router.put('/:categoryId', (req, res) => {
@@ -78,7 +77,26 @@ router.put('/:categoryId', (req, res) => {
     console.log(error);
     res.sendStatus(500);
   })
+});
 
+router.delete('/:categoryId', (req, res) => {
+
+  const sqlText = `
+    DELETE FROM "resources"
+    WHERE "id" = $1
+    ;
+    `;
+
+  const sqlParams = [req.body.id];
+
+  pool.query(sqlText, sqlParams)
+  .then(dbRes => {
+    res.sendStatus(204);
+  })
+  .catch(error => {
+    console.log(error);
+    res.sendStatus(500);
+  })
 });
 
 module.exports = router;
