@@ -8,7 +8,11 @@ import {
     AccordionItem,
     AccordionPanel,
     Box,
+    Table,
     TableContainer,
+    Tbody,
+    Td,
+    Tr,
 } from "@chakra-ui/react";
 import './CategoryDetailView.css';
 
@@ -20,6 +24,12 @@ function CategoryDetailView(){
 
 
     useEffect(() => {
+
+        if(!categoryDetails){
+            console.log('hello');
+        }else{
+            console.log('hi');
+        }
         dispatch({
             type: 'FETCH_CATEGORY_DETAIL',
             payload: {
@@ -27,7 +37,7 @@ function CategoryDetailView(){
                 ageId: params.ageId
             }
         })
-    }, []);
+    },);
 
     let categoryDetails = useSelector((store)=>{
         return store.categoryDetail;
@@ -47,23 +57,37 @@ function CategoryDetailView(){
                         <AccordionItem>
                             <h2>
                                 <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
-                                    <Box flex='1' textAlign='left'>
+                                    <Box flex ='1' textAlign='center'>
                                         Guidelines
                                     </Box>
+                                   
                                     <AccordionIcon />
                                 </AccordionButton>
                             </h2>
                             <AccordionPanel pb={4}>
-                                <Box maxHeight="30vh" overflowY='scroll'>
-                                  render guidelines here
-
-                                </Box>
+                            <TableContainer maxHeight="200vh" overflowY='scroll'>
+                                     <Table variant='simple' size='sm'>
+                                         <Tbody>
+                                             {categoryDetails && categoryDetails.guidelines.map((guideline) => (
+                                                 <Tr key={guideline.id}>
+                                                     <Td>{guideline.name}</Td>
+                                                      <Td>{guideline.info}</Td>
+                                                     <Td>{guideline.grade}</Td>
+                                                     <Td>{guideline.date}</Td> 
+                                                 </Tr>
+                                             )
+                                            )
+                                         }
+                                          </Tbody>
+                                     </Table>
+ 
+                                 </TableContainer> 
                             </AccordionPanel>
                         </AccordionItem>
             <AccordionItem>
                             <h2>
                                 <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
-                                    <Box flex='1' textAlign='left'>
+                                    <Box flex='1' textAlign='center'>
                                         Diagnostic Tools
                                     </Box>
                                     <AccordionIcon />
@@ -79,7 +103,7 @@ function CategoryDetailView(){
             <AccordionItem>
                             <h2>
                                 <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
-                                    <Box flex='1' textAlign='left'>
+                                    <Box flex='1' textAlign='center'>
                                         FAQs
                                     </Box>
                                     <AccordionIcon />
@@ -95,7 +119,7 @@ function CategoryDetailView(){
             <AccordionItem>
                             <h2>
                                 <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
-                                    <Box flex='1' textAlign='left'>
+                                    <Box flex='1' textAlign='center'>
                                         Questions to Ask your Doctor
                                     </Box>
                                     <AccordionIcon />
@@ -112,7 +136,7 @@ function CategoryDetailView(){
             <AccordionItem>
                             <h2>
                                 <AccordionButton style={{height: 50, borderRadius: 8, backgroundColor: '#8EBBA7'}}>
-                                    <Box flex='1' textAlign='left'>
+                                    <Box flex='1' textAlign='center'>
                                         Specific resources
                                     </Box>
                                     <AccordionIcon />
@@ -133,5 +157,6 @@ function CategoryDetailView(){
     </>
     );
 }
+
 
 export default CategoryDetailView;

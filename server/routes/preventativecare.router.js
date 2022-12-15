@@ -24,16 +24,16 @@ router.get('/:catId/ages/:ageId', rejectUnauthenticated, async (req, res) => {
     console.log('in preventativecare id router');
 
     let faqSQLText = `
-    SELECT ("question"), ("answer") FROM "faq"
+    SELECT ("question"), ("answer"), ("id") FROM "faq"
     WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
 
-    let diagSQLText = `SELECT ("name"), ("info") FROM "diagnostic_tool"
+    let diagSQLText = `SELECT ("name"), ("info"), ("id") FROM "diagnostic_tool"
     WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
 
-    let guidelinesSQLText = `SELECT ("name"), ("info"), ("grade"), ("date") FROM "guidelines"
+    let guidelinesSQLText = `SELECT ("name"), ("info"), ("grade"), ("date"), ("id") FROM "guidelines"
     WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
 
-    let drQuestionsSQLText = `SELECT ("question"), ("answer") FROM "doctor_questions"
+    let drQuestionsSQLText = `SELECT ("question"), ("answer"), ("id") FROM "doctor_questions"
     WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
 
     // Get category details
