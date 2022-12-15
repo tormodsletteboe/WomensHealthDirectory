@@ -8,6 +8,11 @@ import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 import Button from '@mui/material/Button';
+import Breadcrumbs from '@mui/material/Breadcrumbs';
+import Typography from '@mui/material/Typography';
+import Link from '@mui/material/Link';
+import Stack from '@mui/material/Stack';
+import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 
 function AdminPreventativeCare() {
 
@@ -37,8 +42,7 @@ function AdminPreventativeCare() {
     // functions
     // when a category is clicked, it will go to a detail view of the id of the button clicked
     const handleCategoryClick = (category) => {
-        console.log('in handleCategoryClick, id is', category.id);
-        history.push(`./adminprevcare/${category.id}/ages/${selectedAgeRange}`);
+        history.push(`/adminprevcare/${category.id}/ages/${selectedAgeRange.id}`);
     }
 
     const handleAgeSelection = (event) => {
@@ -46,24 +50,48 @@ function AdminPreventativeCare() {
         dispatch({type: 'SET_SELECTED_AGE_RANGE', payload: newAgeRange})
     }
 
+    // MUI Breadcrumbs
+
+    const breadcrumbs = [
+        <Link underline="hover" 
+        key="1" color="inherit" 
+        href="/">
+          Admin
+        </Link>,
+        <Link
+          underline="hover"
+          key="2"
+          color="inherit"
+          href="/#/adminprevcare"
+        >
+          Preventative Care
+        </Link>,
+      ];
+
     return (
         <>
+        {/* MUI Breadcrumbs */}
+        <Stack spacing={2}>
+            <Breadcrumbs
+                separator={<NavigateNextIcon fontSize="small" />}
+                aria-label="breadcrumb"
+            >
+                {breadcrumbs}
+            </Breadcrumbs>
+        </Stack>
+
             <label htmlFor="ageRange"> Choose Your Age Range </label>
             <select name="ageRange" id="ageRangeSelect" 
                 onChange={(event)=>handleAgeSelection(event)}>
                 {ageRanges.map(ageRange => 
                 (<option key={ageRange.id} 
                     value={JSON.stringify(ageRange)}
-                    // value={{id: ageRange.id, text: `${ageRange.low} - ${ageRange.high}`}} 
                 >
                     {ageRange.low} - {ageRange.high}
                 </option>))}
                 
             </select>
-            <Button variant="contained" style={{backgroundColor:'#276359'}} 
-                type="submit">
-                Submit
-            </Button>
+
             <ul>
                 {healthCategories.map(category => (
                     <li key={category.id}>
