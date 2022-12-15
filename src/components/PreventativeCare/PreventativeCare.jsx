@@ -50,7 +50,7 @@ function PreventativeCare() {
 
     return(
     <>
-    <h4>Recommended Screening Guidelines</h4>
+    <h4>Screening Recommended by Age</h4>
 
     <form onSubmit={handleAgeFormSubmit}>
             <select name="agerange" id="ageRangeSelect" onChange={handleAgeChange}>

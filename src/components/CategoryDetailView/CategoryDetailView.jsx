@@ -12,6 +12,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
 import './CategoryDetailView.css';
 
 
@@ -34,12 +36,11 @@ function CategoryDetailView(){
     let categoryDetails = useSelector((store)=>{
         return store.categoryDetail;
     })
-    console.log('categorydetails is', categoryDetails);
 
     let specificresources = useSelector((store)=>{
         return store.specificresources;
     })
-    console.log('specific resources is', specificresources);
+   
 
     
     return(
@@ -91,9 +92,13 @@ function CategoryDetailView(){
           <Typography>Diagnostic Tools</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Render diagnostic tools here
-          </Typography>
+        {categoryDetails.diagTools && categoryDetails.diagTools.map((diagTool) => (
+            <List key={diagTool.id} style={{backgroundColor: '#FFFFFF'}}>
+                <ListItem>{diagTool.name}</ListItem>
+                <ListItem>{diagTool.info}</ListItem>
+            </List>
+        ))}
+
         </AccordionDetails>
       </Accordion>
 
@@ -106,9 +111,12 @@ function CategoryDetailView(){
           <Typography>FAQs</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Render FAQs here
-          </Typography>
+        {categoryDetails.faqs && categoryDetails.faqs.map((faq) => (
+            <List key={faq.id} style={{backgroundColor: '#FFFFFF'}}>
+                <ListItem>{faq.question}</ListItem>
+                <ListItem>{faq.answer}</ListItem>
+            </List>
+        ))}
         </AccordionDetails>
       </Accordion>
 
@@ -121,9 +129,12 @@ function CategoryDetailView(){
           <Typography>Questions to Ask Your Doctor</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Render questions here
-          </Typography>
+        {categoryDetails.drQuestions && categoryDetails.drQuestions.map((question) => (
+            <List key={question.id} style={{backgroundColor: '#FFFFFF'}}>
+                <ListItem>{question.question}</ListItem>
+                <ListItem>{question.answer}</ListItem>
+            </List>
+        ))}
         </AccordionDetails>
       </Accordion>
 
