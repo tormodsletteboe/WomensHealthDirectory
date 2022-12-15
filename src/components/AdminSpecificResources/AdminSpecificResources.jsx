@@ -1,6 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
+import AddEditForm from "../AdminAddEditForm/AdminAddEditForm";
+
 
 function AdminSpecificResources() {
 
@@ -15,71 +17,53 @@ function AdminSpecificResources() {
 
     // fetch specific resources
     useEffect(() => {
-        dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: params.categoryId });
+        dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: {categoryId: params.categoryId} });
         
     }, [params.categoryId]);
 
     // functions
-    function updateResource(evt) {
-        evt.preventDefault();
-        const updateResoursePayload = {...resourceToEdit, categoryId: params.categoryId}
-        console.log(updateResoursePayload);
-
-        if (resourceToEdit.id > specificResources[specificResources.length-1].id) {
-            dispatch({ type: 'ADD_RESOURCE', payload: updateResoursePayload});
-            alert('added');
-        } else {
-            dispatch({ type: 'SAVE_RESOURCE_UPDATE', payload: updateResoursePayload});
-            alert('edit submitted');
-        }
-
-        dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
-        dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: params.categoryId });
-    }
-
     const handleAddClick = () => {
-
         dispatch({type: 'SET_RESOURCE_TO_EDIT', 
-                    payload: 
-                    {id: Number(specificResources[specificResources.length-1].id + 1), 
-                    name: '', description:'', link: ''}})
+            payload: 
+            {id: Number(specificResources[specificResources.length-1].id + 1), 
+            name: '', description:'', link: ''}})
     }
 
     const handleDelete = (evt, x) => {
         evt.preventDefault();
         // console.log('deleting x', x);
         dispatch({type: 'DELETE_RESOURCE', 
-            payload: {id: x.id, categoryId: params.categoryId}})
-            dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: params.categoryId })
+            payload: {id: x.id, categoryId: params.categoryId}});
+        
     }
     
 
-    const addEditForm =  (                   
-        <form onSubmit={updateResource}
-            key={resourceToEdit.id}>
-            <input 
-                value={resourceToEdit.name}
-                onChange={(evt) => dispatch({
-                    type: 'UPDATE_FIELD',
-                    payload: {name: evt.target.value}
-            })}/>
-            <input 
-                value={resourceToEdit.description}
-                onChange={(evt) => dispatch({
-                    type: 'UPDATE_FIELD',
-                    payload: {description: evt.target.value}
-            })}/>
-            <input 
-                value={resourceToEdit.link}
-                onChange={(evt) => dispatch({
-                    type: 'UPDATE_FIELD',
-                    payload: {link: evt.target.value}
-            })}/>
-            <button onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: {}})}>
-                Cancel
-            </button>
-            <button type="submit">Save</button>
-        </form>)
+    // const addEditForm =  (                   
+    //     <form onSubmit={updateOrAddResource}
+    //         key={resourceToEdit.id}>
+    //         <input 
+    //             value={resourceToEdit.name}
+    //             onChange={(evt) => dispatch({
+    //                 type: 'UPDATE_FIELD',
+    //                 payload: {name: evt.target.value}
+    //         })}/>
+    //         <input 
+    //             value={resourceToEdit.description}
+    //             onChange={(evt) => dispatch({
+    //                 type: 'UPDATE_FIELD',
+    //                 payload: {description: evt.target.value}
+    //         })}/>
+    //         <input 
+    //             value={resourceToEdit.link}
+    //             onChange={(evt) => dispatch({
+    //                 type: 'UPDATE_FIELD',
+    //                 payload: {link: evt.target.value}
+    //         })}/>
+    //         <button onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: {}})}>
+    //             Cancel
+    //         </button>
+    //         <button type="submit">Save</button>
+    //     </form>)
 
     return (
         <> 
@@ -87,8 +71,9 @@ function AdminSpecificResources() {
             <ul className="specificResources">
                 {specificResources.map(x => (
                     x.id === resourceToEdit.id ? 
-                    
-                    addEditForm
+
+                    // addEditForm
+                    <AddEditForm key={x.id} />
 
                     : 
                     <li key={x.id}><a href={x.link}>{x.name}</a> {x.description} 
@@ -112,7 +97,7 @@ function AdminSpecificResources() {
                     Add
                     </button> 
                     {/* conditional rendering to show/not show the add form */}
-                { resourceToEdit.id && resourceToEdit.id === (specificResources[specificResources.length-1].id + 1) ? addEditForm : null }
+                { resourceToEdit.id && resourceToEdit.id === (specificResources[specificResources.length-1].id + 1) ? <AddEditForm /> : null }
                 </li>
             </ul>
         </>
