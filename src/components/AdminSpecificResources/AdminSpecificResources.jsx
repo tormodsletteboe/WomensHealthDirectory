@@ -45,10 +45,12 @@ function AdminSpecificResources() {
                     name: '', description:'', link: ''}})
     }
 
-    const handleDelete = () => {
-
+    const handleDelete = (evt, x) => {
+        evt.preventDefault();
+        // console.log('deleting x', x);
         dispatch({type: 'DELETE_RESOURCE', 
-                            payload: {id: x.id, categoryId: params.categoryId}})
+            payload: {id: x.id, categoryId: params.categoryId}})
+            dispatch({ type: 'FETCH_SPECIFIC_RESOURCES', payload: params.categoryId })
     }
     
 
@@ -95,8 +97,7 @@ function AdminSpecificResources() {
                             Edit
                         </button>
                         <button 
-                        onClick={()=>{dispatch({type: 'DELETE_RESOURCE', 
-                        payload: {id: x.id, categoryId: params.categoryId}})}}>
+                        onClick={(evt)=>{handleDelete(evt, x)}}>
                             Delete
                         </button>
                     </li>

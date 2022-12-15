@@ -80,6 +80,7 @@ router.put('/:categoryId', (req, res) => {
 });
 
 router.delete('/:categoryId', (req, res) => {
+  const categoryId = req.body.categoryId;
 
   const sqlText = `
     DELETE FROM "resources"
