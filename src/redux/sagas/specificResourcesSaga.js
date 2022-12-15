@@ -17,6 +17,21 @@ function* fetchSpecificResources(action) {
     }
 }
 
+function* addResource(action) {
+    console.log('in add resource');
+
+    try {
+        
+        const dataToSend = action.payload;
+        console.log('data is', dataToSend);
+
+        yield axios.post(`/api/adminprevcare/specificresources/${action.payload.categoryId}`,  dataToSend );
+
+    } catch (err) {
+        console.error('Error adding specific resource', err);
+    }
+}
+
 function* updateResource(action) {
     console.log('in update resource');
 
@@ -37,7 +52,7 @@ function* specificResourcesSaga() {
 
     yield takeLatest('SAVE_RESOURCE_UPDATE', updateResource);
 
-    
+    yield takeLatest('ADD_RESOURCE', addResource);
 }
 
 export default specificResourcesSaga;

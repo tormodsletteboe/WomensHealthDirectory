@@ -30,6 +30,31 @@ router.get('/:categoryId', (req, res) => {
     })
 });
 
+router.post('/:categoryId', (req, res) => {
+
+  const categoryId = req.params.categoryId;
+
+  const sqlText = `
+    INSERT INTO "resources" ("name", "link", "description", "health_category_id")
+    VALUES ($1 , $2 , $3, $4 )
+    ;
+    `;
+
+  const sqlParams = [req.body.name, req.body.link, req.body.description, categoryId];
+  
+  console.log('sql params are', sqlParams);
+
+  pool.query(sqlText, sqlParams)
+  .then(dbRes => {
+    res.sendStatus(204);
+  })
+  .catch(error => {
+    console.log(error);
+    res.sendStatus(500);
+  })
+
+});
+
 router.put('/:categoryId', (req, res) => {
 
   const categoryId = req.params.categoryId;
