@@ -123,7 +123,6 @@ CREATE TABLE "age_range" (
 CREATE TABLE "doctor_questions" (
 	"id" serial NOT NULL,
 	"question" varchar(1024) NOT NULL,
-	"answer" varchar(1024) NOT NULL,
 	"health_category_id" int NOT NULL,
 	"age_range_id" int NOT NULL,
 	CONSTRAINT "doctor_questions_pk" PRIMARY KEY ("id")
@@ -195,6 +194,7 @@ INSERT INTO "age_range" ("low", "high")
 VALUES (15, 19), (20, 24), (25, 29), (30, 34), (35, 39), (40, 44), (45, 49), (50, 54), (55, 59), (60, 64), (65, 69), (70, 74), (75, 79)
 ;
 
+
 INSERT INTO "resources" ("name", "link", "description", "health_category_id")
 VALUES ('American Society for Colposcopy and Cervical Pathology', 'https://www.asccp.org/cervicalcancerelimination', 'Additional reading', 2),
 ('United States Preventive Services Task Force', 'https://uspreventiveservicestaskforce.org/uspstf/search_results?searchterm=cervical%20cancer', 'Additional reading', 2),
@@ -208,4 +208,19 @@ VALUES ('USPSTF Recommendation', 'Screen Every 3 years', 1, 5, 'A', '08-21-2018'
 ('USPSTF Recommendation', 'Screen Every 1 years', 2, 2, 'A', '08-21-2018'),
 ('USPSTF Recommendation', 'Screen Every 10 years', 2, 1, 'A', '08-21-2018')
 ;
+
+
+INSERT INTO "faq" ("question", "answer", "health_category_id", "age_range_id")
+VALUES ('What is the first step?', 'Depending on your age, you still start with a pap smear. The sample is collected the same way with a pap and HPV. The difference is in how the sample is tested and evaluated.', 7, 5), 
+('How do the tests differ?', 'The sample is collected in the same way with a pap and HPV. The difference is in how the sample is tested and evaluated. The pap is subjective with human reading, while the HPV test is objective using an analyzer.', 7, 5), 
+('I am positive. Now what?', 'Your test sample will go on for further testing, HPV, Pap, or triage biomarker. From there, you may be asked to come in for a visual examination using a colposcope to better see your cervix. This is called a colposcopy.', 7, 5),
+('What do these numbers mean?', 'There are 14 identified high-risk HPV genotypes, which is what HPV testing is looking for. HPV causes 99% of all cervical cancers, with HPV 16 and 18 causing 70% of those cases. You will want to follow up with your provider for next steps and more details.', 7, 5);
+
+INSERT INTO "diagnostic_tool" ("name", "info", "health_category_id", "age_range_id")
+VALUES ('Pap smear', 'Developed in the 1970s, subjective screening model--looks for abnormal cells', 7, 5), 
+('HPV Testing', 'FDA approved in 1997, objective--Looks for HPV virus (causes 99% of all cervical cancer', 7, 5),
+('Primary screening', 'HPV test-only', 7, 5),
+('Co-testing', 'HPV and Pap smear ordered at the same time', 7, 5),
+('Triage testing', 'Dual-stain biomarkers--Looks for transformation of cells', 7, 5),
+('Colposcopy', 'Physical exam with camera', 7, 5);
 

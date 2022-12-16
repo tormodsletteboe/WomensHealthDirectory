@@ -25,6 +25,7 @@ import AdminResources from "../AdminResources/AdminResources";
 import AdminSpecificResources from "../AdminSpecificResources/AdminSpecificResources";
 import Membership from "../Membership/Membership";
 import Feedback from "../Feedback/Feedback";
+import CategoryDetailView from "../CategoryDetailView/CategoryDetailView";
 
 //function used to redirect if its admin loggin in or user logging in
 function UserOrAdmin(user) {
@@ -151,6 +152,14 @@ function App() {
               // Otherwise, show the Landing page
               <Redirect to="/home" />
             )}
+          </ProtectedRoute>
+        
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/preventativecare/:catId/ages/:ageId"
+          >
+            <CategoryDetailView />
           </ProtectedRoute>
 
 

@@ -1,0 +1,36 @@
+.aboutTitle {
+    text-align: center;
+}
+
+.aboutText {
+    text-align: left;
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.aboutImage {
+    margin-left: 0.5rem;
+    margin-right: 0.5rem;
+}
+
+.caption {
+    margin-right: 1.5rem;
+    text-align: center;
+    font-weight: bolder;
+}
+
+.bio {
+    margin-left: 0.5rem;
+    margin-left: 0.5rem;
+}
+
+.linkedInLogo {
+    height: 3rem;
+    width: 3rem;
+    margin: 0 auto;
+}
+
+
+
+
+

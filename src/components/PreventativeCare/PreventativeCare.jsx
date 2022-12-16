@@ -16,9 +16,7 @@ function PreventativeCare() {
     })
     console.log('age ranges is', ageRanges);
 
-    //fetch user's age on page load to autofill form with user's age
-    //TODO: update database (add user_id foreign key to healthcategory table), create new saga function and reducer
-    //add GET router to user router
+    
     useEffect(() => {
         dispatch({
             type: 'FETCH_USER_AGE'
@@ -31,6 +29,7 @@ function PreventativeCare() {
     const handleAgeChange  = (event) => {
         setAge(event.target.value);
     }
+    console.log('age is', age);
 
     const handleAgeFormSubmit = (event) => {
         console.log('in handleAgeFormSubmit');
@@ -45,18 +44,19 @@ function PreventativeCare() {
     //When a category is clicked, it will go to a detail view of the id of the button clicked
     const handleCategoryClick = (category) => {
         console.log('in handleCategoryClick, id is',category.id);
-        history.push(`./preventativecare/${category.id}`);
+        history.push(`./preventativecare/${category.id}/ages/${age}`);
+
     }
 
     return(
     <>
-    <h4>Recommended Screening Guidelines</h4>
+    <h4>Screening Recommended by Age</h4>
 
     <form onSubmit={handleAgeFormSubmit}>
-            <select name="agerange" id="ageRangeSelect">
+            <select name="agerange" id="ageRangeSelect" onChange={handleAgeChange}>
                 <option defaultValue="Choose Your Age Range">Choose Your Age Range</option>
             {ageRanges.map(ageRange =>
-                (<option key={ageRange.id} value={`{ageRange.low} - {ageRange.high}`}>
+                (<option key={ageRange.id} value={ageRange.id}>
                     {ageRange.low} - {ageRange.high}
                 </option>
                  ))}
