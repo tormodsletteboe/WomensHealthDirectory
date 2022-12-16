@@ -41,10 +41,10 @@ function AdminPreventativeCare() {
 
 
     // functions
-    // when a category is clicked, it will go to a detail view of the id of the button clicked
+    
     const handleCategoryClick = (category) => {
         dispatch({ type: 'SET_SELECTED_CATEGORY', payload: category });
-        // history.push(`/adminprevcare/${category.id}/ages/${selectedAgeRange.id}`);
+        
     }
 
     const handleAgeSelection = (event) => {
@@ -52,8 +52,20 @@ function AdminPreventativeCare() {
         dispatch({type: 'SET_SELECTED_AGE_RANGE', payload: newAgeRange})
     }
 
-    // MUI Breadcrumbs
+    // when a category is clicked, it will go to a detail view of the id of the button clicked
+    const handleSectionClick = (section) => {
+        history.push(`/adminprevcare/${selectedHealthCategory.id}/ages/${selectedAgeRange.id}/${section.name}`);
+    }
 
+    const categorySections = [
+        { name: 'guidelines' },
+        { name: 'diagnosticTools' },
+        { name: 'faq' },
+        { name: 'questionsfordoctor' },
+        { name: 'resources' }
+    ]
+
+    // MUI Breadcrumbs
     const breadcrumbs = [
         <Link underline="hover" 
         key="1" color="inherit" 
@@ -106,10 +118,22 @@ function AdminPreventativeCare() {
                         </li>))}
                 </ul>
             </section>
+                
             { selectedHealthCategory.id ? 
-            <Button>
-                Diagnostic Tools
-            </Button>
+            <section>
+                <ul>
+                { categorySections.map(section => (
+                    <li key={section.name}>
+                        <Button 
+                            onClick={() => handleSectionClick(section)}
+                            variant="contained"  
+                            style={{backgroundColor: '#89C489', color: '#FFFFFF'}}>
+                            {section.name}
+                        </Button>
+                    </li>
+                ))}
+                </ul>
+            </section>
             : 
             null}
         </>
