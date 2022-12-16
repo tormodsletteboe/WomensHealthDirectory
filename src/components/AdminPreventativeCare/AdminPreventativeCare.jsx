@@ -117,7 +117,7 @@ function AdminPreventativeCare() {
                 </ul>
             </section>
                 
-            { selectedHealthCategory.id ? 
+            {selectedAgeRange.id && selectedHealthCategory.id ? 
             <section>
                 <ul>
                 { categorySections.map(section => (

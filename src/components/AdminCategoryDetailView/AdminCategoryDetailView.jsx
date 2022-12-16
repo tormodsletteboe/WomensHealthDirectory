@@ -33,6 +33,27 @@ function AdminCategoryDetailView() {
         })
     }, [params]);
 
+    // functions
+    const handleAddClick = () => {
+		
+		// calculate how many fields to show in the add form
+		const newObjectItemsNumber = (Object.keys(detailContent[0]).length) - 1;
+		console.log('new add object fields', newObjectItemsNumber);
+
+		// create object and add in empty fields based on the above number
+		let objToAdd = {id: 0};
+
+		for (let i = 1; i <= newObjectItemsNumber; i++ ){
+			let newName = 'field0' + i;
+			objToAdd[newName] = '';
+		}
+
+		console.log('new add object', objToAdd);
+
+        dispatch({type: 'SET_RESOURCE_TO_EDIT', 
+            payload: objToAdd})
+    }
+
     // MUI Breadcrumbs
     const breadcrumbs = [
         <Link underline="hover" 
@@ -96,6 +117,17 @@ function AdminCategoryDetailView() {
 						</button>
 					</li>
 				))}
+				<li> 
+                    {/* Creates Add button
+                    Clicking Add button will send a file with 3 empty lines to edit, 
+                    and id will be the highest id in the specific resources reducer plus one
+                    */}                    
+                    <button type="button" onClick={(evt)=>{handleAddClick(evt)}}>
+                    Add
+                    </button> 
+                    {/* conditional rendering to show/not show the add form */}
+                { resourceToEdit.field01 === "" ? <AddEditForm /> : null }
+                </li>
 			</ul>
         </section>
         </>

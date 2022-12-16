@@ -33,12 +33,12 @@ function AddEditForm() {
         <>
         <form onSubmit={updateOrAddResource}
             key={resourceToEdit.id}>
-            <input 
-                value={resourceToEdit.field01}
-                onChange={(evt) => dispatch({
-                    type: 'UPDATE_FIELD',
-                    payload: {field01: evt.target.value}
-            })}/>
+                <input 
+                    value={resourceToEdit.field01}
+                    onChange={(evt) => dispatch({
+                        type: 'UPDATE_FIELD',
+                        payload: {field01: evt.target.value}
+                })}/>
             {resourceToEdit.field02 ? 
                 <input 
                     value={resourceToEdit.field02}
