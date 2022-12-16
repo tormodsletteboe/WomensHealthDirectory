@@ -79,31 +79,35 @@ router.get('/:catId/ages/:ageId/:sectionName', rejectUnauthenticated, async (req
       sqlText = `SELECT "id", "name" AS "field01", "info" AS "field02", 
         "grade" AS "field03", "date" AS "field04" 
         FROM "guidelines"
-        WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+        WHERE "health_category_id" = $1 AND "age_range_id"=$2
+        ORDER BY "id" ASC ;`;
       break;
     case 'Diagnostic Tools':
       sqlText = `SELECT "id", "name" AS "field01", "info" AS "field02" 
         FROM "diagnostic_tool"
-        WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+        WHERE "health_category_id" = $1 AND "age_range_id"=$2
+        ORDER BY "id" ASC
+        ;`;
       break;
     case 'FAQ':
       sqlText = `
         SELECT "id", "question" AS "field01", "answer" AS "field02" 
         FROM "faq"
-        WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+        WHERE "health_category_id" = $1 AND "age_range_id"=$2
+        ORDER BY "id" ASC
+        ;`;
       break;
     case 'Questions for Your Doctor':
       sqlText = `SELECT "id", "answer" AS "field01", "question" AS "field02"
         FROM "doctor_questions"
-        WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+        WHERE "health_category_id" = $1 AND "age_range_id"=$2
+        ORDER BY "id" ASC;`;
       break;
   }
-
 
   // Get category details
   try{
 
-  //Get guidelines
   let dbRes = await pool.query(sqlText, sqlParams);
 
   res.send(dbRes.rows);
@@ -113,6 +117,74 @@ router.get('/:catId/ages/:ageId/:sectionName', rejectUnauthenticated, async (req
       res.sendStatus(500);
   }
 })
+
+// Edit router
+  router.put('/:catId/ages/:ageId/:sectionName', rejectUnauthenticated, (req, res) => {
+    console.log('in preventativecare specific Id router');
+
+    const sectionName = req.params.sectionName;
+  
+    let sqlParams = [req.body.id, req.params.catId, req.params.ageId];
+    let sqlText = '';
+    
+    // switch statement to determine which table to update
+    switch(sectionName) {
+      case 'Guidelines': 
+        sqlText = `
+          UPDATE "guidelines" 
+          SET "name" = $4 , "info" = $5, "grade" = $6, "date" = $7
+          WHERE "id" = $1 AND "health_category_id" = $2 AND "age_range_id" = $3;`;
+        sqlParams = [req.body.id, req.params.catId, req.params.ageId, 
+          req.body.field01, req.body.field02, req.body.field03, req.body.field04];
+        
+        break;
+      case 'Diagnostic Tools':
+        sqlText = `
+          UPDATE "diagnostic_tool"
+          SET "name" = $4 , "info" = $5
+          WHERE "id" = $1 AND "health_category_id" = $2 AND "age_range_id" = $3;`;
+        sqlParams = [req.body.id, req.params.catId, req.params.ageId, 
+          req.body.field01, req.body.field02];
+        break;
+      case 'FAQ':
+        sqlText = `
+          UPDATE "faq"
+          SET "question" = $4 , "answer" = $5
+          WHERE "id" = $1 AND "health_category_id" = $2 AND "age_range_id" = $3;`;
+        sqlParams = [req.body.id, req.params.catId, req.params.ageId, 
+          req.body.field01, req.body.field02];
+        break;
+      case 'Questions for Your Doctor':
+        sqlText = `
+          UPDATE "doctor_questions"
+          SET "question" = $4 , "answer" = $5
+          WHERE "id" = $1 AND "health_category_id" = $2 AND "age_range_id" = $3;`;
+        sqlParams = [req.body.id, req.params.catId, req.params.ageId, 
+          req.body.field01, req.body.field02];
+        break;
+      case 'Resources':
+        sqlText = `
+          UPDATE "resources"
+          SET "name" = $1 , "link" = $2 , "description" = $3 
+          WHERE "id" = $4 AND "health_category_id" = $5
+        ;
+        `;
+        sqlParams = [req.body.name, req.body.link, req.body.description, req.body.id, catId];
+      break;
+    }
+    
+    console.log('sql params are', sqlParams);
+
+    pool.query(sqlText, sqlParams)
+    .then(dbRes => {
+      res.sendStatus(204);
+    })
+    .catch(error => {
+      console.log(error);
+      res.sendStatus(500);
+    })
+  });
+
 
 module.exports = router;
 

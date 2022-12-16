@@ -52,11 +52,30 @@ function* fetchSpecificCategoryDetail(action) {
     }
 }
 
+function* updateCategoryDetail(action) {
+    
+    try {
+        const catId = action.payload.catId;
+        const ageId = action.payload.ageId;
+        const sectionName = action.payload.sectionName;
+        const dataToSend = action.payload;
+        console.log('data is', dataToSend);
+
+        yield axios.put(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`,  dataToSend );
+
+        yield put({type: 'FETCH_SPECIFIC_CATEGORY_DETAIL' , 
+                payload: {catId: catId , ageId: ageId, sectionName: sectionName}});
+    } catch (err) {
+        console.error('Error updating specific resource', err);
+    }
+}
+
 function* categoryDetailSaga() {
     yield takeLatest('FETCH_CATEGORY_DETAIL', fetchCategoryDetail);
 
     yield takeLatest('FETCH_SPECIFIC_CATEGORY_DETAIL', fetchSpecificCategoryDetail);
 
+    yield takeLatest('SAVE_DETAIL_UPDATE', updateCategoryDetail);
 }
 
 export default categoryDetailSaga;

@@ -85,7 +85,7 @@ function AdminCategoryDetailView() {
 					// addEditForm
 					<AddEditForm key={x.id} />
 					: 
-					<li key={x.id}>{x.field01} | {x.field02}
+					<li key={x.id}>{x.field01} | {x.field02} | {x.field03 ? x.field03 : null} | {x.field04 ? x.field04 : null}
 						<button 
 						onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: x})}>
 							Edit

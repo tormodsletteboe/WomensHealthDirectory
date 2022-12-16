@@ -17,7 +17,7 @@ function AddEditForm() {
     // update or add resource function
     function updateOrAddResource(evt) {
         evt.preventDefault();
-        const updateDetailPayload = {...resourceToEdit, categoryId: params.categoryId}
+        const updateDetailPayload = {...resourceToEdit, catId: params.catId, ageId: params.ageId, sectionName: params.sectionName}
         console.log(updateDetailPayload);
 
         if (resourceToEdit.id > detailContent[detailContent.length-1].id) {
