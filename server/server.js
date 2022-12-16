@@ -32,11 +32,8 @@ app.use(passport.session());
 app.use('/api/user', userRouter);
 app.use('/api/feedback', feedbackRouter);
 app.use('/api/preventativecare', preventativecareRouter);
-
 app.use('/api/agerange', ageRangeRouter);
 app.use('/api/newsletter', newsletterRouter);
-app.use('/api/adminprevcare/specificresources', specificResourcesRouter);
-app.use('/api/agerange', ageRangeRouter);
 app.use('/api/newsletter', newsletterRouter);
 app.use('/api/adminprevcare/specificresources', specificResourcesRouter);
 
