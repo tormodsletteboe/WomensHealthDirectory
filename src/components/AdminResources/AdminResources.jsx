@@ -20,7 +20,7 @@ function AdminResources() {
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
       <Tabs value={value} onChange={handleChange} centered>
-        <Tab className="links" label="Medical Links" />
+        <Tab className="links" label="Medical Links"  />
         <Tab className="links" label="Virtual Health" />
       </Tabs>
       <Box sx={{ padding: 2 }}>

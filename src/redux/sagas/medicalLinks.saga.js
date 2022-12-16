@@ -34,10 +34,40 @@ function* updateMedicalLink(action){
     }
 
 }
+function* addMedicalLink(action){
+  try {
+        const dataToSend = action.payload;
+        
+        //update the medical link in question
+        yield axios.post(`/api/medicallinks`,dataToSend);
+        
+        //update the store with updated info
+        yield put({ type: 'FETCH_MEDICAL_LINKS'});
+  } 
+  catch (error) {
+    console.log('add medical link failed',error);
+  }
+}
+
+function* deleteMedicalLink(action){
+  try {
+    
+    //delete the medical link in question
+    yield axios.delete(`/api/medicallinks/${action.payload}`);
+    
+    //update the store with updated info
+    yield put({ type: 'FETCH_MEDICAL_LINKS'});
+} 
+catch (error) {
+console.log('add medical link failed',error);
+}
+}
 
 function* medicalLinksSaga() {
   yield takeLatest("FETCH_MEDICAL_LINKS", fetchMedicalLinks);
   yield takeLatest("UPDATE_MEDICAL_LINK",updateMedicalLink);
+  yield takeLatest('ADD_MEDICAL_LINK',addMedicalLink);
+  yield takeLatest('DELETE_MEDICAL_LINK',deleteMedicalLink);
 }
 
 export default medicalLinksSaga;

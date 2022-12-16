@@ -26,12 +26,14 @@ CREATE TABLE "health_category" (
 CREATE TABLE "medical_links" (
 	"id" serial NOT NULL,
 	"name" varchar(255) NOT NULL,
-	"link" varchar(255) NOT NULL,
+	"link" varchar(1024) NOT NULL,
 	"logo_url" varchar(1024),
+	"description" varchar(1024),
 	CONSTRAINT "medical_links_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
+
 
 
 
