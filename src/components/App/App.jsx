@@ -207,6 +207,21 @@ function App() {
 
           <ProtectedRoute
             exact
+            path="/adminprevcare/:catId/ages/:ageId/:sectionName"
+          >
+            {user.id && user.access_level==1?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <AdminCategoryDetailView />
+              :
+              // Otherwise, show the Landing page
+              <Redirect to="/home" />
+            }
+
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
             path="/adminprevcare/specificresources/:categoryId"
           >
             {user.id && user.access_level==1?

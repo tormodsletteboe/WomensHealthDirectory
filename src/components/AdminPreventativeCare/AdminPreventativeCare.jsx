@@ -25,9 +25,6 @@ function AdminPreventativeCare() {
     const selectedAgeRange = useSelector(store => store.selectedAgeRange);
     const healthCategories = useSelector(store => store.healthCategories);
     const selectedHealthCategory = useSelector(store => store.selectedHealthCategory);
-
-    // state vars
-    const [age, setAge] = React.useState('');
     
 
     useEffect(() => {
@@ -41,12 +38,12 @@ function AdminPreventativeCare() {
 
 
     // functions
-    
+    // when category is selected, store selection in reducer
     const handleCategoryClick = (category) => {
-        dispatch({ type: 'SET_SELECTED_CATEGORY', payload: category });
-        
+        dispatch({ type: 'SET_SELECTED_CATEGORY', payload: category }); 
     }
 
+    // when age range is selected, store age selection in reducer
     const handleAgeSelection = (event) => {
         const newAgeRange = JSON.parse(event.target.value);
         dispatch({type: 'SET_SELECTED_AGE_RANGE', payload: newAgeRange})
@@ -57,12 +54,13 @@ function AdminPreventativeCare() {
         history.push(`/adminprevcare/${selectedHealthCategory.id}/ages/${selectedAgeRange.id}/${section.name}`);
     }
 
+    // category section names are used in url for category detail view
     const categorySections = [
-        { name: 'guidelines' },
-        { name: 'diagnosticTools' },
-        { name: 'faq' },
-        { name: 'questionsfordoctor' },
-        { name: 'resources' }
+        { name: 'Guidelines' },
+        { name: 'Diagnostic Tools' },
+        { name: 'FAQ' },
+        { name: 'Questions for Your Doctor' },
+        { name: 'Resources' }
     ]
 
     // MUI Breadcrumbs

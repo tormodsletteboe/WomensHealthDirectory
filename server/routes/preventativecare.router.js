@@ -66,5 +66,45 @@ router.get('/:catId/ages/:ageId', rejectUnauthenticated, async (req, res) => {
     }
 })
 
+router.get('/:catId/ages/:ageId/:sectionName', rejectUnauthenticated, async (req, res) => {
+  console.log('in preventativecare id router');
+
+  const sectionName = req.params.sectionName;
+  let sqlText = '';
+  switch(sectionName) {
+    case 'Guidelines': 
+      sqlText = `SELECT * FROM "guidelines"
+      WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+      break;
+    case 'Diagnostic Tools':
+      sqlText = `SELECT * FROM "diagnostic_tool"
+      WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+      break;
+    case 'FAQ':
+      sqlText = `
+      SELECT * FROM "faq"
+      WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+      break;
+    case 'Questions for Your Doctor':
+      sqlText = `SELECT ("question"), ("id") FROM "doctor_questions"
+      WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+      break;
+  }
+
+  let sqlParams = [req.params.catId, req.params.ageId];
+  // Get category details
+  try{
+
+  //Get guidelines
+  let dbRes = await pool.query(sqlText, sqlParams);
+
+  res.send(dbRes.rows);
+
+  }catch (err) {
+      console.log('Error with fetching category details', err);
+      res.sendStatus(500);
+  }
+})
+
 module.exports = router;
 
