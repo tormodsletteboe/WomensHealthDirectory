@@ -5,12 +5,8 @@ import userSaga from './user.saga';
 import newsletterSaga from './newsletter.saga';
 import healthCategoriesSaga from './healthCategoriesSaga';
 import specificResourcesSaga from './specificResourcesSaga';
-<<<<<<< HEAD
-
-=======
 import ageRangeSaga from './agerange.saga';
 import categoryDetailSaga from './categoryDetail.saga';
->>>>>>> f6a980cbdba5db0f56397b6c7fb6802db849a062
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
