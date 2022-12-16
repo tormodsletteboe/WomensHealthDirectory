@@ -123,7 +123,6 @@ CREATE TABLE "age_range" (
 CREATE TABLE "doctor_questions" (
 	"id" serial NOT NULL,
 	"question" varchar(1024) NOT NULL,
-	"answer" varchar(1024) NOT NULL,
 	"health_category_id" int NOT NULL,
 	"age_range_id" int NOT NULL,
 	CONSTRAINT "doctor_questions_pk" PRIMARY KEY ("id")
