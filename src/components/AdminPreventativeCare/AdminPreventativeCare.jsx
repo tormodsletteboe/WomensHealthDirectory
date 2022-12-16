@@ -24,6 +24,7 @@ function AdminPreventativeCare() {
     const ageRanges = useSelector(store => store.ageRanges);
     const selectedAgeRange = useSelector(store => store.selectedAgeRange);
     const healthCategories = useSelector(store => store.healthCategories);
+    const selectedHealthCategory = useSelector(store => store.selectedHealthCategory);
 
     // state vars
     const [age, setAge] = React.useState('');
@@ -42,7 +43,8 @@ function AdminPreventativeCare() {
     // functions
     // when a category is clicked, it will go to a detail view of the id of the button clicked
     const handleCategoryClick = (category) => {
-        history.push(`/adminprevcare/${category.id}/ages/${selectedAgeRange.id}`);
+        dispatch({ type: 'SET_SELECTED_CATEGORY', payload: category });
+        // history.push(`/adminprevcare/${category.id}/ages/${selectedAgeRange.id}`);
     }
 
     const handleAgeSelection = (event) => {
@@ -91,19 +93,25 @@ function AdminPreventativeCare() {
                 </option>))}
                 
             </select>
-
-            <ul>
-                {healthCategories.map(category => (
-                    <li key={category.id}>
-                        <Button 
-                            onClick={() => handleCategoryClick(category)}
-                            variant="contained"  
-                            style={{backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>
-                                {category.category}
-                        </Button>
-                    </li>))}
-            </ul>
-            
+            <section>
+                <ul>
+                    {healthCategories.map(category => (
+                        <li key={category.id}>
+                            <Button 
+                                onClick={() => handleCategoryClick(category)}
+                                variant="contained"  
+                                style={{backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>
+                                    {category.category}
+                            </Button>
+                        </li>))}
+                </ul>
+            </section>
+            { selectedHealthCategory.id ? 
+            <Button>
+                Diagnostic Tools
+            </Button>
+            : 
+            null}
         </>
     )
 }

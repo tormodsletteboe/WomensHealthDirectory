@@ -18,7 +18,7 @@ function AdminCategoryDetailView() {
 
     // selectors
     const selectedAgeRange = useSelector(store => store.selectedAgeRange);
-    
+
 
     useEffect(() => {
         dispatch({
@@ -31,7 +31,6 @@ function AdminCategoryDetailView() {
     }, [params]);
 
     // MUI Breadcrumbs
-
     const breadcrumbs = [
         <Link underline="hover" 
         key="1" color="inherit" 
@@ -56,7 +55,7 @@ function AdminCategoryDetailView() {
 
     return (
         <>
-                    {/* MUI Breadcrumbs */}
+        {/* MUI Breadcrumbs */}
         <Stack spacing={2}>
             <Breadcrumbs
                 separator={<NavigateNextIcon fontSize="small" />}

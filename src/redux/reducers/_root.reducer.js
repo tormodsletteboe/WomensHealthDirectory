@@ -7,6 +7,7 @@ import specificResources from './specificresources.reducer';
 import resourceToEdit from './resourcetoedit.reducer';
 import categoryDetail from './categoryDetail.reducer';
 import selectedAgeRange from './selectedAgeRange.reducer';
+import selectedHealthCategory from './selectedHealthCategory';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -23,6 +24,7 @@ const rootReducer = combineReducers({
   specificResources, // age ranges from the DB table
   categoryDetail, //renders faqs for a specific health category
   selectedAgeRange, // age range id based on dropdown menu selection
+  selectedHealthCategory,
 });
 
 export default rootReducer;
