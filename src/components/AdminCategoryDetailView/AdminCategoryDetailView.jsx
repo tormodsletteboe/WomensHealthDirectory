@@ -1,6 +1,7 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from "react-router-dom";
+import AddEditForm from "../AdminAddEditForm/AdminAddEditForm";
 
 import Button from '@mui/material/Button';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
@@ -19,6 +20,7 @@ function AdminCategoryDetailView() {
     // selectors
     const selectedAgeRange = useSelector(store => store.selectedAgeRange);
     const detailContent = useSelector(store => store.categoryDetail);
+	const resourceToEdit = useSelector(store => store.resourceToEdit);
 
     useEffect(() => {
         dispatch({
@@ -46,16 +48,19 @@ function AdminCategoryDetailView() {
         >
           Preventative Care
         </Link>,
-        <Link
-          underline="hover"
-          key="2"
-          color="inherit"
-          href="/#/adminprevcare"
-        >
-          Age Range {selectedAgeRange.low} - {selectedAgeRange.high}
-        </Link>,
+        // <Link
+        //   underline="hover"
+        //   key="2"
+        //   color="inherit"
+        //   href={`/#/adminprevcare/${params.catId}/ages/${params.ageId}`}
+        // >
+        //   Age Range {selectedAgeRange.low} - {selectedAgeRange.high}
+        // </Link>,
+		<Typography key="3" color="text.primary">
+			Age Range {selectedAgeRange.low} - {selectedAgeRange.high}
+		</Typography>,
         <Typography key="3" color="text.primary">
-            Category: {selectedAgeRange.low} - {selectedAgeRange.high}
+            Category: {params.sectionName}
         </Typography>,
       ];
 
@@ -74,14 +79,13 @@ function AdminCategoryDetailView() {
         <h1>{params.sectionName}</h1>
         <section>
 			<ul>
-				{detailContent.id && detailContent.map(x => (
+				{detailContent[0] && detailContent.map(x => (
 					x.id === resourceToEdit.id ? 
 
 					// addEditForm
 					<AddEditForm key={x.id} />
-
 					: 
-					<li key={x.id}><a href={x.link}>{x.name}</a> {x.description} 
+					<li key={x.id}>{x.field01} | {x.field02}
 						<button 
 						onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: x})}>
 							Edit

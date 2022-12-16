@@ -67,31 +67,39 @@ router.get('/:catId/ages/:ageId', rejectUnauthenticated, async (req, res) => {
 })
 
 router.get('/:catId/ages/:ageId/:sectionName', rejectUnauthenticated, async (req, res) => {
-  console.log('in preventativecare id router');
+  console.log('in preventativecare specific Id router');
 
   const sectionName = req.params.sectionName;
+
+  let sqlParams = [req.params.catId, req.params.ageId];
   let sqlText = '';
+
   switch(sectionName) {
     case 'Guidelines': 
-      sqlText = `SELECT * FROM "guidelines"
-      WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+      sqlText = `SELECT "id", "name" AS "field01", "info" AS "field02", 
+        "grade" AS "field03", "date" AS "field04" 
+        FROM "guidelines"
+        WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
       break;
     case 'Diagnostic Tools':
-      sqlText = `SELECT * FROM "diagnostic_tool"
-      WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+      sqlText = `SELECT "id", "name" AS "field01", "info" AS "field02" 
+        FROM "diagnostic_tool"
+        WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
       break;
     case 'FAQ':
       sqlText = `
-      SELECT * FROM "faq"
-      WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+        SELECT "id", "question" AS "field01", "answer" AS "field02" 
+        FROM "faq"
+        WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
       break;
     case 'Questions for Your Doctor':
-      sqlText = `SELECT ("question"), ("id") FROM "doctor_questions"
-      WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+      sqlText = `SELECT "id", "answer" AS "field01", "question" AS "field02"
+        FROM "doctor_questions"
+        WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
       break;
   }
 
-  let sqlParams = [req.params.catId, req.params.ageId];
+
   // Get category details
   try{
 

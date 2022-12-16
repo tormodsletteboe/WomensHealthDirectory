@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 
-function AddEditForm() {
+function AddEditFormSpecR() {
     
     // hooks
     const dispatch = useDispatch();
@@ -12,18 +12,17 @@ function AddEditForm() {
     // selectors
     const specificResources = useSelector(store => store.specificResources);
     const resourceToEdit = useSelector(store => store.resourceToEdit);
-    const detailContent = useSelector(store => store.categoryDetail);
 
     // update or add resource function
     function updateOrAddResource(evt) {
         evt.preventDefault();
-        const updateDetailPayload = {...resourceToEdit, categoryId: params.categoryId}
-        console.log(updateDetailPayload);
+        const updateResoursePayload = {...resourceToEdit, categoryId: params.categoryId}
+        console.log(updateResoursePayload);
 
-        if (resourceToEdit.id > detailContent[detailContent.length-1].id) {
-            dispatch({ type: 'ADD_CATEGORY_DETAIL', payload: updateDetailPayload});
+        if (resourceToEdit.id > specificResources[specificResources.length-1].id) {
+            dispatch({ type: 'ADD_RESOURCE', payload: updateResoursePayload});
         } else {
-            dispatch({ type: 'SAVE_DETAIL_UPDATE', payload: updateDetailPayload});
+            dispatch({ type: 'SAVE_RESOURCE_UPDATE', payload: updateResoursePayload});
         }
 
         dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
@@ -73,4 +72,4 @@ function AddEditForm() {
     );
 }
 
-export default AddEditForm;
+export default AddEditFormSpecR;
