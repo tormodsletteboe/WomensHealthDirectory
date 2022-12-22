@@ -46,7 +46,7 @@ function AdminPreventativeCare() {
     // when age range is selected, store age selection in reducer
     const handleAgeSelection = (event) => {
         const newAgeRange = JSON.parse(event.target.value);
-        dispatch({type: 'SET_SELECTED_AGE_RANGE', payload: newAgeRange})
+        dispatch({type: 'SET_SELECTED_AGE_RANGE', payload: newAgeRange});
     }
 
     // when a category is clicked, it will go to a detail view of the id of the button clicked

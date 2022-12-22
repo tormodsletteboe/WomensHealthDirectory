@@ -23,14 +23,27 @@ function AdminCategoryDetailView() {
 	const resourceToEdit = useSelector(store => store.resourceToEdit);
 
     useEffect(() => {
-        dispatch({
-            type: 'FETCH_SPECIFIC_CATEGORY_DETAIL',
-            payload: {
-                catId: params.catId,
-                ageId: params.ageId,
-				sectionName: params.sectionName
-            }
-        })
+
+        const fetchData = async () => {
+            // get the data from the api
+            await dispatch({type: 'FETCH_SELECTED_AGE_RANGE', payload: params.ageId});
+            // convert the data to json
+            await dispatch({
+                    type: 'FETCH_SPECIFIC_CATEGORY_DETAIL',
+                    payload: {
+                        catId: params.catId,
+                        ageId: params.ageId,
+                        sectionName: params.sectionName
+                    }
+                })
+        
+          }
+        
+        // call the function
+        fetchData()
+
+        .catch(console.error);
+        
     }, [params]);
 
     // functions
@@ -52,6 +65,14 @@ function AdminCategoryDetailView() {
 
         dispatch({type: 'SET_RESOURCE_TO_EDIT', 
             payload: objToAdd})
+    }
+
+    const handleDelete = (evt, x) => {
+        evt.preventDefault();
+        // console.log('deleting x', x);
+        dispatch({type: 'DELETE_CATEGORY_DETAIL', 
+            payload: {id: x.id, catId: params.catId, ageId: params.ageId, sectionName: params.sectionName}});
+        
     }
 
     // MUI Breadcrumbs

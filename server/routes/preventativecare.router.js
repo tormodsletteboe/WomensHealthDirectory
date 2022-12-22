@@ -245,5 +245,56 @@ router.post('/:catId/ages/:ageId/:sectionName', rejectUnauthenticated, (req, res
   })
 });
 
+router.delete('/:catId/ages/:ageId/:sectionName', rejectUnauthenticated, (req, res) => {
+  const ageId = req.body.ageId;
+  const catId = req.body.catId;
+  const sectionName = req.params.sectionName;
+
+  let sqlParams = [req.body.id];
+  let sqlText = '';
+  
+    // switch statement to determine which table to delete from
+    switch(sectionName) {
+      case 'Guidelines': 
+        sqlText = `
+          DELETE FROM "guidelines" 
+          WHERE "id" = $1;`;
+        break;
+      case 'Diagnostic Tools':
+        sqlText = `
+          DELETE FROM "diagnostic_tool" 
+          WHERE "id" = $1;`;
+        break;
+      case 'FAQ':
+        sqlText = `
+          DELETE FROM "faq" 
+          WHERE "id" = $1;`;
+        break;
+      case 'Questions for Your Doctor':
+        sqlText = `
+          DELETE FROM "doctor_questions" 
+          WHERE "id" = $1;`;
+        break;
+      case 'Resources':
+        sqlText = `
+          DELETE FROM "resources"
+          WHERE "id" = $1
+        ;
+        `;
+      break;
+    }
+    
+    console.log('deleting detail with id:', req.body.id);
+  
+    pool.query(sqlText, sqlParams)
+  .then(dbRes => {
+    res.sendStatus(204);
+  })
+  .catch(error => {
+    console.log(error);
+    res.sendStatus(500);
+  })
+});
+
 module.exports = router;
 

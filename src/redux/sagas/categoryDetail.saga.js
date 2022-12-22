@@ -83,8 +83,23 @@ function* addCategoryDetail(action) {
         yield put({type: 'FETCH_SPECIFIC_CATEGORY_DETAIL' , 
                 payload: {catId: catId , ageId: ageId, sectionName: sectionName}});
     } catch (err) {
-        console.error('Error adding specific resource', err);
+        console.error('Error adding specific category detail', err);
     }
+}
+
+function* deleteCategoryDetail(action) {
+    try {
+        const catId = action.payload.catId;
+        const ageId = action.payload.ageId;
+        const sectionName = action.payload.sectionName;
+       
+        yield axios.delete(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`,  {data: action.payload} );
+
+        yield put({type: 'FETCH_SPECIFIC_CATEGORY_DETAIL' , 
+                payload: {catId: catId , ageId: ageId, sectionName: sectionName}});
+    } catch (err) {
+        console.error('Error deleting specific category detail', err);
+    } 
 }
 
 function* categoryDetailSaga() {
@@ -95,6 +110,8 @@ function* categoryDetailSaga() {
     yield takeLatest('SAVE_DETAIL_UPDATE', updateCategoryDetail);
 
     yield takeLatest('ADD_CATEGORY_DETAIL', addCategoryDetail);
+
+    yield takeLatest('DELETE_CATEGORY_DETAIL', deleteCategoryDetail);
 }
 
 export default categoryDetailSaga;
