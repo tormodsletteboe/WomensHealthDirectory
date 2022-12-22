@@ -9,6 +9,9 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
 
 function AdminCategoryDetailView() {
 
@@ -116,7 +119,7 @@ function AdminCategoryDetailView() {
             </Breadcrumbs>
         </Stack>
 
-        <h1>{params.sectionName}</h1>
+        <Typography align="center" component="h1" variant="h3">{params.sectionName}</Typography>
         <section>
 			<ul>
 				{detailContent[0] && detailContent.map(x => (
@@ -126,14 +129,14 @@ function AdminCategoryDetailView() {
 					<AddEditForm key={x.id} />
 					: 
 					<li key={x.id}>{x.field01} | {x.field02} | {x.field03 ? x.field03 : null} | {x.field04 ? x.field04 : null}
-						<button 
+						<Button variant="contained" size="small"
 						onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: x})}>
 							Edit
-						</button>
-						<button 
+						</Button>
+						<Button variant="contained" size="small"
 						onClick={(evt)=>{handleDelete(evt, x)}}>
 							Delete
-						</button>
+						</Button>
 					</li>
 				))}
 				<li> 
@@ -141,9 +144,9 @@ function AdminCategoryDetailView() {
                     Clicking Add button will send a file with 3 empty lines to edit, 
                     and id will be the highest id in the specific resources reducer plus one
                     */}                    
-                    <button type="button" onClick={(evt)=>{handleAddClick(evt)}}>
+                    <Button variant="contained" size="small" onClick={(evt)=>{handleAddClick(evt)}}>
                     Add
-                    </button> 
+                    </Button> 
                     {/* conditional rendering to show/not show the add form */}
                 { resourceToEdit.id === 0 ? <AddEditForm /> : null }
                 </li>
