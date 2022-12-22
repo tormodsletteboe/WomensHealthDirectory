@@ -20,7 +20,7 @@ function AddEditForm() {
         const updateDetailPayload = {...resourceToEdit, catId: params.catId, ageId: params.ageId, sectionName: params.sectionName}
         console.log(updateDetailPayload);
 
-        if (resourceToEdit.id > detailContent[detailContent.length-1].id) {
+        if (resourceToEdit.id === 0) {
             dispatch({ type: 'ADD_CATEGORY_DETAIL', payload: updateDetailPayload});
         } else {
             dispatch({ type: 'SAVE_DETAIL_UPDATE', payload: updateDetailPayload});
@@ -32,21 +32,22 @@ function AddEditForm() {
     return(
         <>
         <form onSubmit={updateOrAddResource}
-            key={resourceToEdit.id}>
+            // key={resourceToEdit.id}
+            >
                 <input 
-                    value={resourceToEdit.field01}
-                    onChange={(evt) => dispatch({
-                        type: 'UPDATE_FIELD',
-                        payload: {field01: evt.target.value}
+                value={resourceToEdit.field01}
+                onChange={(evt) => dispatch({
+                    type: 'UPDATE_FIELD',
+                    payload: {field01: evt.target.value}
                 })}/>
-            {resourceToEdit.field02 ? 
+            {resourceToEdit.field02 && 
                 <input 
                     value={resourceToEdit.field02}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
                         payload: {field02: evt.target.value}
                 })}/>
-            : null}
+            }
             {resourceToEdit.field03 ? 
                 <input 
                     value={resourceToEdit.field03}

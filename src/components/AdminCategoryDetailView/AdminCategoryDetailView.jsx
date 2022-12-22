@@ -45,7 +45,7 @@ function AdminCategoryDetailView() {
 
 		for (let i = 1; i <= newObjectItemsNumber; i++ ){
 			let newName = 'field0' + i;
-			objToAdd[newName] = '';
+			objToAdd[newName] = ".";
 		}
 
 		console.log('new add object', objToAdd);
@@ -126,7 +126,7 @@ function AdminCategoryDetailView() {
                     Add
                     </button> 
                     {/* conditional rendering to show/not show the add form */}
-                { resourceToEdit.field01 === "" ? <AddEditForm /> : null }
+                { resourceToEdit.id === 0 ? <AddEditForm /> : null }
                 </li>
 			</ul>
         </section>
