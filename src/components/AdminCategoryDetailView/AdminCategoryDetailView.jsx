@@ -27,21 +27,19 @@ function AdminCategoryDetailView() {
         const fetchData = async () => {
             // get the data from the api
             await dispatch({type: 'FETCH_SELECTED_AGE_RANGE', payload: params.ageId});
-            // convert the data to json
+            
+            
             await dispatch({
                     type: 'FETCH_SPECIFIC_CATEGORY_DETAIL',
                     payload: {
                         catId: params.catId,
                         ageId: params.ageId,
                         sectionName: params.sectionName
-                    }
-                })
-        
-          }
+                    }})
+        }
         
         // call the function
         fetchData()
-
         .catch(console.error);
         
     }, [params]);

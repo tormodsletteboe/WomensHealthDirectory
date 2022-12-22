@@ -106,13 +106,13 @@ router.get('/:catId/ages/:ageId/:sectionName', rejectUnauthenticated, async (req
   }
 
   // Get category details
-  try{
+  try {
 
   let dbRes = await pool.query(sqlText, sqlParams);
 
   res.send(dbRes.rows);
 
-  }catch (err) {
+  } catch (err) {
       console.log('Error with fetching category details', err);
       res.sendStatus(500);
   }

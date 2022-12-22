@@ -51,7 +51,11 @@ function AdminPreventativeCare() {
 
     // when a category is clicked, it will go to a detail view of the id of the button clicked
     const handleSectionClick = (section) => {
-        history.push(`/adminprevcare/${selectedHealthCategory.id}/ages/${selectedAgeRange.id}/${section.name}`);
+        if (section.name === 'Resources') {
+            history.push(`/adminprevcare/specificresources/${selectedHealthCategory.id}`)
+        } else {
+            history.push(`/adminprevcare/${selectedHealthCategory.id}/ages/${selectedAgeRange.id}/${section.name}`);
+        }
     }
 
     // category section names are used in url for category detail view
