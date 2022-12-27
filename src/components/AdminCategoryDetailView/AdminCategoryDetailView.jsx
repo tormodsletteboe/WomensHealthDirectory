@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useHistory, useParams } from "react-router-dom";
 import AddEditForm from "../AdminAddEditForm/AdminAddEditForm";
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
@@ -76,7 +77,18 @@ function AdminCategoryDetailView() {
         
     }
 
-    // MUI Breadcrumbs
+    // MUI 
+    // MUI theme
+    const theme = createTheme({
+        typography: {
+          detailField01: {
+            fontWeight: 'bold',
+          },
+        },
+    });
+      
+
+    // Breadcrumbs
     const breadcrumbs = [
         <Link underline="hover" 
         key="1" color="inherit" 
@@ -109,6 +121,7 @@ function AdminCategoryDetailView() {
 
     return (
         <>
+        <ThemeProvider theme={theme}>
         {/* MUI Breadcrumbs */}
         <Stack spacing={2}>
             <Breadcrumbs
@@ -129,16 +142,16 @@ function AdminCategoryDetailView() {
 					<AddEditForm key={x.id} />
 					: 
 					<ListItem key={x.id}>
-                        <Typography variant="body1">{x.field01} </Typography>
+                        <Typography variant="detailField01">{x.field01} </Typography>
                         <Typography variant="body2">{x.field02} </Typography>
                         <Typography>{x.field03 ? x.field03 : null} </Typography>
                         <Typography>{x.field04 ? x.field04 : null}
                         </Typography>
-						<Button variant="contained" size="small"
+						<Button variant="contained" size="small" color="primary"
 						onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: x})}>
 							Edit
 						</Button>
-						<Button variant="contained" size="small"
+						<Button variant="contained" size="small" color="error"
 						onClick={(evt)=>{handleDelete(evt, x)}}>
 							Delete
 						</Button>
@@ -158,6 +171,7 @@ function AdminCategoryDetailView() {
                 </li>
 			</List>
         </section>
+        </ThemeProvider>
         </>
     );
 }
