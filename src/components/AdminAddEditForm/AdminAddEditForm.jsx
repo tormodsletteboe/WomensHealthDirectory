@@ -2,6 +2,10 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 
+import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import { listClasses } from "@mui/material";
+
 function AddEditForm() {
     
     // hooks
@@ -29,19 +33,40 @@ function AddEditForm() {
         dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
     }
 
+    // const addList = (resourceToEdit) => {
+    //     let inputList = [];
+    //     for (const [key, value] of Object.entries(resourceToEdit)) {
+    //         console.log(`${key}: ${value}`);
+    //         inputList.push(<TextField 
+    //             key={key}
+    //             multiline
+    //             value={resourceToEdit.value}
+    //             onChange={(evt) => dispatch({
+    //                 type: 'UPDATE_FIELD',
+    //                 payload: {key: evt.target.value}
+    //         })}/>)
+    //         }
+    //     inputList.shift();
+    //     return inputList;
+    // }
+
     return(
         <>
+        
         <form onSubmit={updateOrAddResource}
             // key={resourceToEdit.id}
             >
-                <input 
+            {/* {addList(resourceToEdit)} */}
+            <TextField 
+                multiline
                 value={resourceToEdit.field01}
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_FIELD',
                     payload: {field01: evt.target.value}
-                })}/>
+            })}/>
             {resourceToEdit.field02 && 
-                <input 
+                <TextField 
+                    multiline   
                     value={resourceToEdit.field02}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
@@ -49,7 +74,8 @@ function AddEditForm() {
                 })}/>
             }
             {resourceToEdit.field03 ? 
-                <input 
+                <TextField 
+                multiline
                     value={resourceToEdit.field03}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
@@ -57,7 +83,8 @@ function AddEditForm() {
                 })}/>
             : null}
             {resourceToEdit.field04 ? 
-                <input 
+                <TextField 
+                    multiline
                     value={resourceToEdit.field04}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
@@ -65,10 +92,13 @@ function AddEditForm() {
                 })}/>
             : null}
             
-            <button onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: {}})}>
+            <Button variant="contained" size="small" 
+                onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: {}})}>
                 Cancel
-            </button>
-            <button type="submit">Save</button>
+            </Button>
+            <Button variant="contained" size="small" type="submit">
+                Save
+            </Button>
         </form>
         </>
     );

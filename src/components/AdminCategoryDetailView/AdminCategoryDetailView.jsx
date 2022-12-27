@@ -59,7 +59,7 @@ function AdminCategoryDetailView() {
 
 		for (let i = 1; i <= newObjectItemsNumber; i++ ){
 			let newName = 'field0' + i;
-			objToAdd[newName] = ".";
+			objToAdd[newName] = "add your text";
 		}
 
 		console.log('new add object', objToAdd);
@@ -121,14 +121,19 @@ function AdminCategoryDetailView() {
 
         <Typography align="center" component="h1" variant="h3">{params.sectionName}</Typography>
         <section>
-			<ul>
+			<List>
 				{detailContent[0] && detailContent.map(x => (
 					x.id === resourceToEdit.id ? 
 
 					// addEditForm
 					<AddEditForm key={x.id} />
 					: 
-					<li key={x.id}>{x.field01} | {x.field02} | {x.field03 ? x.field03 : null} | {x.field04 ? x.field04 : null}
+					<ListItem key={x.id}>
+                        <Typography variant="body1">{x.field01} </Typography>
+                        <Typography variant="body2">{x.field02} </Typography>
+                        <Typography>{x.field03 ? x.field03 : null} </Typography>
+                        <Typography>{x.field04 ? x.field04 : null}
+                        </Typography>
 						<Button variant="contained" size="small"
 						onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: x})}>
 							Edit
@@ -137,20 +142,21 @@ function AdminCategoryDetailView() {
 						onClick={(evt)=>{handleDelete(evt, x)}}>
 							Delete
 						</Button>
-					</li>
+					</ListItem>
 				))}
 				<li> 
                     {/* Creates Add button
                     Clicking Add button will send a file with 3 empty lines to edit, 
                     and id will be the highest id in the specific resources reducer plus one
                     */}                    
-                    <Button variant="contained" size="small" onClick={(evt)=>{handleAddClick(evt)}}>
+                    <Button variant="contained" size="small" align="center"
+                        onClick={(evt)=>{handleAddClick(evt)}}>
                     Add
                     </Button> 
                     {/* conditional rendering to show/not show the add form */}
                 { resourceToEdit.id === 0 ? <AddEditForm /> : null }
                 </li>
-			</ul>
+			</List>
         </section>
         </>
     );
