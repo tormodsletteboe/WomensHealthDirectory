@@ -1,3 +1,6 @@
+-- name of database : womens_health_app
+
+
 CREATE TABLE "user" (
 	"id" serial NOT NULL,
 	"username" varchar(255) NOT NULL UNIQUE,
