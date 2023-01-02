@@ -19,8 +19,8 @@ function Nav() {
   //Toggle between showing and hiding the navigation menu links when 
   //the user clicks on the hamburger menu / bar icon
   const handleClick = () => {
-    setOpen(!open);
     let nav = document.getElementById("myLinks");
+    // setOpen(!open);
     if (nav.style.display === "block") {
       nav.style.display = "none";
     } 
