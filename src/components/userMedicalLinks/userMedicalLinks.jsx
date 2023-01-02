@@ -1,3 +1,4 @@
+import './UserMedicalLinks.css';
 
 function UserMedicalLinks(){
     return(
