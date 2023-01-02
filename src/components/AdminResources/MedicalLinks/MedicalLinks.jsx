@@ -65,10 +65,10 @@ function MedicalLinks() {
           expanded>
             <AccordionSummary >
               <Grid container columnSpacing={1}>
-                <Grid item xs={1} className="fuckingcenterwillyou">
+                <Grid item xs={1} className="centerthis">
                   <img src={selected} />
                 </Grid>
-                <Grid item xs={4} px={1} className="fuckingcenterwillyou">
+                <Grid item xs={4} px={1} className="centerthis">
                   <TextField
                     label="Title"
                     variant="outlined"
@@ -82,7 +82,7 @@ function MedicalLinks() {
                     }
                   />
                 </Grid>
-                <Grid item xs={7} className="fuckingcenterwillyou">
+                <Grid item xs={7} className="centerthis">
                   <TextField
                     label="Url"
                     variant="outlined"
