@@ -8,15 +8,20 @@ import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
 import axios from "axios";
-function EditMedicalLinksAccordion() {
+
+
+function EditVirtualHealthLinksAccordion() {
   //   const store = useSelector((store) => store);
 
  
  
   const dispatch = useDispatch();
   const resourceToEdit = useSelector((store) => store.resourceToEdit);
+
+  //used for the get icons button
   const [selected, setSelected] = useState(resourceToEdit.logo_url);
   const [result, setResult] = useState([resourceToEdit.logo_url]);
+
   let imgpath = "./images/vifidefault.jpeg";
   let noImagePath = "";
 
@@ -29,11 +34,13 @@ function EditMedicalLinksAccordion() {
 
     //update the database with edited info
     dispatch({
-      type: "UPDATE_MEDICAL_LINK",
+      type: "UPDATE_VIRTUALHEALTH_LINK",
       payload: {
         id: resourceToEdit.id,
         name: resourceToEdit.name,
+        info_cost: resourceToEdit.info_cost,
         link: resourceToEdit.link,
+        specialty: resourceToEdit.specialty,
         logo_url: selected,
         description: resourceToEdit.description
       },
@@ -67,7 +74,7 @@ function EditMedicalLinksAccordion() {
               </Grid>
               <Grid item xs={7} className="centerthis">
                 <TextField
-                  label="Url"
+                  label="Link"
                   variant="outlined"
                   fullWidth
                   value={resourceToEdit.link}
@@ -139,7 +146,7 @@ function EditMedicalLinksAccordion() {
           </Button>
         </Grid>
         <Grid item xs={4} textAlign={"end"}>
-          <Button onClick={updateResource}>Update Medical Link</Button>
+          <Button onClick={updateResource}>Update Virtual Health Link</Button>
         </Grid>
         <Grid item>
           <Button
@@ -155,4 +162,4 @@ function EditMedicalLinksAccordion() {
   );
 }
 
-export default EditMedicalLinksAccordion;
+export default EditVirtualHealthLinksAccordion;

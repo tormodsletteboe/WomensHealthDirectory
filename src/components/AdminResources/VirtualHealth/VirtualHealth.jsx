@@ -21,35 +21,38 @@ import { Typography } from "@mui/material";
 
 function VirtualHealth() {
   const dispatch = useDispatch();
-  // const addMedLinks = useSelector((store) => store.addMedicalLinks);
-  // const medicallinks = useSelector((store) => store.medicallinks);
-  // const resourceToEdit = useSelector((store) => store.resourceToEdit);
-
-  const [result, setResult] = useState([addMedLinks.logo_url]);
-  const [selected, setSelected] = useState(addMedLinks.logo_url);
+  const addVirtualHealthLinks = useSelector((store) => store.addVirtualHealthLinks);
+  const virtualhealthlinks = useSelector((store) => store.virtualhealth_links);
+   const resourceToEdit = useSelector((store) => store.resourceToEdit);
+ 
+   //this is used with the get ICONS button
+  const [result, setResult] = useState([addVirtualHealthLinks.logo_url]);
+  const [selected, setSelected] = useState(addVirtualHealthLinks.logo_url);
 
   const handleAddVirtualHealth = () => {
    
-    // dispatch({
-    //   type: "ADD_MEDICAL_LINK",
-    //   payload: {
-    //     name: addMedLinks.title,
-    //     link: addMedLinks.url,
-    //     logo_url: addMedLinks.logo_url,
-    //     description: addMedLinks.description,
-    //   },
-    // });
+    dispatch({
+      type: "ADD_VIRTUALHEALTH_LINK",
+      payload: {
+        name: addVirtualHealthLinks.title,
+        info_cost: addVirtualHealthLinks.info_cost,
+        link: addVirtualHealthLinks.link,
+        specialty: addVirtualHealthLinks.specialty,
+        logo_url: addVirtualHealthLinks.logo_url,
+        description: addVirtualHealthLinks.description,
+      },
+    });
 
-    // dispatch({type:'CLEAR_ADD_MEDICAL_LINKS'});
+     dispatch({type:'CLEAR_ADD_VIRTUALHEALTH_LINKS'});
   };
 
   useEffect(() => {
     console.log("virtual health  useeffect ran");
 
 
-    //fetch all medical links from database
+    //fetch all virtual health links from database
     //dispatch someting
-    // dispatch({ type: "FETCH_MEDICAL_LINKS" });
+     dispatch({ type: "FETCH_VIRTUALHEALTH_LINKS" });
   }, []);
 
   
@@ -74,10 +77,10 @@ function VirtualHealth() {
                     label="Title"
                     variant="outlined"
                     fullWidth
-                    value={addMedLinks.title}
+                    value={addVirtualHealthLinks.title}
                     onChange={(event) =>
                       dispatch({
-                        type: "SET_MEDICAL_TITLE",
+                        type: "SET_VIRTUALHEALTH_TITLE",
                         payload: event.target.value,
                       })
                     }
@@ -85,13 +88,13 @@ function VirtualHealth() {
                 </Grid>
                 <Grid item xs={7} className="centerthis">
                   <TextField
-                    label="Url"
+                    label="Link"
                     variant="outlined"
                     fullWidth
-                    value={addMedLinks.url}
+                    value={addVirtualHealthLinks.link}
                     onChange={(event) =>
                       dispatch({
-                        type: "SET_MEDICAL_URL",
+                        type: "SET_VIRTUALHEALTH_LINK",
                         payload: event.target.value,
                       })
                     }
@@ -107,10 +110,10 @@ function VirtualHealth() {
                   fullWidth
                   multiline
                   maxRows={4}
-                  value={addMedLinks.description}
+                  value={addVirtualHealthLinks.description}
                   onChange={(event) =>
                     dispatch({
-                      type: "SET_MEDICAL_DESCRIPTION",
+                      type: "SET_VIRTUALHEALTH_DESCRIPTION",
                       payload: event.target.value,
                     })
                   }
@@ -127,7 +130,7 @@ function VirtualHealth() {
               onChange={(e) => {
                 setSelected(e.target.value);
                 dispatch({
-                  type: "SET_MEDICAL_LOGO_URL",
+                  type: "SET_VIRTUALHEALTH_LOGO_URL",
                   payload: e.target.value,
                 });
               }}
@@ -144,7 +147,7 @@ function VirtualHealth() {
             <Button
             sx={{color:'#8EBBA7'}}
               onClick={async () => {
-                const url = new URL(addMedLinks.url);
+                const url = new URL(addVirtualHealthLinks.link);
                 console.log(url.hostname);
                 const result = await axios.get(
                   `https://favicongrabber.com/api/grab/${url.hostname}`
@@ -157,18 +160,18 @@ function VirtualHealth() {
             </Button>
           </Grid>
           <Grid item xs={5} textAlign={"end"}>
-            <Button variant="contained" onClick={handleAddVirtualHealth}>Add Medical Link</Button>
+            <Button variant="contained" onClick={handleAddVirtualHealth}>Add Virtual Health Link</Button>
           </Grid>
         </Grid>
       </Grid>
       <Box sx={{mx:2,marginTop:10}}>
-        <Typography variant="h3"> Medical Links </Typography>
+        <Typography variant="h3"> Virtual Health Links </Typography>
       {/* render all medical links from database */}
-      {medicallinks.map((medlink) =>
-        medlink.id === resourceToEdit.id ? (
-          <EditMedicalLinksAccordion key={medlink.id} medLinkToEdit={medlink} />
+      {virtualhealthlinks.map((virtualhealthlink) =>
+        virtualhealthlink.id === resourceToEdit.id ? (
+          <EditVirtualHealthLinksAccordion key={virtualhealthlink.id} medLinkToEdit={virtualhealthlink} />
         ) : (
-          <MedicalLinksAccordion key={medlink.id} medicallink={medlink} />
+          <VirtualHealthAccordion key={virtualhealthlink.id} medicallink={virtualhealthlink} />
         )
       )}
       </Box>

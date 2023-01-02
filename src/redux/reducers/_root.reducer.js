@@ -9,6 +9,7 @@ import resourceToEdit from './resourcetoedit.reducer';
 import categoryDetail from './categoryDetail.reducer';
 import medicallinks from './medicallinks.reducer';
 import virtualhealth_links from './virtualhealthlinks.reducer';
+import addVirtualHealthLinks from './addvirtualhealthlinks.reducer';
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
 // This is imported in index.js as rootSaga
@@ -26,6 +27,7 @@ const rootReducer = combineReducers({
   specificResources, // age ranges from the DB table
   categoryDetail, //renders faqs for a specific health category
   virtualhealth_links,
+  addVirtualHealthLinks,
 
 });
 
