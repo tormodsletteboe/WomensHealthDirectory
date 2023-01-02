@@ -5,6 +5,7 @@ import userSaga from './user.saga';
 import newsletterSaga from './newsletter.saga';
 import healthCategoriesSaga from './healthCategoriesSaga';
 import specificResourcesSaga from './specificResourcesSaga';
+import medicalLinksSaga from './medicalLinks.saga';
 import ageRangeSaga from './agerange.saga';
 import categoryDetailSaga from './categoryDetail.saga';
 
@@ -24,6 +25,7 @@ export default function* rootSaga() {
     ageRangeSaga(), // fetches age ranges
     newsletterSaga(), // add submitted emails to newsletter table
     specificResourcesSaga(),
+    medicalLinksSaga(),
     categoryDetailSaga(), //fetch category details
   ]);
 }
