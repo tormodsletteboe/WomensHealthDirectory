@@ -40,14 +40,15 @@ CREATE TABLE "medical_links" (
 
 
 
-CREATE TABLE "virtuahealth" (
+CREATE TABLE "virtualhealth" (
 	"id" serial NOT NULL,
 	"name" varchar(255) NOT NULL,
 	"info_cost" varchar(1024),
 	"link" varchar(255) NOT NULL,
 	"specialty" varchar(255),
 	"logo_url" varchar(1000),
-	CONSTRAINT "virtuahealth_pk" PRIMARY KEY ("id")
+	"description" varchar(1024),
+	CONSTRAINT "virtualhealth_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
@@ -245,4 +246,15 @@ VALUES
 ('Choosing Wisely','https://www.choosingwisely.org/','https://www.choosingwisely.org/wp-content/themes/choosingw/favicon.ico','Choosing Wisely is an initiative of the ABIM Foundation that promotes patient-physician conversations about unnecessary medical tests and procedures'),
 ('United States Preventive Screening Task Force (USPSTF)','https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/cervical-cancer-screening','https://uspreventiveservicestaskforce.org/uspstf/sites/default/files/favicon.png',''),
 ('World Health Organization (WHO)','https://www.who.int/health-topics/cervical-cancer#tab=tab_1','https://www.who.int/ResourcePackages/WHO/assets/icons/apple-icon-76x76.png','')
+;
+
+INSERT INTO "virtualhealth" ("name","info_cost","link","specialty","logo_url","description")
+VALUES
+('Better Help','Membership $60 to $90 per week—charged every 4 weeks','https://www.betterhelp.com/online-therapy/','Mental Health','','Therapists communicate with their patients remotely, through messaging, phone calls, video calls, or live chat '),
+('Lyra','Requires insurance coverage','https://www.lyrahealth.com/','Mental Health','https://www.lyrahealth.com/wp-content/themes/lyra-2020/dist/images/favicon-32x32.png',''),
+('TalkSpace','Monthly $276, 3 months $744, 6 months $1320','https://www.talkspace.com/','Mental Health','https://assets-global.website-files.com/5f6b627361bad8cad0fc5c99/617704ac72d9b58191708167_favicon_02.png',''),
+('TeleDoc','You can access Teladoc virtual counseling whether you have insurance or not. Therapy visits are $0-99. Psychiatry visits are $0-299.','https://www.teladoc.com/ways-we-help/mental-health/','Mental Health','https://www.teladoc.com/wp-content/themes/teladoc-members/media/images/apple-touch-icon.png','4 step process from registration to meeting with a provider.'),
+('Kaia Health','Requires insurance coverage','https://kaiahealth.com/ ','Physical Therapy','',''),
+('TheraNow','Employer pays initial fee. The employee will be the person who chooses the plan that best fits their needs, among the three plans available. If an employee chooses to upgrade to one of the premium plans, they will pay the corresponding monthly fee.','https://www.theranow.com/home','Physical Therapy','https://www.theranow.com/images/favicon.png',''),
+('Everlywell','','https://www.everlywell.com/','Primary Care','https://www.everlywell.com/icons/icon-48x48.png','')
 ;

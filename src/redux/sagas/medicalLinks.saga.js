@@ -59,7 +59,7 @@ function* deleteMedicalLink(action){
     yield put({ type: 'FETCH_MEDICAL_LINKS'});
 } 
 catch (error) {
-console.log('add medical link failed',error);
+console.log('delete medical link failed',error);
 }
 }
 
