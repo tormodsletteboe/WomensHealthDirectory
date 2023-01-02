@@ -24,6 +24,7 @@ import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCar
 import AdminResources from "../AdminResources/AdminResources";
 import AdminSpecificResources from "../AdminSpecificResources/AdminSpecificResources";
 import CategoryDetailView from "../CategoryDetailView/CategoryDetailView";
+import Resources from '../Resources/Resources';
 
 
 //function used to redirect if its admin loggin in or user logging in
@@ -111,6 +112,14 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/resources"
+          >
+            <Resources />
           </ProtectedRoute>
 
           <Route exact path="/login">
