@@ -102,7 +102,7 @@ function App() {
             exact
             path="/virtualhealth"
           >
-            <virtualHealth />
+            <userVirtualHealth />
           </ProtectedRoute>
 
           <ProtectedRoute
@@ -110,7 +110,7 @@ function App() {
             exact
             path="/medicallinks"
           >
-            <medicalLinks />
+            <userMedicalLinks />
           </ProtectedRoute>
 
 
