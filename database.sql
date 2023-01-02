@@ -247,3 +247,14 @@ VALUES
 ('United States Preventive Screening Task Force (USPSTF)','https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/cervical-cancer-screening','https://uspreventiveservicestaskforce.org/uspstf/sites/default/files/favicon.png',''),
 ('World Health Organization (WHO)','https://www.who.int/health-topics/cervical-cancer#tab=tab_1','https://www.who.int/ResourcePackages/WHO/assets/icons/apple-icon-76x76.png','')
 ;
+
+INSERT INTO "virtualhealth" ("name","info_cost","link","specialty","logo_url","description")
+VALUES
+('Better Help','Membership $60 to $90 per week—charged every 4 weeks','https://www.betterhelp.com/online-therapy/','Mental Health','','Therapists communicate with their patients remotely, through messaging, phone calls, video calls, or live chat '),
+('Lyra','Requires insurance coverage','https://www.lyrahealth.com/','Mental Health','',''),
+('TalkSpace','Monthly $276, 3 months $744, 6 months $1320','https://www.talkspace.com/','Mental Health','',''),
+('TeleDoc','You can access Teladoc virtual counseling whether you have insurance or not. Therapy visits are $0-99. Psychiatry visits are $0-299.','https://www.teladoc.com/ways-we-help/mental-health/','Mental Health','','4 step process from registration to meeting with a provider.'),
+('Kaia Health','Requires insurance coverage','https://kaiahealth.com/ ','Physical Therapy','',''),
+('TheraNow','Employer pays initial fee. The employee will be the person who chooses the plan that best fits their needs, among the three plans available. If an employee chooses to upgrade to one of the premium plans, they will pay the corresponding monthly fee.','https://www.theranow.com/home','Physical Therapy','',''),
+('Everlywell','','https://www.everlywell.com/','Primary Care','','')
+;
