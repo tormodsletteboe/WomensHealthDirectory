@@ -1,8 +1,11 @@
+import './UserVirtualHealth.css';
 
 function UserVirtualHealth(){
     return(
         <>
-        <h1>virtual health for the user!</h1>
+        <div className = "virtualHealthTitle">
+            <h3>Virtual Health</h3>
+        </div>
         </>
     );
 }
