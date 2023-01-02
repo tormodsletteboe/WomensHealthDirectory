@@ -1,0 +1,17 @@
+
+.resources {
+    margin: 0 auto;
+    display: flex;
+    flex-direction: column;
+}
+
+.virtualHealth {
+    margin: 10px;
+    border-radius: 8px;
+}
+
+.medicalLinks {
+    margin: 10px;
+    border-radius: 8px;
+}
+
