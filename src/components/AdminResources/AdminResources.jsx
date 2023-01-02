@@ -16,7 +16,7 @@ function AdminResources() {
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
+// TODO: 
   return (
     <Box sx={{ width: "100%", bgcolor: "background.paper" }}>
       <Tabs value={value} onChange={handleChange} centered>
@@ -25,7 +25,7 @@ function AdminResources() {
       </Tabs>
       <Box sx={{ padding: 2 }}>
         {value == 0 && <MedicalLinks/>}
-        {value == 1 && <VirtualHealth/>}
+        {/* {value == 1 && <VirtualHealth/>} */}
       </Box>
     </Box>
   );
