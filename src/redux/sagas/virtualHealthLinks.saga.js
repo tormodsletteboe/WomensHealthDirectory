@@ -4,8 +4,8 @@ import { put, takeLatest } from "redux-saga/effects";
 function* fetchVirtualHealthLinks() {
   try {
     //axios here
-    //TODO:
-     //const response = yield axios.get('/api/medicallinks');
+    
+     const response = yield axios.get('/api/virtualhealthlinks');
 
      yield put({ 
         type: 'SET_VIRTUAL_HEALTH_LINKS',
@@ -23,9 +23,8 @@ function* updateVirtualHealthLink(action){
         const dataToSend = action.payload;
         console.log('data is', dataToSend);
 
-        //update the medical link in question
-        //TODO:
-        //yield axios.put(`/api/medicallinks/${action.payload.id}`,dataToSend);
+        //update the virtual health link in question
+        yield axios.put(`/api/virtualhealthlinks/${action.payload.id}`,dataToSend);
         
         //update the store with updated info
         yield put({ type: 'FETCH_VIRTUALHEALTH_LINKS'});
@@ -40,8 +39,8 @@ function* addVirtualHealthLink(action){
         const dataToSend = action.payload;
         
         //update the medical link in question
-        //TODO:
-        //yield axios.post(`/api/medicallinks`,dataToSend);
+        
+        yield axios.post(`/api/virtualhealthlinks`,dataToSend);
         
         //update the store with updated info
         yield put({ type: 'FETCH_VIRTUALHEALTH_LINKS'});
@@ -55,14 +54,14 @@ function* deleteVirtualHealthLink(action){
   try {
     
     //delete the medical link in question
-    //TODO: 
-    //yield axios.delete(`/api/medicallinks/${action.payload}`);
+   
+    yield axios.delete(`/api/virtualhealthlinks/${action.payload}`);
     
     //update the store with updated info
     yield put({ type: 'FETCH_VIRTUALHEALTH_LINKS'});
 } 
 catch (error) {
-console.log('add virtual health link failed',error);
+console.log('delete virtual health link failed',error);
 }
 }
 

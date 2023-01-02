@@ -15,8 +15,8 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./VirtualHealth.css";
-import MedicalLinksAccordion from "./MedicalLinksAccordion";
-import EditMedicalLinksAccordion from './EditMedicalLinksAccordion';
+import VirtualHealthAccordion from './VirtualHealthAccordion';
+import EditVirtualHealthLinksAccordion from './EditVirtualHealthAccordion';
 import { Typography } from "@mui/material";
 
 function VirtualHealth() {
