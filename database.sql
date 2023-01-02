@@ -40,14 +40,15 @@ CREATE TABLE "medical_links" (
 
 
 
-CREATE TABLE "virtuahealth" (
+CREATE TABLE "virtualhealth" (
 	"id" serial NOT NULL,
 	"name" varchar(255) NOT NULL,
 	"info_cost" varchar(1024),
 	"link" varchar(255) NOT NULL,
 	"specialty" varchar(255),
 	"logo_url" varchar(1000),
-	CONSTRAINT "virtuahealth_pk" PRIMARY KEY ("id")
+	"description" varchar(1024),
+	CONSTRAINT "virtualhealth_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
 );
