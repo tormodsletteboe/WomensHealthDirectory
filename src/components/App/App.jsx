@@ -25,8 +25,8 @@ import AdminResources from "../AdminResources/AdminResources";
 import AdminSpecificResources from "../AdminSpecificResources/AdminSpecificResources";
 import CategoryDetailView from "../CategoryDetailView/CategoryDetailView";
 import Resources from '../Resources/Resources';
-import UserMedicalLinks from "../userMedicalLinks/userMedicalLinks";
-import UserVirtualHealth from "../userVirtualHealth/userVirtualHealth";
+import UserMedicalLinks from "../UserMedicalLinks/UserMedicalLinks";
+import UserVirtualHealth from "../UserVirtualHealth/UserVirtualHealth";
 
 
 //function used to redirect if its admin loggin in or user logging in
