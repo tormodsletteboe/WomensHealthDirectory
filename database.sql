@@ -234,3 +234,12 @@ VALUES ('American Society for Colposcopy and Cervical Pathology', 'https://www.a
 ('Centers for Disease Control and Prevention (CDC)', 'https://www.cdc.gov/cancer/cervical/basic_info/index.htm', 'Additional reading', 12),
 ('World Health Organization (WHO)', ' https://www.who.int/health-topics/cervical-cancer#tab=tab_1', 'Additional reading', 12);
 
+INSERT INTO "medical_links" ("name","link","logo_url","description")
+VALUES
+('American College of Obstetricians and Gynecologists (ACOG)','https://www.acog.org/clinical/clinical-guidance/practice-advisory/articles/2021/04/updated-cervical-cancer-screening-guidelines','https://www.acog.org/assets/images/favicon/favicon-32x32.png',''),
+('American Society for Colposcopy and Cervical Pathology (ASCCP) ','https://www.asccp.org/guidelines','https://www.asccp.org/favicon.ico','The ASCCP educational mission is to improve clinician competence and performance and patient outcomes through educational activities focused around the study, prevention, diagnosis, and management of anogenital and HPV-related diseases.'),
+('Centers for Disease Control and Prevention (CDC)','https://www.cdc.gov/cancer/cervical/basic_info/index.htm','https://www.cdc.gov/TemplatePackage/4.0/assets/imgs/apple-touch-icon-60x60.png',''),
+('Choosing Wisely','https://www.choosingwisely.org/','https://www.choosingwisely.org/wp-content/themes/choosingw/favicon.ico','Choosing Wisely is an initiative of the ABIM Foundation that promotes patient-physician conversations about unnecessary medical tests and procedures'),
+('United States Preventive Screening Task Force (USPSTF)','https://www.uspreventiveservicestaskforce.org/uspstf/recommendation/cervical-cancer-screening','https://uspreventiveservicestaskforce.org/uspstf/sites/default/files/favicon.png',''),
+('World Health Organization (WHO)','https://www.who.int/health-topics/cervical-cancer#tab=tab_1','https://www.who.int/ResourcePackages/WHO/assets/icons/apple-icon-76x76.png','')
+;
