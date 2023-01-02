@@ -1,5 +1,13 @@
-footer {
-  margin-top: 80px;
-  padding: 20px;
+p {
+  margin: 1rem;
   text-align: center;
 }
+
+footer {
+  position: relative;
+}
+
+
+
+
+
