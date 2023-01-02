@@ -3,7 +3,9 @@ import './UserMedicalLinks.css';
 function UserMedicalLinks(){
     return(
         <>
-        <h1>medical links for the user!</h1>
+        <div className = "medicalLinksTitle">
+             <h3>Medical Links</h3>
+        </div>
         </>
     );
 }
