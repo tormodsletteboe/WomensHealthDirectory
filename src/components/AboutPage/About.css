@@ -11,6 +11,17 @@
 .aboutImage {
     margin-left: 0.5rem;
     margin-right: 0.5rem;
+    width:200px;
+    height:200px;
+    object-fit:cover;
+    border-radius:50%;
+    border: 5px solid gray;
+    display: flex;
+    margin: 0 auto;
+}
+
+.imageContainer {
+    background-color: lightgrey;
 }
 
 .caption {

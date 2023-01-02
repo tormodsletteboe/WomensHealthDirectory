@@ -27,7 +27,7 @@ function Nav() {
     document.addEventListener("mousedown", checkIfClickedOutside);
 
     return () => {
-      // Cleanup the event listener
+
       document.removeEventListener("mousedown", checkIfClickedOutside);
     };
   }, [isMenuOpen]);
@@ -37,7 +37,8 @@ function Nav() {
     let x = document.getElementById("myLinks");
     if (x.style.display === "block") {
       x.style.display = "none";
-    } else {
+    } 
+    else {
       x.style.display = "block";
     }
   };
@@ -116,5 +117,6 @@ function Nav() {
     </div>
   );
 }
+
 
 export default Nav;
