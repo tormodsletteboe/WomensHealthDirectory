@@ -27,6 +27,12 @@ function VirtualHealthAccordion({  virtualhealthlink }) {
               {virtualhealthlink.link}
             </Typography>
           </Grid>
+          <Grid item xs={4} my={1} textAlign={"start"}>
+            <Typography>{virtualhealthlink.specialty}</Typography>
+          </Grid>
+          <Grid item xs={4} my={1} textAlign={"start"}>
+            <Typography>{virtualhealthlink.info_cost}</Typography>
+          </Grid>
         </Grid>
       </AccordionSummary>
       <AccordionDetails>

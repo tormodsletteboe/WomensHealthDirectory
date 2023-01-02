@@ -3,7 +3,7 @@ const addVirtualHealthLinks = (state = {}, action) => {
     case "SET_VIRTUALHEALTH_TITLE":
       return { ...state, title: action.payload };
     case "SET_VIRTUALHEALTH_LINK":
-      return { ...state, url: action.payload };
+      return { ...state, link: action.payload };
     case "SET_VIRTUALHEALTH_LOGO_URL":
       return { ...state, logo_url: action.payload };
     case "SET_VIRTUALHEALTH_DESCRIPTION":
@@ -11,7 +11,7 @@ const addVirtualHealthLinks = (state = {}, action) => {
     case "SET_VIRTUALHEALTH_SPECIALTY":
       return { ...state, specialty: action.payload };
     case "SET_VIRTUALHEALTH_INFO_COST":
-      return { ...state, specialty: action.payload };
+      return { ...state, info_cost: action.payload };
     case "CLEAR_ADD_VIRTUALHEALTH_LINKS":
       return {};
     default:

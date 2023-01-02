@@ -38,9 +38,9 @@ function EditVirtualHealthLinksAccordion() {
       payload: {
         id: resourceToEdit.id,
         name: resourceToEdit.name,
-        info_cost: 'TODO:resourceToEdit.info_cost',
+        info_cost: resourceToEdit.info_cost,
         link: resourceToEdit.link,
-        specialty: 'TODO:resourceToEdit.specialty',
+        specialty: resourceToEdit.specialty,
         logo_url: selected,
         description: resourceToEdit.description
       },
@@ -84,6 +84,36 @@ function EditVirtualHealthLinksAccordion() {
                         payload: { link: e.target.value },
                       })
                   }
+                />
+              </Grid>
+              <Grid item xs={4} px={1} pt={2} className="centerthis">
+                <TextField
+                  label="Specialty"
+                  variant="outlined"
+                  fullWidth
+                  value={resourceToEdit.specialty}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "UPDATE_FIELD",
+                      payload: { specialty: e.target.value },
+                    })
+                  }
+                  
+                />
+              </Grid>
+              <Grid item xs={8} px={1} pt={2} className="centerthis">
+                <TextField
+                  label="Cost/Coverage"
+                  variant="outlined"
+                  fullWidth
+                  value={resourceToEdit.info_cost}
+                  onChange={(e) =>
+                    dispatch({
+                      type: "UPDATE_FIELD",
+                      payload: { info_cost: e.target.value },
+                    })
+                  }
+                  
                 />
               </Grid>
             </Grid>

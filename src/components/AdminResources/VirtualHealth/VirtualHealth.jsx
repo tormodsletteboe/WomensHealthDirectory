@@ -33,9 +33,9 @@ function VirtualHealth() {
       type: "ADD_VIRTUALHEALTH_LINK",
       payload: {
         name: addVirtualHealthLinks.title,
-        info_cost: 'TODO:addVirtualHealthLinks.info_cost',
+        info_cost: addVirtualHealthLinks.info_cost,
         link: addVirtualHealthLinks.link,
-        specialty: 'TODO:addVirtualHealthLinks.specialty',
+        specialty: addVirtualHealthLinks.specialty,
         logo_url: addVirtualHealthLinks.logo_url,
         description: addVirtualHealthLinks.description,
       },
@@ -98,6 +98,35 @@ function VirtualHealth() {
                     }
                   />
                 </Grid>
+                <Grid item xs={4} px={1} pt={2} className="centerthis">
+                  <TextField
+                    label="Specialty"
+                    variant="outlined"
+                    fullWidth
+                    value={addVirtualHealthLinks.specialty}
+                    onChange={(event) =>
+                      dispatch({
+                        type: "SET_VIRTUALHEALTH_SPECIALTY",
+                        payload: event.target.value,
+                      })
+                    }
+                  />
+                </Grid>
+                <Grid item xs={8} px={1} pt={2} className="centerthis">
+                  <TextField
+                    label="Cost/Coverage"
+                    variant="outlined"
+                    fullWidth
+                    value={addVirtualHealthLinks.info_cost}
+                    onChange={(event) =>
+                      dispatch({
+                        type: "SET_VIRTUALHEALTH_INFO_COST",
+                        payload: event.target.value,
+                      })
+                    }
+                  />
+                </Grid>
+                
               </Grid>
             </AccordionSummary>
             <AccordionDetails>
@@ -145,6 +174,7 @@ function VirtualHealth() {
             <Button
             sx={{color:'#8EBBA7'}}
               onClick={async () => {
+                console.log(addVirtualHealthLinks.link);
                 const url = new URL(addVirtualHealthLinks.link);
                 console.log(url.hostname);
                 const result = await axios.get(
