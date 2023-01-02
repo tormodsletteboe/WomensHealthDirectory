@@ -1,5 +1,5 @@
 
-function userMedicalLinks(){
+function UserMedicalLinks(){
     return(
         <>
         <h1>medical links for the user!</h1>
@@ -7,4 +7,4 @@ function userMedicalLinks(){
     );
 }
 
-export default userMedicalLinks;
+export default UserMedicalLinks;

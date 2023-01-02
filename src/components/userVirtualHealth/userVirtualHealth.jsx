@@ -1,5 +1,5 @@
 
-function userVirtualHealth(){
+function UserVirtualHealth(){
     return(
         <>
         <h1>virtual health for the user!</h1>
@@ -7,4 +7,4 @@ function userVirtualHealth(){
     );
 }
 
-export default userVirtualHealth;
+export default UserVirtualHealth;

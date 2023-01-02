@@ -3,13 +3,14 @@ import Button from '@mui/material/Button';
 import './Resources.css';
 
 function Resources(){
+    const history = useHistory();
 
     const virtualHealth = () => {
-        history.pushState('/virtualhealth');
+        history.push('/virtualhealth');
     }
 
     const medicalLinks = () => {
-        history.pushState('/medicallinks');
+        history.push('/medicallinks');
     }
 
     return(
