@@ -25,7 +25,7 @@ function AdminResources() {
       </Tabs>
       <Box sx={{ padding: 2 }}>
         {value == 0 && <MedicalLinks/>}
-        {/* {value == 1 && <VirtualHealth/>} */}
+        {value == 1 && <VirtualHealth/>}
       </Box>
     </Box>
   );

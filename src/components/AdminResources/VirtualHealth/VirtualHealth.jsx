@@ -4,20 +4,18 @@ import { useDispatch, useSelector } from "react-redux";
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
 import axios from "axios";
-
 import Box from "@mui/material/Box";
-
 import Grid from "@mui/material/Grid";
-
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
-
+import { Typography } from "@mui/material";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 import "./VirtualHealth.css";
 import VirtualHealthAccordion from './VirtualHealthAccordion';
 import EditVirtualHealthLinksAccordion from './EditVirtualHealthAccordion';
-import { Typography } from "@mui/material";
+
 
 function VirtualHealth() {
   const dispatch = useDispatch();
@@ -35,9 +33,9 @@ function VirtualHealth() {
       type: "ADD_VIRTUALHEALTH_LINK",
       payload: {
         name: addVirtualHealthLinks.title,
-        info_cost: addVirtualHealthLinks.info_cost,
+        info_cost: 'TODO:addVirtualHealthLinks.info_cost',
         link: addVirtualHealthLinks.link,
-        specialty: addVirtualHealthLinks.specialty,
+        specialty: 'TODO:addVirtualHealthLinks.specialty',
         logo_url: addVirtualHealthLinks.logo_url,
         description: addVirtualHealthLinks.description,
       },
@@ -166,12 +164,12 @@ function VirtualHealth() {
       </Grid>
       <Box sx={{mx:2,marginTop:10}}>
         <Typography variant="h3"> Virtual Health Links </Typography>
-      {/* render all medical links from database */}
+      {/* render all virtual health links from database */}
       {virtualhealthlinks.map((virtualhealthlink) =>
         virtualhealthlink.id === resourceToEdit.id ? (
           <EditVirtualHealthLinksAccordion key={virtualhealthlink.id} medLinkToEdit={virtualhealthlink} />
         ) : (
-          <VirtualHealthAccordion key={virtualhealthlink.id} medicallink={virtualhealthlink} />
+          <VirtualHealthAccordion key={virtualhealthlink.id} virtualhealthlink={virtualhealthlink} />
         )
       )}
       </Box>

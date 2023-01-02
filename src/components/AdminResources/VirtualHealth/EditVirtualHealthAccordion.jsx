@@ -38,9 +38,9 @@ function EditVirtualHealthLinksAccordion() {
       payload: {
         id: resourceToEdit.id,
         name: resourceToEdit.name,
-        info_cost: resourceToEdit.info_cost,
+        info_cost: 'TODO:resourceToEdit.info_cost',
         link: resourceToEdit.link,
-        specialty: resourceToEdit.specialty,
+        specialty: 'TODO:resourceToEdit.specialty',
         logo_url: selected,
         description: resourceToEdit.description
       },
