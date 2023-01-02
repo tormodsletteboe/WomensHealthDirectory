@@ -14,7 +14,12 @@ function Resources(){
 
     return(
     <>
+    <div className = "resourcesTitle">
+        <h3>Resources</h3>
+    </div>
+
     <div className = "resources">
+
     <Button className="virtualHealth" onClick = {virtualHealth} variant="contained" style={{backgroundColor:'#276359'}}>Virtual Health</Button>
     <Button className = "medicalLinks" onClick = {medicalLinks} variant="contained" style={{backgroundColor:'#276359'}}>Medical Links</Button>
     </div>

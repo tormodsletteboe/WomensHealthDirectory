@@ -97,6 +97,22 @@ function App() {
             <PreventativeCare />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/virtualhealth"
+          >
+            <virtualHealth />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/medicallinks"
+          >
+            <medicalLinks />
+          </ProtectedRoute>
+
 
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
