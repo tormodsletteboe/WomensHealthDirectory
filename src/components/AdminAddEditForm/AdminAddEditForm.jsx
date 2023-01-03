@@ -4,7 +4,8 @@ import { useParams } from "react-router-dom";
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { listClasses } from "@mui/material";
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+
 
 function AddEditForm() {
     
@@ -52,53 +53,59 @@ function AddEditForm() {
 
     return(
         <>
-        
         <form onSubmit={updateOrAddResource}
-            // key={resourceToEdit.id}
             >
             {/* {addList(resourceToEdit)} */}
-            <TextField 
+            <TableRow>
+            <TableCell align="center"><TextField 
                 multiline
                 value={resourceToEdit.field01}
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_FIELD',
                     payload: {field01: evt.target.value}
-            })}/>
+            })}/></TableCell>
             {resourceToEdit.field02 && 
+                <TableCell>
                 <TextField 
                     multiline   
                     value={resourceToEdit.field02}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
                         payload: {field02: evt.target.value}
-                })}/>
+                })}/></TableCell>
             }
             {resourceToEdit.field03 ? 
+            <TableCell>
                 <TextField 
                 multiline
                     value={resourceToEdit.field03}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
                         payload: {field03: evt.target.value}
-                })}/>
+                })}/></TableCell>
             : null}
             {resourceToEdit.field04 ? 
+                <TableCell>
                 <TextField 
                     multiline
                     value={resourceToEdit.field04}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
                         payload: {field04: evt.target.value}
-                })}/>
+                })}/></TableCell>
             : null}
-            
-            <Button variant="contained" size="small" 
-                onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: {}})}>
-                Cancel
-            </Button>
-            <Button variant="contained" size="small" type="submit">
-                Save
-            </Button>
+                <TableCell>
+                    <Button variant="contained" size="small" 
+                        onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: {}})}>
+                        Cancel
+                    </Button>
+                </TableCell>
+                <TableCell>
+                    <Button variant="contained" size="small" type="submit">
+                        Save
+                    </Button>
+                </TableCell>
+            </TableRow>
         </form>
         </>
     );

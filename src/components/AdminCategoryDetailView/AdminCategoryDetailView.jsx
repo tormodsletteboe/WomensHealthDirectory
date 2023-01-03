@@ -13,6 +13,8 @@ import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemButton from '@mui/material/ListItemButton';
+import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+
 
 function AdminCategoryDetailView() {
 
@@ -134,42 +136,46 @@ function AdminCategoryDetailView() {
 
         <Typography align="center" component="h1" variant="h3">{params.sectionName}</Typography>
         <section>
-			<List>
+        <TableContainer>
+            <TableBody m={2} pt={3} sx={{border: '1px', borderColor: 'black'}}>
+            
 				{detailContent[0] && detailContent.map(x => (
 					x.id === resourceToEdit.id ? 
 
 					// addEditForm
 					<AddEditForm key={x.id} />
 					: 
-					<ListItem key={x.id}>
-                        <Typography variant="detailField01">{x.field01} </Typography>
-                        <Typography variant="body2">{x.field02} </Typography>
-                        <Typography>{x.field03 ? x.field03 : null} </Typography>
-                        <Typography>{x.field04 ? x.field04 : null}
-                        </Typography>
-						<Button variant="contained" size="small" color="primary"
+					<TableRow key={x.id} sx={{ width: '100%' }}>
+                        <TableCell><Typography variant="detailField01" >{x.field01} </Typography></TableCell> 
+                        <TableCell><Typography variant="body2">{x.field02} </Typography></TableCell>
+                        {x.field03 ? <TableCell><Typography>{x.field03}</Typography></TableCell>  : null} 
+                        {x.field04 ? <TableCell><Typography>{x.field04}</Typography></TableCell> : null}
+						<TableCell><Button variant="contained" size="small" color="primary"
 						onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: x})}>
 							Edit
-						</Button>
-						<Button variant="contained" size="small" color="error"
+						</Button></TableCell>
+						<TableCell><Button variant="contained" size="small" color="error"
 						onClick={(evt)=>{handleDelete(evt, x)}}>
 							Delete
-						</Button>
-					</ListItem>
+						</Button></TableCell>
+					</TableRow>
 				))}
-				<li> 
+				<TableRow> 
+                    <TableCell align="center" colSpan={6}>
                     {/* Creates Add button
                     Clicking Add button will send a file with 3 empty lines to edit, 
                     and id will be the highest id in the specific resources reducer plus one
                     */}                    
-                    <Button variant="contained" size="small" align="center"
+                    <Button variant="contained" size="small"
                         onClick={(evt)=>{handleAddClick(evt)}}>
                     Add
                     </Button> 
                     {/* conditional rendering to show/not show the add form */}
                 { resourceToEdit.id === 0 ? <AddEditForm /> : null }
-                </li>
-			</List>
+                </TableCell></TableRow>  
+            </TableBody>
+			
+            </TableContainer>
         </section>
         </ThemeProvider>
         </>

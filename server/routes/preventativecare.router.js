@@ -77,7 +77,7 @@ router.get('/:catId/ages/:ageId/:sectionName', rejectUnauthenticated, async (req
   switch(sectionName) {
     case 'Guidelines': 
       sqlText = `SELECT "id", "name" AS "field01", "info" AS "field02", 
-        "grade" AS "field03", "date" AS "field04" 
+        "grade" AS "field03", to_char(date, 'YYYY-MM-DD') AS "field04" 
         FROM "guidelines"
         WHERE "health_category_id" = $1 AND "age_range_id"=$2
         ORDER BY "id" ASC ;`;
