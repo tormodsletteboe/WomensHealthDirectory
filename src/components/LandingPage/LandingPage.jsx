@@ -3,7 +3,6 @@ import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
 
 // CUSTOM COMPONENTS
-import RegisterForm from '../RegisterForm/RegisterForm';
 import { Button, Card, CardActions, CardContent, CardHeader, Modal, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useDispatch } from 'react-redux';
@@ -25,7 +24,7 @@ function LandingPage() {
   const [history, dispatch] = [useHistory(), useDispatch()];
 
   const submitEmail = () => {
-    dispatch({ type:'ADD_TO_NEWSLETTER', payload: text });
+    dispatch({ type: 'ADD_TO_NEWSLETTER', payload: text });
     setModal(false);
   }
 
@@ -66,8 +65,8 @@ function LandingPage() {
         </Card>
 
         <Box className='grid-col_12' id='newsletter'>
-          <h1>Subscribe to our Newsletter!</h1>
-          <Typography paragraph>Get weekly news and updates of how to advocate for your health!</Typography>
+          <h1>The ViFi Newsletter</h1>
+          <Typography paragraph>Stay up-to-date on healthcare and what it really means for you</Typography>
           <Button sx={({ '&:hover': { opacity: 0.7 } })} variant='outlined' onClick={() => setModal(true)}>Subscribe</Button>
         </Box>
 
@@ -77,12 +76,12 @@ function LandingPage() {
         >
           <Box sx={style}>
             <Card>
-              <CardHeader title='Our Newsletter' sx={({ 'textAlign': 'center' })}></CardHeader>
+              <CardHeader title='The ViFi Newsletter' subheader='' sx={({ 'textAlign': 'center' })}></CardHeader>
               <CardContent>
                 <Typography paragraph></Typography>
-                <TextField variant='standard' onChange={(e) => setText(e.target.value)} sx={({ 'width':'100%' })} placeholder='example@email.com'></TextField>
+                <TextField variant='standard' onChange={(e) => setText(e.target.value)} sx={({ 'width': '100%' })} placeholder='example@email.com'></TextField>
               </CardContent>
-              <CardActions sx={({ 'justifyContent':'center' })}>
+              <CardActions sx={({ 'justifyContent': 'center' })}>
                 <Button variant='contained' onClick={submitEmail}>Subscribe</Button>
               </CardActions>
             </Card>

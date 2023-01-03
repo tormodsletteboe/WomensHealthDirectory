@@ -46,12 +46,16 @@ function AdminPreventativeCare() {
     // when age range is selected, store age selection in reducer
     const handleAgeSelection = (event) => {
         const newAgeRange = JSON.parse(event.target.value);
-        dispatch({type: 'SET_SELECTED_AGE_RANGE', payload: newAgeRange})
+        dispatch({type: 'SET_SELECTED_AGE_RANGE', payload: newAgeRange});
     }
 
     // when a category is clicked, it will go to a detail view of the id of the button clicked
     const handleSectionClick = (section) => {
-        history.push(`/adminprevcare/${selectedHealthCategory.id}/ages/${selectedAgeRange.id}/${section.name}`);
+        if (section.name === 'Resources') {
+            history.push(`/adminprevcare/specificresources/${selectedHealthCategory.id}`)
+        } else {
+            history.push(`/adminprevcare/${selectedHealthCategory.id}/ages/${selectedAgeRange.id}/${section.name}`);
+        }
     }
 
     // category section names are used in url for category detail view
@@ -117,7 +121,7 @@ function AdminPreventativeCare() {
                 </ul>
             </section>
                 
-            { selectedHealthCategory.id ? 
+            {selectedAgeRange.id && selectedHealthCategory.id ? 
             <section>
                 <ul>
                 { categorySections.map(section => (
