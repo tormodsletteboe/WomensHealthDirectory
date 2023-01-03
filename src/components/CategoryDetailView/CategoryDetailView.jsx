@@ -64,8 +64,23 @@ function CategoryDetailView(){
           <Typography>Guidelines</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <TableContainer style = {{backgroundColor: '#FFFFFF'}}>
-        <Table variant='simple' size='sm'>
+        <TableContainer 
+            style = {{backgroundColor: '#FFFFFF', maxHeight: 250}}
+            sx={{
+                "&::-webkit-scrollbar": {
+                  width: 8,
+                  height: 8
+                },
+                "&::-webkit-scrollbar-track": {
+                  backgroundColor: "lightgray"
+                },
+                "&::-webkit-scrollbar-thumb": {
+                  backgroundColor: "#276359",
+                  borderRadius: 2
+                }
+              }}
+        >
+        <Table variant='simple' stickyHeader>
                 <TableHead>
                     <TableRow>
                         <TableCell>Guideline Name</TableCell>
@@ -81,7 +96,7 @@ function CategoryDetailView(){
                                                       <TableCell>{guideline.info}</TableCell>
                                                      <TableCell>{guideline.grade}</TableCell>
                                                      <TableCell>{guideline.date}</TableCell> 
-                                                 </TableRow>
+                                        </TableRow>
                                              )
                                             )
                                          }

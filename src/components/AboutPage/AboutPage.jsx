@@ -15,8 +15,8 @@ function AboutPage() {
         <p><b>The Vifi</b> strives to develop and maintain a diverse team of experts across the healthcare industry in order to serve our members in a holistic and empathetic manner.</p>
     </div>
 
-    <div className = "aboutImage">
-      <img src="./images/about.png"/>
+    <div className = "imageContainer">
+      <img className = "aboutImage" src="./images/about.png"/>
     </div>
 
     <div className = "caption">
