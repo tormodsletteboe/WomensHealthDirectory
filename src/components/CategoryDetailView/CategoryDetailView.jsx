@@ -6,12 +6,6 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import './CategoryDetailView.css';
@@ -64,45 +58,28 @@ function CategoryDetailView(){
           <Typography>Guidelines</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <TableContainer 
-            style = {{backgroundColor: '#FFFFFF', maxHeight: 250}}
-            sx={{
-                "&::-webkit-scrollbar": {
-                  width: 8,
-                  height: 8
-                },
-                "&::-webkit-scrollbar-track": {
-                  backgroundColor: "lightgray"
-                },
-                "&::-webkit-scrollbar-thumb": {
-                  backgroundColor: "#276359",
-                  borderRadius: 2
-                }
-              }}
-        >
-        <Table variant='simple' stickyHeader>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Guideline Name</TableCell>
-                        <TableCell>Info</TableCell>
-                        <TableCell>Grade</TableCell>
-                        <TableCell>Last Updated</TableCell>
-                    </TableRow>
-                </TableHead>
-                                         <TableBody>
-                                             {categoryDetails.guidelines && categoryDetails.guidelines.map((guideline) => (
-                                                 <TableRow key={guideline.id}>
-                                                     <TableCell>{guideline.name}</TableCell>
-                                                      <TableCell>{guideline.info}</TableCell>
-                                                     <TableCell>{guideline.grade}</TableCell>
-                                                     <TableCell>{guideline.date}</TableCell> 
-                                        </TableRow>
-                                             )
-                                            )
-                                         }
-                                          </TableBody>
-                                     </Table>
-                            </TableContainer>
+        {categoryDetails.guidelines && categoryDetails.guidelines.map((guideline) => (
+        <List  key={guideline.id}>
+            <ListItem>
+                <b>Guideline Name: </b> 
+                {guideline.name}
+            </ListItem>
+            <ListItem>
+                <b>Info: </b> 
+            </ListItem>
+            <ListItem>
+            {guideline.info}
+            </ListItem>
+            <ListItem>
+                <b>Grade: </b>
+                {guideline.grade}
+            </ListItem>
+            <ListItem>
+                <b>Last Updated: </b>
+                {guideline.date}
+            </ListItem>
+        </List>
+        ))}                           
         </AccordionDetails>
       </Accordion>
 

@@ -62,7 +62,11 @@ function PreventativeCare() {
                 </option>
                  ))}
             </select>
-            <Button variant="contained" style={{backgroundColor:'#276359'}} type="submit">Submit</Button>
+            <Button 
+                variant="contained" 
+                style={{backgroundColor:'#276359'}} 
+                type="submit">Submit
+            </Button>
     </form>
     
     {healthCategories.map(category => (
