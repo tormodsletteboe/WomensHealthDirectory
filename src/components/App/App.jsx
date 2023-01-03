@@ -23,6 +23,8 @@ import AdminLandingPage from "../AdminLandingPage/AdminLandingPage";
 import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
 import AdminResources from "../AdminResources/AdminResources";
 import AdminSpecificResources from "../AdminSpecificResources/AdminSpecificResources";
+import Membership from "../Membership/Membership";
+import Feedback from "../Feedback/Feedback";
 import CategoryDetailView from "../CategoryDetailView/CategoryDetailView";
 import AdminCategoryDetailView from "../AdminCategoryDetailView/AdminCategoryDetailView";
 
@@ -75,18 +77,20 @@ function App() {
             <AboutPage />
           </Route>
 
-          {/* <Route
+          <Route
             // shows AboutPage at all times (logged in or not)
             exact
             path="/membership"
           >
-
             <Membership />
-          </Route> */}
+          </Route>
 
-            {/* <Membership /> */}
-          
-
+          <Route
+            exact
+            path="/feedback"
+          >
+            <Feedback />
+          </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
