@@ -38,7 +38,6 @@ function VirtualHealthCard({ virthealthlink }) {
             alt=""
             src={virthealthlink.logo_url}
             sx={{ bgcolor: "#8EBBA7" }}
-            aria-label="recipe"
           />
         }
         title={<Typography variant="body" >{virthealthlink.name}</Typography>}
