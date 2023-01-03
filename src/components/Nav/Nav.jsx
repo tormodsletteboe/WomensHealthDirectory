@@ -45,7 +45,7 @@ function Nav() {
     <ClickAwayListener onClickAway={handleClickAway}>
     <div className="topnav">
       <Link className="navTitle" to="/home">
-        <h4>Women's Health Directory</h4>
+        <h4>The Vifi</h4>
       </Link>
       {/* Navigation links (hidden by default) */}
       <div id="myLinks">
