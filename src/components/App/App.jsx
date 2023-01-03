@@ -23,11 +23,14 @@ import AdminLandingPage from "../AdminLandingPage/AdminLandingPage";
 import AdminPreventativeCare from '../AdminPreventativeCare/AdminPreventativeCare';
 import AdminResources from "../AdminResources/AdminResources";
 import AdminSpecificResources from "../AdminSpecificResources/AdminSpecificResources";
+import Membership from "../Membership/Membership";
+import Feedback from "../Feedback/Feedback";
 import CategoryDetailView from "../CategoryDetailView/CategoryDetailView";
+import AdminCategoryDetailView from "../AdminCategoryDetailView/AdminCategoryDetailView";
+
 import Resources from '../Resources/Resources';
 import UserMedicalLinks from "../UserMedicalLinks/UserMedicalLinks";
 import UserVirtualHealth from "../UserVirtualHealth/UserVirtualHealth";
-
 
 //function used to redirect if its admin loggin in or user logging in
 function UserOrAdmin(user) {
@@ -74,18 +77,20 @@ function App() {
             <AboutPage />
           </Route>
 
-          {/* <Route
+          <Route
             // shows AboutPage at all times (logged in or not)
             exact
             path="/membership"
           >
-
             <Membership />
-          </Route> */}
+          </Route>
 
-            {/* <Membership /> */}
-          
-
+          <Route
+            exact
+            path="/feedback"
+          >
+            <Feedback />
+          </Route>
 
           {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
@@ -210,6 +215,36 @@ function App() {
               // If the user is already logged in, 
               // redirect them to the /user page
               <AdminPreventativeCare />
+              :
+              // Otherwise, show the Landing page
+              <Redirect to="/home" />
+            }
+
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/adminprevcare/:catId/ages/:ageId"
+          >
+            {user.id && user.access_level==1?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <AdminCategoryDetailView />
+              :
+              // Otherwise, show the Landing page
+              <Redirect to="/home" />
+            }
+
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            exact
+            path="/adminprevcare/:catId/ages/:ageId/:sectionName"
+          >
+            {user.id && user.access_level==1?
+              // If the user is already logged in, 
+              // redirect them to the /user page
+              <AdminCategoryDetailView />
               :
               // Otherwise, show the Landing page
               <Redirect to="/home" />
