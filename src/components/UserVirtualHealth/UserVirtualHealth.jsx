@@ -28,7 +28,7 @@ function UserVirtualHealth() {
       <div className="virtualHealthTitle">
         <h3>Virtual Health</h3>
       </div>
-      <ul>
+      <ul style={{padding:0}} >
         {virtualhealthlinks.map((virthealthlink) => (
           <li key={virthealthlink.id}>
             <VirtualHealthCard virthealthlink={virthealthlink} />

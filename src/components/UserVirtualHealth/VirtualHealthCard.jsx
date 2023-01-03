@@ -18,9 +18,9 @@ const ExpandMore = styled((props) => {
 })(({ theme, expand }) => ({
   transform: !expand ? "rotate(0deg)" : "rotate(180deg)",
   marginLeft: "auto",
-  transition: theme.transitions.create("transform", {
-    duration: theme.transitions.duration.shortest,
-  }),
+//   transition: theme.transitions.create("transform", {
+//     duration: theme.transitions.duration.shortest,
+//   }),
 }));
 
 function VirtualHealthCard({ virthealthlink }) {
@@ -41,28 +41,31 @@ function VirtualHealthCard({ virthealthlink }) {
             aria-label="recipe"
           />
         }
-        title={virthealthlink.name}
+        title={<Typography variant="body" >{virthealthlink.name}</Typography>}
         subheader={virthealthlink.specialty}
+        
       />
       {virthealthlink.description && (
         <CardContent>
           <Typography variant="body2" sx={{textAlign:'left'}} >{virthealthlink.description}</Typography>
         </CardContent>
       )}
-      <CardActions disableSpacing>
-        <Link variant="button" underline="none" href={virthealthlink.link}>
-          learn more
-        </Link>
+      <CardActions disableSpacing sx={{justifyContent:'space-between'}} >
+       
         {virthealthlink.info_cost && (
           <ExpandMore
             expand={expanded}
             onClick={handleExpandClick}
             aria-expanded={expanded}
             aria-label="show more"
+            sx={{ ml: 0 }}
           >
             <ExpandMoreIcon />
           </ExpandMore>
         )}
+         <Link mr={1} ml={0} pl={1} variant="button" underline="none" href={virthealthlink.link}>
+          learn more
+        </Link>
       </CardActions>
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
