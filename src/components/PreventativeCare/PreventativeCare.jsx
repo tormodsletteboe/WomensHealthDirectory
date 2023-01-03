@@ -46,13 +46,12 @@ function PreventativeCare() {
     const handleCategoryClick = (category) => {
         console.log('in handleCategoryClick, id is',category.id);
         history.push(`./preventativecare/${category.id}/ages/${age}`);
+
     }
 
     return(
     <>
-    <div className = "screeningGuidelinesTitle">
-        <h4>Screening Recommended by Age</h4>
-    </div>
+    <h4>Screening Recommended by Age</h4>
 
     <form onSubmit={handleAgeFormSubmit}>
             <select name="agerange" id="ageRangeSelect" onChange={handleAgeChange}>
@@ -63,31 +62,23 @@ function PreventativeCare() {
                 </option>
                  ))}
             </select>
-            <Button 
-                variant="contained" 
-                style={{backgroundColor:'#276359'}} 
-                type="submit">Submit
-            </Button>
+            <Button variant="contained" style={{backgroundColor:'#276359'}} type="submit">Submit</Button>
     </form>
-    
     
     <Box textAlign = 'center' marginRight = '3rem'>
     {healthCategories.map(category => (
-        <ul>
-            <li key={category.id}>
-                <Button 
-                    variant="contained" 
-                    onClick={() => handleCategoryClick(category)} 
-                    style=
-                        {{backgroundColor: '#8EBBA7', 
-                        color: '#FFFFFF', 
-                        }}>{category.category}
-                </Button>
-            </li>
-        </ul>
-        ))}
+    <ul>
+        <li key={category.id}>
+            <Button 
+                variant="contained" 
+                onClick={() => handleCategoryClick(category)} 
+                style={{backgroundColor: '#8EBBA7', 
+                color: '#FFFFFF'}}>{category.category}
+            </Button>
+        </li>
+    </ul>
+    ))}
     </Box>
-  
     </>
     );
 
