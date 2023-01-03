@@ -17,4 +17,24 @@ router.get('/', (req, res) => {
     })
 });
 
+router.get('/:ageId', (req, res) => {
+  const ageId = req.params.ageId;
+
+  const sqlText = `
+  SELECT * FROM "age_range" 
+  WHERE "id" = $1
+  ;`
+
+  const sqlParams = [ageId];
+  
+  pool.query(sqlText, sqlParams)
+    .then(dbRes => {
+      res.send(dbRes.rows[0]);
+    })
+    .catch(error => {
+      console.log(error);
+      res.sendStatus(500);
+    })
+});
+
 module.exports = router;

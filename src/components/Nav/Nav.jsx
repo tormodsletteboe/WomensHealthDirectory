@@ -42,6 +42,7 @@ function Nav() {
   };
 
   return (
+    <>
     <ClickAwayListener onClickAway={handleClickAway}>
     <div className="topnav">
       <Link className="navTitle" to="/home">
@@ -110,6 +111,7 @@ function Nav() {
       </div>
     </div>
     </ClickAwayListener>
+    </>
   );
 }
 

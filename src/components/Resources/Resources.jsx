@@ -25,7 +25,7 @@ function Resources(){
         onClick = {virtualHealth} 
         variant="contained" 
         style={{
-            backgroundColor:'#276359', 
+            backgroundColor:'#8EBBA7', 
             width: '12rem', 
             margin: 'auto',
             borderRadius: '8px'
@@ -36,7 +36,7 @@ function Resources(){
         onClick = {medicalLinks} 
         variant="contained" 
         style={{
-            backgroundColor:'#276359', 
+            backgroundColor:'#8EBBA7', 
             width: '12rem', 
             margin: 'auto', 
             borderRadius: '8px',

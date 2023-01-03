@@ -46,12 +46,13 @@ function PreventativeCare() {
     const handleCategoryClick = (category) => {
         console.log('in handleCategoryClick, id is',category.id);
         history.push(`./preventativecare/${category.id}/ages/${age}`);
-
     }
 
     return(
     <>
-    <h4>Screening Recommended by Age</h4>
+    <div className = "screeningGuidelinesTitle">
+        <h4>Screening Recommended by Age</h4>
+    </div>
 
     <form onSubmit={handleAgeFormSubmit}>
             <select name="agerange" id="ageRangeSelect" onChange={handleAgeChange}>
@@ -69,10 +70,11 @@ function PreventativeCare() {
             </Button>
     </form>
     
-    {healthCategories.map(category => (
+    
     <Box textAlign = 'center' marginRight = '3rem'>
-        <ul key={category.id}>
-            <li>
+    {healthCategories.map(category => (
+        <ul>
+            <li key={category.id}>
                 <Button 
                     variant="contained" 
                     onClick={() => handleCategoryClick(category)} 
@@ -83,8 +85,9 @@ function PreventativeCare() {
                 </Button>
             </li>
         </ul>
+        ))}
     </Box>
-    ))}
+  
     </>
     );
 
