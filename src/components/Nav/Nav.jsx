@@ -6,40 +6,34 @@ import { useSelector } from "react-redux";
 import ReorderIcon from "@mui/icons-material/Reorder";
 import { useHistory } from "react-router-dom";
 import Button from "@mui/material/Button";
-import { useEffect, useState, useRef } from "react";
+import { useEffect, useState} from "react";
+import ClickAwayListener from '@mui/material/ClickAwayListener';
+
 
 function Nav() {
+
   const user = useSelector((store) => store.user);
   const history = useHistory();
-  const ref = useRef();
+  const [open, setOpen] = useState(false);
 
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-
-  useEffect(() => {
-    const checkIfClickedOutside = (e) => {
-      // If the menu is open and the clicked target is not within the menu,
-      // then close the menu
-      if (isMenuOpen && ref.current && !ref.current.contains(e.target)) {
-        setIsMenuOpen(false);
-      }
-    };
-
-    document.addEventListener("mousedown", checkIfClickedOutside);
-
-    return () => {
-      // Cleanup the event listener
-      document.removeEventListener("mousedown", checkIfClickedOutside);
-    };
-  }, [isMenuOpen]);
-
-  //Toggle between showing and hiding the navigation menu links when the user clicks on the hamburger menu / bar icon */
-  const onClickHandler = () => {
-    let x = document.getElementById("myLinks");
-    if (x.style.display === "block") {
-      x.style.display = "none";
-    } else {
-      x.style.display = "block";
+  //Toggle between showing and hiding the navigation menu links when 
+  //the user clicks on the hamburger menu / bar icon
+  const handleClick = () => {
+    let nav = document.getElementById("myLinks");
+    // setOpen(!open);
+    if (nav.style.display === "block") {
+      nav.style.display = "none";
+    } 
+    else {
+      nav.style.display = "block";
     }
+  };
+
+  //close navigation bar if user clicks outside of the navigation bar
+  const handleClickAway = () => {
+    let nav = document.getElementById("myLinks");
+    nav.style.display = "none";
+    setOpen(false);
   };
 
   const handleJoin = () => {
@@ -48,6 +42,7 @@ function Nav() {
   };
 
   return (
+    <ClickAwayListener onClickAway={handleClickAway}>
     <div className="topnav">
       <Link className="navTitle" to="/home">
         <h4>Women's Health Directory</h4>
@@ -100,7 +95,7 @@ function Nav() {
           size="small"
           sx={{ fontSize: "2rem" }}
           style={{ color: "white" }}
-          onClick={onClickHandler}
+          onClick={handleClick}
         ></ReorderIcon>
       </div>
       <div className="join">
@@ -114,7 +109,9 @@ function Nav() {
 
       </div>
     </div>
+    </ClickAwayListener>
   );
 }
+
 
 export default Nav;

@@ -16,6 +16,8 @@ const ageRangeRouter = require('./routes/agerange.router');
 const newsletterRouter = require('./routes/newsletter.router');
 const specificResourcesRouter = require('./routes/specificresources.router');
 
+const medicalLinksRouter = require('./routes/medicallinks.router');
+const virtualHealthLinksRouter = require('./routes/virtualhealthlinks.router');
 
 // Body parser middleware
 app.use(bodyParser.json());
@@ -39,6 +41,9 @@ app.use('/api/adminprevcare/specificresources', specificResourcesRouter);
 app.use('/api/agerange', ageRangeRouter);
 app.use('/api/newsletter', newsletterRouter);
 app.use('/api/adminprevcare/specificresources', specificResourcesRouter);
+
+app.use('/api/medicallinks',medicalLinksRouter);
+app.use('/api/virtualhealthlinks',virtualHealthLinksRouter);
 
 // Serve static files
 app.use(express.static('build'));

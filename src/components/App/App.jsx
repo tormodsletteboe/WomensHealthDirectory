@@ -26,6 +26,9 @@ import AdminSpecificResources from "../AdminSpecificResources/AdminSpecificResou
 import Membership from "../Membership/Membership";
 import Feedback from "../Feedback/Feedback";
 import CategoryDetailView from "../CategoryDetailView/CategoryDetailView";
+import Resources from '../Resources/Resources';
+import UserMedicalLinks from "../UserMedicalLinks/UserMedicalLinks";
+import UserVirtualHealth from "../UserVirtualHealth/UserVirtualHealth";
 
 //function used to redirect if its admin loggin in or user logging in
 function UserOrAdmin(user) {
@@ -99,6 +102,22 @@ function App() {
             <PreventativeCare />
           </ProtectedRoute>
 
+          <ProtectedRoute
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/virtualhealth"
+          >
+            <UserVirtualHealth />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // shows AboutPage at all times (logged in or not)
+            exact
+            path="/medicallinks"
+          >
+            <UserMedicalLinks />
+          </ProtectedRoute>
+
 
           <ProtectedRoute
             // logged in shows UserPage else shows LoginPage
@@ -114,6 +133,14 @@ function App() {
             path="/info"
           >
             <InfoPage />
+          </ProtectedRoute>
+
+          <ProtectedRoute
+            // logged in shows InfoPage else shows LoginPage
+            exact
+            path="/resources"
+          >
+            <Resources />
           </ProtectedRoute>
 
           <Route exact path="/login">
