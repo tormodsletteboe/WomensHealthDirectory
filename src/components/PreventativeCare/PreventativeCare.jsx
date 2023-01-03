@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import './PreventativeCare.css';
 
 function PreventativeCare() {
@@ -65,9 +66,20 @@ function PreventativeCare() {
     </form>
     
     {healthCategories.map(category => (
-    <ul key={category.id}>
-        <li><Button variant="contained" onClick={() => handleCategoryClick(category)} style={{backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>{category.category}</Button></li>
-    </ul>
+    <Box textAlign = 'center' marginRight = '3rem'>
+        <ul key={category.id}>
+            <li>
+                <Button 
+                    variant="contained" 
+                    onClick={() => handleCategoryClick(category)} 
+                    style=
+                        {{backgroundColor: '#8EBBA7', 
+                        color: '#FFFFFF', 
+                        }}>{category.category}
+                </Button>
+            </li>
+        </ul>
+    </Box>
     ))}
     </>
     );
