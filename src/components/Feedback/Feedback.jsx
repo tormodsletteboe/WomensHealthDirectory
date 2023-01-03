@@ -1,12 +1,17 @@
-import { Box, Button, Container, FormControlLabel, InputLabel, Menu, MenuItem, Pagination, Radio, RadioGroup, Select, Typography } from "@mui/material";
+import { Box, Button, Container, FormControlLabel, InputLabel, Menu, MenuItem, Pagination, Radio, RadioGroup, Select, TextField, Typography } from "@mui/material";
 import { useState } from "react";
+import { useDispatch } from "react-redux";
+import { useHistory } from "react-router-dom";
 
 function Feedback() {
 
+    const dispatch = useDispatch();
+    const history = useHistory();
+
     const [questions, setQuestions] =
         useState([
-            'What was the most helpful feature of this website?',
-            'What was the least helpful feature of this website?',
+            'What was the MOST helpful feature of this website?',
+            'What was the LEAST helpful feature of this website?',
             'How do you currently get your healthcare information?',
             'What is the most confusing aspect of managing your healthcare?',
         ])
@@ -36,7 +41,11 @@ function Feedback() {
 
     const [answers, setAnswers] = useState({ q1: '', q2: '', q3: '', q4: 0, q5: 0, q6: 0, q7: 0, q8: 0, q9: 0 });
 
-    const [[page, setPage], [radio, setRadio]] = [useState(1), useState(1)];
+    const [[page, setPage],
+        [radio, setRadio],
+        [comment, setComment],
+        [rating, setRating]
+    ] = [useState(1), useState(1), useState(''), useState(0)];
 
     const saveAnswer = (answer) => {
         setAnswers({ ...answers, ...answer });
@@ -47,7 +56,6 @@ function Feedback() {
             setRadio(0);
             setPage(page + update);
         }
-        multiRender();
     }
 
     const setRadioAnswer = (e) => {
@@ -60,22 +68,20 @@ function Feedback() {
             case 9: setAnswers({ ...answers, q9: e.target.value }); break;
             default: null;
         }
-        
+        setRadio(e.target.value);
     }
 
-    const multiRender = () => {
-        switch (page) {
-            case 4: multiQ = multi[0]; break;
-            case 5: multiQ = multi[1]; break;
-            case 6: multiQ = multi[2]; break;
-            case 7: multiQ = multi[3]; break;
-            case 8: multiQ = multi[4]; break;
-            case 9: multiQ = multi[5]; break;
-            default: null;
-        }
+    const submitSurvey = () => {
+        dispatch({
+            type: 'SUBMIT_SURVEY', payload: {
+                answers: { ...answers },
+                questions: [questions[0], questions[1], questions[2], ...multi],
+                comment: comment,
+                rating: rating
+            }
+        })
+        history.push('/home');
     }
-
-    let multiQ = '';
 
     console.log(answers);
 
@@ -83,7 +89,7 @@ function Feedback() {
         <Container>
             <Typography variant="h4" textAlign={'center'}>Thank you for using the ViFi!</Typography>
             <Typography paragraph textAlign={'center'}>
-                If you don't mind, please answer some questions
+                Please answer some questions
                 so we may better serve you next time.
             </Typography>
             {page == 1 &&
@@ -123,9 +129,9 @@ function Feedback() {
             }
             {page > 3 && page < 10 &&
                 <Box>
-                    <Typography>{questions[3]}</Typography>
-                    <Typography>Please rate from 1 (most confusing) to 5 (least confusing)</Typography>
-                    <Typography>{multiQ}</Typography>
+                    <Typography paragraph>{questions[3]}</Typography>
+                    <Typography paragraph>Please rate from 1 (least confusing) to 5 (most confusing)</Typography>
+                    <Typography paragraph textAlign={'center'} border={'1px solid black'}>{multi[page - 4]}</Typography>
                     <Box>
                         <RadioGroup row sx={({ 'justifyContent': 'space-evenly' })} onChange={(e) => setRadioAnswer(e)} value={radio}>
                             <FormControlLabel value={1} control={<Radio />} label='1' labelPlacement="top" sx={({ 'margin': 0 })} />
@@ -135,6 +141,27 @@ function Feedback() {
                             <FormControlLabel value={5} control={<Radio />} label='5' labelPlacement="top" sx={({ 'margin': 0 })} />
                         </RadioGroup>
                     </Box>
+                </Box>
+            }
+            {page == 10 &&
+                <Box>
+                    <Typography paragraph>
+                        Thank you for completing the survey!
+
+                        Leave a comment and a rating about your overall experience using The Vifi!
+
+                        Submit when you are ready. Thank you yet again!
+                    </Typography>
+                    <TextField label={'Comment'} onChange={(e) => setComment(e.target.value)} sx={({ 'width':'100%' })}></TextField>
+                    <Select value={rating} onChange={(e) => setRating(e.target.value)}>
+                        <MenuItem value={0}>0</MenuItem>
+                        <MenuItem value={1}>1</MenuItem>
+                        <MenuItem value={2}>2</MenuItem>
+                        <MenuItem value={3}>3</MenuItem>
+                        <MenuItem value={4}>4</MenuItem>
+                        <MenuItem value={5}>5</MenuItem>
+                    </Select>
+                    <Button onClick={() => submitSurvey()} variant='contained'>SUBMIT</Button>
                 </Box>
             }
             <Box sx={({ 'textAlign': 'center', 'paddingTop': '1em', 'paddingBottom': '1em' })}>
