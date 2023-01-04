@@ -3,3 +3,14 @@
     margin: 1rem;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+
+.linkIcon {
+    margin: 1rem;
+}
+
+

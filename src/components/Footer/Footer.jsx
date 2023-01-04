@@ -11,7 +11,7 @@ function Footer() {
   <>
 
   <footer>
-      <p>
+      <p className="footerTitle">
           <b>Mission:</b>
       </p>
         

@@ -2,6 +2,7 @@ import { useDispatch, useSelector } from "react-redux";
 import {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import Button from '@mui/material/Button';
+import Box from '@mui/material/Box';
 import './PreventativeCare.css';
 
 function PreventativeCare() {
@@ -45,6 +46,7 @@ function PreventativeCare() {
     const handleCategoryClick = (category) => {
         console.log('in handleCategoryClick, id is',category.id);
         history.push(`./preventativecare/${category.id}/ages/${age}`);
+
     }
 
     return(
@@ -63,13 +65,20 @@ function PreventativeCare() {
             <Button variant="contained" style={{backgroundColor:'#276359'}} type="submit">Submit</Button>
     </form>
     
+    <Box textAlign = 'center' marginRight = '3rem'>
     {healthCategories.map(category => (
-    <ul >
-        <li key={category.id}><Button variant="contained" 
-        onClick={() => handleCategoryClick(category)} 
-        style={{backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>{category.category}</Button></li>
+    <ul>
+        <li key={category.id}>
+            <Button 
+                variant="contained" 
+                onClick={() => handleCategoryClick(category)} 
+                style={{backgroundColor: '#8EBBA7', 
+                color: '#FFFFFF'}}>{category.category}
+            </Button>
+        </li>
     </ul>
     ))}
+    </Box>
     </>
     );
 

@@ -30,10 +30,12 @@ router.get('/:catId/ages/:ageId', rejectUnauthenticated, async (req, res) => {
     let diagSQLText = `SELECT ("name"), ("info"), ("id") FROM "diagnostic_tool"
     WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
 
-    let guidelinesSQLText = `SELECT ("name"), ("info"), ("grade"), ("date"), ("id") FROM "guidelines"
-    WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+    // let guidelinesSQLText = `SELECT ("name"), ("info"), ("grade"), tochar(("date"),"YYYY-MM-DD"), ("id") FROM "guidelines"
+    // WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
+    let guidelinesSQLText = `SELECT name, info, grade, to_char(date,'MM/DD/YYYY') as date, id FROM guidelines WHERE health_category_id = $1 AND age_range_id=$2;`;
 
-    let drQuestionsSQLText = `SELECT ("question"), ("id") FROM "doctor_questions"
+
+    let drQuestionsSQLText = `SELECT ("question_category"), ("question"), ("id") FROM "doctor_questions"
     WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
 
     // Get category details

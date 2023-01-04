@@ -6,15 +6,16 @@ import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import Button from '@mui/material/Button';
+import OpenInNew from '@mui/icons-material/OpenInNew';
 import './CategoryDetailView.css';
+import FaqCard from './FaqCard';
+import DiagnosticToolsCard from './DiagnosticToolsCard';
+import GuidelinesCard from './GuidelinesCard';
+import DoctorQuestionsCard from './DoctorQuestionsCard';
+import * as React from 'react';
 
 
 function CategoryDetailView(){
@@ -43,6 +44,7 @@ function CategoryDetailView(){
     let categoryDetails = useSelector((store)=>{
         return store.categoryDetail;
     })
+    console.log('categoryDetails is', categoryDetails);
 
     let specificresources = useSelector((store)=>{
         return store.specificResources;
@@ -53,125 +55,110 @@ function CategoryDetailView(){
     
     return(
     <>
-
 <div className="accordion">
       <Accordion style={{backgroundColor: '#8EBBA7'}}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>Guidelines</Typography>
+          <Typography style={{color: '#FFFFFF'}}>Guidelines</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <TableContainer 
-            style = {{backgroundColor: '#FFFFFF', maxHeight: 250}}
-            sx={{
-                "&::-webkit-scrollbar": {
-                  width: 8,
-                  height: 8
-                },
-                "&::-webkit-scrollbar-track": {
-                  backgroundColor: "lightgray"
-                },
-                "&::-webkit-scrollbar-thumb": {
-                  backgroundColor: "#276359",
-                  borderRadius: 2
-                }
-              }}
-        >
-        <Table variant='simple' stickyHeader>
-                <TableHead>
-                    <TableRow>
-                        <TableCell>Guideline Name</TableCell>
-                        <TableCell>Info</TableCell>
-                        <TableCell>Grade</TableCell>
-                        <TableCell>Last Updated</TableCell>
-                    </TableRow>
-                </TableHead>
-                                         <TableBody>
-                                             {categoryDetails.guidelines && categoryDetails.guidelines.map((guideline) => (
-                                                 <TableRow key={guideline.id}>
-                                                     <TableCell>{guideline.name}</TableCell>
-                                                      <TableCell>{guideline.info}</TableCell>
-                                                     <TableCell>{guideline.grade}</TableCell>
-                                                     <TableCell>{guideline.date}</TableCell> 
-                                        </TableRow>
-                                             )
-                                            )
-                                         }
-                                          </TableBody>
-                                     </Table>
-                            </TableContainer>
+        <ul style={{padding:0}} >
+          {categoryDetails.guidelines && categoryDetails.guidelines.map((guideline) => (
+                  <li key={guideline.id} style={{backgroundColor: '#FFFFFF'}}>
+                    <GuidelinesCard guideline = {guideline} /> 
+                  </li>
+                ))}
+        </ul>
+                                
         </AccordionDetails>
       </Accordion>
 
       <Accordion style={{backgroundColor: '#8EBBA7'}}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography>Diagnostic Tools</Typography>
+          <Typography style={{color: '#FFFFFF'}}>Diagnostic Tools</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        {categoryDetails.diagTools && categoryDetails.diagTools.map((diagTool) => (
-            <List key={diagTool.id} style={{backgroundColor: '#FFFFFF'}}>
-                <ListItem>{diagTool.name}</ListItem>
-                <ListItem>{diagTool.info}</ListItem>
-            </List>
-        ))}
+        <ul style={{padding:0}} >
+            {categoryDetails.diagTools && categoryDetails.diagTools.map((diagTool) => (
+                  <li key={diagTool.id} style={{backgroundColor: '#FFFFFF'}}>
+                    <DiagnosticToolsCard diagTool = {diagTool}/>
+                  </li>
+                ))}
+          </ul>
+        </AccordionDetails>
+      </Accordion>
+
+      <Accordion style={{backgroundColor: '#8EBBA7'}}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography style={{color: '#FFFFFF'}}>FAQs</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <ul style={{padding:0}} >
+                {categoryDetails.faqs && categoryDetails.faqs.map((faq) => (
+                  <li key={faq.id} style={{backgroundColor: '#FFFFFF'}}>
+                    <FaqCard faq={faq} />
+                  </li>
+                ))}
+          </ul>
+      </AccordionDetails>
+      </Accordion>
+
+      <Accordion style={{backgroundColor: '#8EBBA7'}}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography style={{color: '#FFFFFF'}}>Questions to Ask Your Doctor</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+
+        <ul style={{padding:0}} >
+              {categoryDetails.drQuestions && categoryDetails.drQuestions.map((question) => (
+
+                  <li key={question.id} style={{backgroundColor: '#FFFFFF'}}>
+                    <DoctorQuestionsCard question={question} />
+                  </li>
+                ))}
+        </ul>
 
         </AccordionDetails>
       </Accordion>
 
       <Accordion style={{backgroundColor: '#8EBBA7'}}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
+          expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography>FAQs</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-        {categoryDetails.faqs && categoryDetails.faqs.map((faq) => (
-            <List key={faq.id} style={{backgroundColor: '#FFFFFF'}}>
-                <ListItem>{faq.question}</ListItem>
-                <ListItem>{faq.answer}</ListItem>
-            </List>
-        ))}
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion style={{backgroundColor: '#8EBBA7'}}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Questions to Ask Your Doctor</Typography>
-        </AccordionSummary>
-        <AccordionDetails>
-        {categoryDetails.drQuestions && categoryDetails.drQuestions.map((question) => (
-            <List key={question.id} style={{backgroundColor: '#FFFFFF'}}>
-                <ListItem>{question.question}</ListItem>
-            </List>
-        ))}
-        </AccordionDetails>
-      </Accordion>
-
-      <Accordion style={{backgroundColor: '#8EBBA7'}}>
-        <AccordionSummary
-          expandIcon={<ExpandMoreIcon />}
-          aria-controls="panel2a-content"
-          id="panel2a-header"
-        >
-          <Typography>Resources</Typography>
+          <Typography style={{color: '#FFFFFF'}}>Resources</Typography>
         </AccordionSummary>
         <AccordionDetails>
         {specificresources && specificresources.map((resource) => (
             <List key={resource.id} style={{backgroundColor: '#FFFFFF'}}>
-                <ListItem><a href={resource.link}>{resource.name}</a></ListItem>
+                <ListItem>
+                    <Button 
+                        variant = "contained"
+                        style={{backgroundColor: '#FFFFFF', color: 'black'}} 
+                        component="a"
+                        href={resource.link}
+                        >{<div className="linkIcon">
+                            <OpenInNew />
+                          </div>}
+                          {resource.name}
+                    </Button>
+                </ListItem>
             </List>
         ))}
         </AccordionDetails>

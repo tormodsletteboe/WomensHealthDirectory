@@ -127,6 +127,7 @@ CREATE TABLE "age_range" (
 
 CREATE TABLE "doctor_questions" (
 	"id" serial NOT NULL,
+	"question_category" varchar(1024),
 	"question" varchar(1024) NOT NULL,
 	"health_category_id" int NOT NULL,
 	"age_range_id" int NOT NULL,
@@ -134,6 +135,7 @@ CREATE TABLE "doctor_questions" (
 ) WITH (
   OIDS=FALSE
 );
+
 
 
 
@@ -222,12 +224,13 @@ VALUES ('What is the first step in screening for cervical cancer?', 'A screening
 ('My screening test is positive.', 'Your test sample will go on for further testing, options include HPV, Pap or a triage biomarker. From there, you may be asked to come in for a visual examination using a colposcope to better see your cervix. ', 1, 5),
 ('What do these numbers mean in my HPV results?', 'There are 14 identified high-risk HPV genotypes, which is what the HPV test is looking for. HPV causes 99% of all cervical cancers, with HPV 16 and 18 causing 70% of those cases. Follow up with your provider for next steps and details.', 1, 5);
 
-INSERT INTO "doctor_questions" ("question", "health_category_id", "age_range_id")
-VALUES ('Risk Factors: What are my risk factors for cervical cancer? Are there any others I should consider based upon environmental factors?', 1, 5),
-('Guidelines: Which screening guidelines are you following? How do the tests you use support them?', 1, 5),
-('Clinical Updates: Can you please share any new information about cervical cancer screening that has come out since my last screening?', 1, 5),
-('Results: How will you communicate my results to me? Where can I go for more information about these results?', 1, 5),
-('Management: Who can I contact when I have questions? What are the possible next steps?', 1, 5);
+INSERT INTO "doctor_questions" ("question_category", "question", "health_category_id", "age_range_id")
+VALUES ('Risk Factors:', 'What are my risk factors for cervical cancer? Are there any others I should consider based upon environmental factors?', 1, 5),
+('Guidelines:', 'Which screening guidelines are you following? How do the tests you use support them?', 1, 5),
+('Clinical Updates:', 'Can you please share any new information about cervical cancer screening that has come out since my last screening?', 1, 5),
+('Results:', 'How will you communicate my results to me? Where can I go for more information about these results?', 1, 5),
+('Management:', 'Who can I contact when I have questions? What are the possible next steps?', 1, 5);
+
 
 INSERT INTO "resources" ("name", "link", "description", "health_category_id")
 VALUES ('American Society for Colposcopy and Cervical Pathology', 'https://www.asccp.org/cervicalcancerelimination', 'Additional reading', 1),
