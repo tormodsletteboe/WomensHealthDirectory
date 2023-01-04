@@ -10,9 +10,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
-import List from '@mui/material/List';
-import ListItem from '@mui/material/ListItem';
-import ListItemButton from '@mui/material/ListItemButton';
+
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
 
 
@@ -27,6 +25,7 @@ function AdminCategoryDetailView() {
     const selectedAgeRange = useSelector(store => store.selectedAgeRange);
     const detailContent = useSelector(store => store.categoryDetail);
 	const resourceToEdit = useSelector(store => store.resourceToEdit);
+    const columnNames = useSelector(store => store.columnNames);
 
     useEffect(() => {
 
@@ -42,6 +41,10 @@ function AdminCategoryDetailView() {
                         ageId: params.ageId,
                         sectionName: params.sectionName
                     }})
+            
+            await dispatch({
+                type: `SET_COLUMN_NAMES_${params.sectionName}`
+            })
         }
         
         // call the function
@@ -59,10 +62,12 @@ function AdminCategoryDetailView() {
 
 		// create object and add in empty fields based on the above number
 		let objToAdd = {id: 0};
-
+        let columnName = Object.keys(detailContent[0])
 		for (let i = 1; i <= newObjectItemsNumber; i++ ){
-			let newName = 'field0' + i;
-			objToAdd[newName] = "add your text";
+			// let newName = 'field0' + i;
+
+            let newName = columnName[i];
+			objToAdd[newName] = "";
 		}
 
 		console.log('new add object', objToAdd);
@@ -75,8 +80,8 @@ function AdminCategoryDetailView() {
         evt.preventDefault();
         // console.log('deleting x', x);
         dispatch({type: 'DELETE_CATEGORY_DETAIL', 
-            payload: {id: x.id, catId: params.catId, ageId: params.ageId, sectionName: params.sectionName}});
-        
+            payload: {id: x.id, catId: params.catId, ageId: params.ageId, 
+                sectionName: params.sectionName}});
     }
 
     // MUI 
@@ -89,7 +94,6 @@ function AdminCategoryDetailView() {
         },
     });
       
-
     // Breadcrumbs
     const breadcrumbs = [
         <Link underline="hover" 
@@ -119,7 +123,7 @@ function AdminCategoryDetailView() {
         <Typography key="3" color="text.primary">
             Category: {params.sectionName}
         </Typography>,
-      ];
+    ];
 
     return (
         <>
@@ -137,8 +141,16 @@ function AdminCategoryDetailView() {
         <Typography align="center" component="h1" variant="h3">{params.sectionName}</Typography>
         <section>
         <TableContainer>
-            <TableBody m={2} pt={3} sx={{border: '1px', borderColor: 'black'}}>
-            
+        <TableRow>
+                    <TableCell><Typography variant="detailField01">{columnNames[0]} </Typography></TableCell> 
+                    <TableCell><Typography variant="body2">{columnNames[1]} 
+                    </Typography></TableCell>
+                    {detailContent[0] && Object.keys(detailContent[0]).length > 3 ? <TableCell><Typography>Grade</Typography></TableCell> : null} 
+                    {detailContent[0] && Object.keys(detailContent[0]).length > 4 ? <TableCell><Typography>Date</Typography></TableCell> : null}
+                    <TableCell>Edit</TableCell>
+                    <TableCell>Delete</TableCell>
+                    </TableRow>
+        <TableBody m={2} pt={3} sx={{border: '1px', borderColor: 'black'}}>
 				{detailContent[0] && detailContent.map(x => (
 					x.id === resourceToEdit.id ? 
 
@@ -146,11 +158,12 @@ function AdminCategoryDetailView() {
 					<AddEditForm key={x.id} />
 					: 
 					<TableRow key={x.id} sx={{ width: '100%' }}>
-                        <TableCell><Typography variant="detailField01" >{x.field01} </Typography></TableCell> 
+                        <TableCell><Typography variant="detailField01">{x.field01} </Typography></TableCell>
                         <TableCell><Typography variant="body2">{x.field02} </Typography></TableCell>
-                        {x.field03 ? <TableCell><Typography>{x.field03}</Typography></TableCell>  : null} 
-                        {x.field04 ? <TableCell><Typography>{x.field04}</Typography></TableCell> : null}
-						<TableCell><Button variant="contained" size="small" color="primary"
+                        {x.field03 ? <TableCell><Typography>{x.field03}</Typography></TableCell> : null} 
+						{x.field04 ? <TableCell><Typography>{x.field04}</Typography></TableCell>: null}
+                        <TableCell>
+                        <Button variant="contained" size="small" color="primary" 
 						onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: x})}>
 							Edit
 						</Button></TableCell>
@@ -160,21 +173,22 @@ function AdminCategoryDetailView() {
 						</Button></TableCell>
 					</TableRow>
 				))}
-				<TableRow> 
+                {/* conditional rendering to show/not show the add form */}
+
+                { resourceToEdit.id === 0 ? <AddEditForm /> : 
+                	<TableRow> 
                     <TableCell align="center" colSpan={6}>
                     {/* Creates Add button
                     Clicking Add button will send a file with 3 empty lines to edit, 
-                    and id will be the highest id in the specific resources reducer plus one
+                    and id will be zero
                     */}                    
-                    <Button variant="contained" size="small"
-                        onClick={(evt)=>{handleAddClick(evt)}}>
+                     <Button variant="contained" size="small"
+                    onClick={(evt)=>{handleAddClick(evt)}}>
                     Add
-                    </Button> 
-                    {/* conditional rendering to show/not show the add form */}
-                { resourceToEdit.id === 0 ? <AddEditForm /> : null }
-                </TableCell></TableRow>  
+                    </Button>
+                    </TableCell>
+                    </TableRow>   }
             </TableBody>
-			
             </TableContainer>
         </section>
         </ThemeProvider>
