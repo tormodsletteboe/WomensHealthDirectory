@@ -1,23 +1,22 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import axios from "axios";
-
 import Box from "@mui/material/Box";
-
 import Grid from "@mui/material/Grid";
-
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import { Typography } from "@mui/material";
+import Slide from '@mui/material/Slide';
 
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import "./MedicalLinks.css";
 import MedicalLinksAccordion from "./MedicalLinksAccordion";
 import EditMedicalLinksAccordion from './EditMedicalLinksAccordion';
-import { Typography } from "@mui/material";
+import PreviewMedicalLinkCard from "./PreviewMedicalLinkCard";
+import PreviewAddMedicalLinkCard from "./PreviewAddMedicalLinkCard";
 
 function MedicalLinks() {
   const dispatch = useDispatch();
@@ -27,6 +26,13 @@ function MedicalLinks() {
 
   const [result, setResult] = useState([addMedLinks.logo_url]);
   const [selected, setSelected] = useState(addMedLinks.logo_url);
+
+  const [checked, setChecked] = React.useState(false);
+  const containerRef = React.useRef(null);
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
 
   const handleAddMedLink = () => {
    
@@ -41,6 +47,21 @@ function MedicalLinks() {
     });
 
     dispatch({type:'CLEAR_ADD_MEDICAL_LINKS'});
+    dispatch({
+      type: "SET_MEDICAL_TITLE",
+      payload: '',
+    });
+    dispatch({
+      type: "SET_MEDICAL_URL",
+      payload: '',
+    });
+    dispatch({
+      type: "SET_MEDICAL_DESCRIPTION",
+      payload: '',
+    });
+    setResult([]);
+    setSelected('');
+   
   };
 
   useEffect(() => {
@@ -119,7 +140,7 @@ function MedicalLinks() {
           </Accordion>
         </Grid>
         <Grid container>
-          <Grid item xs={2}>
+          <Grid item xs={1.6}>
             <select
               className="dropdown"
               defaultValue={result[0]}
@@ -139,7 +160,7 @@ function MedicalLinks() {
               ))}
             </select>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={1}>
             <Button
             sx={{color:'#8EBBA7'}}
               onClick={async () => {
@@ -155,11 +176,21 @@ function MedicalLinks() {
               get icons
             </Button>
           </Grid>
-          <Grid item xs={5} textAlign={"end"}>
+          <Grid item xs={2.4} textAlign={"start"}>
+            <Button  onClick={handleChange}>Preview</Button>
+          </Grid>
+          <Grid item xs={7} textAlign={"end"}>
             <Button variant="contained" onClick={handleAddMedLink}>Add Medical Link</Button>
           </Grid>
         </Grid>
+        <Grid item xs={5.5} my={1} sx={{display:'flex',justifyContent:'end'}} >
+        {checked &&
+        <Slide direction="up" in={checked} container={containerRef.current} >
+          {<PreviewAddMedicalLinkCard addMedicalLink={addMedLinks} />}
+        </Slide>}
+        </Grid>
       </Grid>
+      
       <Box sx={{mx:2,marginTop:10}}>
         <Typography variant="h3"> Medical Links </Typography>
       {/* render all medical links from database */}

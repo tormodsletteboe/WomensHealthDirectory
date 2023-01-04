@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
+
 import Grid from "@mui/material/Grid";
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
@@ -7,10 +9,19 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import axios from "axios";
+import Slide from '@mui/material/Slide';
+import PreviewMedicalLinkCard from "./PreviewMedicalLinkCard";
+
+
+
 function EditMedicalLinksAccordion() {
   //   const store = useSelector((store) => store);
+  const [checked, setChecked] = React.useState(false);
+  const containerRef = React.useRef(null);
 
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
  
  
   const dispatch = useDispatch();
@@ -102,7 +113,7 @@ function EditMedicalLinksAccordion() {
         </Accordion>
       </Grid>
       <Grid container>
-        <Grid item>
+        <Grid item xs={1.6}>
           <select
             onChange={(e) => {
               setSelected(e.target.value);
@@ -123,7 +134,7 @@ function EditMedicalLinksAccordion() {
             ))}
           </select>
         </Grid>
-        <Grid item xs={5}>
+        <Grid item xs={1}>
           <Button
             onClick={async () => {
               const url = new URL(resourceToEdit.link);
@@ -138,10 +149,11 @@ function EditMedicalLinksAccordion() {
             get icons
           </Button>
         </Grid>
-        <Grid item xs={4} textAlign={"end"}>
-          <Button onClick={updateResource}>Update Medical Link</Button>
-        </Grid>
-        <Grid item>
+        <Grid item xs={6.9} textAlign={"start"}>
+            <Button  onClick={handleChange}>Preview</Button>
+          </Grid>
+       
+        <Grid item xs={1} textAlign="end">
           <Button
             onClick={() =>
               dispatch({ type: "SET_RESOURCE_TO_EDIT", payload: {} })
@@ -149,6 +161,15 @@ function EditMedicalLinksAccordion() {
           >
             Cancel
           </Button>
+        </Grid>
+        <Grid item xs={1.5} textAlign={"end"}>
+          <Button onClick={updateResource}>Update Medical Link</Button>
+        </Grid>
+        <Grid item xs={5.5} my={1} sx={{display:'flex',justifyContent:'end'}} >
+        {checked &&
+        <Slide direction="up" in={checked} container={containerRef.current} >
+          {<PreviewMedicalLinkCard medicallink={resourceToEdit} />}
+        </Slide>}
         </Grid>
       </Grid>
     </Grid>

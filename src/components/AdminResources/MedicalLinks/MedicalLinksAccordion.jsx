@@ -7,11 +7,18 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-
+import Slide from '@mui/material/Slide';
+import PreviewMedicalLinkCard from "./PreviewMedicalLinkCard";
 function MedicalLinksAccordion({ medicallink }) {
   //   const store = useSelector((store) => store);
+  const [checked, setChecked] = React.useState(false);
+  const containerRef = React.useRef(null);
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
   const dispatch = useDispatch();
-  return (
+  return (<>
     <Accordion sx={{ my: 2 }}>
       <AccordionSummary expandIcon={<ExpandMoreIcon />}>
         <Grid container>
@@ -33,6 +40,9 @@ function MedicalLinksAccordion({ medicallink }) {
           {medicallink.description}
         </Typography>
         <Grid item textAlign={'end'}>
+          <Button ref={containerRef} onClick={handleChange} >
+            Preview
+          </Button>
         <Button
           onClick={() =>
             dispatch({ type: "SET_RESOURCE_TO_EDIT", payload: medicallink })
@@ -44,7 +54,13 @@ function MedicalLinksAccordion({ medicallink }) {
         </Grid>
       </AccordionDetails>
     </Accordion>
+    {checked &&
+    <Slide direction="up" in={checked} container={containerRef.current}>
+          {<PreviewMedicalLinkCard medicallink={medicallink} />}
+        </Slide>}
+    </>
   );
 }
 
 export default MedicalLinksAccordion;
+
