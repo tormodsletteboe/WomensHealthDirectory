@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import { Button } from '@mui/material';
+import './AdminLandingPage.css';
+
 import {useSelector} from 'react-redux';
 
 // Basic functional component structure for React with default state
@@ -9,11 +12,14 @@ function AdminLandingPage() {
   // a default value of 'Functional Component'
   
   //const store = useSelector((store) => store);
-  const [heading, setHeading] = useState('Admin Landing Page');
+  const [heading, setHeading] = useState('Welcome, Admin!');
 
   return (
-    <div>
+    <div className = "adminLandingPage">
       <h2>{heading}</h2>
+      <Button variant="contained" style = {{backgroundColor: '#8EBBA7', color: '#FFFFFF', fontSize: '18px'}}>View User Feedback</Button>
+
+
     </div>
   );
 }
