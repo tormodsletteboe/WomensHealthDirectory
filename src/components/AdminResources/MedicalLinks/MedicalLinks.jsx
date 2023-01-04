@@ -27,7 +27,7 @@ function MedicalLinks() {
   const [result, setResult] = useState([addMedLinks.logo_url]);
   const [selected, setSelected] = useState(addMedLinks.logo_url);
 
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(true);
   const containerRef = React.useRef(null);
 
   const handleChange = () => {
@@ -176,7 +176,7 @@ function MedicalLinks() {
               get icons
             </Button>
           </Grid>
-          <Grid item xs={1.5} textAlign={"end"}>
+          <Grid item xs={1.5} textAlign={"start"}>
             <Button  onClick={handleChange}>Preview</Button>
           </Grid>
           <Grid item xs={1.5} textAlign={"end"}>

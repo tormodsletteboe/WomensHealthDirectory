@@ -16,7 +16,7 @@ import PreviewMedicalLinkCard from "./PreviewMedicalLinkCard";
 
 function EditMedicalLinksAccordion() {
   //   const store = useSelector((store) => store);
-  const [checked, setChecked] = React.useState(false);
+  const [checked, setChecked] = React.useState(true);
   const containerRef = React.useRef(null);
 
   const handleChange = () => {
