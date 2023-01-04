@@ -60,6 +60,7 @@ function AddEditForm() {
             <TableCell align="center"><TextField 
                 multiline
                 label={columnNames[0]}
+                fullWidth={true}
                 value={resourceToEdit.field01}
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_FIELD',
@@ -68,6 +69,7 @@ function AddEditForm() {
                 <TableCell>
                 <TextField 
                     multiline   
+                    fullWidth={true}
                     label={columnNames[1]}
                     value={resourceToEdit.field02}
                     onChange={(evt) => dispatch({
@@ -78,6 +80,7 @@ function AddEditForm() {
             <TableCell>
                 <TextField 
                 multiline
+                fullWidth={true}
                 label={columnNames[2]}
                     value={resourceToEdit.field03}
                     onChange={(evt) => dispatch({
@@ -90,6 +93,7 @@ function AddEditForm() {
                 <TextField 
                     label={columnNames[3]}
                     multiline
+                    fullWidth={true}
                     value={resourceToEdit.field04}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
