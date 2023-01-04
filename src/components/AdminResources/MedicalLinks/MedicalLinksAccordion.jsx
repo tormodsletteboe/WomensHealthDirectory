@@ -29,22 +29,22 @@ function MedicalLinksAccordion({ medicallink }) {
     <>
       <Accordion sx={{ my: 2 }}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Grid container>
-            <Grid item xs={2}>
+          <Grid container >
+            <Grid item xs={2} >
               <img src={medicallink.logo_url} />
             </Grid>
             <Grid item xs={4} my={1} textAlign={"start"}>
-              <Typography>{medicallink.name}</Typography>
+              <Typography textAlign={"start"} >{medicallink.name}</Typography>
             </Grid>
             <Grid item xs={6} my={1} textAlign={"end"}>
-              <Typography sx={{ color: "text.secondary" }}>
+              <Typography textAlign={"start"} sx={{ color: "text.secondary" }}>
                 {medicallink.link}
               </Typography>
             </Grid>
           </Grid>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography sx={{ width: "33%", flexShrink: 0 }}>
+          <Typography textAlign={"start"} sx={{ width: "33%", flexShrink: 0 }}>
             {medicallink.description}
           </Typography>
           <Grid item textAlign={"end"}>

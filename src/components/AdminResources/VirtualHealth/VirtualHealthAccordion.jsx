@@ -56,11 +56,32 @@ function VirtualHealthAccordion({ virtualhealthlink }) {
         <AccordionDetails>
           <Grid container>
             <Grid item xs={4} my={1} textAlign={"start"}>
-              <Typography>{<span style={{fontWeight:'bold'}} >COST/COVERAGE:</span>}{`\n`}{virtualhealthlink.info_cost}</Typography>
+              {virtualhealthlink.info_cost && <Grid container direction={"column"}>
+                <Typography mb={1} textAlign="start">
+                  {
+                    <span style={{ fontWeight: "bold" }}>
+                      {"COST/COVERAGE:"}
+                    </span>
+                  }
+                </Typography>
+                <Typography textAlign="start">
+                  {virtualhealthlink.info_cost}
+                </Typography>
+              </Grid>}
             </Grid>
-            <Typography sx={{ width: "33%", flexShrink: 0 }}>
-              {virtualhealthlink.description}
-            </Typography>
+            <Grid item xs={6} my={1} textAlign={"start"} ml={2}>
+              {virtualhealthlink.description && <Grid container direction={"column"}>
+                <Typography mb={1} textAlign="start">
+                  {<span style={{ fontWeight: "bold" }}>{"DESCRIPTION:"}</span>}
+                </Typography>
+                <Typography
+                  textAlign={"start"}
+                  sx={{ width: "50%", flexShrink: 0 }}
+                >
+                  {virtualhealthlink.description}
+                </Typography>
+              </Grid>}
+            </Grid>
           </Grid>
           <Grid item textAlign={"end"}>
             <ToggleButton onClick={handleChange} selected={checked}>

@@ -104,6 +104,7 @@ function MedicalLinks() {
                         payload: event.target.value,
                       })
                     }
+                    sx={{justifyContent: 'start'}}
                   />
                 </Grid>
                 <Grid item xs={7} className="centerthis">

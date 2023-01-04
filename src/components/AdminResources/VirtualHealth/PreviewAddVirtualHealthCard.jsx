@@ -38,7 +38,7 @@ const PreviewAddVirtualHealthCard = React.forwardRef((props,ref) => {
           <Avatar
             alt=""
             src={addVirtualHealthLink.logo_url}
-            sx={{ bgcolor: "#8EBBA7" }}
+            sx={addVirtualHealthLink.logo_url ? {bgcolor: "white"}:{ bgcolor: "#8EBBA7" }}
           />
         }
         title={addVirtualHealthLink.title && <Typography variant="body" >{addVirtualHealthLink.title}</Typography>}
