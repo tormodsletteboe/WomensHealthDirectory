@@ -6,7 +6,7 @@ import { useSelector } from "react-redux";
 import ReorderIcon from "@mui/icons-material/Reorder";
 import { useHistory } from "react-router-dom";
 import Button from "@mui/material/Button";
-import { useEffect, useState} from "react";
+import {useState} from "react";
 import ClickAwayListener from '@mui/material/ClickAwayListener';
 
 
@@ -77,17 +77,6 @@ function Nav() {
             Login / Register
           </Link>
         )}
-        {/* If a user is logged in, show these links */}
-        {user.id && (
-          <>
-            <Link className="navLink" to="/user">
-              Home
-            </Link>
-            <LogOutButton className="logout" />
-          </>
-        )}
-
-       
       </div>
 
       {/* "Hamburger menu" / "Bar icon" to toggle the navigation links */}
@@ -100,13 +89,25 @@ function Nav() {
         ></ReorderIcon>
       </div>
       <div className="join">
-        <Button
+
+
+      {!user.id && (
+          // If there's no user, show join button
+          <Button
           variant="contained"
           style={{ backgroundColor: "#8EBBA7", color: "white" }}
           onClick={handleJoin}
         >
           Join
         </Button>
+       )}
+
+       {/* If a user is logged in, show the logout button */}
+       {user.id && (
+          <>
+            <LogOutButton className="logout" />
+          </>
+        )}
 
       </div>
     </div>
