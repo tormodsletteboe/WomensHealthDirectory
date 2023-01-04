@@ -19,7 +19,6 @@ import Tooltip from '@mui/material/Tooltip';
 import "./MedicalLinks.css";
 import MedicalLinksAccordion from "./MedicalLinksAccordion";
 import EditMedicalLinksAccordion from './EditMedicalLinksAccordion';
-import PreviewMedicalLinkCard from "./PreviewMedicalLinkCard";
 import PreviewAddMedicalLinkCard from "./PreviewAddMedicalLinkCard";
 
 function MedicalLinks() {
@@ -71,10 +70,8 @@ function MedicalLinks() {
   };
 
   useEffect(() => {
-    console.log("medical links useeffect ran");
     //fetch all medical links from database
     //dispatch someting
-
     dispatch({ type: "FETCH_MEDICAL_LINKS" });
   }, []);
 
@@ -129,7 +126,7 @@ function MedicalLinks() {
               <Grid item xs={11}>
                 <TextField
                   variant="outlined"
-                  label="description"
+                  label="Description"
                   fullWidth
                   multiline
                   maxRows={4}
@@ -146,7 +143,7 @@ function MedicalLinks() {
           </Accordion>
         </Grid>
         <Grid container>
-          <Grid item xs={1.6}>
+          <Grid item xs={1.8}>
             <select
               className="dropdown"
               defaultValue={result[0]}
@@ -166,17 +163,17 @@ function MedicalLinks() {
               ))}
             </select>
           </Grid>
-          <Grid item xs={7.4}>
+          <Grid item xs={7.2}>
             <Button
-            sx={{color:'#8EBBA7'}}
+            
               onClick={async () => {
                 const url = new URL(addMedLinks.url);
-                console.log(url.hostname);
+                
                 const result = await axios.get(
                   `https://favicongrabber.com/api/grab/${url.hostname}`
                 );
                 setResult(result.data.icons.map((icon) => icon.src));
-                console.log(result.data.icons.map((icon) => icon.src));
+                
               }}
             >
               get icons

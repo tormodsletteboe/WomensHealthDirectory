@@ -10,25 +10,36 @@ import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { Typography } from "@mui/material";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
+import Slide from "@mui/material/Slide";
+import ToggleButton from "@mui/material/ToggleButton";
+import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
+import Tooltip from "@mui/material/Tooltip";
 
 import "./VirtualHealth.css";
-import VirtualHealthAccordion from './VirtualHealthAccordion';
-import EditVirtualHealthLinksAccordion from './EditVirtualHealthAccordion';
-
+import VirtualHealthAccordion from "./VirtualHealthAccordion";
+import EditVirtualHealthLinksAccordion from "./EditVirtualHealthAccordion";
+import PreviewAddVirtualHealthCard from "./PreviewAddVirtualHealthCard";
 
 function VirtualHealth() {
   const dispatch = useDispatch();
-  const addVirtualHealthLinks = useSelector((store) => store.addVirtualHealthLinks);
+  const addVirtualHealthLinks = useSelector(
+    (store) => store.addVirtualHealthLinks
+  );
   const virtualhealthlinks = useSelector((store) => store.virtualhealth_links);
-   const resourceToEdit = useSelector((store) => store.resourceToEdit);
- 
-   //this is used with the get ICONS button
+  const resourceToEdit = useSelector((store) => store.resourceToEdit);
+
+  //this is used with the get ICONS button
   const [result, setResult] = useState([addVirtualHealthLinks.logo_url]);
   const [selected, setSelected] = useState(addVirtualHealthLinks.logo_url);
 
+  const [checked, setChecked] = React.useState(true);
+  const containerRef = React.useRef(null);
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
+
   const handleAddVirtualHealth = () => {
-   
     dispatch({
       type: "ADD_VIRTUALHEALTH_LINK",
       payload: {
@@ -41,19 +52,42 @@ function VirtualHealth() {
       },
     });
 
-     dispatch({type:'CLEAR_ADD_VIRTUALHEALTH_LINKS'});
+    dispatch({ type: "CLEAR_ADD_VIRTUALHEALTH_LINKS" });
+    //TODO: clear the add virtual health link reducer
+    dispatch({
+      type: "SET_VIRTUALHEALTH_TITLE",
+      payload: "",
+    });
+    dispatch({
+      type: "SET_VIRTUALHEALTH_LINK",
+      payload: "",
+    });
+    dispatch({
+      type: "SET_VIRTUALHEALTH_LOGO_URL",
+      payload: "",
+    });
+    dispatch({
+      type: "SET_VIRTUALHEALTH_DESCRIPTION",
+      payload: "",
+    });
+    dispatch({
+      type: "SET_VIRTUALHEALTH_SPECIALTY",
+      payload: "",
+    });
+    dispatch({
+      type: "SET_VIRTUALHEALTH_INFO_COST",
+      payload: "",
+    });
+    setResult([]);
+    setSelected("");
+   
   };
 
   useEffect(() => {
-    console.log("virtual health  useeffect ran");
-
-
     //fetch all virtual health links from database
     //dispatch someting
-     dispatch({ type: "FETCH_VIRTUALHEALTH_LINKS" });
+    dispatch({ type: "FETCH_VIRTUALHEALTH_LINKS" });
   }, []);
-
-  
 
   let imgpath = "./images/vifidefault.jpeg";
   let noImagePath = "";
@@ -61,11 +95,10 @@ function VirtualHealth() {
   return (
     <Box>
       <Typography variant="h5">Add New Virtual Health</Typography>
-      <Grid container >
+      <Grid container>
         <Grid item xs={12} my={1}>
-          <Accordion
-          expanded>
-            <AccordionSummary >
+          <Accordion expanded>
+            <AccordionSummary>
               <Grid container columnSpacing={1}>
                 <Grid item xs={1} className="centerthis">
                   <img src={selected} />
@@ -86,7 +119,7 @@ function VirtualHealth() {
                 </Grid>
                 <Grid item xs={7} className="centerthis">
                   <TextField
-                    label="Link"
+                    label="Url"
                     variant="outlined"
                     fullWidth
                     value={addVirtualHealthLinks.link}
@@ -126,14 +159,13 @@ function VirtualHealth() {
                     }
                   />
                 </Grid>
-                
               </Grid>
             </AccordionSummary>
             <AccordionDetails>
               <Grid item xs={11}>
                 <TextField
                   variant="outlined"
-                  label="description"
+                  label="Description"
                   fullWidth
                   multiline
                   maxRows={4}
@@ -150,7 +182,7 @@ function VirtualHealth() {
           </Accordion>
         </Grid>
         <Grid container>
-          <Grid item xs={2}>
+          <Grid item xs={1.8} textAlign={"start"}>
             <select
               className="dropdown"
               defaultValue={result[0]}
@@ -162,46 +194,78 @@ function VirtualHealth() {
                 });
               }}
             >
-              <option key={'sdfs'} disabled>Choose One</option>
+              <option key={"sdfs"} disabled>
+                Choose One
+              </option>
               <option key={noImagePath}>{noImagePath}</option>
               <option key={imgpath}>{imgpath}</option>
               {result.map((icon) => (
-                <option key={icon} value={icon}>{icon}</option>
+                <option key={icon} value={icon}>
+                  {icon}
+                </option>
               ))}
             </select>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={7.2}>
             <Button
-            sx={{color:'#8EBBA7'}}
               onClick={async () => {
-                console.log(addVirtualHealthLinks.link);
                 const url = new URL(addVirtualHealthLinks.link);
-                console.log(url.hostname);
+
                 const result = await axios.get(
                   `https://favicongrabber.com/api/grab/${url.hostname}`
                 );
                 setResult(result.data.icons.map((icon) => icon.src));
-                console.log(result.data.icons.map((icon) => icon.src));
               }}
             >
               get icons
             </Button>
           </Grid>
-          <Grid item xs={5} textAlign={"end"}>
-            <Button variant="contained" onClick={handleAddVirtualHealth}>Add Virtual Health Link</Button>
+          <Grid item xs={1} textAlign={"end"}>
+            <ToggleButton onClick={handleChange} selected={checked}>
+              <Tooltip title={checked ? "Close" : "Preview"}>
+                <PhoneAndroidIcon />
+              </Tooltip>
+            </ToggleButton>
+          </Grid>
+          <Grid item xs={2} textAlign={"end"}>
+            <Button variant="contained" onClick={handleAddVirtualHealth}>
+              Add Virtual Health
+            </Button>
           </Grid>
         </Grid>
+        <Grid
+          item
+          xs={11}
+          my={1}
+          sx={{ display: "flex", justifyContent: "end" }}
+        >
+          {checked && (
+            <Slide direction="up" in={checked} container={containerRef.current}>
+              {
+                <PreviewAddVirtualHealthCard
+                  addVirtualHealthLink={addVirtualHealthLinks}
+                />
+              }
+            </Slide>
+          )}
+        </Grid>
       </Grid>
-      <Box sx={{mx:2,marginTop:10}}>
-        <Typography variant="h3"> Virtual Health Links </Typography>
-      {/* render all virtual health links from database */}
-      {virtualhealthlinks.map((virtualhealthlink) =>
-        virtualhealthlink.id === resourceToEdit.id ? (
-          <EditVirtualHealthLinksAccordion key={virtualhealthlink.id} medLinkToEdit={virtualhealthlink} />
-        ) : (
-          <VirtualHealthAccordion key={virtualhealthlink.id} virtualhealthlink={virtualhealthlink} />
-        )
-      )}
+      <Box sx={{ mx: 2, marginTop: 10 }}>
+        <Typography variant="h3"> Virtual Health </Typography>
+        {/* render all virtual health links from database */}
+        {virtualhealthlinks.map((virtualhealthlink) =>
+          virtualhealthlink.id === resourceToEdit.id ? (
+            <EditVirtualHealthLinksAccordion
+              key={virtualhealthlink.id}
+              medLinkToEdit={virtualhealthlink}
+            />
+          ) : (
+            <VirtualHealthAccordion
+              key={virtualhealthlink.id}
+              virtualhealthlink={virtualhealthlink}
+            />
+          )
+        )}
       </Box>
     </Box>
   );
