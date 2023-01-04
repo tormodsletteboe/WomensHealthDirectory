@@ -9,6 +9,7 @@ import medicalLinksSaga from './medicalLinks.saga';
 import ageRangeSaga from './agerange.saga';
 import categoryDetailSaga from './categoryDetail.saga';
 import virtualHealthLinksSaga from './virtualHealthLinks.saga';
+import feedbackSaga from './feedback.saga';
 
 // rootSaga is the primary saga.
 // It bundles up all of the other sagas so our project can use them.
@@ -29,5 +30,6 @@ export default function* rootSaga() {
     medicalLinksSaga(),
     categoryDetailSaga(), //fetch category details
     virtualHealthLinksSaga(),
+    feedbackSaga(),
   ]);
 }
