@@ -7,10 +7,10 @@ function DiagnosticToolsCard ({diagTool}) {
         <>
         <Card sx={{ minWidth: 275, marginBottom: 2}}>
             <CardContent>
-                <Typography>
+                <Typography sx={{textAlign:'left'}}>
                     <b>{diagTool.name}</b>
                 </Typography>
-                <Typography>
+                <Typography sx={{textAlign:'left'}}>
                     {diagTool.info}
                 </Typography>
             </CardContent>

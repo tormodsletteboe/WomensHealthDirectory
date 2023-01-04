@@ -7,10 +7,10 @@ function FaqCard ({faq}) {
         <>
         <Card sx={{ minWidth: 275, marginBottom: 2}}>
             <CardContent>
-                <Typography>
+                <Typography sx={{textAlign:'left'}}>
                 <b>{faq.question}</b>
                 </Typography>
-                <Typography>
+                <Typography sx={{textAlign:'left'}}>
                 {faq.answer}
                 </Typography>
             </CardContent>

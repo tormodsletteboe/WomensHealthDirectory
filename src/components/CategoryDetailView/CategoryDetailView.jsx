@@ -149,7 +149,7 @@ function CategoryDetailView(){
                 <ListItem>
                     <Button 
                         variant = "contained"
-                        style={{backgroundColor: '#8EBBA7', color: 'black'}} 
+                        style={{backgroundColor: '#FFFFFF', color: 'black'}} 
                         component="a"
                         href={resource.link}
                         >{<div className="linkIcon">

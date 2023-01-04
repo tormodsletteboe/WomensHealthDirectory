@@ -8,22 +8,22 @@ function GuidelinesCard ({guideline}) {
         <>
         <Card sx={{ minWidth: 275, marginBottom: 2}}>
             <CardContent>
-                <Typography style = {{margin: '0.5rem'}}>
+                <Typography style = {{margin: '0.5rem'}} sx={{textAlign:'left'}}>
                     <b>Guideline: </b>
                 </Typography>
-                <Typography style = {{margin: '0.5rem'}}>
+                <Typography style = {{margin: '0.5rem'}} sx={{textAlign:'left'}}>
                     {guideline.name}
                 </Typography>
-                <Typography style = {{margin: '0.5rem'}}>
+                <Typography style = {{margin: '0.5rem'}} sx={{textAlign:'left'}}>
                     <b>Info: </b> 
                 </Typography>
-                <Typography style = {{margin: '0.5rem'}}>
+                <Typography style = {{margin: '0.5rem'}} sx={{textAlign:'left'}}>
                     {guideline.info}
                 </Typography>
-                <Typography style = {{margin: '0.5rem'}}>
+                <Typography style = {{margin: '0.5rem'}} sx={{textAlign:'left'}}>
                     <b>Grade:</b> {guideline.grade}
                 </Typography>
-                <Typography style = {{margin: '0.5rem'}}>
+                <Typography style = {{margin: '0.5rem'}} sx={{textAlign:'left'}}>
                     {/* TODO: format the date */}
                     <b>Last Updated:</b> {guideline.date}
                 </Typography>

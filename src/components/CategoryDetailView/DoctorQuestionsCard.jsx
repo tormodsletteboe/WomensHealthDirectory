@@ -7,7 +7,7 @@ function DoctorQuestionsCard ({question}) {
         <>
         <Card sx={{ minWidth: 275, marginBottom: 0}}>
             <CardContent>
-                <Typography>
+                <Typography sx={{textAlign:'left'}}>
                     {question.question}
                 </Typography>
             </CardContent>
