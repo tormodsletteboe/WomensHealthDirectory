@@ -3,9 +3,9 @@ import { put, takeLatest } from "redux-saga/effects";
 
 function* fetchNewsletter() {
     try {
-        let res = yield axios.get('/api/');
+        let res = yield axios.get('/api/newsletter');
 
-        yield put({ type:'SET_', payload: res.data });
+        yield put({ type:'SET_NEWSLETTER_EMAILS', payload: res.data });
     } catch (err) {
         console.log('Unable to fetch ___ from table', err);
     }
