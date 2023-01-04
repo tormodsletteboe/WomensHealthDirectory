@@ -182,7 +182,7 @@ function MedicalLinks() {
               get icons
             </Button>
           </Grid>
-          <Grid item xs={1.5} textAlign={"start"}>
+          <Grid item xs={1.5} textAlign={"end"}>
             <ToggleButton  onClick={handleChange} selected={checked}>
             <Tooltip title={checked ? "Close":"Preview"}>
                 <PhoneAndroidIcon />
@@ -193,7 +193,7 @@ function MedicalLinks() {
             <Button variant="contained" onClick={handleAddMedLink}>Add Medical Link</Button>
           </Grid>
         </Grid>
-        <Grid item xs={10} my={1} sx={{display:'flex',justifyContent:'end'}} >
+        <Grid item xs={11} my={1} sx={{display:'flex',justifyContent:'end'}} >
         {checked &&
         <Slide direction="up" in={checked} container={containerRef.current} >
           {<PreviewAddMedicalLinkCard addMedicalLink={addMedLinks} />}
