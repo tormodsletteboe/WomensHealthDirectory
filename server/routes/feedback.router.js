@@ -28,19 +28,41 @@ router.get('/avg', (req, res) => { // GET AVERAGE OF ALL RATINGS
     })
 })
 
-router.post('/', (req, res) => { // ADD NEW FEEDBACK
-  pool.query(`
-    INSERT INTO "feedback" ("rating", "comment", "user_id") VALUES ($1, $2, $3)
-    RETURNING "id";
-  `, [req.body.rating, req.body.comment, req.body.user_id])
-    .then(dbRes => {
-      console.log('---- Added new feedback row : ', dbRes.rows);
-      res.sendStatus(201);
-    })
-    .catch(error => {
-      console.log(error);
-      res.sendStatus(500);
-    })
+router.post('/', async (req, res) => {
+  // console.log('INSIDE FEEDBACK ROUTER POST :: ', req.body);
+
+  const client = await pool.connect();
+  const questions = req.body.questions;
+  const answers = req.body.answers;
+
+  try {
+    await client.query('BEGIN'); // start database stream
+
+    const newFeedbackID = await client.query(`
+      INSERT INTO "feedback" ("comment", "rating")
+      VALUES ($1, $2) RETURNING "id";
+    `, [req.body.comment, req.body.rating]);
+
+    await Promise.all(questions.map(async (question, i) => {
+      // console.log('IN QUESTIONS.MAP :: QUESTION, INDEX', question, i);
+      await client.query(`
+        INSERT INTO "feedback_q" ("question", "answer", "feedback_id")
+        VALUES ($1, $2, $3);
+      `, [question, answers[i+1], newFeedbackID.rows[0].id]);
+    }));
+
+    await client.query('COMMIT'); // if everything is as required
+    res.sendStatus(201);
+
+  } catch (err) {
+
+    await client.query('ROLLBACK'); // if something is missing
+    console.log('Unable to complete survey entry :: ', err);
+    res.sendStatus(500);
+
+  } finally {
+    client.release(); // stop the database stream
+  }
 });
 
 router.delete('/', (req, res) => { // DELETE FEEDBACK
