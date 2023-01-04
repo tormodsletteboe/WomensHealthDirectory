@@ -18,6 +18,7 @@ function AddEditForm() {
     const specificResources = useSelector(store => store.specificResources);
     const resourceToEdit = useSelector(store => store.resourceToEdit);
     const detailContent = useSelector(store => store.categoryDetail);
+    const columnNames = useSelector(store => store.columnNames);
 
     // update or add resource function
     function updateOrAddResource(evt) {
@@ -53,41 +54,46 @@ function AddEditForm() {
 
     return(
         <>
-        <form onSubmit={updateOrAddResource}
-            >
             {/* {addList(resourceToEdit)} */}
             <TableRow>
+            {/* <form> */}
             <TableCell align="center"><TextField 
                 multiline
+                label={columnNames[0]}
+                fullWidth={true}
                 value={resourceToEdit.field01}
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_FIELD',
                     payload: {field01: evt.target.value}
             })}/></TableCell>
-            {resourceToEdit.field02 && 
                 <TableCell>
                 <TextField 
                     multiline   
+                    fullWidth={true}
+                    label={columnNames[1]}
                     value={resourceToEdit.field02}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
                         payload: {field02: evt.target.value}
                 })}/></TableCell>
-            }
-            {resourceToEdit.field03 ? 
+            {Object.keys(resourceToEdit).length > 3 ? 
             <TableCell>
                 <TextField 
                 multiline
+                fullWidth={true}
+                label={columnNames[2]}
                     value={resourceToEdit.field03}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
                         payload: {field03: evt.target.value}
                 })}/></TableCell>
             : null}
-            {resourceToEdit.field04 ? 
+            {Object.keys(resourceToEdit).length > 4 ? 
                 <TableCell>
                 <TextField 
+                    label={columnNames[3]}
                     multiline
+                    fullWidth={true}
                     value={resourceToEdit.field04}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
@@ -101,12 +107,14 @@ function AddEditForm() {
                     </Button>
                 </TableCell>
                 <TableCell>
-                    <Button variant="contained" size="small" type="submit">
+                    <Button variant="contained" size="small" type="submit"
+                    onClick={updateOrAddResource}>
                         Save
                     </Button>
                 </TableCell>
+                {/* </form> */}
             </TableRow>
-        </form>
+        
         </>
     );
 }
