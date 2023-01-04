@@ -1,23 +1,25 @@
 import React, { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
+import axios from "axios";
 
 import TextField from "@mui/material/TextField";
 import Button from "@mui/material/Button";
-import axios from "axios";
-
 import Box from "@mui/material/Box";
-
 import Grid from "@mui/material/Grid";
-
 import Accordion from "@mui/material/Accordion";
 import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
+import { Typography } from "@mui/material";
+import Slide from '@mui/material/Slide';
+import ToggleButton from '@mui/material/ToggleButton';
+import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
+import Tooltip from '@mui/material/Tooltip';
 
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
+
 import "./MedicalLinks.css";
 import MedicalLinksAccordion from "./MedicalLinksAccordion";
 import EditMedicalLinksAccordion from './EditMedicalLinksAccordion';
-import { Typography } from "@mui/material";
+import PreviewAddMedicalLinkCard from "./PreviewAddMedicalLinkCard";
 
 function MedicalLinks() {
   const dispatch = useDispatch();
@@ -27,6 +29,15 @@ function MedicalLinks() {
 
   const [result, setResult] = useState([addMedLinks.logo_url]);
   const [selected, setSelected] = useState(addMedLinks.logo_url);
+
+  const [checked, setChecked] = React.useState(true);
+  const containerRef = React.useRef(null);
+  
+  
+
+  const handleChange = () => {
+    setChecked((prev) => !prev);
+  };
 
   const handleAddMedLink = () => {
    
@@ -41,13 +52,26 @@ function MedicalLinks() {
     });
 
     dispatch({type:'CLEAR_ADD_MEDICAL_LINKS'});
+    dispatch({
+      type: "SET_MEDICAL_TITLE",
+      payload: '',
+    });
+    dispatch({
+      type: "SET_MEDICAL_URL",
+      payload: '',
+    });
+    dispatch({
+      type: "SET_MEDICAL_DESCRIPTION",
+      payload: '',
+    });
+    setResult([]);
+    setSelected('');
+   
   };
 
   useEffect(() => {
-    console.log("medical links useeffect ran");
     //fetch all medical links from database
     //dispatch someting
-
     dispatch({ type: "FETCH_MEDICAL_LINKS" });
   }, []);
 
@@ -80,6 +104,7 @@ function MedicalLinks() {
                         payload: event.target.value,
                       })
                     }
+                    sx={{justifyContent: 'start'}}
                   />
                 </Grid>
                 <Grid item xs={7} className="centerthis">
@@ -102,7 +127,7 @@ function MedicalLinks() {
               <Grid item xs={11}>
                 <TextField
                   variant="outlined"
-                  label="description"
+                  label="Description"
                   fullWidth
                   multiline
                   maxRows={4}
@@ -119,7 +144,7 @@ function MedicalLinks() {
           </Accordion>
         </Grid>
         <Grid container>
-          <Grid item xs={2}>
+          <Grid item xs={1.8}>
             <select
               className="dropdown"
               defaultValue={result[0]}
@@ -139,27 +164,41 @@ function MedicalLinks() {
               ))}
             </select>
           </Grid>
-          <Grid item xs={5}>
+          <Grid item xs={7.2}>
             <Button
-            sx={{color:'#8EBBA7'}}
+            
               onClick={async () => {
                 const url = new URL(addMedLinks.url);
-                console.log(url.hostname);
+                
                 const result = await axios.get(
                   `https://favicongrabber.com/api/grab/${url.hostname}`
                 );
                 setResult(result.data.icons.map((icon) => icon.src));
-                console.log(result.data.icons.map((icon) => icon.src));
+                
               }}
             >
               get icons
             </Button>
           </Grid>
-          <Grid item xs={5} textAlign={"end"}>
+          <Grid item xs={1.5} textAlign={"end"}>
+            <ToggleButton  onClick={handleChange} selected={checked}>
+            <Tooltip title={checked ? "Close":"Preview"}>
+                <PhoneAndroidIcon />
+              </Tooltip>
+            </ToggleButton>
+          </Grid>
+          <Grid item xs={1.5} textAlign={"end"}>
             <Button variant="contained" onClick={handleAddMedLink}>Add Medical Link</Button>
           </Grid>
         </Grid>
+        <Grid item xs={11} my={1} sx={{display:'flex',justifyContent:'end'}} >
+        {checked &&
+        <Slide direction="up" in={checked} container={containerRef.current} >
+          {<PreviewAddMedicalLinkCard addMedicalLink={addMedLinks} />}
+        </Slide>}
+        </Grid>
       </Grid>
+      
       <Box sx={{mx:2,marginTop:10}}>
         <Typography variant="h3"> Medical Links </Typography>
       {/* render all medical links from database */}
