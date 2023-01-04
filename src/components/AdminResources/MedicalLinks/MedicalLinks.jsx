@@ -11,6 +11,10 @@ import AccordionDetails from "@mui/material/AccordionDetails";
 import AccordionSummary from "@mui/material/AccordionSummary";
 import { Typography } from "@mui/material";
 import Slide from '@mui/material/Slide';
+import ToggleButton from '@mui/material/ToggleButton';
+import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
+import Tooltip from '@mui/material/Tooltip';
+
 
 import "./MedicalLinks.css";
 import MedicalLinksAccordion from "./MedicalLinksAccordion";
@@ -29,6 +33,8 @@ function MedicalLinks() {
 
   const [checked, setChecked] = React.useState(true);
   const containerRef = React.useRef(null);
+  
+  
 
   const handleChange = () => {
     setChecked((prev) => !prev);
@@ -177,7 +183,11 @@ function MedicalLinks() {
             </Button>
           </Grid>
           <Grid item xs={1.5} textAlign={"start"}>
-            <Button  onClick={handleChange}>Preview</Button>
+            <ToggleButton  onClick={handleChange} selected={checked}>
+            <Tooltip title={checked ? "Close":"Preview"}>
+                <PhoneAndroidIcon />
+              </Tooltip>
+            </ToggleButton>
           </Grid>
           <Grid item xs={1.5} textAlign={"end"}>
             <Button variant="contained" onClick={handleAddMedLink}>Add Medical Link</Button>

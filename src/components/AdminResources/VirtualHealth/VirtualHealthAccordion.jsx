@@ -7,7 +7,7 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import { Typography } from "@mui/material";
 import Button from "@mui/material/Button";
-
+import Swal from "sweetalert2";
 
 function VirtualHealthAccordion({  virtualhealthlink }) {
   //   const store = useSelector((store) => store);
@@ -47,7 +47,22 @@ function VirtualHealthAccordion({  virtualhealthlink }) {
         >
           Edit
         </Button>
-        <Button onClick={()=>dispatch({type:'DELETE_VIRTUALHEALTH_LINK', payload:virtualhealthlink.id})}>Delete</Button>
+        <Button onClick={()=>{
+          Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+          }).then((result) => {
+            if (result.isConfirmed) {
+              dispatch({type:'DELETE_VIRTUALHEALTH_LINK', payload:virtualhealthlink.id})
+            }
+          })
+          
+          }}>Delete</Button>
         </Grid>
       </AccordionDetails>
     </Accordion>

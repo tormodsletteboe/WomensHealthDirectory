@@ -9,10 +9,11 @@ import AccordionSummary from "@mui/material/AccordionSummary";
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import Button from "@mui/material/Button";
 import TextField from "@mui/material/TextField";
-import Slide from '@mui/material/Slide';
+import Slide from "@mui/material/Slide";
 import PreviewMedicalLinkCard from "./PreviewMedicalLinkCard";
-
-
+import Tooltip from "@mui/material/Tooltip";
+import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
+import ToggleButton from "@mui/material/ToggleButton";
 
 function EditMedicalLinksAccordion() {
   //   const store = useSelector((store) => store);
@@ -22,8 +23,7 @@ function EditMedicalLinksAccordion() {
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
- 
- 
+
   const dispatch = useDispatch();
   const resourceToEdit = useSelector((store) => store.resourceToEdit);
   const [selected, setSelected] = useState(resourceToEdit.logo_url);
@@ -31,11 +31,9 @@ function EditMedicalLinksAccordion() {
   let imgpath = "./images/vifidefault.jpeg";
   let noImagePath = "";
 
-//console.log("resource to edit", medLinkToEdit);
+  //console.log("resource to edit", medLinkToEdit);
 
   function updateResource(evt) {
-    
-    
     console.log("resource to edit", resourceToEdit);
 
     //update the database with edited info
@@ -46,7 +44,7 @@ function EditMedicalLinksAccordion() {
         name: resourceToEdit.name,
         link: resourceToEdit.link,
         logo_url: selected,
-        description: resourceToEdit.description
+        description: resourceToEdit.description,
       },
     });
     dispatch({ type: "SET_RESOURCE_TO_EDIT", payload: {} });
@@ -54,8 +52,7 @@ function EditMedicalLinksAccordion() {
   return (
     <Grid container>
       <Grid item xs={12} my={1}>
-        <Accordion
-        expanded>
+        <Accordion expanded>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Grid container columnSpacing={1}>
               <Grid item xs={1} className="centerthis">
@@ -73,7 +70,6 @@ function EditMedicalLinksAccordion() {
                       payload: { name: e.target.value },
                     })
                   }
-                  
                 />
               </Grid>
               <Grid item xs={7} className="centerthis">
@@ -84,9 +80,9 @@ function EditMedicalLinksAccordion() {
                   value={resourceToEdit.link}
                   onChange={(e) =>
                     dispatch({
-                        type: "UPDATE_FIELD",
-                        payload: { link: e.target.value },
-                      })
+                      type: "UPDATE_FIELD",
+                      payload: { link: e.target.value },
+                    })
                   }
                 />
               </Grid>
@@ -102,10 +98,10 @@ function EditMedicalLinksAccordion() {
                 maxRows={4}
                 value={resourceToEdit.description}
                 onChange={(e) =>
-                    dispatch({
-                        type: "UPDATE_FIELD",
-                        payload: { description: e.target.value },
-                      })
+                  dispatch({
+                    type: "UPDATE_FIELD",
+                    payload: { description: e.target.value },
+                  })
                 }
               />
             </Grid>
@@ -126,12 +122,15 @@ function EditMedicalLinksAccordion() {
             <option disabled>Choose One</option>
             <option>{noImagePath}</option>
             <option>{imgpath}</option>
-            {result.map((icon) => (
-               icon == resourceToEdit.logo_url ?
-               <option selected value={icon}>{icon}</option>
-               :
-               <option value={icon}>{icon}</option>
-            ))}
+            {result.map((icon) =>
+              icon == resourceToEdit.logo_url ? (
+                <option selected value={icon}>
+                  {icon}
+                </option>
+              ) : (
+                <option value={icon}>{icon}</option>
+              )
+            )}
           </select>
         </Grid>
         <Grid item xs={6.9}>
@@ -150,9 +149,13 @@ function EditMedicalLinksAccordion() {
           </Button>
         </Grid>
         <Grid item xs={1} textAlign={"start"}>
-            <Button  onClick={handleChange}>Preview</Button>
-          </Grid>
-       
+          <ToggleButton onClick={handleChange} selected={checked}>
+            <Tooltip title={checked ? "Close":"Preview"} placement="top">
+              <PhoneAndroidIcon />
+            </Tooltip>
+          </ToggleButton>
+        </Grid>
+
         <Grid item xs={1} textAlign="end">
           <Button
             onClick={() =>
@@ -165,11 +168,17 @@ function EditMedicalLinksAccordion() {
         <Grid item xs={1.5} textAlign={"end"}>
           <Button onClick={updateResource}>Update Medical Link</Button>
         </Grid>
-        <Grid item xs={10} my={1} sx={{display:'flex',justifyContent:'end'}} >
-        {checked &&
-        <Slide direction="up" in={checked} container={containerRef.current} >
-          {<PreviewMedicalLinkCard medicallink={resourceToEdit} />}
-        </Slide>}
+        <Grid
+          item
+          xs={10}
+          my={1}
+          sx={{ display: "flex", justifyContent: "end" }}
+        >
+          {checked && (
+            <Slide direction="up" in={checked} container={containerRef.current}>
+              {<PreviewMedicalLinkCard medicallink={resourceToEdit} />}
+            </Slide>
+          )}
         </Grid>
       </Grid>
     </Grid>
