@@ -160,7 +160,7 @@ function MedicalLinks() {
               ))}
             </select>
           </Grid>
-          <Grid item xs={1}>
+          <Grid item xs={7.4}>
             <Button
             sx={{color:'#8EBBA7'}}
               onClick={async () => {
@@ -176,14 +176,14 @@ function MedicalLinks() {
               get icons
             </Button>
           </Grid>
-          <Grid item xs={2.4} textAlign={"start"}>
+          <Grid item xs={1.5} textAlign={"end"}>
             <Button  onClick={handleChange}>Preview</Button>
           </Grid>
-          <Grid item xs={7} textAlign={"end"}>
+          <Grid item xs={1.5} textAlign={"end"}>
             <Button variant="contained" onClick={handleAddMedLink}>Add Medical Link</Button>
           </Grid>
         </Grid>
-        <Grid item xs={5.5} my={1} sx={{display:'flex',justifyContent:'end'}} >
+        <Grid item xs={10} my={1} sx={{display:'flex',justifyContent:'end'}} >
         {checked &&
         <Slide direction="up" in={checked} container={containerRef.current} >
           {<PreviewAddMedicalLinkCard addMedicalLink={addMedLinks} />}

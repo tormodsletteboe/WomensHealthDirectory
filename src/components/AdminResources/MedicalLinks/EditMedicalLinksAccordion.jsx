@@ -134,7 +134,7 @@ function EditMedicalLinksAccordion() {
             ))}
           </select>
         </Grid>
-        <Grid item xs={1}>
+        <Grid item xs={6.9}>
           <Button
             onClick={async () => {
               const url = new URL(resourceToEdit.link);
@@ -149,7 +149,7 @@ function EditMedicalLinksAccordion() {
             get icons
           </Button>
         </Grid>
-        <Grid item xs={6.9} textAlign={"start"}>
+        <Grid item xs={1} textAlign={"start"}>
             <Button  onClick={handleChange}>Preview</Button>
           </Grid>
        
@@ -165,7 +165,7 @@ function EditMedicalLinksAccordion() {
         <Grid item xs={1.5} textAlign={"end"}>
           <Button onClick={updateResource}>Update Medical Link</Button>
         </Grid>
-        <Grid item xs={5.5} my={1} sx={{display:'flex',justifyContent:'end'}} >
+        <Grid item xs={10} my={1} sx={{display:'flex',justifyContent:'end'}} >
         {checked &&
         <Slide direction="up" in={checked} container={containerRef.current} >
           {<PreviewMedicalLinkCard medicallink={resourceToEdit} />}
