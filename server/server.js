@@ -37,7 +37,6 @@ app.use('/api/preventativecare', preventativecareRouter);
 app.use('/api/agerange', ageRangeRouter);
 app.use('/api/newsletter', newsletterRouter);
 app.use('/api/adminprevcare/specificresources', specificResourcesRouter);
-app.use('/api/newsletter', newsletterRouter);
 
 app.use('/api/medicallinks',medicalLinksRouter);
 app.use('/api/virtualhealthlinks',virtualHealthLinksRouter);

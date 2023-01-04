@@ -12,6 +12,7 @@ import selectedHealthCategory from './selectedHealthCategory';
 import medicallinks from './medicallinks.reducer';
 import virtualhealth_links from './virtualhealthlinks.reducer';
 import addVirtualHealthLinks from './addvirtualhealthlinks.reducer';
+import columnNames from './columnNames.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -33,6 +34,7 @@ const rootReducer = combineReducers({
   selectedHealthCategory,
   virtualhealth_links,
   addVirtualHealthLinks,
+  columnNames,
 });
 
 export default rootReducer;
