@@ -3,3 +3,13 @@
     margin: 1rem;
 }
 
+a {
+    text-decoration: none;
+    color: inherit;
+}
+
+svg {
+    margin: 1rem;
+}
+
+

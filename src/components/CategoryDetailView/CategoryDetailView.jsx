@@ -8,6 +8,8 @@ import Typography from '@mui/material/Typography';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
+import Button from '@mui/material/Button';
+import OpenInNew from '@mui/icons-material/OpenInNew';
 import './CategoryDetailView.css';
 
 
@@ -94,7 +96,7 @@ function CategoryDetailView(){
         <AccordionDetails>
         {categoryDetails.diagTools && categoryDetails.diagTools.map((diagTool) => (
             <List key={diagTool.id} style={{backgroundColor: '#FFFFFF'}}>
-                <ListItem>{diagTool.name}</ListItem>
+                <ListItem><b>{diagTool.name}</b></ListItem>
                 <ListItem>{diagTool.info}</ListItem>
             </List>
         ))}
@@ -113,7 +115,7 @@ function CategoryDetailView(){
         <AccordionDetails>
         {categoryDetails.faqs && categoryDetails.faqs.map((faq) => (
             <List key={faq.id} style={{backgroundColor: '#FFFFFF'}}>
-                <ListItem>{faq.question}</ListItem>
+                <ListItem><b>{faq.question}</b></ListItem>
                 <ListItem>{faq.answer}</ListItem>
             </List>
         ))}
@@ -148,7 +150,15 @@ function CategoryDetailView(){
         <AccordionDetails>
         {specificresources && specificresources.map((resource) => (
             <List key={resource.id} style={{backgroundColor: '#FFFFFF'}}>
-                <ListItem><a href={resource.link}>{resource.name}</a></ListItem>
+                <ListItem>
+                    <Button 
+                        variant = "contained"
+                        style={{backgroundColor: '#8EBBA7', color: '#FFFFFF'}} 
+                        component="a"
+                        href={resource.link}
+                        >{<OpenInNew />}{resource.name}
+                    </Button>
+                </ListItem>
             </List>
         ))}
         </AccordionDetails>
