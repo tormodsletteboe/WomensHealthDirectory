@@ -1,10 +1,14 @@
 p {
   margin: 1rem;
-  text-align: center;
+  text-align: left;
 }
 
 footer {
   position: relative;
+}
+
+.copyright, .footerTitle {
+  text-align: center;
 }
 
 
