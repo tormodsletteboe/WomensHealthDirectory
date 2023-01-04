@@ -33,7 +33,7 @@ router.get('/:catId/ages/:ageId', rejectUnauthenticated, async (req, res) => {
     let guidelinesSQLText = `SELECT ("name"), ("info"), ("grade"), ("date"), ("id") FROM "guidelines"
     WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
 
-    let drQuestionsSQLText = `SELECT ("question"), ("id") FROM "doctor_questions"
+    let drQuestionsSQLText = `SELECT ("question_category"), ("question"), ("id") FROM "doctor_questions"
     WHERE "health_category_id" = $1 AND "age_range_id"=$2;`;
 
     // Get category details

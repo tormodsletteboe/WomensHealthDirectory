@@ -44,6 +44,7 @@ function CategoryDetailView(){
     let categoryDetails = useSelector((store)=>{
         return store.categoryDetail;
     })
+    console.log('categoryDetails is', categoryDetails);
 
     let specificresources = useSelector((store)=>{
         return store.specificResources;
