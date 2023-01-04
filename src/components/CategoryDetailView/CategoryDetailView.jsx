@@ -14,6 +14,7 @@ import './CategoryDetailView.css';
 import FaqCard from './FaqCard';
 import DiagnosticToolsCard from './DiagnosticToolsCard';
 import GuidelinesCard from './GuidelinesCard';
+import DoctorQuestionsCard from './DoctorQuestionsCard';
 import * as React from 'react';
 
 
@@ -121,11 +122,16 @@ function CategoryDetailView(){
           <Typography>Questions to Ask Your Doctor</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        {categoryDetails.drQuestions && categoryDetails.drQuestions.map((question) => (
-            <List key={question.id} style={{backgroundColor: '#FFFFFF'}}>
-                <ListItem>{question.question}</ListItem>
-            </List>
-        ))}
+
+        <ul style={{padding:0}} >
+              {categoryDetails.drQuestions && categoryDetails.drQuestions.map((question) => (
+
+                  <li key={question.id} style={{backgroundColor: '#FFFFFF'}}>
+                    <DoctorQuestionsCard question={question} />
+                  </li>
+                ))}
+        </ul>
+
         </AccordionDetails>
       </Accordion>
 
@@ -143,7 +149,7 @@ function CategoryDetailView(){
                 <ListItem>
                     <Button 
                         variant = "contained"
-                        style={{backgroundColor: '#8EBBA7', color: '#FFFFFF'}} 
+                        style={{backgroundColor: '#8EBBA7', color: 'black'}} 
                         component="a"
                         href={resource.link}
                         >{<div className="linkIcon">
