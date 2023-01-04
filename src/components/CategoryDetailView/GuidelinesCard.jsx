@@ -2,6 +2,8 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
+import { format } from 'date-fns';
+
 
 function GuidelinesCard ({guideline}) {
     return (
@@ -27,7 +29,7 @@ function GuidelinesCard ({guideline}) {
                     <b>Last Updated:</b>
                 </Typography>
                 <Typography>
-                    {guideline.date}
+                    {guideline.date.toLocaleDateString()}
                 </Typography>
             </CardContent>
         </Card>
