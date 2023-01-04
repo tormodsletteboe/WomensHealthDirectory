@@ -2,35 +2,32 @@
 import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Typography from '@mui/material/Typography';
-import { format } from 'date-fns';
-
 
 function GuidelinesCard ({guideline}) {
     return (
         <>
         <Card sx={{ minWidth: 275, marginBottom: 2}}>
             <CardContent>
-                <Typography>
-                    <b>Guideline Name: </b>
+                <Typography style = {{margin: '0.5rem'}}>
+                    <b>Guideline: </b>
                 </Typography>
-                <Typography>
+                <Typography style = {{margin: '0.5rem'}}>
                     {guideline.name}
                 </Typography>
-                <Typography>
+                <Typography style = {{margin: '0.5rem'}}>
                     <b>Info: </b> 
                 </Typography>
-                <Typography>
+                <Typography style = {{margin: '0.5rem'}}>
                     {guideline.info}
                 </Typography>
-                <Typography>
+                <Typography style = {{margin: '0.5rem'}}>
                     <b>Grade:</b> {guideline.grade}
                 </Typography>
-                <Typography>
-                    <b>Last Updated:</b>
+                <Typography style = {{margin: '0.5rem'}}>
+                    {/* TODO: format the date */}
+                    <b>Last Updated:</b> {guideline.date}
                 </Typography>
-                <Typography>
-                    {guideline.date.toLocaleDateString()}
-                </Typography>
+        
             </CardContent>
         </Card>
         </>
