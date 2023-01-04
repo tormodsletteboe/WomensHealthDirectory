@@ -12,6 +12,8 @@ import Button from '@mui/material/Button';
 import OpenInNew from '@mui/icons-material/OpenInNew';
 import './CategoryDetailView.css';
 import FaqCard from './FaqCard';
+import DiagnosticToolsCard from './DiagnosticToolsCard';
+import GuidelinesCard from './GuidelinesCard';
 import * as React from 'react';
 
 
@@ -51,7 +53,6 @@ function CategoryDetailView(){
     
     return(
     <>
-
 <div className="accordion">
       <Accordion style={{backgroundColor: '#8EBBA7'}}>
         <AccordionSummary
@@ -62,28 +63,14 @@ function CategoryDetailView(){
           <Typography>Guidelines</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        {categoryDetails.guidelines && categoryDetails.guidelines.map((guideline) => (
-        <List  key={guideline.id}>
-            <ListItem>
-                <b>Guideline Name: </b> 
-                {guideline.name}
-            </ListItem>
-            <ListItem>
-                <b>Info: </b> 
-            </ListItem>
-            <ListItem>
-            {guideline.info}
-            </ListItem>
-            <ListItem>
-                <b>Grade: </b>
-                {guideline.grade}
-            </ListItem>
-            <ListItem>
-                <b>Last Updated: </b>
-                {guideline.date}
-            </ListItem>
-        </List>
-        ))}                           
+        <ul style={{padding:0}} >
+          {categoryDetails.guidelines && categoryDetails.guidelines.map((guideline) => (
+                  <li key={guideline.id} style={{backgroundColor: '#FFFFFF'}}>
+                    <GuidelinesCard guideline = {guideline} /> 
+                  </li>
+                ))}
+        </ul>
+                                
         </AccordionDetails>
       </Accordion>
 
@@ -96,13 +83,13 @@ function CategoryDetailView(){
           <Typography>Diagnostic Tools</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        {categoryDetails.diagTools && categoryDetails.diagTools.map((diagTool) => (
-            <List key={diagTool.id} style={{backgroundColor: '#FFFFFF'}}>
-                <ListItem><b>{diagTool.name}</b></ListItem>
-                <ListItem>{diagTool.info}</ListItem>
-            </List>
-        ))}
-
+        <ul style={{padding:0}} >
+            {categoryDetails.diagTools && categoryDetails.diagTools.map((diagTool) => (
+                  <li key={diagTool.id} style={{backgroundColor: '#FFFFFF'}}>
+                    <DiagnosticToolsCard diagTool = {diagTool}/>
+                  </li>
+                ))}
+          </ul>
         </AccordionDetails>
       </Accordion>
 
@@ -115,13 +102,13 @@ function CategoryDetailView(){
           <Typography>FAQs</Typography>
         </AccordionSummary>
         <AccordionDetails>
-        <ul style={{padding:0}} >
-        {categoryDetails.faqs && categoryDetails.faqs.map((faq) => (
-          <li key={faq.id} style={{backgroundColor: '#FFFFFF'}}>
-            <FaqCard faq={faq} />
-          </li>
-        ))}
-      </ul>
+          <ul style={{padding:0}} >
+                {categoryDetails.faqs && categoryDetails.faqs.map((faq) => (
+                  <li key={faq.id} style={{backgroundColor: '#FFFFFF'}}>
+                    <FaqCard faq={faq} />
+                  </li>
+                ))}
+          </ul>
       </AccordionDetails>
       </Accordion>
 
