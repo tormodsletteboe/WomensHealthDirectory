@@ -59,7 +59,6 @@ CREATE TABLE "feedback" (
 	"id" serial NOT NULL,
 	"rating" int NOT NULL,
 	"comment" varchar(255) NOT NULL,
-	"user_id" int NOT NULL UNIQUE,
 	CONSTRAINT "feedback_pk" PRIMARY KEY ("id")
 ) WITH (
   OIDS=FALSE
@@ -172,7 +171,6 @@ CREATE TABLE "guidelines" (
 
 
 
-ALTER TABLE "feedback" ADD CONSTRAINT "feedback_fk0" FOREIGN KEY ("user_id") REFERENCES "user"("id");
 
 ALTER TABLE "faq" ADD CONSTRAINT "faq_fk0" FOREIGN KEY ("health_category_id") REFERENCES "health_category"("id");
 ALTER TABLE "faq" ADD CONSTRAINT "faq_fk1" FOREIGN KEY ("age_range_id") REFERENCES "age_range"("id");
