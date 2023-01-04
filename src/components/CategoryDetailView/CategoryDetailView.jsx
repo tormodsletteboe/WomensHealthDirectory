@@ -156,7 +156,10 @@ function CategoryDetailView(){
                         style={{backgroundColor: '#8EBBA7', color: '#FFFFFF'}} 
                         component="a"
                         href={resource.link}
-                        >{<OpenInNew />}{resource.name}
+                        >{<div className="linkIcon">
+                            <OpenInNew />
+                          </div>}
+                          {resource.name}
                     </Button>
                 </ListItem>
             </List>
