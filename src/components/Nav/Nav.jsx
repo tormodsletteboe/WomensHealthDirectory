@@ -38,7 +38,7 @@ function Nav() {
 
   const handleJoin = () => {
     console.log("in handleJoin");
-    history.push("/membership");
+    history.push("/registration");
   };
 
   return (
