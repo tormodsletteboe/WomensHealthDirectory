@@ -11,6 +11,8 @@ import ListItem from '@mui/material/ListItem';
 import Button from '@mui/material/Button';
 import OpenInNew from '@mui/icons-material/OpenInNew';
 import './CategoryDetailView.css';
+import FaqCard from './FaqCard';
+import * as React from 'react';
 
 
 function CategoryDetailView(){
@@ -113,13 +115,14 @@ function CategoryDetailView(){
           <Typography>FAQs</Typography>
         </AccordionSummary>
         <AccordionDetails>
+        <ul style={{padding:0}} >
         {categoryDetails.faqs && categoryDetails.faqs.map((faq) => (
-            <List key={faq.id} style={{backgroundColor: '#FFFFFF'}}>
-                <ListItem><b>{faq.question}</b></ListItem>
-                <ListItem>{faq.answer}</ListItem>
-            </List>
+          <li key={faq.id} style={{backgroundColor: '#FFFFFF'}}>
+            <FaqCard faq={faq} />
+          </li>
         ))}
-        </AccordionDetails>
+      </ul>
+      </AccordionDetails>
       </Accordion>
 
       <Accordion style={{backgroundColor: '#8EBBA7'}}>
