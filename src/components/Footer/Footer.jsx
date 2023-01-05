@@ -48,16 +48,6 @@ const user = useSelector((store) => store.user);
          </p>
          </footer>
     )}
-
-    {/* if the user is an admin, display the copyright instead */}
-    {user.access_level === 1 && (
-    <footer>
-       <p className = "copyright">
-         Register now to access our healthcare pro tips.
-         &copy; The Vifi
-     </p>
-     </footer>      
-    )}
   </>
   );
 }

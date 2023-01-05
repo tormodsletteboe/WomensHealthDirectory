@@ -3,10 +3,8 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => { // GET ALL FEEDBACK: RATINGS + COMMENTS
-  // SELECT * FROM "feedback" ORDER BY "id" ASC;
-  pool.query(`
-     
-  `)
+    let commentsAndRatingsSqlText = ``;
+ 
     .then(dbRes => {
       res.send(dbRes.rows);
     })
