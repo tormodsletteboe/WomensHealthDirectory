@@ -78,9 +78,6 @@ function AdminFeedbackView() {
         </AccordionDetails>
       </Accordion>
 
-   
-
-
       <Accordion style= {{width: '80%'}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
