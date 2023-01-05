@@ -5,10 +5,10 @@ function* fetchUserFeedback() {
 try {
 
     const response = yield axios.get('/api/feedback');
-    // console.log('response.data is', response.data);
+    console.log('response.data is', response.data);
 
     yield put({ 
-        type: 'FETCH_USER_FEEDBACK',
+        type: 'SET_USER_FEEDBACK',
         payload: response.data
 });
 

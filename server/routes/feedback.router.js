@@ -3,8 +3,9 @@ const pool = require('../modules/pool');
 const router = express.Router();
 
 router.get('/', (req, res) => { // GET ALL FEEDBACK: RATINGS + COMMENTS
+  // SELECT * FROM "feedback" ORDER BY "id" ASC;
   pool.query(`
-    SELECT * FROM "feedback" ORDER BY "id" ASC;
+     
   `)
     .then(dbRes => {
       res.send(dbRes.rows);
@@ -14,6 +15,7 @@ router.get('/', (req, res) => { // GET ALL FEEDBACK: RATINGS + COMMENTS
       res.sendStatus(500);
     })
 });
+
 
 router.get('/avg', (req, res) => { // GET AVERAGE OF ALL RATINGS
   pool.query(`
