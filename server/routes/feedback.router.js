@@ -2,18 +2,39 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-router.get('/', (req, res) => { // GET ALL FEEDBACK: RATINGS + COMMENTS
-    let commentsAndRatingsSqlText = ``;
- 
-    .then(dbRes => {
-      res.send(dbRes.rows);
-    })
-    .catch(error => {
-      console.log(error);
-      res.sendStatus(500);
-    })
-});
 
+router.get('/', async (req, res) => { // GET ALL FEEDBACK: RATINGS + COMMENTS
+    let commentsAndRatingsSqlText = `
+    SELECT "feedback"."comment", "feedback"."rating" FROM "feedback";
+    `;
+
+    let questionAndAnswerSqlText = `
+    SELECT "feedback_q"."question", json_agg(("feedback_q"."answer")) FROM "feedback_q"
+    GROUP BY "feedback_q"."question";
+    `;
+
+    try{
+
+    //Get comments and ratings response
+    let commentsAndRatingsRes = await pool.query(commentsAndRatingsSqlText, [req.params.id]);
+    console.log('comments and ratings res is', commentsAndRatingsRes);
+
+    //Get questions and answers
+    let questionAndAnswerRes = await pool.query(questionAndAnswerSqlText, [req.params.id]);
+    console.log('question and answer res is', questionAndAnswerRes);
+
+    let apiRes = {
+        commentsAndRatings: commentsAndRatingsRes.rows,
+        questionsAndAnswers: questionAndAnswerRes.rows
+    }
+    res.send(apiRes);
+
+    }catch (err) {
+        console.log('Error with fetching comments, ratings, questions, and answers', err);
+        res.sendStatus(500);
+    }
+})
+    
 
 router.get('/avg', (req, res) => { // GET AVERAGE OF ALL RATINGS
   pool.query(`
