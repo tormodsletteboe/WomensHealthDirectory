@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { CSVLink } from "react-csv";
 
-import { Button, Stack, Typography, List, ListItem, Divider } from '@mui/material';
+import { Button, Stack, Typography, List, ListItem, Divider, Box } from '@mui/material';
 
 function AdminLandingPage() {
     // hooks
@@ -27,16 +27,30 @@ function AdminLandingPage() {
 
 	return (
 		<>
-
 			<Typography component="h1" variant="h3">Welcome, Laina!</Typography>
-			<Stack spacing={2}>
+			<Box m='auto' display='flex' 
+			alignItems="center" justifyContent="center"
+			flexDirection="column">
 				{ isClicked === true ?
-				<List>
-					<Button variant="contained" color="primary"
+
+					<Button variant="contained" color="primary" 
+					sx={{width: '400px'}}
 					onClick={handleEmailClick}
 					> 
 						Close Newsletter Sign-up Emails
 					</Button>
+				:
+				
+					<Button variant="contained" color="primary"
+					sx={{width: '400px'}}
+					onClick={handleEmailClick}
+					> 
+						View Newsletter Sign-up Emails
+					</Button> 
+				
+				}
+				{ isClicked === true ?
+				<List>
 				{ newsletterEmails.map(x => (
 					<>
 					<ListItem key={x.id}>{x.email}</ListItem>
@@ -44,23 +58,20 @@ function AdminLandingPage() {
 					</>
 				))}
 				</List>
-				:
-					<Button variant="contained" color="primary"
-					onClick={handleEmailClick}
-					> 
-						View Newsletter Sign-up Emails
-					</Button> 
-				}
-				<Button variant="contained" color="primary">
-					<CSVLink 
-						data={newsletterEmails} 
-						headers={headers} 
-						filename={"newsletter-emails.csv"}
-					>
-					Download Newsletter Emails Addresses
-					</CSVLink>
-				</Button>
-			</Stack>
+				: null }
+				
+					<Button variant="contained" color="primary" 
+					sx={{width: '400px'}}>
+						<CSVLink 
+							data={newsletterEmails} 
+							headers={headers} 
+							filename={"newsletter-emails.csv"}
+						>
+						Download Newsletter Emails Addresses
+						</CSVLink>
+					</Button>
+				
+			</Box>
 		</>
 	);
 }
