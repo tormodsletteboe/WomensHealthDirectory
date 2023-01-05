@@ -25,7 +25,7 @@ function RegisterForm() {
       },
     });
   }; // end registerUser
-
+//TODO: this is where I am wednesday night styling register form
   return (
     <form className="formPanel" onSubmit={registerUser}>
       <h2>Register User</h2>
