@@ -4,14 +4,8 @@ const router = express.Router();
 
 
 router.get('/', async (req, res) => { // GET ALL FEEDBACK: RATINGS + COMMENTS
-    let commentSqlText = `
-
-    SELECT "feedback"."comment" FROM "feedback";
-    `;
-
-    let ratingSqlText = `
-    SELECT "feedback"."rating" FROM "feedback";
-
+    let commentsAndRatingsSqlText = `
+    SELECT "feedback"."id", "feedback"."comment", "feedback"."rating" FROM "feedback";
     `;
 
     let questionAndAnswerSqlText = `
@@ -22,19 +16,15 @@ router.get('/', async (req, res) => { // GET ALL FEEDBACK: RATINGS + COMMENTS
     try{
 
     //Get comments and ratings response
-    let commentsRes = await pool.query(commentSqlText);
-    console.log('comments res is', commentsRes);
-
-    let ratingsRes = await pool.query(ratingSqlText);
-    console.log('ratings res is', ratingsRes);
+    let commentsAndRatingsRes = await pool.query(commentsAndRatingsSqlText);
+    console.log('comments and ratings res is', commentsAndRatingsRes);
 
     //Get questions and answers
     let questionAndAnswerRes = await pool.query(questionAndAnswerSqlText);
     console.log('question and answer res is', questionAndAnswerRes);
 
     let apiRes = {
-        commentsRes: commentsRes.rows,
-        ratingsRes: ratingsRes.rows,
+        commentsAndRatings: commentsAndRatingsRes.rows,
         questionsAndAnswers: questionAndAnswerRes.rows
     }
     res.send(apiRes);

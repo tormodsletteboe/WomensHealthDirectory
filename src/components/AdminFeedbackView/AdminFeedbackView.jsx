@@ -22,13 +22,13 @@ function AdminFeedbackView() {
     }, []);
 
     const feedback = useSelector((store)=> {
-        //render feedback here
+        return store.feedback;
     })
-
-
+    console.log('feedback is', feedback);
 
     return(
       <>
+      <h1>User Feedback</h1>
       <div>
       <Accordion style= {{width: '80%'}}>
         <AccordionSummary
@@ -36,22 +36,58 @@ function AdminFeedbackView() {
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography>Accordion 1</Typography>
+        <Typography>Comments and Overall Rating</Typography>
         </AccordionSummary>
         <AccordionDetails>
-          <Typography>
-            Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse
-            malesuada lacus ex, sit amet blandit leo lobortis eget.
-          </Typography>
+          <TableContainer height= '90%'>
+            <Table>
+                <TableHead>
+                    <TableRow>
+                        <TableCell>Comments</TableCell>
+                        <TableCell>Overall Rating</TableCell>
+                    </TableRow>
+                </TableHead>
+                <TableBody>
+                {!Object.keys(feedback).length === 0 && feedback.map(comment =>
+                    <TableRow>
+                        <TableCell>
+                             I noticed there is a typo in the virtual health link.
+                        </TableCell>
+                        <TableCell>
+                            
+                        </TableCell>
+                    </TableRow>
+                    )}
+                </TableBody>
+            </Table>
+          </TableContainer>
         </AccordionDetails>
       </Accordion>
-      <Accordion>
+      <Accordion style= {{width: '80%'}}>
         <AccordionSummary
           expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography>Accordion 2</Typography>
+          <Typography>Questions</Typography>
+        </AccordionSummary>
+        <AccordionDetails>
+          <Typography>
+    
+          </Typography>
+        </AccordionDetails>
+      </Accordion>
+
+   
+
+
+      <Accordion style= {{width: '80%'}}>
+        <AccordionSummary
+          expandIcon={<ExpandMoreIcon />}
+          aria-controls="panel2a-content"
+          id="panel2a-header"
+        >
+          <Typography>Most Common Ratings</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <Typography>
