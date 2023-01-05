@@ -54,6 +54,8 @@ function App() {
     dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
 
+  // MUI theme provider
+
   return (
     <Router>
       <div>

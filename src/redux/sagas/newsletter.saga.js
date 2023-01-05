@@ -21,6 +21,6 @@ function* addToNewsletter(action) {
 }
 
 export default function* newsletterSaga() {
-    yield takeLatest('FETCH_NEWSLETTER', fetchNewsletter);
+    yield takeLatest('FETCH_NEWSLETTER_EMAILS', fetchNewsletter);
     yield takeLatest('ADD_TO_NEWSLETTER', addToNewsletter);
 }
