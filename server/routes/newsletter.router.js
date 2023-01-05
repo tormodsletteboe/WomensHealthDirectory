@@ -2,8 +2,18 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
+// gets all email from database
 router.get('/', (req, res) => {
-  // GET route code here
+  pool.query(`SELECT * from "newsletter"
+  ORDER BY "id" ASC
+    `)
+  .then(dbRes => {
+    res.send(dbRes.rows);
+  })
+  .catch(err => {
+    console.error('Unable to get email table', err);
+    res.sendStatus(500);
+  })
 });
 
 router.post('/', (req, res) => {

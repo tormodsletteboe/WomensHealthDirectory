@@ -82,6 +82,7 @@ function AdminPreventativeCare() {
         >
           Preventative Care
         </Link>,
+        <Typography>{selectedHealthCategory.category}</Typography> 
       ];
 
     return (

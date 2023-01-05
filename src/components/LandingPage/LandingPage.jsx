@@ -70,9 +70,9 @@ function LandingPage() {
           <Typography paragraph>Get weekly news and updates of how to advocate for your health!</Typography>
           <Button sx={({ '&:hover': { opacity: 0.7 } })} variant='outlined' style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={() => setModal(true)}>Subscribe</Button>
 
-          <h1>The ViFi Newsletter</h1>
+          {/* <h1>The ViFi Newsletter</h1>
           <Typography paragraph>Stay up-to-date on healthcare and what it really means for you</Typography>
-          <Button sx={({ '&:hover': { opacity: 0.7 } })} variant='outlined' onClick={() => setModal(true)}>Subscribe</Button>
+          <Button sx={({ '&:hover': { opacity: 0.7 } })} variant='outlined' onClick={() => setModal(true)}>Subscribe</Button> */}
 
         </Box>
 
@@ -90,10 +90,6 @@ function LandingPage() {
 
               <CardActions sx={({ 'justifyContent':'center' })}>
                 <Button variant='contained' style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={submitEmail}>Subscribe</Button>
-              </CardActions>
-              <CardActions sx={({ 'justifyContent': 'center' })}>
-                <Button variant='contained' onClick={submitEmail}>Subscribe</Button>
-
               </CardActions>
             </Card>
           </Box>

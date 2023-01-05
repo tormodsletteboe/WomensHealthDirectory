@@ -101,7 +101,7 @@ router.get('/:catId/ages/:ageId/:sectionName', rejectUnauthenticated, async (req
         ;`;
       break;
     case 'Questions for Your Doctor':
-      sqlText = `SELECT "id", "answer" AS "field01", "question" AS "field02"
+      sqlText = `SELECT "id", "question_category" AS "field01", "question" AS "field02"
         FROM "doctor_questions"
         WHERE "health_category_id" = $1 AND "age_range_id"=$2
         ORDER BY "id" ASC;`;
@@ -160,7 +160,7 @@ router.put('/:catId/ages/:ageId/:sectionName', rejectUnauthenticated, (req, res)
     case 'Questions for Your Doctor':
       sqlText = `
         UPDATE "doctor_questions"
-        SET "question" = $5 , "answer" = $4
+        SET "question" = $5 , "question_category" = $4
         WHERE "id" = $1 AND "health_category_id" = $2 AND "age_range_id" = $3;`;
       sqlParams = [req.body.id, req.params.catId, req.params.ageId, 
         req.body.field01, req.body.field02];
@@ -222,7 +222,7 @@ router.post('/:catId/ages/:ageId/:sectionName', rejectUnauthenticated, (req, res
       break;
     case 'Questions for Your Doctor':
       sqlText = `
-        INSERT INTO "doctor_questions" ("answer", "question", "health_category_id", "age_range_id")
+        INSERT INTO "doctor_questions" ("question_category", "question", "health_category_id", "age_range_id")
         VALUES ($1, $2, $3, $4);`;
       sqlParams = [req.body.field01, req.body.field02, req.params.catId, req.params.ageId];
       break;

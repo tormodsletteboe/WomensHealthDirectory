@@ -33,6 +33,8 @@ import UserMedicalLinks from "../UserMedicalLinks/UserMedicalLinks";
 import UserVirtualHealth from "../UserVirtualHealth/UserVirtualHealth";
 import AdminFeedbackView from "../AdminFeedbackView/AdminFeedbackView";
 
+import { createTheme, ThemeProvider } from '@mui/material/styles';
+
 //function used to redirect if its admin loggin in or user logging in
 function UserOrAdmin(user) {
   if (user.id && user.access_level == 0) {
@@ -45,6 +47,32 @@ function UserOrAdmin(user) {
   return (<LoginPage />);
 }
 
+// MUI theme
+const theme = createTheme({
+  typography: {
+    detailField01: {
+      fontWeight: 'bold',
+    },
+  },
+  palette: {
+      type: 'light',
+      primary: {
+        main: '#8EBBA7',
+        contrastText: "#fff"
+      },
+      secondary: {
+        main: 'rgb(99, 130, 116)',
+      },
+      text: {
+        primary: '#000000',
+        secondary: '#a3a3a3',
+        white: '#fff'
+      },
+      error: {
+        main: '#d63a2f',
+      }
+  }
+});
 
 function App() {
   const dispatch = useDispatch();
@@ -55,7 +83,10 @@ function App() {
     dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
 
+  // MUI theme provider
+
   return (
+    <ThemeProvider theme={theme}>
     <Router>
       <div>
         {user.id && user.access_level == 1 ? <AdminNav /> : <Nav />}
@@ -286,6 +317,7 @@ function App() {
         <Footer />
       </div>
     </Router>
+    </ThemeProvider>
   );
 }
 
