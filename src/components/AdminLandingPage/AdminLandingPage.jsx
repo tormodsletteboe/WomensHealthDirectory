@@ -1,13 +1,15 @@
+
+import './AdminLandingPage.css';
+import {useHistory} from 'react-router-dom';
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { CSVLink } from "react-csv";
-
 import { Button, Stack, Typography, List, ListItem, Divider, Box } from '@mui/material';
 
 function AdminLandingPage() {
     // hooks
     const dispatch = useDispatch();
+	const history = useHistory();
 
 	// selectors
 	const newsletterEmails = useSelector(store => store.newsletterEmails);
@@ -24,6 +26,10 @@ function AdminLandingPage() {
 		setClicked(!isClicked);
 		console.log('clicked?', isClicked)
 	}
+
+	const handleViewFeedback = () => {
+		history.push('/adminfeedbackview');
+	  }
 
 	return (
 		<>
@@ -47,7 +53,6 @@ function AdminLandingPage() {
 					> 
 						View Newsletter Sign-up Emails
 					</Button> 
-				
 				}
 				{ isClicked === true ?
 				<List>
@@ -70,6 +75,12 @@ function AdminLandingPage() {
 						Download Newsletter Emails Addresses
 						</CSVLink>
 					</Button>
+					<Button variant="contained"
+					sx={{width: '400px'}} 
+					color = "primary"
+					onClick = {handleViewFeedback}
+					>View User Feedback
+					</Button>
 				
 			</Box>
 		</>
@@ -77,3 +88,5 @@ function AdminLandingPage() {
 }
 
 export default AdminLandingPage;
+
+
