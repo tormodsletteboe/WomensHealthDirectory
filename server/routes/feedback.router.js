@@ -16,11 +16,11 @@ router.get('/', async (req, res) => { // GET ALL FEEDBACK: RATINGS + COMMENTS
     try{
 
     //Get comments and ratings response
-    let commentsAndRatingsRes = await pool.query(commentsAndRatingsSqlText, [req.params.id]);
+    let commentsAndRatingsRes = await pool.query(commentsAndRatingsSqlText);
     console.log('comments and ratings res is', commentsAndRatingsRes);
 
     //Get questions and answers
-    let questionAndAnswerRes = await pool.query(questionAndAnswerSqlText, [req.params.id]);
+    let questionAndAnswerRes = await pool.query(questionAndAnswerSqlText);
     console.log('question and answer res is', questionAndAnswerRes);
 
     let apiRes = {

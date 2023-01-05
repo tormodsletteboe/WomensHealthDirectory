@@ -14,6 +14,7 @@ import virtualhealth_links from './virtualhealthlinks.reducer';
 import addVirtualHealthLinks from './addvirtualhealthlinks.reducer';
 import columnNames from './columnNames.reducer';
 import newsletterEmails from './newsletter.reducer';
+import feedback from './feedback.reducer';
 
 // rootReducer is the primary reducer for our entire project
 // It bundles up all of the other reducers so our project can use them.
@@ -36,7 +37,8 @@ const rootReducer = combineReducers({
   virtualhealth_links,
   addVirtualHealthLinks,
   columnNames,
-  newsletterEmails
+  newsletterEmails,
+  feedback,
 });
 
 export default rootReducer;
