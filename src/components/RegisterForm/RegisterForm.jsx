@@ -28,7 +28,7 @@ function RegisterForm() {
       },
     });
   }; // end registerUser
-  //TODO: this is where I am wednesday night styling register form
+  
   return (
     <form className="formPanel" onSubmit={registerUser}>
       <h2>Register User</h2>
@@ -39,16 +39,7 @@ function RegisterForm() {
       )}
       <Grid container direction="column" spacing={2} mt={5}>
         <Grid item>
-          {/* <label htmlFor="username">
-            Username:
-            <input
-              type="text"
-              name="username"
-              value={username}
-              required
-              onChange={(event) => setUsername(event.target.value)}
-            />
-          </label> */}
+         
           <TextField
           sx={{ width: "100%" }}
             label={"Username"}
@@ -60,16 +51,7 @@ function RegisterForm() {
           />
         </Grid>
         <Grid item>
-          {/* <label htmlFor="password">
-            Password:
-            <input
-              type="password"
-              name="password"
-              value={password}
-              required
-              onChange={(event) => setPassword(event.target.value)}
-            />
-          </label> */}
+         
           <TextField
           sx={{ width: "100%" }}
             label={"Password"}
@@ -81,16 +63,7 @@ function RegisterForm() {
           />
         </Grid>
         <Grid item>
-          {/* <label htmlFor="email">
-            Email:
-            <input
-              type="email"
-              name="email"
-              value={email}
-              required
-              onChange={(event) => setEmail(event.target.value)}
-            />
-          </label> */}
+          
           <TextField
           sx={{ width: "100%" }}
             label={"Email"}
@@ -102,16 +75,7 @@ function RegisterForm() {
           />
         </Grid>
         <Grid item>
-          {/* <label htmlFor="age">
-            Age:
-            <input
-              type="age"
-              name="age"
-              value={age}
-              required
-              onChange={(event) => setAge(event.target.value)}
-            />
-          </label> */}
+         
           <TextField
           sx={{ width: "100%" }}
             label={"Age"}
@@ -123,16 +87,7 @@ function RegisterForm() {
           />
         </Grid>
         <Grid item>
-          {/* <label htmlFor="zip">
-            Zip Code:
-            <input
-              type="zip"
-              name="zip"
-              value={zip}
-              required
-              onChange={(event) => setZip(event.target.value)}
-            />
-          </label> */}
+         
           <TextField
           sx={{ width: "100%" }}
             label={"Zip Code"}
