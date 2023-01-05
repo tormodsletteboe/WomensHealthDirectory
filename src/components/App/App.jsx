@@ -31,6 +31,7 @@ import AdminCategoryDetailView from "../AdminCategoryDetailView/AdminCategoryDet
 import Resources from '../Resources/Resources';
 import UserMedicalLinks from "../UserMedicalLinks/UserMedicalLinks";
 import UserVirtualHealth from "../UserVirtualHealth/UserVirtualHealth";
+import AdminFeedbackView from "../AdminFeedbackView/AdminFeedbackView";
 
 //function used to redirect if its admin loggin in or user logging in
 function UserOrAdmin(user) {
@@ -182,6 +183,16 @@ function App() {
               <Redirect to="/home" />
             )}
           </ProtectedRoute>
+          
+          
+          <ProtectedRoute 
+            exact
+            path="/adminfeedbackview">
+              
+            <AdminFeedbackView />
+          
+          </ProtectedRoute>
+          
         
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
