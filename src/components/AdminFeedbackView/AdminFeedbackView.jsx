@@ -48,13 +48,13 @@ function AdminFeedbackView() {
                     </TableRow>
                 </TableHead>
                 <TableBody>
-                {!Object.keys(feedback).length === 0 && feedback.map(comment =>
+                {feedback.commentsAndRatings && feedback.commentsAndRatings.map(feedbackItem =>
                     <TableRow>
                         <TableCell>
-                             I noticed there is a typo in the virtual health link.
+                            {feedbackItem.comment}
                         </TableCell>
                         <TableCell>
-                            
+                            {feedbackItem.rating}
                         </TableCell>
                     </TableRow>
                     )}
