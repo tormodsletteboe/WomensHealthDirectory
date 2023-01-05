@@ -1,53 +1,21 @@
 
-import React, { useState } from 'react';
-import { Button } from '@mui/material';
 import './AdminLandingPage.css';
-import {useSelector} from 'react-redux';
 import {useHistory} from 'react-router-dom';
-
 import React, { useState, useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-
 import { CSVLink } from "react-csv";
-
 import { Button, Stack, Typography, List, ListItem, Divider, Box } from '@mui/material';
 
-
 function AdminLandingPage() {
-
-  // Using hooks we're creating local state for a "heading" variable with
-  // a default value of 'Functional Component'
-  
-  //const store = useSelector((store) => store);
-  const [heading, setHeading] = useState('Welcome, Laina!');
-  const history = useHistory();
-
-  const handleViewFeedback = () => {
-    history.push('/adminfeedbackview');
-  }
-
-  return (
-    <div className = "adminLandingPage">
-      <h2>{heading}</h2>
-      <Button variant="contained" 
-              style = 
-                {{backgroundColor: '#8EBBA7', 
-                color: '#FFFFFF', 
-                fontSize: '18px'}}
-                onClick = {handleViewFeedback}
-              >View User Feedback
-      </Button>
-    </div>
-  );
-
     // hooks
     const dispatch = useDispatch();
+	const history = useHistory();
 
 	// selectors
 	const newsletterEmails = useSelector(store => store.newsletterEmails);
 	
 	const headers = [{ label: "Email Address", key: "email" }]
-	// const [heading, setHeading] = useState('Admin Landing Page');
+	const [heading, setHeading] = useState('Admin Landing Page');
 	const [isClicked, setClicked] = useState(false);;
 
 	useEffect(() => {
@@ -58,6 +26,10 @@ function AdminLandingPage() {
 		setClicked(!isClicked);
 		console.log('clicked?', isClicked)
 	}
+
+	const handleViewFeedback = () => {
+		history.push('/adminfeedbackview');
+	  }
 
 	return (
 		<>
@@ -81,7 +53,6 @@ function AdminLandingPage() {
 					> 
 						View Newsletter Sign-up Emails
 					</Button> 
-				
 				}
 				{ isClicked === true ?
 				<List>
@@ -104,6 +75,12 @@ function AdminLandingPage() {
 						Download Newsletter Emails Addresses
 						</CSVLink>
 					</Button>
+					<Button variant="contained"
+					sx={{width: '400px'}} 
+					color = "primary"
+					onClick = {handleViewFeedback}
+					>View User Feedback
+					</Button>
 				
 			</Box>
 		</>
@@ -111,3 +88,5 @@ function AdminLandingPage() {
 }
 
 export default AdminLandingPage;
+
+
