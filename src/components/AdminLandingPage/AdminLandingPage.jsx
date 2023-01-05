@@ -33,7 +33,7 @@ function AdminLandingPage() {
 			flexDirection="column">
 				{ isClicked === true ?
 
-					<Button variant="contained" color="primary" 
+					<Button variant="contained" color="primary" buttontext="white"
 					sx={{width: '400px'}}
 					onClick={handleEmailClick}
 					> 

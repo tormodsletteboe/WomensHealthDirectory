@@ -91,10 +91,6 @@ function LandingPage() {
               <CardActions sx={({ 'justifyContent':'center' })}>
                 <Button variant='contained' style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={submitEmail}>Subscribe</Button>
               </CardActions>
-              <CardActions sx={({ 'justifyContent': 'center' })}>
-                <Button variant='contained' onClick={submitEmail}>Subscribe</Button>
-
-              </CardActions>
             </Card>
           </Box>
         </Modal>
