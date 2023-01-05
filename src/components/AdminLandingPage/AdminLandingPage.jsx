@@ -16,7 +16,7 @@ function AdminLandingPage() {
   const history = useHistory();
 
   const handleViewFeedback = () => {
-    history.push('/feedbackview');
+    history.push('/adminfeedbackview');
   }
 
   return (
