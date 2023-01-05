@@ -65,7 +65,6 @@ function AdminCategoryDetailView() {
         let columnName = Object.keys(detailContent[0])
 		for (let i = 1; i <= newObjectItemsNumber; i++ ){
 			// let newName = 'field0' + i;
-
             let newName = columnName[i];
 			objToAdd[newName] = "";
 		}
@@ -92,6 +91,22 @@ function AdminCategoryDetailView() {
             fontWeight: 'bold',
           },
         },
+        palette: {
+            type: 'light',
+            primary: {
+              main: '#8EBBA7',
+            },
+            secondary: {
+              main: 'rgb(99, 130, 116)',
+            },
+            text: {
+              primary: '#000000',
+              secondary: '#ffffff',
+            },
+            error: {
+              main: '#d63a2f',
+            }
+        }
     });
       
     // Breadcrumbs
@@ -142,14 +157,15 @@ function AdminCategoryDetailView() {
         <section>
         <TableContainer>
         <TableRow>
-                    <TableCell><Typography variant="detailField01">{columnNames[0]} </Typography></TableCell> 
-                    <TableCell><Typography variant="body2">{columnNames[1]} 
-                    </Typography></TableCell>
+                <TableCell><Typography variant="detailField01">{columnNames[0]} </Typography></TableCell> 
+                <TableCell><Typography variant="body2">{columnNames[1]} 
+                    </Typography>
+                </TableCell>
                     {detailContent[0] && Object.keys(detailContent[0]).length > 3 ? <TableCell><Typography>Grade</Typography></TableCell> : null} 
                     {detailContent[0] && Object.keys(detailContent[0]).length > 4 ? <TableCell><Typography>Date</Typography></TableCell> : null}
-                    <TableCell>Edit</TableCell>
-                    <TableCell>Delete</TableCell>
-                    </TableRow>
+                <TableCell>Edit</TableCell>
+                <TableCell>Delete</TableCell>
+            </TableRow>
         <TableBody m={2} pt={3} sx={{border: '1px', borderColor: 'black'}}>
 				{detailContent[0] && detailContent.map(x => (
 					x.id === resourceToEdit.id ? 
