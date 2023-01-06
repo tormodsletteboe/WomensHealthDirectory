@@ -12,6 +12,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
+
 function AdminFeedbackView() {
     const dispatch = useDispatch();
 
@@ -28,28 +29,28 @@ function AdminFeedbackView() {
 
     return (
         <>
-            <h1>User Feedback</h1>
             <div>
-                <Accordion style={{ width: '80%' }}>
+                <Typography textAlign='center' fontSize = '32px'>User Feedback</Typography>
+                <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
+                        expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
-                        <Typography>Comments and Overall Rating</Typography>
+                        <Typography textAlign= 'center' fontSize = '18px'>Comments and Overall Rating</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
-                        <TableContainer height='90%'>
+                        <TableContainer height='90%' style = {{backgroundColor: '#FFFFFF'}}>
                             <Table>
                                 <TableHead>
-                                    <TableRow>
+                                    <TableRow style={{fontSize: '18px'}}>
                                         <TableCell>Comments</TableCell>
                                         <TableCell>Overall Rating</TableCell>
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
                                     {feedback.commentsAndRatings && feedback.commentsAndRatings.map(feedbackItem =>
-                                        <TableRow key={feedbackItem.id}>
+                                        <TableRow style={{fontSize: '18px'}} key={feedbackItem.id}>
                                             <TableCell>
                                                 {feedbackItem.comment}
                                             </TableCell>
@@ -64,13 +65,13 @@ function AdminFeedbackView() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion style={{ width: '80%' }}>
+                <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon />}
+                        expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
                         aria-controls="panel2a-content"
                         id="panel2a-header"
                     >
-                        <Typography>Most Common Ratings</Typography>
+                        <Typography fontSize = '18px'>Most Common Ratings</Typography>
                     </AccordionSummary>
                     <AccordionDetails>
                         <Typography>
@@ -81,23 +82,24 @@ function AdminFeedbackView() {
 
                 <div>
                     {feedback.questionsAndAnswers && feedback.questionsAndAnswers.map(questionAndAnswerItem =>
-                        // {feedback.questionsAndAnswers.json_agg && feedback.questionsAndAnswers.json_agg.map(answerItem =>
-                        <Accordion style={{ width: '80%' }}>
+                        <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>
                             <AccordionSummary
-                                expandIcon={<ExpandMoreIcon />}
+                                expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
                                 aria-controls="panel2a-content"
                                 id="panel2a-header"
                             >
-                                <Typography key={questionAndAnswerItem.id}>
+                                <Typography key={questionAndAnswerItem.id} fontSize = '18px'>
                                     {questionAndAnswerItem.question}
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <TableContainer height='90%'>
+                                <TableContainer height='90%' style = {{backgroundColor: '#FFFFFF'}}>
                                     <Table>
                                         <TableHead>
-                                            <TableRow>
-                                                <TableCell>Answers</TableCell>
+                                            <TableRow style={{fontSize: '18px'}}>
+                                                <TableCell>
+                                                        Answers
+                                                </TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
@@ -116,8 +118,6 @@ function AdminFeedbackView() {
                     )}
                 </div>
             </div>
-
-
         </>
     );
 }
