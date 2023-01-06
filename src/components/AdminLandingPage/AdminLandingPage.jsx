@@ -114,6 +114,12 @@ function AdminLandingPage() {
 					Download Newsletter Emails Addresses
 					</CSVLink>
 				</Button>
+				<Button variant="contained"
+					sx={{width: '400px'}} 
+					color = "primary"
+					onClick = {handleViewFeedback}
+					>View User Feedback
+					</Button>
 			{ isEditorClicked === false ?
 				<Button variant="contained" sx={{width: '400px'}}
 				onClick={handleEditorClick}>Write Newsletter</Button> 
