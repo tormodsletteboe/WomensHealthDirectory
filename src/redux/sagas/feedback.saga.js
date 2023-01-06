@@ -17,6 +17,22 @@ try {
 }
 }
 
+function* fetchAverageRating() {
+    try {
+    
+        const response = yield axios.get('/api/feedback/avg');
+        console.log('response.data is', response.data);
+    
+        yield put({ 
+            type: 'SET_AVERAGE_RATING',
+            payload: response.data
+    });
+    
+    } catch (err) {
+        console.log('Error with fetching average rating', err);
+    }
+    }
+
 function* submitSurvey(action) {
     try {
         yield axios.post('/api/feedback', action.payload);
@@ -28,4 +44,5 @@ function* submitSurvey(action) {
 export default function* feedbackSaga() {
     yield takeLatest('SUBMIT_SURVEY', submitSurvey);
     yield takeLatest ('FETCH_USER_FEEDBACK', fetchUserFeedback);
+    yield takeLatest ('FETCH_AVERAGE_RATING', fetchAverageRating);
 }
