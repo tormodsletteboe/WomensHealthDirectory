@@ -64,7 +64,7 @@ function AddEditForm() {
                 value={resourceToEdit.field01}
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_FIELD',
-                    payload: {field01: evt.target.value}
+                    payload: {field01: "Pap smear"}
             })}/></TableCell>
                 <TableCell>
                 <TextField 
@@ -74,7 +74,7 @@ function AddEditForm() {
                     value={resourceToEdit.field02}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
-                        payload: {field02: evt.target.value}
+                        payload: {field02: "aka Pap screening test, a sample is collected during a speculum exam with a brush. Sample is sent to the lab and reviewed under a microscope by a cytologist."}
                 })}/></TableCell>
             {Object.keys(resourceToEdit).length > 3 ? 
             <TableCell>

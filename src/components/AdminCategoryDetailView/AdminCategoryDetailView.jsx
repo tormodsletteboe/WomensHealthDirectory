@@ -153,7 +153,7 @@ function AdminCategoryDetailView() {
             </Breadcrumbs>
         </Stack>
 
-        <Typography align="center" component="h1" variant="h3">{params.sectionName}</Typography>
+        <Typography  align="center" component="h1" variant="h3">{params.sectionName}</Typography>
         <section>
         <TableContainer>
         <TableRow>
