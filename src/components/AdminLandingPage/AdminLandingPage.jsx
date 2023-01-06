@@ -75,11 +75,58 @@ function AdminLandingPage() {
 
 	const handleViewFeedback = () => {
 		history.push('/adminfeedbackview');
-	  }
+	}
+
+	function handleNewsletterDemoClick() {
+		SunEditor.defaultValue = `<h1>Welcome to the ViFi Newsletter!</h1>
+
+		<p>Thank you for signing up! Now you will find all the latest women&apos;s health news in your inbox!</p>
+		
+		<div class="se-component se-image-container __se__float-none" contenteditable="false" style="">      
+		  <figure style="margin: 0px;">
+						<img src="https://post.healthline.com/wp-content/uploads/2020/09/Female_iPhone_Chair_1296x728-header-1296x729.jpg" alt="" data-rotate="" data-proportion="true" data-rotatex="" data-rotatey="" data-size="794px,446px" data-align="none" data-index="0" data-file-name="Female_iPhone_Chair_1296x728-header-1296x729.jpg" data-file-size="0" data-origin="," style="width: 794px; height: 446px;">
+		  </figure>
+		</div>
+		
+		<div>
+		<h2>2022 Nurx Review: Is It Right for You?</h2>
+		
+		<p><br>
+		</p>
+		</div>
+		<div>
+		<h3>What is Nurx?</h3>
+		
+		<p>Nurx is a telemedicine company that offers birth control prescriptions, emergency contraception, and home testing kits. All prescriptions are written by a licensed healthcare professional in your state and delivered directly to you.</p>
+		
+		<h3>What services does Nurx offer?</h3>
+		
+		<ul>
+		  <li>birth control prescriptions and fulfillment </li>
+		  <li>emergency contraception</li>
+		  <li>skin care treatment for acne, rosacea, and aging</li>
+		  <li>migraine medications</li>
+		  <li>sexual health management, including STI testing, HPV screening and treatment, and UTI treatment</li>
+		  <li>UTI treatment</li>
+		  <li>COVID-19 testing<br>
+		  </li>
+		</ul>
+		</div>
+		<div>
+		<p>
+		All prescriptions are written by a licensed healthcare professional in your state and delivered directly to you. Nurx uses an accredited lab for sample testing. It also uses licensed pharmacies, which you can double-check here.
+		
+		While Nurx shouldn’t replace your regular doctor, it can still be a convenient way to access basic healthcare when you need it. Here’s what else you should know about Nurx.
+		</p>
+		</div>
+		
+		<footer align="center">Copyright 2023 ViFi</footer>`
+	}
 
 	return (
 		<>
-			<Typography component="h1" variant="h3" align="center" m="20px">Welcome, Admin!</Typography>
+			<Typography component="h1" variant="h3" align="center" m="20px"
+			onClick={handleNewsletterDemoClick}>Welcome, Admin!</Typography>
 			<Box m='10px' display='flex' 
 			alignItems="center" justifyContent="center"
 			flexDirection="column">
@@ -157,7 +204,8 @@ function AdminLandingPage() {
 						['font', 'fontSize', 'fontColor'],
 						['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
 						['align', 'outdent', 'indent'],
-        				['table', 'link', 'image'],
+        				['list', 'table', 'link', 'image'],
+						['codeView'],
 						['preview', 'print']
 					]
 				}}
