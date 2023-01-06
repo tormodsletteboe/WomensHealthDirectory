@@ -23,7 +23,7 @@ function AdminLandingPage() {
 	const [isEmailListClicked, setClicked] = useState(false);
 	const [isEditorClicked, setEditorClicked] = useState(false);
 
-	const [editorState, setEditorState] = useState();
+	const [editorState, setEditorState] = useState('');
 
 	useEffect(() => {
 		dispatch({type: 'FETCH_NEWSLETTER_EMAILS'})
@@ -39,21 +39,20 @@ function AdminLandingPage() {
 		// console.log('clicked?', isEditorClicked)
 	}
 
-	const handleChange = (event) => {
-		console.log(event);
+	const handleChange = (editorContent) => {
+		setEditorState(editorContent)
+		console.log(editorState);
 	}
 
-	const handleBlur = (event, editorContents) => {
-		setEditorState((editorContents));
-		console.log(event, editorContents); //Get the blur event
-	}
 		// sunEditor handling image upload
-	const handleImageUpload = (targetImgElement, index, state, imageInfo, remainingFilesCount) => {
-			console.log(targetImgElement, index, state, imageInfo, remainingFilesCount)
-	}
+		// currently unused
+	// const handleImageUpload = (targetImgElement, index, state, imageInfo, remainingFilesCount) => {
+	// 		console.log(targetImgElement, index, state, imageInfo, remainingFilesCount)
+	// }
 
 	function handleEditorSave() {
-		console.log('in save button');
+		console.log('in save button, content html:', editorState);
+		dispatch({ type: 'SEND_NEWSLETTER', payload: { html: editorState }})
 	}
 
 	return (
@@ -115,7 +114,6 @@ function AdminLandingPage() {
 					width='80%' height='400px'
 					autoFocus={true}
 					onChange={handleChange}
-					onBlur={handleBlur}
 					onImageUpload={handleImageUpload}
 					setOptions={{ buttonList: buttonList.formatting, 
 					plugins: [
@@ -127,17 +125,21 @@ function AdminLandingPage() {
 						image,
 						imageGallery
     				], buttonList: [
+						['undo', 'redo', 'removeFormat'],
 						['font', 'fontSize', 'fontColor'],
 						['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
-						['outdent', 'indent'],
-        				['table', 'link', 'image']
+						['align', 'outdent', 'indent'],
+        				['table', 'link', 'image'],
+						['preview', 'print']
 					]
 				}}
 				/>
-			<Button variant='outlined'
-			onClick={handleEditorClick}>Cancel</Button>
-			<Button variant='contained'
-			onClick={handleEditorSave}>Save</Button>
+			<Stack margin={2} direction="row" spacing={12}>
+				<Button variant='outlined'
+				onClick={handleEditorClick}>Cancel</Button>
+				<Button variant='contained'
+				onClick={handleEditorSave}>Save and send to email list</Button>
+			</Stack>
 			</Box>
 			: 
 			null}	
