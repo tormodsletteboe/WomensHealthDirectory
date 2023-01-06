@@ -65,7 +65,7 @@ function AdminFeedbackView() {
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>
+                {/* <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>
                     <AccordionSummary
                         expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
                         aria-controls="panel2a-content"
@@ -78,7 +78,7 @@ function AdminFeedbackView() {
 
                         </Typography>
                     </AccordionDetails>
-                </Accordion>
+                </Accordion> */}
 
                 <div>
                     {feedback.questionsAndAnswers && feedback.questionsAndAnswers.map(questionAndAnswerItem =>
