@@ -108,6 +108,10 @@ function AdminFeedbackView() {
                                                     <TableCell>
                                                         {answer}
                                                     </TableCell>
+                                                    <TableCell>
+                                                        {/* count */}
+                                                    </TableCell>
+
                                                 </TableRow>
                                             )}
                                         </TableBody>
