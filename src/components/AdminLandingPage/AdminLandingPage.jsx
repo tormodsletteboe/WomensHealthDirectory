@@ -72,7 +72,7 @@ function AdminLandingPage() {
 
 	return (
 		<>
-			<Typography component="h1" variant="h3" align="center" m="20px">Welcome, Laina!</Typography>
+			<Typography component="h1" variant="h3" align="center" m="20px">Welcome, Admin!</Typography>
 			<Box m='10px' display='flex' 
 			alignItems="center" justifyContent="center"
 			flexDirection="column">

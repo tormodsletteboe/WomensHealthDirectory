@@ -26,8 +26,8 @@ function LoginForm() {
     }
   }; // end login
 function fillData() {
-    setUsername("test");
-    setPassword("test");
+    setUsername("tormod");
+    setPassword("tormod");
   }
   return (
     <form className="formPanel" onSubmit={login}>

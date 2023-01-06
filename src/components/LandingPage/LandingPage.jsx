@@ -49,7 +49,7 @@ function LandingPage() {
         <Card variant='outlined' className='grid-col_12'>
           <CardHeader title='Preventative Care' subheader='What to look for before it happens'></CardHeader>
           <CardContent>
-            <Typography paragraph>Info Info Info</Typography>
+            <Typography paragraph></Typography>
           </CardContent>
           <CardActions disableSpacing sx={({ 'justifyContent':'center' })}>
             <Button variant='contained' style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={() => history.push('/preventativecare')}>Learn More</Button>
@@ -59,7 +59,7 @@ function LandingPage() {
         <Card variant='outlined' className='grid-col_12'>
           <CardHeader title='Resources' subheader='Educational resources'></CardHeader>
           <CardContent>
-            <Typography paragraph>Info Info Info</Typography>
+            <Typography paragraph></Typography>
           </CardContent>
           <CardActions disableSpacing sx={({ 'justifyContent':'center' })}>
             <Button variant='contained' style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={() => history.push('/resources')}>Learn More</Button>
