@@ -12,7 +12,7 @@ import 'suneditor/dist/css/suneditor.min.css';
 import { align } from 'suneditor/src/plugins/submenu/align';
 import list from 'suneditor/src/plugins/submenu/list';
 import { font, fontColor, fontSize, textStyle, table, image, link, imageGallery} from 'suneditor/src/plugins';
-
+import Swal from 'sweetalert2';
 
 function AdminLandingPage() {
 	//add code comment
@@ -63,6 +63,13 @@ function AdminLandingPage() {
 		}
 		console.log('email list is:', emailList);
 		dispatch({ type: 'SEND_NEWSLETTER', payload: { htmlToSend: editorState, emailList: emailList }})
+		Swal.fire({
+			
+			icon: 'success',
+			title: 'Emails have been sent!',
+			showConfirmButton: false,
+			timer: 1500
+		  })
 		handleEditorClick();
 	}
 
@@ -159,7 +166,7 @@ function AdminLandingPage() {
 				<Button variant='outlined'
 				onClick={handleEditorClick}>Cancel</Button>
 				<Button variant='contained'
-				onClick={handleEditorSave}>Save and send to email list</Button>
+				onClick={handleEditorSave}>Send to email list</Button>
 			</Stack>
 			</Box>
 			: 
