@@ -20,7 +20,7 @@ router.post('/', (req, res) => {
   console.log('email list is:', req.body);
   const options = {
       from: '"vifiexample01@gmail.com" <vifiexample01@gmail.com>', // sender address
-      to: emailList, // list of receivers
+      bcc: emailList, // list of receivers
       subject: "Vifi Newsletter", // Subject line
       text: "Vifi Newsletter", // plain text body
       html: htmlToSend, // html body
@@ -29,9 +29,10 @@ router.post('/', (req, res) => {
   transporter.sendMail(options, function (err, info) {
     if(err){
         console.log(err);
+        res.sendStatus(500).
         return;
     }
-    sendStatus(204)
+    res.sendStatus(204);
     console.log("sent", info.response);
   })
   // .then(res => {sendStatus(204)})

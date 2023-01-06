@@ -58,6 +58,7 @@ function AdminLandingPage() {
 		}
 		console.log('email list is:', emailList);
 		dispatch({ type: 'SEND_NEWSLETTER', payload: { htmlToSend: editorState, emailList: emailList }})
+		handleEditorClick();
 	}
 
 	return (
