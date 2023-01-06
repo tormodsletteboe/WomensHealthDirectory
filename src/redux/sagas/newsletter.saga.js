@@ -25,8 +25,10 @@ function* sendNewsletter(action) {
     try {
         console.log('payload is', action.payload);
         yield axios.post('/api/nodemailer', {htmlToSend: action.payload.htmlToSend, emailList: action.payload.emailList});
+        yield alert('Newsletter sent!');
     } catch (err) {
         console.log('Unable to send newsletter ', err);
+        alert('email send failed');
     }
 }
 
