@@ -1,4 +1,4 @@
-import { Box, Button, Container, FormControlLabel, InputLabel, Menu, MenuItem, Pagination, Radio, RadioGroup, Select, TextField, Typography } from "@mui/material";
+import { Box, Button, ButtonBase, Container, FormControlLabel, InputLabel, Menu, MenuItem, Pagination, Radio, RadioGroup, Select, TextField, Typography } from "@mui/material";
 import { useState } from "react";
 import { useDispatch } from "react-redux";
 import { useHistory } from "react-router-dom";
@@ -39,8 +39,10 @@ function Feedback() {
             ])
         ]
 
-    const [answers, setAnswers] = useState({ '1': 'N/A', '2': 'N/A', '3': 'N/A', '4': 'N/A',
-                                             '5': 'N/A', '6': 'N/A', '7': 'N/A', '8': 'N/A', '9': 'N/A' });
+    const [answers, setAnswers] = useState({
+        '1': '', '2': '', '3': '', '4': '',
+        '5': '', '6': '', '7': '', '8': '', '9': ''
+    });
 
     const [[page, setPage],
         [radio, setRadio],
@@ -73,9 +75,18 @@ function Feedback() {
     }
 
     const submitSurvey = () => {
+        
+        let tempAnswers = {...answers};
+
+        for(const question in tempAnswers) {
+            if(tempAnswers[question] == '') tempAnswers[question] = 'N/A';
+        }
+
+        console.log(tempAnswers);
+
         dispatch({
             type: 'SUBMIT_SURVEY', payload: {
-                answers: { ...answers },
+                answers: { ...tempAnswers },
                 questions: [questions[0], questions[1], questions[2], ...multi],
                 comment: comment,
                 rating: rating
@@ -84,31 +95,40 @@ function Feedback() {
         history.push('/home');
     }
 
+    const commentAutofill = () => {
+        setComment(`There's a typo in a virtua health link!`);
+        setRating(`4`);
+    }
+
     // console.log(answers);
 
     return (
         <Container>
-            <Typography variant="h4" textAlign={'center'}>Thank you for using the ViFi!</Typography>
-            <Typography paragraph textAlign={'center'}>
-                Please answer some questions
-                so we may better serve you next time.
-            </Typography>
             {page == 1 &&
-                <Box>
-                    <InputLabel id='feedbackQ1' sx={({ 'fontSize': '12px' })}>{questions[0]}</InputLabel>
-                    <Select labelId="feedbackQ1" value={answers['1']} onChange={(e) => saveAnswer({ '1': e.target.value })}>
-                        <MenuItem value={dropdownA[0]}>{dropdownA[0]}</MenuItem>
-                        <MenuItem value={dropdownA[1]}>{dropdownA[1]}</MenuItem>
-                        <MenuItem value={dropdownA[2]}>{dropdownA[2]}</MenuItem>
-                        <MenuItem value={dropdownA[3]}>{dropdownA[3]}</MenuItem>
-                        <MenuItem value={dropdownA[4]}>{dropdownA[4]}</MenuItem>
-                    </Select>
-                </Box>
+                <Container>
+                    <Box>
+                        <Typography variant="h4" textAlign={'center'}>Thank you for using the ViFi!</Typography>
+                        <Typography paragraph textAlign={'center'}>
+                            Please answer some questions
+                            so we may better serve you next time.
+                        </Typography>
+                    </Box>
+                    <Box>
+                    <Typography paragraph sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'textAlign':'center' })}>{questions[0]}</Typography>
+                        <Select value={answers['1']} onChange={(e) => saveAnswer({ '1': e.target.value })}>
+                            <MenuItem value={dropdownA[0]}>{dropdownA[0]}</MenuItem>
+                            <MenuItem value={dropdownA[1]}>{dropdownA[1]}</MenuItem>
+                            <MenuItem value={dropdownA[2]}>{dropdownA[2]}</MenuItem>
+                            <MenuItem value={dropdownA[3]}>{dropdownA[3]}</MenuItem>
+                            <MenuItem value={dropdownA[4]}>{dropdownA[4]}</MenuItem>
+                        </Select>
+                    </Box>
+                </Container>
             }
             {page == 2 &&
                 <Box>
-                    <InputLabel id='feedbackQ2' sx={({ 'fontSize': '12px' })}>{questions[1]}</InputLabel>
-                    <Select labelId="feedbackQ2" value={answers['2']} onChange={(e) => saveAnswer({ '2': e.target.value })}>
+                    <Typography paragraph sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'textAlign':'center' })}>{questions[1]}</Typography>
+                    <Select value={answers['2']} onChange={(e) => saveAnswer({ '2': e.target.value })}>
                         <MenuItem value={dropdownA[0]}>{dropdownA[0]}</MenuItem>
                         <MenuItem value={dropdownA[1]}>{dropdownA[1]}</MenuItem>
                         <MenuItem value={dropdownA[2]}>{dropdownA[2]}</MenuItem>
@@ -119,8 +139,8 @@ function Feedback() {
             }
             {page == 3 &&
                 <Box>
-                    <InputLabel id='feedbackQ3' sx={({ 'fontSize': '12px' })}>{questions[2]}</InputLabel>
-                    <Select labelId="feedbackQ3" value={answers['3']} onChange={(e) => saveAnswer({ '3': e.target.value })}>
+                    <Typography paragraph sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'textAlign':'center' })}>{questions[2]}</Typography>
+                    <Select value={answers['3']} onChange={(e) => saveAnswer({ '3': e.target.value })}>
                         <MenuItem value={dropdownB[0]}>{dropdownB[0]}</MenuItem>
                         <MenuItem value={dropdownB[1]}>{dropdownB[1]}</MenuItem>
                         <MenuItem value={dropdownB[2]}>{dropdownB[2]}</MenuItem>
@@ -132,7 +152,7 @@ function Feedback() {
                 <Box>
                     <Typography paragraph>{questions[3]}</Typography>
                     <Typography paragraph>Please rate from 1 (least confusing) to 5 (most confusing)</Typography>
-                    <Typography paragraph textAlign={'center'} border={'1px solid black'}>{multi[page - 4]}</Typography>
+                    <Typography paragraph textAlign={'center'} borderBottom={'1px solid black'} fontSize={'18px'}>{multi[page - 4]}</Typography>
                     <Box>
                         <RadioGroup row sx={({ 'justifyContent': 'space-evenly' })} onChange={(e) => setRadioAnswer(e)} value={radio}>
                             <FormControlLabel value={'1'} control={<Radio />} label='1' labelPlacement="top" sx={({ 'margin': 0 })} />
@@ -146,17 +166,14 @@ function Feedback() {
             }
             {page == 10 &&
                 <Box>
-                    <Typography paragraph>
+                    <Typography paragraph onClick={() => commentAutofill()}>
                         Thank you for completing the survey!
-
                         Leave a comment and a rating about your overall experience using The Vifi!
-
-                        Submit when you are ready. Thank you yet again!
                     </Typography>
-                    <TextField label={'Leave a comment!'} onChange={(e) => setComment(e.target.value)} sx={({ 'width':'100%' })}></TextField>
+                    <TextField label={'Leave a comment!'} value={comment} onChange={(e) => setComment(e.target.value)} sx={({ 'width': '100%' })}></TextField>
                     <Box>
-                        <InputLabel id="ratingLabel" sx={({ 'fontSize':'12px', 'marginTop':'5%' })}>How do you rate your overall experience?</InputLabel>
-                        <Select labelId="ratingLabel" value={rating} onChange={(e) => setRating(e.target.value)}>
+                        <Typography paragraph sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'marginTop':'5%' })}>How do you rate your overall experience?</Typography>
+                        <Select value={rating} onChange={(e) => setRating(e.target.value)}>
                             <MenuItem value={0}>0</MenuItem>
                             <MenuItem value={1}>1</MenuItem>
                             <MenuItem value={2}>2</MenuItem>
@@ -165,7 +182,7 @@ function Feedback() {
                             <MenuItem value={5}>5</MenuItem>
                         </Select>
                     </Box>
-                    <Box sx={({ 'textAlign':'center' })}>
+                    <Box sx={({ 'textAlign': 'center' })}>
                         <Button onClick={() => submitSurvey()} variant='contained'>SUBMIT</Button>
                     </Box>
                 </Box>
@@ -174,8 +191,8 @@ function Feedback() {
                 <Button onClick={() => changePage(-1)} variant='outlined' sx={({ 'marginRight': '2em' })}>PREV</Button>
                 <Button onClick={() => changePage(1)} variant='outlined' sx={({ 'marginLeft': '2em' })}>NEXT</Button>
             </Box>
-            <Box sx={({ 'alignContent':'center' })}>
-                <Pagination count={10} page={page} onChange={(e, v) => setPage(v)} hideNextButton hidePrevButton disabled size="large" siblingCount={1}></Pagination>
+            <Box sx={({ 'alignContent': 'center' })}>
+                <Pagination count={10} page={page} onChange={(e, v) => setPage(v)} hideNextButton hidePrevButton size="large" siblingCount={1}></Pagination>
             </Box>
         </Container>
     )
