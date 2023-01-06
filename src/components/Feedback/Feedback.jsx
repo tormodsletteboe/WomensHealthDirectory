@@ -95,10 +95,7 @@ function Feedback() {
         history.push('/home');
     }
 
-    const commentAutofill = () => {
-        setComment(`There's a typo in a virtua health link!`);
-        setRating(`4`);
-    }
+    
 
     // console.log(answers);
 
@@ -174,7 +171,7 @@ function Feedback() {
             }
             {page == 10 &&
                 <Box>
-                    <Typography paragraph onClick={() => commentAutofill()}>
+                    <Typography paragraph >
                         Thank you for completing the survey!
                         Leave a comment and a rating about your overall experience using The Vifi!
                     </Typography>
