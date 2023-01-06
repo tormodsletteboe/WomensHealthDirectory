@@ -7,6 +7,8 @@ const app = express();
 const sessionMiddleware = require('./modules/session-middleware');
 const passport = require('./strategies/user.strategy');
 
+const transporter = require('./modules/transporter');
+
 // Route includes
 const userRouter = require('./routes/user.router');
 const feedbackRouter = require('./routes/feedback.router');
@@ -14,6 +16,7 @@ const preventativecareRouter=require('./routes/preventativecare.router');
 
 const ageRangeRouter = require('./routes/agerange.router');
 const newsletterRouter = require('./routes/newsletter.router');
+const nodemailerRouter = require('./routes/transporter.router');
 const specificResourcesRouter = require('./routes/specificresources.router');
 
 const medicalLinksRouter = require('./routes/medicallinks.router');
@@ -38,8 +41,10 @@ app.use('/api/agerange', ageRangeRouter);
 app.use('/api/newsletter', newsletterRouter);
 app.use('/api/adminprevcare/specificresources', specificResourcesRouter);
 
-app.use('/api/medicallinks',medicalLinksRouter);
-app.use('/api/virtualhealthlinks',virtualHealthLinksRouter);
+app.use('/api/medicallinks', medicalLinksRouter);
+app.use('/api/virtualhealthlinks', virtualHealthLinksRouter);
+
+app.use('/api/nodemailer', nodemailerRouter);
 
 // Serve static files
 app.use(express.static('build'));

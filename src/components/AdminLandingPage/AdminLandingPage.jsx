@@ -52,7 +52,12 @@ function AdminLandingPage() {
 
 	function handleEditorSave() {
 		console.log('in save button, content html:', editorState);
-		dispatch({ type: 'SEND_NEWSLETTER', payload: { html: editorState }})
+		let emailList=[];
+		for (let email of newsletterEmails) {
+			emailList.push(email.email);
+		}
+		console.log('email list is:', emailList);
+		dispatch({ type: 'SEND_NEWSLETTER', payload: { htmlToSend: editorState, emailList: emailList }})
 	}
 
 	return (
@@ -76,7 +81,6 @@ function AdminLandingPage() {
 					> 
 						View Newsletter Sign-up Emails
 					</Button> 
-				
 				}
 				{ isEmailListClicked === true ?
 				<List>
@@ -114,7 +118,7 @@ function AdminLandingPage() {
 					width='80%' height='400px'
 					autoFocus={true}
 					onChange={handleChange}
-					onImageUpload={handleImageUpload}
+					// onImageUpload={handleImageUpload}
 					setOptions={{ buttonList: buttonList.formatting, 
 					plugins: [
 						font,
