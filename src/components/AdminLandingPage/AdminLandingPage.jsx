@@ -16,15 +16,21 @@ function AdminLandingPage() {
 	
 	const headers = [{ label: "Email Address", key: "email" }]
 	const [heading, setHeading] = useState('Admin Landing Page');
-	const [isClicked, setClicked] = useState(false);;
+	const [isEmailListClicked, setClicked] = useState(false);
+	const [isEditorClicked, setEditorClicked] = useState(false);
 
 	useEffect(() => {
 		dispatch({type: 'FETCH_NEWSLETTER_EMAILS'})
 	}, []);
 
 	function handleEmailClick() {
-		setClicked(!isClicked);
-		console.log('clicked?', isClicked)
+		setClicked(!isEmailListClicked);
+		// console.log('clicked?', isEmailListClicked)
+	}
+
+	function handleEditorClick() {
+		setEditorClicked(!isEditorClicked);
+		// console.log('clicked?', isEditorClicked)
 	}
 
 	return (
@@ -33,7 +39,7 @@ function AdminLandingPage() {
 			<Box m='10px' display='flex' 
 			alignItems="center" justifyContent="center"
 			flexDirection="column">
-				{ isClicked === true ?
+				{ isEmailListClicked === true ?
 
 					<Button variant="contained" color="primary" buttontext="white" marginBottom='10px'
 					sx={{width: '400px', }}
@@ -51,7 +57,7 @@ function AdminLandingPage() {
 					</Button> 
 				
 				}
-				{ isClicked === true ?
+				{ isEmailListClicked === true ?
 				<List>
 				{ newsletterEmails.map(x => (
 					<>
@@ -62,27 +68,37 @@ function AdminLandingPage() {
 				</List>
 				: null }
 				
-					<Button variant="contained" color="primary" 
-					sx={{width: '400px'}}>
-						<CSVLink 
-							data={newsletterEmails} 
-							headers={headers} 
-							filename={"newsletter-emails.csv"}
-						>
-						Download Newsletter Emails Addresses
-						</CSVLink>
-					</Button>
-				
+				<Button variant="contained" color="primary" 
+				sx={{width: '400px'}}>
+					<CSVLink 
+						data={newsletterEmails} 
+						headers={headers} 
+						filename={"newsletter-emails.csv"}
+					>
+					Download Newsletter Emails Addresses
+					</CSVLink>
+				</Button>
+			{ isEditorClicked === false ?
+				<Button variant="contained" sx={{width: '400px'}}
+				onClick={handleEditorClick}>Write Newsletter</Button> 
+				: null}
 			</Box>
+			{ isEditorClicked === true ?
 			<Box margin="20px 0px" display='flex' 
 			alignItems="center" justifyContent="center"
 			flexDirection="column">
 				<SunEditor name='newsletter-editor' 
-
-					width='60%'
+					defaultValue=""
+					placeholder="Newsletter editor - add your text here..."
+					width='60%' height='400px'
+					autoFocus={true}
 				/>
-			<Button>Cancel</Button>
+			<Button variant='outlined'
+			onClick={handleEditorClick}>Cancel</Button>
 			</Box>
+			: 
+			null}	
+			
 		</>
 	);
 }
