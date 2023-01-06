@@ -3,7 +3,9 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { CSVLink } from "react-csv";
 
-import { Button, Stack, Typography, List, ListItem, Divider, Box } from '@mui/material';
+import { Button, Stack, Typography, List, ListItem, Divider, Box, Container } from '@mui/material';
+import SunEditor from 'suneditor-react';
+import 'suneditor/dist/css/suneditor.min.css';
 
 function AdminLandingPage() {
     // hooks
@@ -27,14 +29,14 @@ function AdminLandingPage() {
 
 	return (
 		<>
-			<Typography component="h1" variant="h3">Welcome, Laina!</Typography>
-			<Box m='auto' display='flex' 
+			<Typography component="h1" variant="h3" align="center" m="20px">Welcome, Laina!</Typography>
+			<Box m='10px' display='flex' 
 			alignItems="center" justifyContent="center"
 			flexDirection="column">
 				{ isClicked === true ?
 
-					<Button variant="contained" color="primary" buttontext="white"
-					sx={{width: '400px'}}
+					<Button variant="contained" color="primary" buttontext="white" marginBottom='10px'
+					sx={{width: '400px', }}
 					onClick={handleEmailClick}
 					> 
 						Close Newsletter Sign-up Emails
@@ -71,6 +73,15 @@ function AdminLandingPage() {
 						</CSVLink>
 					</Button>
 				
+			</Box>
+			<Box margin="20px 0px" display='flex' 
+			alignItems="center" justifyContent="center"
+			flexDirection="column">
+				<SunEditor name='newsletter-editor' 
+
+					width='60%'
+				/>
+			<Button>Cancel</Button>
 			</Box>
 		</>
 	);
