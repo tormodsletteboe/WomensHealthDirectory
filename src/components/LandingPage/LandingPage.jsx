@@ -3,6 +3,7 @@ import { useHistory } from 'react-router-dom';
 import './LandingPage.css';
 
 // CUSTOM COMPONENTS
+//Imports
 import { Button, Card, CardActions, CardContent, CardHeader, Modal, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useDispatch } from 'react-redux';

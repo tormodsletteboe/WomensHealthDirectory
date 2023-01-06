@@ -15,6 +15,7 @@ import { font, fontColor, fontSize, textStyle, table, image, link, imageGallery}
 
 
 function AdminLandingPage() {
+	//add code comment
     // hooks
     const dispatch = useDispatch();
 	const history = useHistory();
