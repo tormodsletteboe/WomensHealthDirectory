@@ -31,6 +31,7 @@ import AdminCategoryDetailView from "../AdminCategoryDetailView/AdminCategoryDet
 import Resources from '../Resources/Resources';
 import UserMedicalLinks from "../UserMedicalLinks/UserMedicalLinks";
 import UserVirtualHealth from "../UserVirtualHealth/UserVirtualHealth";
+import AdminFeedbackView from "../AdminFeedbackView/AdminFeedbackView";
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
@@ -213,6 +214,16 @@ function App() {
               <Redirect to="/home" />
             )}
           </ProtectedRoute>
+          
+          {/* admin feedback view page */}
+          <ProtectedRoute 
+            exact
+            path="/adminfeedbackview">
+              
+            <AdminFeedbackView />
+          
+          </ProtectedRoute>
+          
         
           <ProtectedRoute
             // logged in shows InfoPage else shows LoginPage
