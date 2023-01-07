@@ -34,6 +34,8 @@ function AdminFeedbackView() {
         return store.averageRating;
     })
     console.log('averageRating is', averageRating);
+   
+    
 
 
     //Identify duplicates in the json_agg array of answers and count them
@@ -67,7 +69,8 @@ function AdminFeedbackView() {
                                     <TableRow style={{ fontSize: '18px' }}>
                                         <TableCell>Comments</TableCell>
                                         <TableCell>Overall Rating</TableCell> 
-                                        <TableCell>Average Rating: {averageRating[0].average_rating}</TableCell>   
+                                        <TableCell>Average Rating: {averageRating[0].average_rating && 
+                                       Number(averageRating[0].average_rating).toFixed(2)}</TableCell>   
                                     </TableRow>
                                 </TableHead>
                                 <TableBody>
