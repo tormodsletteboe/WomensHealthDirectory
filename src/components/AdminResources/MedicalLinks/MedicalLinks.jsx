@@ -14,7 +14,14 @@ import Slide from '@mui/material/Slide';
 import ToggleButton from '@mui/material/ToggleButton';
 import PhoneAndroidIcon from '@mui/icons-material/PhoneAndroid';
 import Tooltip from '@mui/material/Tooltip';
-
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemButton from '@mui/material/ListItemButton';
+import ListItemIcon from '@mui/material/ListItemIcon';
+import ListItemText from '@mui/material/ListItemText';
+import Divider from '@mui/material/Divider';
+import InboxIcon from '@mui/icons-material/Inbox';
+import DraftsIcon from '@mui/icons-material/Drafts';
 
 import "./MedicalLinks.css";
 import MedicalLinksAccordion from "./MedicalLinksAccordion";
@@ -29,7 +36,7 @@ function MedicalLinks() {
 
   const [result, setResult] = useState([addMedLinks.logo_url]);
   const [selected, setSelected] = useState(addMedLinks.logo_url);
-
+  const [open, setOpen] = React.useState(false);
   const [checked, setChecked] = React.useState(true);
   const containerRef = React.useRef(null);
   
@@ -165,20 +172,34 @@ function MedicalLinks() {
             </select>
           </Grid>
           <Grid item xs={7.2}>
+          <Box sx={{ m: 1, position: 'relative' }}>
             <Button
             
               onClick={async () => {
-                const url = new URL(addMedLinks.url);
                 
+                const url = new URL(addMedLinks.url);
+               
                 const result = await axios.get(
                   `https://favicongrabber.com/api/grab/${url.hostname}`
                 );
+                console.log(result.data);
                 setResult(result.data.icons.map((icon) => icon.src));
-                
+                setOpen(true);
               }}
             >
               get icons
             </Button>
+            {open && <List> {result.map((icon) => (<ListItem disablePadding>
+            <ListItemButton>
+              <ListItemIcon>
+               {/* this is where I am, I am trying to get the image size, prop put img into an array */}
+              </ListItemIcon>
+              <ListItemText primary={icon} />
+            </ListItemButton>
+          </ListItem>))}
+        </List> }
+            
+            </Box>
           </Grid>
           <Grid item xs={1.5} textAlign={"end"}>
             <ToggleButton  onClick={handleChange} selected={checked}>
