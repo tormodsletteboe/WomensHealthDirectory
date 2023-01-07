@@ -1,8 +1,12 @@
+import { useSelect } from '@mui/base';
 import React from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useHistory } from 'react-router-dom';
 
 function LogOutButton(props) {
+
+  const user = useSelector(store => store.user);
+
   const dispatch = useDispatch();
   const history = useHistory();
   return (
@@ -13,7 +17,12 @@ function LogOutButton(props) {
       className={props.className}
       onClick={() => {
         dispatch({ type: 'LOGOUT' });
-        history.push('/feedback');
+        if(user.access_level == 0) {
+          history.push('/feedback');
+        }
+        else {
+          history.push('/home')
+        }
       }}
     >
       Log Out
