@@ -58,20 +58,17 @@ function AdminFeedbackView() {
                         id="panel1a-header"
                     >
                         <Typography textAlign='center' fontSize='18px'>Comments and Overall Rating</Typography>
+                        
                     </AccordionSummary>
                     <AccordionDetails>
                         <TableContainer height='90%' style={{ backgroundColor: '#FFFFFF' }}>
                             <Table>
                                 <TableHead>
-                                <TableBody>
                                     <TableRow style={{ fontSize: '18px' }}>
                                         <TableCell>Comments</TableCell>
-                                        <TableCell>Overall Rating</TableCell>
-                                        
-                                        <TableCell>Average Rating: </TableCell>
-                                        
+                                        <TableCell>Overall Rating</TableCell> 
+                                        <TableCell>Average Rating: {averageRating[0].average_rating}</TableCell>   
                                     </TableRow>
-                                    </TableBody>
                                 </TableHead>
                                 <TableBody>
                                     {feedback.commentsAndRatings && feedback.commentsAndRatings.map(feedbackItem =>
