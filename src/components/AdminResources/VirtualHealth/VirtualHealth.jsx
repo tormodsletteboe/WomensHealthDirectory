@@ -92,9 +92,36 @@ function VirtualHealth() {
   let imgpath = "./images/vifidefault.jpeg";
   let noImagePath = "";
 
+  function autofillVertHealth(){
+    dispatch({
+      type: "SET_VIRTUALHEALTH_TITLE",
+      payload: "Everlywell",
+    });
+    dispatch({
+      type: "SET_VIRTUALHEALTH_LINK",
+      payload: "https://www.everlywell.com/",
+    });
+    dispatch({
+      type: "SET_VIRTUALHEALTH_LOGO_URL",
+      payload: "",
+    });
+    dispatch({
+      type: "SET_VIRTUALHEALTH_DESCRIPTION",
+      payload: "At-home lab tests to telehealth.",
+    });
+    dispatch({
+      type: "SET_VIRTUALHEALTH_SPECIALTY",
+      payload: "Primary Care",
+    });
+    dispatch({
+      type: "SET_VIRTUALHEALTH_INFO_COST",
+      payload: "See: https://support.everlywell.com/article/47-insurance-coverage-faq",
+    });
+  }
+
   return (
     <Box>
-      <Typography variant="h5">Add New Virtual Health</Typography>
+      <Typography onClick={autofillVertHealth} variant="h5">Add New Virtual Health</Typography>
       <Grid container>
         <Grid item xs={12} my={1}>
           <Accordion expanded>
@@ -112,7 +139,7 @@ function VirtualHealth() {
                     onChange={(event) =>
                       dispatch({
                         type: "SET_VIRTUALHEALTH_TITLE",
-                        payload: event.target.value,
+                        payload: 'Everlywell',
                       })
                     }
                   />
@@ -126,7 +153,7 @@ function VirtualHealth() {
                     onChange={(event) =>
                       dispatch({
                         type: "SET_VIRTUALHEALTH_LINK",
-                        payload: event.target.value,
+                        payload: 'https://www.everlywell.com/',
                       })
                     }
                   />
@@ -140,7 +167,7 @@ function VirtualHealth() {
                     onChange={(event) =>
                       dispatch({
                         type: "SET_VIRTUALHEALTH_SPECIALTY",
-                        payload: event.target.value,
+                        payload: 'Primary Care',
                       })
                     }
                   />
@@ -154,7 +181,7 @@ function VirtualHealth() {
                     onChange={(event) =>
                       dispatch({
                         type: "SET_VIRTUALHEALTH_INFO_COST",
-                        payload: event.target.value,
+                        payload: 'See: https://support.everlywell.com/article/47-insurance-coverage-faq',
                       })
                     }
                   />
@@ -173,7 +200,7 @@ function VirtualHealth() {
                   onChange={(event) =>
                     dispatch({
                       type: "SET_VIRTUALHEALTH_DESCRIPTION",
-                      payload: event.target.value,
+                      payload: 'At-home lab tests to telehealth.',
                     })
                   }
                 />
