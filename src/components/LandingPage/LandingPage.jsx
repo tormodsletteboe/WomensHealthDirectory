@@ -37,21 +37,24 @@ function LandingPage() {
   const handleLearnMorePcClick = () => {
     gaEventTracker('Learn More about Preventative Care clicked ');
     history.push('/preventativecare')
-
   }
 
   //track Learn More about Resources click
   const handleLearnMoreResourcesClick = () => {
     gaEventTracker('Learn More about Resources clicked ');
     history.push('/resources');
-
   }
 
    //track Learn More about Membership click
    const handleLearnMoreMembershipClick = () => {
     gaEventTracker('Learn More about Membership clicked ');
     history.push('/membership');
+  }
 
+   //track Subscribe click
+   const handleSubscribeClick = () => {
+    gaEventTracker('Subscribe to newsletter button clicked ');
+    setModal(true);
   }
 
   return (
@@ -94,7 +97,8 @@ function LandingPage() {
         <Box className='grid-col_12' id='newsletter'>
           <h1>Subscribe to our Newsletter!</h1>
           <Typography paragraph>Get weekly news and updates of how to advocate for your health!</Typography>
-          <Button sx={({ '&:hover': { opacity: 0.7 } })} variant='outlined' style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={() => setModal(true)}>Subscribe</Button>
+          <Button sx={({ '&:hover': { opacity: 0.7 } })} variant='outlined' style={{ backgroundColor: "#8EBBA7", color: "white" }} 
+          onClick={handleSubscribeClick}>Subscribe</Button>
 
           {/* <h1>The ViFi Newsletter</h1>
           <Typography paragraph>Stay up-to-date on healthcare and what it really means for you</Typography>
