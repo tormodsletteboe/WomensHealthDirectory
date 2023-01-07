@@ -47,6 +47,13 @@ function LandingPage() {
 
   }
 
+   //track Learn More about Membership click
+   const handleLearnMoreMembershipClick = () => {
+    gaEventTracker('Learn More about Membership clicked ');
+    history.push('/membership');
+
+  }
+
   return (
     <div className="container">
       <h2>{heading}</h2>
@@ -60,7 +67,7 @@ function LandingPage() {
             your doctor with in order to make a statement that your health
             is not to be trifled with. To arms!
             <Button sx={({ justifyContent: 'center' })} variant='contained'
-              style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={() => history.push('/membership')}>Click Here to Learn More</Button>
+              style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={handleLearnMoreMembershipClick}>Click Here to Learn More</Button>
           </Typography>
         </Box>
 
