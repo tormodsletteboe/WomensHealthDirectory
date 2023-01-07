@@ -7,6 +7,7 @@ import './LandingPage.css';
 import { Button, Card, CardActions, CardContent, CardHeader, Modal, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useDispatch } from 'react-redux';
+import useAnalyticsEventTracker from '../UseAnalyticsEventTracker/UseAnalyticsEventTracker';
 
 const style = {  // modal styling
   position: 'absolute',
@@ -24,9 +25,26 @@ function LandingPage() {
   const [[modalOpen, setModal], [text, setText]] = [useState(false), useState('')];
   const [history, dispatch] = [useHistory(), useDispatch()];
 
+  //Google Analytics tracking for buttons
+  const gaEventTracker = useAnalyticsEventTracker('Learn More');
+
   const submitEmail = () => {
     dispatch({ type: 'ADD_TO_NEWSLETTER', payload: text });
     setModal(false);
+  }
+
+  //track Learn More about Preventative Care click
+  const handleLearnMorePcClick = () => {
+    gaEventTracker('Learn More about Preventative Care clicked ');
+    history.push('/preventativecare')
+
+  }
+
+  //track Learn More about Resources click
+  const handleLearnMoreResourcesClick = () => {
+    gaEventTracker('Learn More about Resources clicked ');
+    history.push('/resources');
+
   }
 
   return (
@@ -41,8 +59,8 @@ function LandingPage() {
             guidelines, preventative care, and questions to grill
             your doctor with in order to make a statement that your health
             is not to be trifled with. To arms!
-            <Button sx={({ justifyContent: 'center'})} variant='contained'
-          style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={() => history.push('/membership')}>Click Here to Learn More</Button>
+            <Button sx={({ justifyContent: 'center' })} variant='contained'
+              style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={() => history.push('/membership')}>Click Here to Learn More</Button>
           </Typography>
         </Box>
 
@@ -51,8 +69,8 @@ function LandingPage() {
           <CardContent>
             <Typography paragraph>Info Info Info</Typography>
           </CardContent>
-          <CardActions disableSpacing sx={({ 'justifyContent':'center' })}>
-            <Button variant='contained' style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={() => history.push('/preventativecare')}>Learn More</Button>
+          <CardActions disableSpacing sx={({ 'justifyContent': 'center' })}>
+            <Button variant='contained' style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={handleLearnMorePcClick}>Learn More</Button>
           </CardActions>
         </Card>
 
@@ -61,8 +79,8 @@ function LandingPage() {
           <CardContent>
             <Typography paragraph>Info Info Info</Typography>
           </CardContent>
-          <CardActions disableSpacing sx={({ 'justifyContent':'center' })}>
-            <Button variant='contained' style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={() => history.push('/resources')}>Learn More</Button>
+          <CardActions disableSpacing sx={({ 'justifyContent': 'center' })}>
+            <Button variant='contained' style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={handleLearnMoreResourcesClick}>Learn More</Button>
           </CardActions>
         </Card>
 
@@ -89,7 +107,7 @@ function LandingPage() {
                 <TextField variant='standard' onChange={(e) => setText(e.target.value)} sx={({ 'width': '100%' })} placeholder='example@email.com'></TextField>
               </CardContent>
 
-              <CardActions sx={({ 'justifyContent':'center' })}>
+              <CardActions sx={({ 'justifyContent': 'center' })}>
                 <Button variant='contained' style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={submitEmail}>Subscribe</Button>
               </CardActions>
             </Card>
