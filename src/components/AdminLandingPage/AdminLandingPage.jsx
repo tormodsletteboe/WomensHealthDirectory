@@ -15,7 +15,7 @@ import { font, fontColor, fontSize, textStyle, table, image, link, imageGallery}
 import Swal from 'sweetalert2';
 
 function AdminLandingPage() {
-	//add code comment
+	// add code comment
     // hooks
     const dispatch = useDispatch();
 	const history = useHistory();
@@ -78,6 +78,7 @@ function AdminLandingPage() {
 	}
 
 	function handleNewsletterDemoClick() {
+		console.log('clicked');
 		SunEditor.defaultValue = `<h1>Welcome to the ViFi Newsletter!</h1>
 
 		<p>Thank you for signing up! Now you will find all the latest women&apos;s health news in your inbox!</p>
@@ -131,7 +132,6 @@ function AdminLandingPage() {
 			alignItems="center" justifyContent="center"
 			flexDirection="column">
 				{ isEmailListClicked === true ?
-
 					<Button  variant="contained" color="primary" buttontext="white"
 					sx={{width: '400px', }}
 					onClick={handleEmailClick}

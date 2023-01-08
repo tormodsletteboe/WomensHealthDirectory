@@ -4,7 +4,7 @@ import './LandingPage.css';
 
 // CUSTOM COMPONENTS
 //Imports
-import { Button, Card, CardActions, CardContent, CardHeader, Modal, TextField, Typography } from '@mui/material';
+import { Button, Card, CardActions, CardContent, CardHeader, CardMedia, Modal, TextField, Typography } from '@mui/material';
 import { Box } from '@mui/system';
 import { useDispatch } from 'react-redux';
 
@@ -49,6 +49,8 @@ function LandingPage() {
         <Card variant='outlined' className='grid-col_12'>
           <CardHeader title='Preventative Care' subheader='What to look for before it happens'></CardHeader>
           <CardContent>
+            <img src='https://images.unsplash.com/photo-1590650046871-92c887180603?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1740&q=80'  
+            height="300px" overflow="hidden"></img>
             <Typography paragraph></Typography>
           </CardContent>
           <CardActions disableSpacing sx={({ 'justifyContent':'center' })}>
@@ -57,9 +59,15 @@ function LandingPage() {
         </Card>
 
         <Card variant='outlined' className='grid-col_12'>
+        <CardMedia 
+        component="img"
+        image='vifi-resources.avif' />
           <CardHeader title='Resources' subheader='Educational resources'></CardHeader>
           <CardContent>
             <Typography paragraph></Typography>
+            <CardMedia 
+            ></CardMedia>
+
           </CardContent>
           <CardActions disableSpacing sx={({ 'justifyContent':'center' })}>
             <Button variant='contained' style={{ backgroundColor: "#8EBBA7", color: "white" }} onClick={() => history.push('/resources')}>Learn More</Button>
