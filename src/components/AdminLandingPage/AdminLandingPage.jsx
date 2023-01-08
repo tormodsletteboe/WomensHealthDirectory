@@ -158,6 +158,15 @@ function AdminLandingPage() {
             Welcome, Admin!
           </Typography>
         </Grid>
+		<Grid item mb={2} >
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleViewFeedback}
+        >
+          View User Feedback
+        </Button>
+		</Grid>
         <Grid item mb={2}>
           <Button variant="contained" color="primary" onClick={handleEmailClick}>
             {isEmailListClicked === true
@@ -188,15 +197,7 @@ function AdminLandingPage() {
           </CSVLink>
         </Button>
 		</Grid>
-		<Grid item mb={2}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleViewFeedback}
-        >
-          View User Feedback
-        </Button>
-		</Grid>
+
         {isEditorClicked === false ? (
           <Grid item mb={2}>
 		  <Button variant="contained" onClick={handleEditorClick}>
