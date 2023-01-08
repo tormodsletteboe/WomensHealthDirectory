@@ -65,14 +65,14 @@ function AdminFeedbackView() {
                         <TableContainer height='90%' style={{ backgroundColor: '#FFFFFF' }}>
                             <Table>
                                 <TableHead>
-                                    {/* {averageRating && averageRating.map(average => */}
-                                    <TableRow style={{ fontSize: '18px' }}>
+                                    {averageRating && averageRating.map((average, index) =>
+                                    <TableRow style={{ fontSize: '18px' }} key={index} >
                                         <TableCell>Comments</TableCell>
                                         <TableCell>Overall Rating</TableCell> 
-                                        <TableCell>Average Rating: 4.00
+                                        <TableCell>Average Rating: {Number(average.average_rating).toFixed(2)}
                                         </TableCell>   
                                     </TableRow>
-                                    {/* )} */}
+                                     )}
                                 </TableHead>
                                 <TableBody>
                                     {feedback.commentsAndRatings && feedback.commentsAndRatings.map(feedbackItem =>
