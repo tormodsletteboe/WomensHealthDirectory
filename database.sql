@@ -210,7 +210,6 @@ OR every 5 years with hrHPV testing in combination with cytology (cotesting).
 INSERT INTO "diagnostic_tool" ("name", "info", "health_category_id", "age_range_id")
 VALUES ('Pap smear', 'aka Pap screening test, a sample is collected during a speculum exam with a brush. Sample is sent to the lab and reviewed under a microscope by a cytologist.', 1, 5), 
 ('HPV Testing', 'aka human papillomavirus screening test. Sample is collected during the speculum exam with a brush. Sample is sent to the lab and tested in an analyzer for DNA or RNA from certain types of HPV that are known to cause cervical cancer. ', 1, 5),
-('Bio-marker Triage Testing', 'uses your initial sample to see if specific biomarkers are present, which could indicate progression of disease', 1, 5),
 ('Colposcopy', 'cervical examination using an instrument called a colposcope, which uses a magnifying lens to allow the provider to clearly see the surface of the cervix up close.', 1, 5),
 ('Cervical Biopsy', 'biopsies can be used to diagnose cervical pre-cancers and cancers. If the biopsy can completely remove all of the abnormal tissue, it might be the only treatment needed.', 1, 5),
 ('Colposcopic Biopsy', 'a tissue sample of the abnormal area is taken during the colposcopy.  The sample is sent to the lab for review by pathology and a diagnostic result (precancer, cancer, no cancer).', 1, 5),

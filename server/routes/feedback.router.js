@@ -5,7 +5,8 @@ const router = express.Router();
 
 router.get('/', async (req, res) => { // GET ALL FEEDBACK: RATINGS + COMMENTS
     let commentsAndRatingsSqlText = `
-    SELECT "feedback"."id", "feedback"."comment", "feedback"."rating" FROM "feedback";
+    SELECT "feedback"."id", "feedback"."comment", "feedback"."rating" FROM "feedback"
+    ORDER BY "feedback"."id" DESC;
     `;
 
     let questionAndAnswerSqlText = `

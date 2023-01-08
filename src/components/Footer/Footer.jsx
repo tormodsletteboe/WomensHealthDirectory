@@ -6,6 +6,7 @@ import {useSelector} from 'react-redux';
 function Footer() {
 const user = useSelector((store) => store.user);
 
+
  return (
   <>
   {/* if the user is not an admin, display the mission statement in the footer */}

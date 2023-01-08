@@ -25,20 +25,28 @@ function LoginForm() {
       dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
   }; // end login
-function fillData() {
-    setUsername("tormod");
-    setPassword("tormod");
+  function fillData(event) {
+    event.preventDefault();
+    setUsername("Aina M Robertson");
+    setPassword("aina");
+  }
+  function loginAsAdmin(event) {
+    event.preventDefault();
+    setUsername("admin");
+    setPassword("admin");
   }
   return (
-    <form className="formPanel" onSubmit={login}>
-      <h2 onClick={fillData}>Sign in to the Vifi</h2>
+    <form className="formPanel" onSubmit={login} >
+      <h2 onClick={fillData}   >
+        Sign in to the Vifi
+      </h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}
         </h3>
       )}
       <Grid container direction="column" spacing={5} mt={5}>
-        <Grid item>
+        <Grid item >
           <TextField
             sx={{ width: "100%" }}
             label={"Username"}
@@ -47,6 +55,7 @@ function fillData() {
             value={username}
             onChange={(event) => setUsername(event.target.value)}
             mb={3}
+            onClick={loginAsAdmin}
           />
         </Grid>
         <Grid item>
@@ -63,12 +72,11 @@ function fillData() {
         <Grid item>
           <Button
             variant="contained"
-            sx={{ width: "100%",minHeight: "50px" }}
+            sx={{ width: "100%", minHeight: "50px" }}
             className="btn"
             type="submit"
             name="submit"
             value="Log In"
-            
           >
             Login
           </Button>
