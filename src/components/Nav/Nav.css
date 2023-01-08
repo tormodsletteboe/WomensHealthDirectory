@@ -22,7 +22,7 @@
 
 /* Style navigation menu links */
 .topnav a {
-  color: white;
+  color: #171717;
   padding: 4px 16px;
   text-decoration: none;
   font-size: 15px;
@@ -49,13 +49,13 @@
 /* Style the active link (or home/logo) */
 .active {
   background-color: #8EBBA7;
-  color: white;
+  color: #171717;
 }
 
 .logout{
   border: none;
   background-color: #8EBBA7;
-  color: white;
+  color: #171717;
   font-size: 14px;
   padding-bottom: 1rem;
   padding-top: 0.5rem;

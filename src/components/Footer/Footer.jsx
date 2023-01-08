@@ -11,7 +11,7 @@ const user = useSelector((store) => store.user);
   {/* if the user is not an admin, display the mission statement in the footer */}
   {user.access_level === 0 && (
     <footer>
-         <Typography variant='h6' className="footerTitle" paddingBottom={0}>
+         <Typography variant='h6' className="footerTitle" paddingBottom={0} marginTop="20px">
             Mission:
         </Typography>
         <Typography paragraph p={2} paddingBottom={0} paddingTop={1}>
@@ -30,7 +30,7 @@ const user = useSelector((store) => store.user);
     {/* If no user is logged in, display the mission statement in the footer */}
     {!user.id && (
         <footer>
-         <Typography variant='h6' className="footerTitle" paddingBottom={0}>
+         <Typography variant='h6' className="footerTitle" paddingBottom={0} marginTop="20px">
             Mission:
         </Typography>
         <Typography paragraph p={2} paddingBottom={0} paddingTop={1}>

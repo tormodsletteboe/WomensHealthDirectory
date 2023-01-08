@@ -46,7 +46,7 @@ function Nav() {
     <ClickAwayListener onClickAway={handleClickAway}>
     <div className="topnav">
       <Link className="navTitle" to="/home">
-        <h4>The Vifi</h4>
+        <h3>The Vifi</h3>
       </Link>
       {/* Navigation links (hidden by default) */}
       <div id="myLinks">
@@ -84,7 +84,7 @@ function Nav() {
         <ReorderIcon
           size="small"
           sx={{ fontSize: "2rem" }}
-          style={{ color: "white" }}
+          style={{ color: "#171717" }}
           onClick={handleClick}
         ></ReorderIcon>
       </div>
@@ -95,7 +95,7 @@ function Nav() {
           // If there's no user, show join button
           <Button
           variant="contained"
-          style={{ backgroundColor: "#8EBBA7", color: "white" }}
+          style={{ backgroundColor: "#8EBBA7"}}
           onClick={handleJoin}
         >
           Join

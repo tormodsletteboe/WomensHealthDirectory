@@ -62,7 +62,7 @@ const theme = createTheme({
     type: 'light',
     primary: {
       main: '#8EBBA7',
-      contrastText: "#fff"
+      contrastText: "#171717"
     },
     secondary: {
       main: 'rgb(99, 130, 116)',
@@ -71,6 +71,9 @@ const theme = createTheme({
       primary: '#000000',
       secondary: '#a3a3a3',
       white: '#fff'
+    },
+    link: {
+      primary: "#171717"
     },
     error: {
       main: '#d63a2f',
