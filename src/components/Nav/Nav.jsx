@@ -66,9 +66,12 @@ function Nav() {
           Resources
         </Link>
 
+        {!user.id && (
+          // If user is not logged in, show membership link on nav bar
         <Link className="navLink" to="/membership">
           Membership
         </Link>
+        )}
 
         {/* If no user is logged in, show these links */}
         {!user.id && (
