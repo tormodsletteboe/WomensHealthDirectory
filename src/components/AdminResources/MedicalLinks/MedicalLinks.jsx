@@ -30,7 +30,7 @@ function MedicalLinks() {
   const [result, setResult] = useState([addMedLinks.logo_url]);
   const [selected, setSelected] = useState(addMedLinks.logo_url);
 
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = React.useState(false);
   const containerRef = React.useRef(null);
   
   
