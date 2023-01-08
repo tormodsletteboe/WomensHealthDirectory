@@ -171,11 +171,11 @@ function Feedback() {
             }
             {page == 10 &&
                 <Box>
-                    <Typography paragraph >
+                    <Typography paragraph onClick={()=>{setComment('Overall the app looks and works great. I would suggest adding Everlywell.com to Virtual Healh. There is also a new Diagnosic Tool called Bio-marker Triage Testing.')}}>
                         Thank you for completing the survey!
                         Leave a comment and a rating about your overall experience using The Vifi!
                     </Typography>
-                    <TextField label={'Leave a comment!'} value={comment} onChange={(e) => setComment(e.target.value)} sx={({ 'width': '100%' })}></TextField>
+                    <TextField label={'Leave a comment!'} value={comment} onChange={(e) => setComment(e.target.value)} sx={({ 'width': '100%' })} multiline></TextField>
                     <Box sx={({ 'textAlign':'center' })}>
                         <Typography paragraph sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'marginTop':'5%' })}>How do you rate your overall experience?</Typography>
                         <Select value={rating} onChange={(e) => setRating(e.target.value)}>
