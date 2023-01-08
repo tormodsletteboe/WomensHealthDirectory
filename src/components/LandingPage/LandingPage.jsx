@@ -71,7 +71,7 @@ function LandingPage() {
             is not to be trifled with. To arms!
             </Typography>
             <Button sx={({ justifyContent: 'center' })} variant='contained'
-              style={{ backgroundColor: "#8EBBA7", color: "white", marginBottom: "20px" }} onClick={handleLearnMoreMembershipClick}>Click Here to Learn More
+              style={{ backgroundColor: "#8EBBA7", marginBottom: "20px" }} onClick={handleLearnMoreMembershipClick}>Click Here to Learn More
             </Button>
         </Box>
 
@@ -85,7 +85,7 @@ function LandingPage() {
           />
           <CardHeader title='Preventative Care' subheader='What to look for before it happens'></CardHeader>
           <CardActions disableSpacing sx={({ 'justifyContent': 'center' })}>
-            <Button variant='contained' style={{ backgroundColor: "#8EBBA7", color: "white", marginBottom: "10px" }} onClick={handleLearnMorePcClick}>Learn More
+            <Button variant='contained' style={{ backgroundColor: "#8EBBA7", marginBottom: "10px" }} onClick={handleLearnMorePcClick}>Learn More
             </Button>
           </CardActions>
         </Card>
@@ -99,7 +99,7 @@ function LandingPage() {
         />
           <CardHeader title='Resources' subheader='Educational resources'></CardHeader>
           <CardActions disableSpacing sx={({ 'justifyContent': 'center' })}>
-            <Button variant='contained' style={{ backgroundColor: "#8EBBA7", color: "white", marginBottom: "10px" }} onClick={handleLearnMoreResourcesClick}>Learn More</Button>
+            <Button variant='contained' style={{ backgroundColor: "#8EBBA7", marginBottom: "10px" }} onClick={handleLearnMoreResourcesClick}>Learn More</Button>
           </CardActions>
         </Card>
 
