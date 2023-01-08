@@ -71,8 +71,8 @@ function PreventativeCare() {
     
     <Box textAlign = 'center' marginRight = '3rem'>
     {healthCategories.map(category => (
-    <ul>
-        <li key={category.id}>
+    <ul key={category.id}>
+        <li>
             <Button 
                 variant="contained" 
                 onClick={() => handleCategoryClick(category)} 
