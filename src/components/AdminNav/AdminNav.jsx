@@ -35,14 +35,15 @@ function AdminNav() {
             <Link className="navLink" to="/adminprevcare">
               Preventative Care
             </Link>
-
-            <LogOutButton className="navLink" />
           </>
         )}
 
         <Link className="navLink" to="/about">
           About
         </Link>
+        {user.id && (
+          <LogOutButton className="navLink" />
+        )}
       </div>
     </div>
   );
