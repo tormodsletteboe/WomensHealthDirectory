@@ -51,9 +51,10 @@ function AdminFeedbackView() {
         <>
             <div>
                 <Typography textAlign='center' fontSize='32px'>User Feedback</Typography>
-                <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF' }}>
+                <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', 
+                backgroundColor: '#8EBBA7'}}>
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon style={{ color: '#FFFFFF' }} />}
+                        expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
@@ -68,7 +69,7 @@ function AdminFeedbackView() {
                                     <TableRow style={{ fontSize: '18px' }}>
                                         <TableCell>Comments</TableCell>
                                         <TableCell>Overall Rating</TableCell> 
-                                        <TableCell>Average Rating: 2.00
+                                        <TableCell>Average Rating: 4.00
                                         </TableCell>   
                                     </TableRow>
                                     {/* )} */}
@@ -91,13 +92,15 @@ function AdminFeedbackView() {
                 </Accordion>
                 <div>
                     {feedback.questionsAndAnswers && feedback.questionsAndAnswers.map(questionAndAnswerItem =>
-                        <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF' }}>
+                        <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', 
+                        backgroundColor: '#8EBBA7'}}
+                        key={questionAndAnswerItem.id}>
                             <AccordionSummary
-                                expandIcon={<ExpandMoreIcon style={{ color: '#FFFFFF' }} />}
+                                expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel2a-content"
                                 id="panel2a-header"
                             >
-                                <Typography key={questionAndAnswerItem.id} fontSize='18px'>
+                                <Typography fontSize='18px'>
                                     {questionAndAnswerItem.question}
                                 </Typography>
                             </AccordionSummary>
