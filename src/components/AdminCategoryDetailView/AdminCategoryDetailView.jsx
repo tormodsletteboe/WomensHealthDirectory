@@ -112,14 +112,14 @@ function AdminCategoryDetailView() {
     // Breadcrumbs
     const breadcrumbs = [
         <Link underline="hover" 
-        key="1" color="inherit" 
+        key="1" color="black" 
         href="/">
           Admin
         </Link>,
         <Link
           underline="hover"
           key="2"
-          color="inherit"
+          color="black"
           href="/#/adminprevcare"
         >
           Preventative Care
@@ -144,7 +144,7 @@ function AdminCategoryDetailView() {
         <>
         <ThemeProvider theme={theme}>
         {/* MUI Breadcrumbs */}
-        <Stack spacing={2}>
+        <Stack spacing={2} ml={5}>
             <Breadcrumbs
                 separator={<NavigateNextIcon fontSize="small" />}
                 aria-label="breadcrumb"

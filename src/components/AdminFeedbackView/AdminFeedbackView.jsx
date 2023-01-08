@@ -20,6 +20,9 @@ function AdminFeedbackView() {
         dispatch({
             type: 'FETCH_USER_FEEDBACK'
         });
+        dispatch({
+            type: 'FETCH_AVERAGE_RATING'
+        });
     }, []);
 
     const feedback = useSelector((store) => {
@@ -27,30 +30,52 @@ function AdminFeedbackView() {
     })
     console.log('feedback is', feedback);
 
+    const averageRating = useSelector((store)=>{
+        return store.averageRating;
+    })
+    console.log('averageRating is', averageRating);
+   
+
+    //Identify duplicates in the json_agg array of answers and count them
+    //Count starts over with each new array of answers
+    const countAnswers = (array) => {
+        let count = {};
+        array.map(element =>
+            (count[element]) ? count[element] += 1 : count[element] = 1
+        );
+        console.log(count);
+        return count;
+    }
+
     return (
         <>
             <div>
-                <Typography textAlign='center' fontSize = '32px'>User Feedback</Typography>
-                <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>
+                <Typography textAlign='center' fontSize='32px'>User Feedback</Typography>
+                <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF' }}>
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
+                        expandIcon={<ExpandMoreIcon style={{ color: '#FFFFFF' }} />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
-                        <Typography textAlign= 'center' fontSize = '18px'>Comments and Overall Rating</Typography>
+                        <Typography textAlign='center' fontSize='18px'>Comments and Overall Rating</Typography>
+                        
                     </AccordionSummary>
                     <AccordionDetails>
-                        <TableContainer height='90%' style = {{backgroundColor: '#FFFFFF'}}>
+                        <TableContainer height='90%' style={{ backgroundColor: '#FFFFFF' }}>
                             <Table>
                                 <TableHead>
-                                    <TableRow style={{fontSize: '18px'}}>
+                                    {/* {averageRating && averageRating.map(average => */}
+                                    <TableRow style={{ fontSize: '18px' }}>
                                         <TableCell>Comments</TableCell>
-                                        <TableCell>Overall Rating</TableCell>
+                                        <TableCell>Overall Rating</TableCell> 
+                                        <TableCell>Average Rating: 2.00
+                                        </TableCell>   
                                     </TableRow>
+                                    {/* )} */}
                                 </TableHead>
                                 <TableBody>
                                     {feedback.commentsAndRatings && feedback.commentsAndRatings.map(feedbackItem =>
-                                        <TableRow style={{fontSize: '18px'}} key={feedbackItem.id}>
+                                        <TableRow style={{ fontSize: '18px' }} key={feedbackItem.id}>
                                             <TableCell>
                                                 {feedbackItem.comment}
                                             </TableCell>
@@ -64,49 +89,39 @@ function AdminFeedbackView() {
                         </TableContainer>
                     </AccordionDetails>
                 </Accordion>
-
-                {/* <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>
-                    <AccordionSummary
-                        expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
-                        aria-controls="panel2a-content"
-                        id="panel2a-header"
-                    >
-                        <Typography fontSize = '18px'>Most Common Ratings</Typography>
-                    </AccordionSummary>
-                    <AccordionDetails>
-                        <Typography>
-
-                        </Typography>
-                    </AccordionDetails>
-                </Accordion> */}
-
                 <div>
                     {feedback.questionsAndAnswers && feedback.questionsAndAnswers.map(questionAndAnswerItem =>
-                        <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF'}}>
+                        <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF' }}>
                             <AccordionSummary
-                                expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
+                                expandIcon={<ExpandMoreIcon style={{ color: '#FFFFFF' }} />}
                                 aria-controls="panel2a-content"
                                 id="panel2a-header"
                             >
-                                <Typography key={questionAndAnswerItem.id} fontSize = '18px'>
+                                <Typography key={questionAndAnswerItem.id} fontSize='18px'>
                                     {questionAndAnswerItem.question}
                                 </Typography>
                             </AccordionSummary>
                             <AccordionDetails>
-                                <TableContainer height='90%' style = {{backgroundColor: '#FFFFFF'}}>
+                                <TableContainer height='90%' style={{ backgroundColor: '#FFFFFF' }}>
                                     <Table>
                                         <TableHead>
-                                            <TableRow style={{fontSize: '18px'}}>
+                                            <TableRow style={{ fontSize: '18px' }}>
                                                 <TableCell>
-                                                        Answers
+                                                    Answers
+                                                </TableCell>
+                                                <TableCell>
+                                                    Count
                                                 </TableCell>
                                             </TableRow>
                                         </TableHead>
                                         <TableBody>
-                                            {questionAndAnswerItem.json_agg.map(answer =>
-                                                <TableRow>
+                                            {Object.entries(countAnswers(questionAndAnswerItem.json_agg)).map(([key, value], index) =>
+                                                <TableRow key={index}>
                                                     <TableCell>
-                                                        {answer}
+                                                        {key}
+                                                    </TableCell>
+                                                    <TableCell>
+                                                        {value}
                                                     </TableCell>
                                                 </TableRow>
                                             )}

@@ -34,6 +34,10 @@ import UserVirtualHealth from "../UserVirtualHealth/UserVirtualHealth";
 import AdminFeedbackView from "../AdminFeedbackView/AdminFeedbackView";
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import ReactGA from 'react-ga';
+const TRACKING_ID = "UA-253396643-2"; // OUR_TRACKING_ID
+ReactGA.initialize(TRACKING_ID);
+
 
 //function used to redirect if its admin loggin in or user logging in
 function UserOrAdmin(user) {
@@ -55,22 +59,22 @@ const theme = createTheme({
     },
   },
   palette: {
-      type: 'light',
-      primary: {
-        main: '#8EBBA7',
-        contrastText: "#fff"
-      },
-      secondary: {
-        main: 'rgb(99, 130, 116)',
-      },
-      text: {
-        primary: '#000000',
-        secondary: '#a3a3a3',
-        white: '#fff'
-      },
-      error: {
-        main: '#d63a2f',
-      }
+    type: 'light',
+    primary: {
+      main: '#8EBBA7',
+      contrastText: "#fff"
+    },
+    secondary: {
+      main: 'rgb(99, 130, 116)',
+    },
+    text: {
+      primary: '#000000',
+      secondary: '#a3a3a3',
+      white: '#fff'
+    },
+    error: {
+      main: '#d63a2f',
+    }
   }
 });
 
@@ -79,244 +83,251 @@ function App() {
 
   const user = useSelector((store) => store.user);
 
+
   useEffect(() => {
     dispatch({ type: "FETCH_USER" });
   }, [dispatch]);
+
+  //Google Analytics
+  useEffect(() => {
+    ReactGA.pageview(window.location.pathname + window.location.hash + window.location.search);
+  }, []);
+
 
   // MUI theme provider
 
   return (
     <ThemeProvider theme={theme}>
-    <Router>
-      <div>
-        {user.id && user.access_level == 1 ? <AdminNav /> : <Nav />}
-        <Switch>
-          {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
-          <Redirect exact from="/" to="/home" />
+      <Router>
+        <div>
+          {user.id && user.access_level == 1 ? <AdminNav /> : <Nav />}
+          <Switch>
+            {/* Visiting localhost:3000 will redirect to localhost:3000/home */}
+            <Redirect exact from="/" to="/home" />
 
-          <Route 
-            exact
-            path="/adminprevcare">
-            
-            <AdminPreventativeCare />
-          </Route>
-          {/* Visiting localhost:3000/about will show the about page. */}
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/about"
-          >
-            <AboutPage />
-          </Route>
+            <Route
+              exact
+              path="/adminprevcare">
 
-          <Route
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/membership"
-          >
-            <Membership />
-          </Route>
+              <AdminPreventativeCare />
+            </Route>
+            {/* Visiting localhost:3000/about will show the about page. */}
+            <Route
+              // shows AboutPage at all times (logged in or not)
+              exact
+              path="/about"
+            >
+              <AboutPage />
+            </Route>
 
-          <Route
-            exact
-            path="/feedback"
-          >
-            <Feedback />
-          </Route>
+            <Route
+              // shows AboutPage at all times (logged in or not)
+              exact
+              path="/membership"
+            >
+              <Membership />
+            </Route>
 
-          {/* For protected routes, the view could show one of several things on the same route.
+            <Route
+              exact
+              path="/feedback"
+            >
+              <Feedback />
+            </Route>
+
+            {/* For protected routes, the view could show one of several things on the same route.
             Visiting localhost:3000/user will show the UserPage if the user is logged in.
             If the user is not logged in, the ProtectedRoute will show the LoginPage (component).
             Even though it seems like they are different pages, the user is always on localhost:3000/user */}
-          <ProtectedRoute
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/preventativecare"
-          >
-            <PreventativeCare />
-          </ProtectedRoute>
+            <ProtectedRoute
+              // shows AboutPage at all times (logged in or not)
+              exact
+              path="/preventativecare"
+            >
+              <PreventativeCare />
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/virtualhealth"
-          >
-            <UserVirtualHealth />
-          </ProtectedRoute>
+            <ProtectedRoute
+              // shows AboutPage at all times (logged in or not)
+              exact
+              path="/virtualhealth"
+            >
+              <UserVirtualHealth />
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            // shows AboutPage at all times (logged in or not)
-            exact
-            path="/medicallinks"
-          >
-            <UserMedicalLinks />
-          </ProtectedRoute>
-
-
-          <ProtectedRoute
-            // logged in shows UserPage else shows LoginPage
-            exact
-            path="/user"
-          >
-            {user.access_level === 1 ? <Redirect to="/admin" /> : <UserPage />}
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/info"
-          >
-            <InfoPage />
-          </ProtectedRoute>
-
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/resources"
-          >
-            <Resources />
-          </ProtectedRoute>
-
-          <Route exact path="/login">
-            {UserOrAdmin(user)}
-          </Route>
-
-          <Route exact path="/registration">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the registration page
-              <RegisterPage />
-            )}
-          </Route>
-
-          <Route exact path="/home">
-            {user.id ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <Redirect to="/user" />
-            ) : (
-              // Otherwise, show the Landing page
-              <LandingPage />
-            )}
-          </Route>
-          
-          {/* admin landing page */}
-          <ProtectedRoute exact path="/admin">
-            {user.id && user.access_level == 1 ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <AdminLandingPage />
-            ) : (
-              // Otherwise, show the Landing page
-              <Redirect to="/home" />
-            )}
-          </ProtectedRoute>
-          
-          {/* admin feedback view page */}
-          <ProtectedRoute 
-            exact
-            path="/adminfeedbackview">
-              
-            <AdminFeedbackView />
-          
-          </ProtectedRoute>
-          
-        
-          <ProtectedRoute
-            // logged in shows InfoPage else shows LoginPage
-            exact
-            path="/preventativecare/:catId/ages/:ageId"
-          >
-            <CategoryDetailView />
-          </ProtectedRoute>
+            <ProtectedRoute
+              // shows AboutPage at all times (logged in or not)
+              exact
+              path="/medicallinks"
+            >
+              <UserMedicalLinks />
+            </ProtectedRoute>
 
 
-          {/* admin resources page */}
-          <ProtectedRoute
-           exact 
-           path="/adminresources"
-           >
-            {user.id && user.access_level == 1 ? (
-              // If the user is already logged in,
-              // redirect them to the /user page
-              <AdminResources />
-            ) : (
-              // Otherwise, show the Landing page
-              <Redirect to="/home" />
-            )}
-          </ProtectedRoute >
+            <ProtectedRoute
+              // logged in shows UserPage else shows LoginPage
+              exact
+              path="/user"
+            >
+              {user.access_level === 1 ? <Redirect to="/admin" /> : <UserPage />}
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            exact
-            path="/adminprevcare"
-          >
-            {user.id && user.access_level==1?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <AdminPreventativeCare />
-              :
-              // Otherwise, show the Landing page
-              <Redirect to="/home" />
-            }
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/info"
+            >
+              <InfoPage />
+            </ProtectedRoute>
 
-          </ProtectedRoute>
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/resources"
+            >
+              <Resources />
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            exact
-            path="/adminprevcare/:catId/ages/:ageId"
-          >
-            {user.id && user.access_level==1?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <AdminCategoryDetailView />
-              :
-              // Otherwise, show the Landing page
-              <Redirect to="/home" />
-            }
+            <Route exact path="/login">
+              {UserOrAdmin(user)}
+            </Route>
 
-          </ProtectedRoute>
+            <Route exact path="/registration">
+              {user.id ? (
+                // If the user is already logged in,
+                // redirect them to the /user page
+                <Redirect to="/user" />
+              ) : (
+                // Otherwise, show the registration page
+                <RegisterPage />
+              )}
+            </Route>
 
-          <ProtectedRoute
-            exact
-            path="/adminprevcare/:catId/ages/:ageId/:sectionName"
-          >
-            {user.id && user.access_level==1?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <AdminCategoryDetailView />
-              :
-              // Otherwise, show the Landing page
-              <Redirect to="/home" />
-            }
+            <Route exact path="/home">
+              {user.id ? (
+                // If the user is already logged in,
+                // redirect them to the /user page
+                <Redirect to="/user" />
+              ) : (
+                // Otherwise, show the Landing page
+                <LandingPage />
+              )}
+            </Route>
 
-          </ProtectedRoute>
+            {/* admin landing page */}
+            <ProtectedRoute exact path="/admin">
+              {user.id && user.access_level == 1 ? (
+                // If the user is already logged in,
+                // redirect them to the /user page
+                <AdminLandingPage />
+              ) : (
+                // Otherwise, show the Landing page
+                <Redirect to="/home" />
+              )}
+            </ProtectedRoute>
 
-          <ProtectedRoute
-            exact
-            path="/adminprevcare/specificresources/:categoryId"
-          >
-            {user.id && user.access_level==1?
-              // If the user is already logged in, 
-              // redirect them to the /user page
-              <AdminSpecificResources />
-              :
-              // Otherwise, show the Landing page
-              <Redirect to="/home" />
-            }
+            {/* admin feedback view page */}
+            <ProtectedRoute
+              exact
+              path="/adminfeedbackview">
 
-          </ProtectedRoute>
+              <AdminFeedbackView />
 
-          {/* If none of the other routes matched, we will show a 404. */}
-          <Route>
-            <h1>404</h1>
-          </Route>
-        </Switch>
-        <Footer />
-      </div>
-    </Router>
+            </ProtectedRoute>
+
+
+            <ProtectedRoute
+              // logged in shows InfoPage else shows LoginPage
+              exact
+              path="/preventativecare/:catId/ages/:ageId"
+            >
+              <CategoryDetailView />
+            </ProtectedRoute>
+
+
+            {/* admin resources page */}
+            <ProtectedRoute
+              exact
+              path="/adminresources"
+            >
+              {user.id && user.access_level == 1 ? (
+                // If the user is already logged in,
+                // redirect them to the /user page
+                <AdminResources />
+              ) : (
+                // Otherwise, show the Landing page
+                <Redirect to="/home" />
+              )}
+            </ProtectedRoute >
+
+            <ProtectedRoute
+              exact
+              path="/adminprevcare"
+            >
+              {user.id && user.access_level == 1 ?
+                // If the user is already logged in, 
+                // redirect them to the /user page
+                <AdminPreventativeCare />
+                :
+                // Otherwise, show the Landing page
+                <Redirect to="/home" />
+              }
+
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              exact
+              path="/adminprevcare/:catId/ages/:ageId"
+            >
+              {user.id && user.access_level == 1 ?
+                // If the user is already logged in, 
+                // redirect them to the /user page
+                <AdminCategoryDetailView />
+                :
+                // Otherwise, show the Landing page
+                <Redirect to="/home" />
+              }
+
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              exact
+              path="/adminprevcare/:catId/ages/:ageId/:sectionName"
+            >
+              {user.id && user.access_level == 1 ?
+                // If the user is already logged in, 
+                // redirect them to the /user page
+                <AdminCategoryDetailView />
+                :
+                // Otherwise, show the Landing page
+                <Redirect to="/home" />
+              }
+
+            </ProtectedRoute>
+
+            <ProtectedRoute
+              exact
+              path="/adminprevcare/specificresources/:categoryId"
+            >
+              {user.id && user.access_level == 1 ?
+                // If the user is already logged in, 
+                // redirect them to the /user page
+                <AdminSpecificResources />
+                :
+                // Otherwise, show the Landing page
+                <Redirect to="/home" />
+              }
+
+            </ProtectedRoute>
+
+            {/* If none of the other routes matched, we will show a 404. */}
+            <Route>
+              <h1>404</h1>
+            </Route>
+          </Switch>
+          <Footer />
+        </div>
+      </Router>
     </ThemeProvider>
   );
 }
