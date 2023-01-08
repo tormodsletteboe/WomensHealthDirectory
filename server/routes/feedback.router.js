@@ -10,11 +10,13 @@ router.get('/', async (req, res) => { // GET ALL FEEDBACK: RATINGS + COMMENTS
 
     let questionAndAnswerSqlText = `
     SELECT "feedback_q"."question", json_agg(("feedback_q"."answer")) FROM "feedback_q"
-    GROUP BY "feedback_q"."question";
+    GROUP BY "feedback_q"."question"
+    LIMIT 20;
     `;
 
     let answerCountSqlText = `
-    SELECT "question", "answer", count("answer") from "feedback_q" group by "question", "answer";
+    SELECT "question", "answer", count("answer") from "feedback_q" group by "question", "answer"
+    LIMIT 20;
     `;
 
     try{

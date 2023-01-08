@@ -54,6 +54,7 @@ function PreventativeCare() {
 
     return(
     <>
+    <Box textAlign='center'>
     <h4>Screening Recommended by Age</h4>
 
     <form onSubmit={handleAgeFormSubmit}>
@@ -66,11 +67,12 @@ function PreventativeCare() {
                  ))}
             </select>
     </form>
+    </Box>
     
     <Box textAlign = 'center' marginRight = '3rem'>
     {healthCategories.map(category => (
-    <ul>
-        <li key={category.id}>
+    <ul key={category.id}>
+        <li>
             <Button 
                 variant="contained" 
                 onClick={() => handleCategoryClick(category)} 

@@ -1,4 +1,4 @@
-const averageRating = (state = {}, action) => {
+const averageRating = (state = [], action) => {
 
     if (action.type === 'SET_AVERAGE_RATING') {
         return action.payload;

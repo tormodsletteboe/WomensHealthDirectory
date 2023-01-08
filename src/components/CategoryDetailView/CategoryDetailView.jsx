@@ -146,7 +146,7 @@ function CategoryDetailView(){
         </AccordionSummary>
         <AccordionDetails>
         {specificresources && specificresources.map((resource) => (
-            <List key={resource.id} style={{backgroundColor: '#FFFFFF'}}>
+            <List key={resource.id} style={{backgroundColor: '#8EBBA7'}}>
                 <ListItem>
                     <Button 
                         variant = "contained"
