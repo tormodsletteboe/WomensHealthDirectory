@@ -41,7 +41,7 @@ function AdminFeedbackView() {
     const countAnswers = (array) => {
         let count = {};
         array.map(element =>
-            (count[element]) ? count[element] + 1 : count[element] = 1
+            (count[element]) ? count[element] += 1 : count[element] = 1
         );
         console.log(count);
         return count;
