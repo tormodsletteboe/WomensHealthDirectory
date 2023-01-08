@@ -168,19 +168,15 @@ function AdminLandingPage() {
             View User Feedback
           </Button>
         </Grid>
-		<Grid item mb={2}>
+        <Grid item mb={2}>
           <Link
-            mr={1}
-            ml={0}
-            pl={1}
-            variant="button"
             target="_blank"
             underline="none"
             href={
               "https://analytics.google.com/analytics/web/?utm_source=demoaccount&utm_medium=demoaccount&utm_campaign=demoaccount#/report/visitors-flow/a54516992w87479473p92320289/"
             }
           >
-            {"Google Analytics"}
+            <Button variant="contained">{"Google Analytics"}</Button>
           </Link>
         </Grid>
         <Grid item mb={2}>
@@ -195,7 +191,7 @@ function AdminLandingPage() {
             <div className=""></div>
           </Button>
         </Grid>
-        
+
         {isEmailListClicked === true ? (
           <Grid item mb={2}>
             <List>

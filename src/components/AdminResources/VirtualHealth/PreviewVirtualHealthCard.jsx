@@ -63,7 +63,7 @@ const PreviewVirtualHealthCard = React.forwardRef((props,ref) => {
             <ExpandMoreIcon />
           </ExpandMore>
         )}
-         <Link mr={1} ml={0} pl={1} variant="button" underline="none" href={virthealthlink.link}>
+         <Link mr={1} ml={0} pl={1} variant="button" underline="none" href={virthealthlink.link} target="_blank">
           learn more
         </Link>
       </CardActions>

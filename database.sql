@@ -257,3 +257,25 @@ VALUES
 ('Kaia Health','Requires insurance coverage','https://kaiahealth.com/ ','Physical Therapy','',''),
 ('TheraNow','Employer pays initial fee. The employee will be the person who chooses the plan that best fits their needs, among the three plans available. If an employee chooses to upgrade to one of the premium plans, they will pay the corresponding monthly fee.','https://www.theranow.com/home','Physical Therapy','https://www.theranow.com/images/favicon.png','')
 ;
+
+INSERT INTO "feedback" ("rating", "comment")
+VALUES 
+(4, 'Found this app very useful for finding information'),
+(3, 'Preventative care resources were helpful'),
+(2, 'Would like to see more information about mental health topics'),
+(4, 'Liked the virtual health resources'),
+(5, 'Found the health topics to be helpful'),
+(4, 'Liked the app and the medical links'),
+(3, 'Would like to see more medical links on the app'),
+(4, 'Would use this app again'),
+(3, 'I enjoy the newsletter'),
+(4, 'The screening guidelines were helpful'),
+(3, 'It is nice to have the doctor questions with me on the go at my appointments'),
+(4, 'The info about the diagnostic tools is useful'),
+(5, 'Enjoyed using this app'),
+(3, 'I liked that you can see the provider cost and insurance info'),
+(3, 'Would like to see more physical therapy providers on the app'),
+(4, 'I like having all the faqs and screening info in one place'),
+(4, 'I brought info from this app with me to my doctor and it was helpful'),
+(3, 'Liked the screening guidelines and questions to ask your doctor'),
+(3, 'I would like to see information about what biomarker triage testing in the cervical health topics');
