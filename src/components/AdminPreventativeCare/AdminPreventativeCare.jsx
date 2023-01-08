@@ -90,7 +90,7 @@ function AdminPreventativeCare() {
     <Breadcrumbs
       separator={<NavigateNextIcon fontSize="small" />}
       aria-label="breadcrumb"
-      sx={{ color: "black",marginLeft: "10px" }}
+      sx={{ color: "black", marginLeft: "10px" }}
       className="breadcrumbs"
     >
       {breadcrumbs}
