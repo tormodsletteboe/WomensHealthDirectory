@@ -171,7 +171,7 @@ function Feedback() {
             }
             {page == 10 &&
                 <Box>
-                    <Typography paragraph onClick={()=>{setComment('Overall the app looks and works great. I would suggest adding Everlywell.com to Virtual Healh. There is also a new Diagnosic Tool called Bio-marker Triage Testing, it would be great if you added that.')}}>
+                    <Typography paragraph onClick={()=>{setComment('Overall the app looks and works great. I would suggest adding Everlywell.com to Virtual Health.')}}>
                         Thank you for completing the survey!
                         Leave a comment and a rating about your overall experience using The Vifi!
                     </Typography>
