@@ -29,6 +29,9 @@ function PreventativeCare() {
 
     const handleAgeChange  = (event) => {
         setAge(event.target.value);
+        dispatch({
+            type: 'FETCH_HEALTH_CATEGORIES'
+        })
     }
     console.log('age is', age);
 
@@ -51,6 +54,7 @@ function PreventativeCare() {
 
     return(
     <>
+    <Box textAlign='center'>
     <h4>Screening Recommended by Age</h4>
 
     <form onSubmit={handleAgeFormSubmit}>
@@ -62,18 +66,18 @@ function PreventativeCare() {
                 </option>
                  ))}
             </select>
-            <Button variant="contained" style={{backgroundColor:'#276359'}} type="submit">Submit</Button>
     </form>
+    </Box>
     
     <Box textAlign = 'center' marginRight = '3rem'>
     {healthCategories.map(category => (
-    <ul>
-        <li key={category.id}>
+    <ul key={category.id}>
+        <li>
             <Button 
                 variant="contained" 
                 onClick={() => handleCategoryClick(category)} 
-                style={{backgroundColor: '#8EBBA7', 
-                color: '#FFFFFF'}}>{category.category}
+                style={{backgroundColor: '#8EBBA7' }}>
+                    {category.category}
             </Button>
         </li>
     </ul>

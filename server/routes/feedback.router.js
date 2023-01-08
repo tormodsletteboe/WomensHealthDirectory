@@ -10,7 +10,13 @@ router.get('/', async (req, res) => { // GET ALL FEEDBACK: RATINGS + COMMENTS
 
     let questionAndAnswerSqlText = `
     SELECT "feedback_q"."question", json_agg(("feedback_q"."answer")) FROM "feedback_q"
-    GROUP BY "feedback_q"."question";
+    GROUP BY "feedback_q"."question"
+    LIMIT 20;
+    `;
+
+    let answerCountSqlText = `
+    SELECT "question", "answer", count("answer") from "feedback_q" group by "question", "answer"
+    LIMIT 20;
     `;
 
     try{
@@ -23,9 +29,15 @@ router.get('/', async (req, res) => { // GET ALL FEEDBACK: RATINGS + COMMENTS
     let questionAndAnswerRes = await pool.query(questionAndAnswerSqlText);
     console.log('question and answer res is', questionAndAnswerRes);
 
+    //get answer counts
+    let answerCountRes = await pool.query(answerCountSqlText);
+    console.log('answerCount res is', answerCountRes);
+
     let apiRes = {
         commentsAndRatings: commentsAndRatingsRes.rows,
-        questionsAndAnswers: questionAndAnswerRes.rows
+        questionsAndAnswers: questionAndAnswerRes.rows,
+        answerCountRes: answerCountRes.rows,
+
     }
     res.send(apiRes);
 
