@@ -58,11 +58,11 @@ function CategoryDetailView(){
 <div className="accordion">
       <Accordion style={{backgroundColor: '#8EBBA7'}}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
+          expandIcon={<ExpandMoreIcon  />}
           aria-controls="panel1a-content"
           id="panel1a-header"
         >
-          <Typography style={{color: '#FFFFFF'}}>Guidelines</Typography>
+          <Typography >Guidelines</Typography>
         </AccordionSummary>
         <AccordionDetails>
         <ul style={{padding:0}} >
@@ -78,11 +78,11 @@ function CategoryDetailView(){
 
       <Accordion style={{backgroundColor: '#8EBBA7'}}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
+          expandIcon={<ExpandMoreIcon />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography style={{color: '#FFFFFF'}}>Diagnostic Tools</Typography>
+          <Typography >Diagnostic Tools</Typography>
         </AccordionSummary>
         <AccordionDetails>
         <ul style={{padding:0}} >
@@ -97,11 +97,11 @@ function CategoryDetailView(){
 
       <Accordion style={{backgroundColor: '#8EBBA7'}}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
+          expandIcon={<ExpandMoreIcon  />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography style={{color: '#FFFFFF'}}>FAQs</Typography>
+          <Typography >FAQs</Typography>
         </AccordionSummary>
         <AccordionDetails>
           <ul style={{padding:0}} >
@@ -116,11 +116,11 @@ function CategoryDetailView(){
 
       <Accordion style={{backgroundColor: '#8EBBA7'}}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
+          expandIcon={<ExpandMoreIcon  />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography style={{color: '#FFFFFF'}}>Questions to Ask Your Doctor</Typography>
+          <Typography >Questions to Ask Your Doctor</Typography>
         </AccordionSummary>
         <AccordionDetails>
 
@@ -138,11 +138,11 @@ function CategoryDetailView(){
 
       <Accordion style={{backgroundColor: '#8EBBA7'}}>
         <AccordionSummary
-          expandIcon={<ExpandMoreIcon style={{color: '#FFFFFF'}} />}
+          expandIcon={<ExpandMoreIcon  />}
           aria-controls="panel2a-content"
           id="panel2a-header"
         >
-          <Typography style={{color: '#FFFFFF'}}>Resources</Typography>
+          <Typography >Resources</Typography>
         </AccordionSummary>
         <AccordionDetails>
         {specificresources && specificresources.map((resource) => (

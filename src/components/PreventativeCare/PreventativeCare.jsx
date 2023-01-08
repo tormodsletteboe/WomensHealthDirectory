@@ -74,8 +74,8 @@ function PreventativeCare() {
             <Button 
                 variant="contained" 
                 onClick={() => handleCategoryClick(category)} 
-                style={{backgroundColor: '#8EBBA7', 
-                color: '#FFFFFF'}}>{category.category}
+                style={{backgroundColor: '#8EBBA7' }}>
+                    {category.category}
             </Button>
         </li>
     </ul>
