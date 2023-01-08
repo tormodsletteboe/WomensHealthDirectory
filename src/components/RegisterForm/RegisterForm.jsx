@@ -29,9 +29,17 @@ function RegisterForm() {
     });
   }; // end registerUser
   
+  function autfillRegister() {
+    setUsername("Aina Robertson");
+    setPassword("aina123");
+    setEmail("ainaR@gmail.com");
+    setAge("25");
+    setZip("55401");
+  }
+
   return (
     <form className="formPanel" onSubmit={registerUser}>
-      <h2>Register User</h2>
+      <h2 onClick={autfillRegister}>Register User</h2>
       {errors.registrationMessage && (
         <h3 className="alert" role="alert">
           {errors.registrationMessage}

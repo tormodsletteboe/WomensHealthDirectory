@@ -27,8 +27,8 @@ function LoginForm() {
   }; // end login
   function fillData(event) {
     event.preventDefault();
-    setUsername("Aina M Robertson");
-    setPassword("aina");
+    setUsername("Aina Robertson");
+    setPassword("aina123");
   }
   function loginAsAdmin(event) {
     event.preventDefault();
