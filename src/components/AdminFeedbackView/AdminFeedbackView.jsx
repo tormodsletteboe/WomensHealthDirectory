@@ -51,9 +51,10 @@ function AdminFeedbackView() {
         <>
             <div>
                 <Typography textAlign='center' fontSize='32px'>User Feedback</Typography>
-                <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF' }}>
+                <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', 
+                backgroundColor: '#8EBBA7'}}>
                     <AccordionSummary
-                        expandIcon={<ExpandMoreIcon style={{ color: '#FFFFFF' }} />}
+                        expandIcon={<ExpandMoreIcon />}
                         aria-controls="panel1a-content"
                         id="panel1a-header"
                     >
@@ -64,14 +65,14 @@ function AdminFeedbackView() {
                         <TableContainer height='90%' style={{ backgroundColor: '#FFFFFF' }}>
                             <Table>
                                 <TableHead>
-                                    {/* {averageRating && averageRating.map(average => */}
-                                    <TableRow style={{ fontSize: '18px' }}>
+                                    {averageRating && averageRating.map((average, index) =>
+                                    <TableRow style={{ fontSize: '18px' }} key={index} >
                                         <TableCell>Comments</TableCell>
                                         <TableCell>Overall Rating</TableCell> 
-                                        <TableCell>Average Rating: 2.00
+                                        <TableCell>Average Rating: {Number(average.average_rating).toFixed(2)}
                                         </TableCell>   
                                     </TableRow>
-                                    {/* )} */}
+                                     )}
                                 </TableHead>
                                 <TableBody>
                                     {feedback.commentsAndRatings && feedback.commentsAndRatings.map(feedbackItem =>
@@ -90,14 +91,16 @@ function AdminFeedbackView() {
                     </AccordionDetails>
                 </Accordion>
                 <div>
-                    {feedback.questionsAndAnswers && feedback.questionsAndAnswers.map(questionAndAnswerItem =>
-                        <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', backgroundColor: '#8EBBA7', color: '#FFFFFF' }}>
+                    {feedback.questionsAndAnswers && feedback.questionsAndAnswers.map((questionAndAnswerItem, index) =>
+                        <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', 
+                        backgroundColor: '#8EBBA7'}}
+                        key={index}>
                             <AccordionSummary
-                                expandIcon={<ExpandMoreIcon style={{ color: '#FFFFFF' }} />}
+                                expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel2a-content"
                                 id="panel2a-header"
                             >
-                                <Typography key={questionAndAnswerItem.id} fontSize='18px'>
+                                <Typography fontSize='18px'>
                                     {questionAndAnswerItem.question}
                                 </Typography>
                             </AccordionSummary>
