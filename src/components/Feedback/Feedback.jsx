@@ -187,14 +187,14 @@ function Feedback() {
                             <MenuItem value={5}>5</MenuItem>
                         </Select>
                     </Box>
-                    <Box sx={({ 'textAlign': 'center' })}>
+                    <Box sx={({ 'textAlign': 'center', marginTop: "10px" })}>
                         <Button onClick={() => submitSurvey()} variant='contained'>SUBMIT</Button>
                     </Box>
                 </Box>
             }
             <Box sx={({ 'textAlign': 'center', 'paddingTop':'30vh', 'paddingBottom':'3vh' })}>
-                <Button onClick={() => changePage(-1)} variant='outlined' sx={({ 'marginRight': '2em' })}>PREV</Button>
-                <Button onClick={() => changePage(1)} variant='outlined' sx={({ 'marginLeft': '2em' })}>NEXT</Button>
+                <Button onClick={() => changePage(-1)} variant='contained' sx={({ 'marginRight': '2em' })}>PREV</Button>
+                <Button onClick={() => changePage(1)} variant='contained' sx={({ 'marginLeft': '2em' })}>NEXT</Button>
             </Box>
             <Box sx={({ 'alignContent': 'center' })}>
                 <Pagination count={10} page={page} onChange={(e, v) => setPage(v)} hideNextButton hidePrevButton size="large" siblingCount={1}></Pagination>

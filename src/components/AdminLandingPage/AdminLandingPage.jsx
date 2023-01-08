@@ -73,29 +73,76 @@ function AdminLandingPage() {
   // 		console.log(targetImgElement, index, state, imageInfo, remainingFilesCount)
   // }
 
-  function handleEditorSave() {
-    console.log("in save button, content html:", editorState);
-    let emailList = [];
-    for (let email of newsletterEmails) {
-      emailList.push(email.email);
-    }
-    console.log("email list is:", emailList);
-    dispatch({
-      type: "SEND_NEWSLETTER",
-      payload: { htmlToSend: editorState, emailList: emailList },
-    });
-    Swal.fire({
-      icon: "success",
-      title: "Emails have been sent!",
-      showConfirmButton: false,
-      timer: 1500,
-    });
-    handleEditorClick();
-  }
+	const handleViewFeedback = () => {
+		history.push('/adminfeedbackview');
+	}
 
-  const handleViewFeedback = () => {
-    history.push("/adminfeedbackview");
-  };
+	function handleEditorSave() {
+		console.log("in save button, content html:", editorState);
+		let emailList = [];
+		for (let email of newsletterEmails) {
+		  emailList.push(email.email);
+		}
+		console.log("email list is:", emailList);
+		dispatch({
+		  type: "SEND_NEWSLETTER",
+		  payload: { htmlToSend: editorState, emailList: emailList },
+		});
+		Swal.fire({
+		  icon: "success",
+		  title: "Emails have been sent!",
+		  showConfirmButton: false,
+		  timer: 1500,
+		});
+		handleEditorClick();
+	  }
+
+	function handleNewsletterDemoClick() {
+		console.log('clicked');
+		SunEditor.defaultValue = `<h1>Welcome to the ViFi Newsletter!</h1>
+
+		<p>Thank you for signing up! Now you will find all the latest women&apos;s health news in your inbox!</p>
+		
+		<div class="se-component se-image-container __se__float-none" contenteditable="false" style="">      
+		  <figure style="margin: 0px;">
+						<img src="https://post.healthline.com/wp-content/uploads/2020/09/Female_iPhone_Chair_1296x728-header-1296x729.jpg" alt="" data-rotate="" data-proportion="true" data-rotatex="" data-rotatey="" data-size="794px,446px" data-align="none" data-index="0" data-file-name="Female_iPhone_Chair_1296x728-header-1296x729.jpg" data-file-size="0" data-origin="," style="width: 794px; height: 446px;">
+		  </figure>
+		</div>
+		
+		<div>
+		<h2>2022 Nurx Review: Is It Right for You?</h2>
+		
+		<p><br>
+		</p>
+		</div>
+		<div>
+		<h3>What is Nurx?</h3>
+		
+		<p>Nurx is a telemedicine company that offers birth control prescriptions, emergency contraception, and home testing kits. All prescriptions are written by a licensed healthcare professional in your state and delivered directly to you.</p>
+		
+		<h3>What services does Nurx offer?</h3>
+		
+		<ul>
+		  <li>birth control prescriptions and fulfillment </li>
+		  <li>emergency contraception</li>
+		  <li>skin care treatment for acne, rosacea, and aging</li>
+		  <li>migraine medications</li>
+		  <li>sexual health management, including STI testing, HPV screening and treatment, and UTI treatment</li>
+		  <li>UTI treatment</li>
+		  <li>COVID-19 testing<br>
+		  </li>
+		</ul>
+		</div>
+		<div>
+		<p>
+		All prescriptions are written by a licensed healthcare professional in your state and delivered directly to you. Nurx uses an accredited lab for sample testing. It also uses licensed pharmacies, which you can double-check here.
+		
+		While Nurx shouldn’t replace your regular doctor, it can still be a convenient way to access basic healthcare when you need it. Here’s what else you should know about Nurx.
+		</p>
+		</div>
+		
+		<footer align="center">Copyright 2023 ViFi</footer>`
+	}
 
   return (
     <Container >
@@ -111,11 +158,20 @@ function AdminLandingPage() {
             Welcome, Admin!
           </Typography>
         </Grid>
+		<Grid item mb={2} >
+        <Button
+          variant="contained"
+          color="primary"
+          onClick={handleViewFeedback}
+        >
+          View User Feedback
+        </Button>
+		</Grid>
         <Grid item mb={2}>
           <Button variant="contained" color="primary" onClick={handleEmailClick}>
             {isEmailListClicked === true
               ? "Close Newsletter Sign-up Emails"
-              : "View Newsletter Sign-up Emails"}
+              : "View Newsletter Sign-up Emails"} <div className=""></div>
           </Button>
         </Grid>
         {isEmailListClicked === true ? (
@@ -141,15 +197,7 @@ function AdminLandingPage() {
           </CSVLink>
         </Button>
 		</Grid>
-		<Grid item mb={2}>
-        <Button
-          variant="contained"
-          color="primary"
-          onClick={handleViewFeedback}
-        >
-          View User Feedback
-        </Button>
-		</Grid>
+
         {isEditorClicked === false ? (
           <Grid item mb={2}>
 		  <Button variant="contained" onClick={handleEditorClick}>
@@ -158,61 +206,45 @@ function AdminLandingPage() {
 		  </Grid>
         ) : null}
 
-        {isEditorClicked === true ? (
-          <Box
-            margin="20px 0px"
-            display="flex"
-            alignItems="center"
-            justifyContent="center"
-            flexDirection="column"
-          >
-            <SunEditor
-              name="newsletter-editor"
-              defaultValue=""
-              placeholder="Newsletter editor - add your text here..."
-              width="100%"
-              height="400px"
-              autoFocus={true}
-              onChange={handleChange}
-              // onImageUpload={handleImageUpload}
-              setOptions={{
-                buttonList: buttonList.formatting,
-                plugins: [
-                  font,
-                  fontColor,
-                  fontSize,
-                  textStyle,
-                  link,
-                  image,
-                  imageGallery,
-                ],
-                buttonList: [
-                  ["undo", "redo", "removeFormat"],
-                  ["font", "fontSize", "fontColor"],
-                  [
-                    "bold",
-                    "underline",
-                    "italic",
-                    "strike",
-                    "subscript",
-                    "superscript",
-                  ],
-                  ["align", "outdent", "indent"],
-                  ["table", "link", "image"],
-                  ["preview", "print"],
-                ],
-              }}
-            />
-            <Stack margin={2} direction="row" spacing={12}>
-              <Button variant="outlined" onClick={handleEditorClick}>
-                Cancel
-              </Button>
-              <Button variant="contained" onClick={handleEditorSave}>
-                Send to email list
-              </Button>
-            </Stack>
-          </Box>
-        ) : null}
+		{ isEditorClicked === true ?
+			<Box margin="20px 0px" display='flex' 
+			alignItems="center" justifyContent="center"
+			flexDirection="column">
+				<SunEditor name='newsletter-editor' 
+					defaultValue=""
+					placeholder="Newsletter editor - add your text here..."
+					width='80%' height='400px'
+					autoFocus={true}
+					onChange={handleChange}
+					// onImageUpload={handleImageUpload}
+					setOptions={{ buttonList: buttonList.formatting, 
+					plugins: [
+						font,
+						fontColor,
+    					fontSize,
+						textStyle,
+						link,
+						image,
+						imageGallery
+    				], buttonList: [
+						['undo', 'redo', 'removeFormat'],
+						['font', 'fontSize', 'fontColor'],
+						['bold', 'underline', 'italic', 'strike', 'subscript', 'superscript'],
+						['align', 'outdent', 'indent'],
+        				['list', 'table', 'link', 'image'],
+						['codeView'],
+						['preview', 'print']
+					]
+				}}
+				/>
+			<Stack margin={2} direction="row" spacing={12}>
+				<Button variant='outlined'
+				onClick={handleEditorClick}>Cancel</Button>
+				<Button variant='contained'
+				onClick={handleEditorSave}>Send to email list</Button>
+			</Stack>
+			</Box>
+         : null }
       </Grid>
     </Container>
   );

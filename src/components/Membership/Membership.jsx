@@ -6,7 +6,7 @@ function Membership() {
     const [history] = [useHistory()];
 
     return (
-        <Container sx={({ 'textAlign':'center' })} id='membershipPage'>
+        <Container sx={({ 'textAlign':'center', marginBottom: "20px"})} id='membershipPage'>
             <h1>What is the ViFi?</h1>
             <Typography paragraph>
                 Members of The ViFi can save time and lessen their mental load
@@ -30,7 +30,7 @@ function Membership() {
             </Typography>
             <h4>Don't wait to get your answers.</h4>
             <h4>It's time to be proactive.</h4>
-            <Button variant='outlined' onClick={() => history.push('/registration')}>Sign Up To Get Access</Button>
+            <Button variant='contained' onClick={() => history.push('/registration')}>Sign Up To Get Access</Button>
         </Container>
     )
 }

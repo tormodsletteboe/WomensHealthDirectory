@@ -35,23 +35,6 @@ function AddEditForm() {
         dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
     }
 
-    // const addList = (resourceToEdit) => {
-    //     let inputList = [];
-    //     for (const [key, value] of Object.entries(resourceToEdit)) {
-    //         console.log(`${key}: ${value}`);
-    //         inputList.push(<TextField 
-    //             key={key}
-    //             multiline
-    //             value={resourceToEdit.value}
-    //             onChange={(evt) => dispatch({
-    //                 type: 'UPDATE_FIELD',
-    //                 payload: {key: evt.target.value}
-    //         })}/>)
-    //         }
-    //     inputList.shift();
-    //     return inputList;
-    // }
-
     return(
         <>
             {/* {addList(resourceToEdit)} */}
