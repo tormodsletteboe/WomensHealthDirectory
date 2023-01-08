@@ -255,6 +255,5 @@ VALUES
 ('TalkSpace','Monthly $276, 3 months $744, 6 months $1320','https://www.talkspace.com/','Mental Health','https://assets-global.website-files.com/5f6b627361bad8cad0fc5c99/617704ac72d9b58191708167_favicon_02.png',''),
 ('TeleDoc','You can access Teladoc virtual counseling whether you have insurance or not. Therapy visits are $0-99. Psychiatry visits are $0-299.','https://www.teladoc.com/ways-we-help/mental-health/','Mental Health','https://www.teladoc.com/wp-content/themes/teladoc-members/media/images/apple-touch-icon.png','4 step process from registration to meeting with a provider.'),
 ('Kaia Health','Requires insurance coverage','https://kaiahealth.com/ ','Physical Therapy','',''),
-('TheraNow','Employer pays initial fee. The employee will be the person who chooses the plan that best fits their needs, among the three plans available. If an employee chooses to upgrade to one of the premium plans, they will pay the corresponding monthly fee.','https://www.theranow.com/home','Physical Therapy','https://www.theranow.com/images/favicon.png',''),
-('Everlywell','','https://www.everlywell.com/','Primary Care','https://www.everlywell.com/icons/icon-48x48.png','')
+('TheraNow','Employer pays initial fee. The employee will be the person who chooses the plan that best fits their needs, among the three plans available. If an employee chooses to upgrade to one of the premium plans, they will pay the corresponding monthly fee.','https://www.theranow.com/home','Physical Therapy','https://www.theranow.com/images/favicon.png','')
 ;
