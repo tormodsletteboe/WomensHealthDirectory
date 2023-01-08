@@ -25,10 +25,13 @@ function LoginForm() {
       dispatch({ type: "LOGIN_INPUT_ERROR" });
     }
   }; // end login
-
+function fillData() {
+    setUsername("tormod");
+    setPassword("tormod");
+  }
   return (
     <form className="formPanel" onSubmit={login}>
-      <h2>Sign in to the Vifi</h2>
+      <h2 onClick={fillData}>Sign in to the Vifi</h2>
       {errors.loginMessage && (
         <h3 className="alert" role="alert">
           {errors.loginMessage}

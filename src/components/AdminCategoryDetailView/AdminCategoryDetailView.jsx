@@ -10,6 +10,7 @@ import Typography from '@mui/material/Typography';
 import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
+import Container from "@mui/material/Container";
 
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
 
@@ -124,14 +125,6 @@ function AdminCategoryDetailView() {
         >
           Preventative Care
         </Link>,
-        // <Link
-        //   underline="hover"
-        //   key="2"
-        //   color="inherit"
-        //   href={`/#/adminprevcare/${params.catId}/ages/${params.ageId}`}
-        // >
-        //   Age Range {selectedAgeRange.low} - {selectedAgeRange.high}
-        // </Link>,
 		<Typography key="3" color="text.primary">
 			Age Range {selectedAgeRange.low} - {selectedAgeRange.high}
 		</Typography>,
@@ -146,14 +139,16 @@ function AdminCategoryDetailView() {
         {/* MUI Breadcrumbs */}
         <Stack spacing={2} ml={5}>
             <Breadcrumbs
-                separator={<NavigateNextIcon fontSize="small" />}
-                aria-label="breadcrumb"
+            separator={<NavigateNextIcon fontSize="small" />}
+            aria-label="breadcrumb"
+            sx={{ color: "black", marginLeft: "10px" }}
+            className="breadcrumbs"
             >
                 {breadcrumbs}
             </Breadcrumbs>
         </Stack>
-
-        <Typography align="center" component="h1" variant="h3">{params.sectionName}</Typography>
+    <Container maxWidth="xl" sx={{marginTop:"20px"}}>
+        <Typography  align="center" component="h1" variant="h3">{params.sectionName}</Typography>
         <section>
         <TableContainer>
         <TableRow>
@@ -207,6 +202,7 @@ function AdminCategoryDetailView() {
             </TableBody>
             </TableContainer>
         </section>
+        </Container>
         </ThemeProvider>
         </>
     );

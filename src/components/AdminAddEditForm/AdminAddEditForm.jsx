@@ -35,23 +35,6 @@ function AddEditForm() {
         dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
     }
 
-    // const addList = (resourceToEdit) => {
-    //     let inputList = [];
-    //     for (const [key, value] of Object.entries(resourceToEdit)) {
-    //         console.log(`${key}: ${value}`);
-    //         inputList.push(<TextField 
-    //             key={key}
-    //             multiline
-    //             value={resourceToEdit.value}
-    //             onChange={(evt) => dispatch({
-    //                 type: 'UPDATE_FIELD',
-    //                 payload: {key: evt.target.value}
-    //         })}/>)
-    //         }
-    //     inputList.shift();
-    //     return inputList;
-    // }
-
     return(
         <>
             {/* {addList(resourceToEdit)} */}
@@ -64,7 +47,7 @@ function AddEditForm() {
                 value={resourceToEdit.field01}
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_FIELD',
-                    payload: {field01: evt.target.value}
+                    payload: {field01: "Pap smear"}
             })}/></TableCell>
                 <TableCell>
                 <TextField 
@@ -74,7 +57,7 @@ function AddEditForm() {
                     value={resourceToEdit.field02}
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
-                        payload: {field02: evt.target.value}
+                        payload: {field02: "aka Pap screening test, a sample is collected during a speculum exam with a brush. Sample is sent to the lab and reviewed under a microscope by a cytologist."}
                 })}/></TableCell>
             {Object.keys(resourceToEdit).length > 3 ? 
             <TableCell>

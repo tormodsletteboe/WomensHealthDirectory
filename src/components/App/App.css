@@ -9,6 +9,10 @@ body {
   margin: 0px;
 }
 
+h1 {
+  font-family: 'Roboto', 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
 img {
   display: inline-block;
   max-width: 100%;
