@@ -194,8 +194,42 @@ function MedicalLinks() {
               >
                 get icons
               </Button>
+              {/* this is where I am at lunch sunday, add avatars to the virtual health aswell, then make the icon viewer for all components */}
               
-              {open && (
+            </Box>
+          </Grid>
+          <Grid item xs={1.5} textAlign={"end"}>
+            <ToggleButton onClick={handleChange} selected={checked}>
+              <Tooltip title={checked ? "Close" : "Preview"}>
+                <PhoneAndroidIcon />
+              </Tooltip>
+            </ToggleButton>
+          </Grid>
+          <Grid item xs={1.5} textAlign={"end"}>
+            <Button variant="contained" onClick={handleAddMedLink}>
+              Add Medical Link
+            </Button>
+          </Grid>
+        </Grid>
+        <Grid
+          item
+          xs={11}
+          my={1}
+          sx={{ display: "flex", justifyContent: "end" }}
+        >
+          {checked && (
+            <Slide direction="up" in={checked} container={containerRef.current}>
+              {<PreviewAddMedicalLinkCard addMedicalLink={addMedLinks} />}
+            </Slide>
+          )}
+        </Grid>
+        <Grid 
+        item
+        xs={6}
+          my={1}
+          sx={{ display: "flex", justifyContent: "start" }}
+        >
+        {open && (
                 <ImageList sx={{ width: 400, height: 200 }} cols={7} >
                   <ImageListItem key={noImagePath}>
                     <ListItemButton  
@@ -244,35 +278,9 @@ function MedicalLinks() {
               </ImageList>
 
               )}
-            </Box>
-          </Grid>
-          <Grid item xs={1.5} textAlign={"end"}>
-            <ToggleButton onClick={handleChange} selected={checked}>
-              <Tooltip title={checked ? "Close" : "Preview"}>
-                <PhoneAndroidIcon />
-              </Tooltip>
-            </ToggleButton>
-          </Grid>
-          <Grid item xs={1.5} textAlign={"end"}>
-            <Button variant="contained" onClick={handleAddMedLink}>
-              Add Medical Link
-            </Button>
-          </Grid>
-        </Grid>
-        <Grid
-          item
-          xs={11}
-          my={1}
-          sx={{ display: "flex", justifyContent: "end" }}
-        >
-          {checked && (
-            <Slide direction="up" in={checked} container={containerRef.current}>
-              {<PreviewAddMedicalLinkCard addMedicalLink={addMedLinks} />}
-            </Slide>
-          )}
         </Grid>
       </Grid>
-
+    
       <Box sx={{ mx: 2, marginTop: 10 }}>
         <Typography variant="h3"> Medical Links </Typography>
         {/* render all medical links from database */}
