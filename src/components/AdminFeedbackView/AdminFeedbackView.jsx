@@ -91,10 +91,10 @@ function AdminFeedbackView() {
                     </AccordionDetails>
                 </Accordion>
                 <div>
-                    {feedback.questionsAndAnswers && feedback.questionsAndAnswers.map(questionAndAnswerItem =>
+                    {feedback.questionsAndAnswers && feedback.questionsAndAnswers.map((questionAndAnswerItem, index) =>
                         <Accordion style={{ width: '80%', marginLeft: 'auto', marginRight: 'auto', 
                         backgroundColor: '#8EBBA7'}}
-                        key={questionAndAnswerItem.id}>
+                        key={index}>
                             <AccordionSummary
                                 expandIcon={<ExpandMoreIcon />}
                                 aria-controls="panel2a-content"
