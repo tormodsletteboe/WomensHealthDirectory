@@ -12,7 +12,7 @@ import Slide from "@mui/material/Slide";
 import ToggleButton from "@mui/material/ToggleButton";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import Tooltip from "@mui/material/Tooltip";
-
+import Avatar from "@mui/material/Avatar";
 import PreviewVirtualHealthCard from "./PreviewVirtualHealthCard";
 
 function VirtualHealthAccordion({ virtualhealthlink }) {
@@ -30,7 +30,8 @@ function VirtualHealthAccordion({ virtualhealthlink }) {
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Grid container>
             <Grid item xs={2}>
-              <img src={virtualhealthlink.logo_url} />
+            <Avatar alt="" src={virtualhealthlink.logo_url} sx={{ bgcolor: "white" }} />
+              {/* <img src={virtualhealthlink.logo_url} /> */}
             </Grid>
 
             <Grid item xs={2} my={1} textAlign={"start"}>
