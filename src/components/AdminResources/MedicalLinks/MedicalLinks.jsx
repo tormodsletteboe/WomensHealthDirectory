@@ -14,26 +14,16 @@ import Slide from "@mui/material/Slide";
 import ToggleButton from "@mui/material/ToggleButton";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import Tooltip from "@mui/material/Tooltip";
-import List from "@mui/material/List";
-import ListItem from "@mui/material/ListItem";
 import ListItemButton from "@mui/material/ListItemButton";
-import ListItemIcon from "@mui/material/ListItemIcon";
-import ListItemText from "@mui/material/ListItemText";
-import Divider from "@mui/material/Divider";
-import InboxIcon from "@mui/icons-material/Inbox";
-import DraftsIcon from "@mui/icons-material/Drafts";
 import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
-import IconButton from "@mui/material/IconButton";
-import InfoIcon from "@mui/icons-material/Info";
 import Avatar from "@mui/material/Avatar";
 
 import "./MedicalLinks.css";
 import MedicalLinksAccordion from "./MedicalLinksAccordion";
 import EditMedicalLinksAccordion from "./EditMedicalLinksAccordion";
 import PreviewAddMedicalLinkCard from "./PreviewAddMedicalLinkCard";
-import zIndex from "@mui/material/styles/zIndex";
+
 
 function MedicalLinks() {
   const dispatch = useDispatch();
@@ -211,6 +201,7 @@ function MedicalLinks() {
             </Button>
           </Grid>
         </Grid>
+        <Grid container></Grid>
         <Grid
           item
           xs={11}
