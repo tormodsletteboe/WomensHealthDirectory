@@ -27,6 +27,7 @@ function RegisterForm() {
         zip_code: zip,
       },
     });
+    dispatch({ type: 'ADD_TO_NEWSLETTER', payload: email });
   }; // end registerUser
   
   return (
