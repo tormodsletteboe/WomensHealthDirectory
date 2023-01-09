@@ -247,7 +247,7 @@ function VirtualHealth() {
                   `https://favicongrabber.com/api/grab/${url.hostname}`
                 );
                 setResult(result.data.icons.map((icon) => icon.src));
-                setOpen={true};
+                setOpen(true);
               }}
               
             >
@@ -296,7 +296,7 @@ function VirtualHealth() {
                     onMouseOver={() => {
                         setSelected(noImagePath);
                         dispatch({
-                          type: "SET_MEDICAL_LOGO_URL",
+                          type: "SET_VIRTUALHEALTH_LOGO_URL",
                           payload: noImagePath,
                         });
                       }}
@@ -310,7 +310,7 @@ function VirtualHealth() {
                     onMouseOver={() => {
                         setSelected(imgpath);
                         dispatch({
-                          type: "SET_MEDICAL_LOGO_URL",
+                          type: "SET_VIRTUALHEALTH_LOGO_URL",
                           payload: imgpath,
                         });
                       }}
@@ -325,7 +325,7 @@ function VirtualHealth() {
                     onMouseOver={() => {
                         setSelected(icon);
                         dispatch({
-                          type: "SET_MEDICAL_LOGO_URL",
+                          type: "SET_VIRTUALHEALTH_LOGO_URL",
                           payload: icon,
                         });
                       }}
