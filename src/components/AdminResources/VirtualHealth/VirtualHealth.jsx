@@ -247,8 +247,9 @@ function VirtualHealth() {
                   `https://favicongrabber.com/api/grab/${url.hostname}`
                 );
                 setResult(result.data.icons.map((icon) => icon.src));
+                setOpen={true};
               }}
-              setOpen={true}
+              
             >
               get icons
             </Button>
