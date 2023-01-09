@@ -16,6 +16,11 @@ import ToggleButton from "@mui/material/ToggleButton";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import Tooltip from "@mui/material/Tooltip";
 
+import ListItemButton from "@mui/material/ListItemButton";
+import ImageList from "@mui/material/ImageList";
+import ImageListItem from "@mui/material/ImageListItem";
+import Avatar from "@mui/material/Avatar";
+
 import "./VirtualHealth.css";
 import VirtualHealthAccordion from "./VirtualHealthAccordion";
 import EditVirtualHealthLinksAccordion from "./EditVirtualHealthAccordion";
@@ -32,7 +37,7 @@ function VirtualHealth() {
   //this is used with the get ICONS button
   const [result, setResult] = useState([addVirtualHealthLinks.logo_url]);
   const [selected, setSelected] = useState(addVirtualHealthLinks.logo_url);
-
+  const [open, setOpen] = React.useState(false);
   const [checked, setChecked] = React.useState(false);
   const containerRef = React.useRef(null);
   const handleChange = () => {
@@ -243,6 +248,7 @@ function VirtualHealth() {
                 );
                 setResult(result.data.icons.map((icon) => icon.src));
               }}
+              setOpen={true}
             >
               get icons
             </Button>
@@ -275,6 +281,62 @@ function VirtualHealth() {
               }
             </Slide>
           )}
+        </Grid>
+        <Grid 
+        item
+        xs={6}
+          my={1}
+          sx={{ display: "flex", justifyContent: "start" }}
+        >
+        {open && (
+                <ImageList sx={{ width: 400, height: 200 }} cols={7} >
+                  <ImageListItem key={noImagePath}>
+                    <ListItemButton  
+                    onMouseOver={() => {
+                        setSelected(noImagePath);
+                        dispatch({
+                          type: "SET_MEDICAL_LOGO_URL",
+                          payload: noImagePath,
+                        });
+                      }}
+                      onClick={() => setOpen(false)}
+                      >
+                      <Avatar alt="" src={noImagePath} sx={{ bgcolor: "white" }} />
+                    </ListItemButton>
+                  </ImageListItem>
+                  <ImageListItem key={imgpath}>
+                    <ListItemButton  
+                    onMouseOver={() => {
+                        setSelected(imgpath);
+                        dispatch({
+                          type: "SET_MEDICAL_LOGO_URL",
+                          payload: imgpath,
+                        });
+                      }}
+                      onClick={() => setOpen(false)}
+                      >
+                      <Avatar alt="" src={imgpath} sx={{ bgcolor: "white" }} />
+                    </ListItemButton>
+                  </ImageListItem>
+                {result.map((icon) => (
+                  <ImageListItem key={icon}>
+                    <ListItemButton  
+                    onMouseOver={() => {
+                        setSelected(icon);
+                        dispatch({
+                          type: "SET_MEDICAL_LOGO_URL",
+                          payload: icon,
+                        });
+                      }}
+                      onClick={() => setOpen(false)}
+                      >
+                      <Avatar alt="" src={icon} sx={{ bgcolor: "white" }} />
+                    </ListItemButton>
+                  </ImageListItem>
+                ))}
+              </ImageList>
+
+              )}
         </Grid>
       </Grid>
       <Box sx={{ mx: 2, marginTop: 10 }}>
