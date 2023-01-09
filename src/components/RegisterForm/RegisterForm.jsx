@@ -33,7 +33,7 @@ function RegisterForm() {
     setUsername("Aina Robertson");
     setPassword("aina123");
     setEmail("ainaR@gmail.com");
-    setAge("25");
+    setAge("39");
     setZip("55401");
   }
 
