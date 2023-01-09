@@ -133,7 +133,8 @@ function VirtualHealth() {
             <AccordionSummary>
               <Grid container columnSpacing={1}>
                 <Grid item xs={1} className="centerthis">
-                  <img src={selected} />
+                <Avatar alt="" src={selected} sx={{ bgcolor: "white" }} />
+                  {/* <img src={selected} /> */}
                 </Grid>
                 <Grid item xs={4} px={1} className="centerthis">
                   <TextField
@@ -216,6 +217,7 @@ function VirtualHealth() {
         <Grid container>
           <Grid item xs={1.8} textAlign={"start"}>
             <select
+            hidden
               className="dropdown"
               defaultValue={result[0]}
               onChange={(e) => {
