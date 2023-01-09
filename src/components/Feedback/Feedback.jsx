@@ -108,7 +108,7 @@ function Feedback() {
             {page == 1 &&
                 <Container>
                     <Box>
-                        <Typography variant="h4" textAlign={'center'}>Thank you for using the ViFi!</Typography>
+                        <Typography variant="h4" textAlign={'center'}>Thank you for using ViFi!</Typography>
                         <Typography paragraph textAlign={'center'}>
                             Please answer some questions
                             so we may better serve you next time.
