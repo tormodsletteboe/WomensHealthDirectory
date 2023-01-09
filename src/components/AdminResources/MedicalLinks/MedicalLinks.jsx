@@ -146,6 +146,7 @@ function MedicalLinks() {
         <Grid container>
           <Grid item xs={1.8}>
             <select
+            hidden
               className="dropdown"
               defaultValue={result[0]}
               onChange={(e) => {
