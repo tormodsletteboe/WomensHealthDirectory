@@ -12,7 +12,7 @@ import Slide from "@mui/material/Slide";
 import ToggleButton from "@mui/material/ToggleButton";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import Tooltip from "@mui/material/Tooltip";
-
+import Avatar from "@mui/material/Avatar";
 import PreviewMedicalLinkCard from "./PreviewMedicalLinkCard";
 import Swal from "sweetalert2";
 
@@ -29,12 +29,17 @@ function MedicalLinksAccordion({ medicallink }) {
     <>
       <Accordion sx={{ my: 2 }}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
-          <Grid container >
-            <Grid item xs={2} >
-              <img src={medicallink.logo_url} />
+          <Grid container>
+            <Grid item xs={2}>
+              <Avatar
+                alt=""
+                src={medicallink.logo_url}
+                sx={{ bgcolor: "white" }}
+              />
+              {/* <img src={medicallink.logo_url} /> */}
             </Grid>
             <Grid item xs={4} my={1} textAlign={"start"}>
-              <Typography textAlign={"start"} >{medicallink.name}</Typography>
+              <Typography textAlign={"start"}>{medicallink.name}</Typography>
             </Grid>
             <Grid item xs={6} my={1} textAlign={"end"}>
               <Typography textAlign={"start"} sx={{ color: "text.secondary" }}>
@@ -48,7 +53,7 @@ function MedicalLinksAccordion({ medicallink }) {
             {medicallink.description}
           </Typography>
           <Grid item textAlign={"end"}>
-            <ToggleButton  onClick={handleChange} selected={checked}>
+            <ToggleButton onClick={handleChange} selected={checked}>
               <Tooltip title={checked ? "Close" : "Preview"}>
                 <PhoneAndroidIcon />
               </Tooltip>

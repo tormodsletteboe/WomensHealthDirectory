@@ -258,6 +258,7 @@ VALUES
 ('TheraNow','Employer pays initial fee. The employee will be the person who chooses the plan that best fits their needs, among the three plans available. If an employee chooses to upgrade to one of the premium plans, they will pay the corresponding monthly fee.','https://www.theranow.com/home','Physical Therapy','https://www.theranow.com/images/favicon.png','')
 ;
 
+<<<<<<< HEAD
 INSERT INTO "feedback" ("rating", "comment")
 VALUES 
 (4, 'Found this app very useful for finding information'),
@@ -279,3 +280,9 @@ VALUES
 (4, 'I brought info from this app with me to my doctor and it was helpful'),
 (3, 'Liked the screening guidelines and questions to ask your doctor'),
 (3, 'I would like to see information about what biomarker triage testing in the cervical health topics');
+=======
+INSERT INTO "newsletter" ("email")
+VALUES 
+('retha.wiza13@yahoo.com'), ('chyna_gorczany95@hotmail.com'), ('brooke_gleichner@gmail.com'), ('alene_doyle@gmail.com'), ('kayla85@gmail.com'), ('estella59@hotmail.com'), ('corrine_koch50@gmail.com'), ('anabel67@gmail.com'), ('cordelia.lebsack@yahoo.com'), ('solon20@yahoo.com'), ('ward.stark@yahoo.com'), ('brandyn.wilkinson@gmail.com'), ('tormod.slettebo@gmail.com'), ('chet80@gmail.com'), ('kathryne_wisoky@yahoo.com'), ('bernadine_lind0@gmail.com'), ('albert.bashirian@hotmail.com'), ('weldon88@yahoo.com'), ('rosina.shields89@hotmail.com'), ('clay_lueilwitz@gmail.com'), ('marcelino.satterfield16@yahoo.com')
+;
+>>>>>>> main
