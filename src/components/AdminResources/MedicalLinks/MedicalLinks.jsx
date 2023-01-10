@@ -19,11 +19,14 @@ import ImageList from "@mui/material/ImageList";
 import ImageListItem from "@mui/material/ImageListItem";
 import Avatar from "@mui/material/Avatar";
 
+import Paper from "@mui/material/Paper";
+import CircularProgress from "@mui/material/CircularProgress";
+import { green } from "@mui/material/colors";
+
 import "./MedicalLinks.css";
 import MedicalLinksAccordion from "./MedicalLinksAccordion";
 import EditMedicalLinksAccordion from "./EditMedicalLinksAccordion";
 import PreviewAddMedicalLinkCard from "./PreviewAddMedicalLinkCard";
-
 
 function MedicalLinks() {
   const dispatch = useDispatch();
@@ -36,7 +39,6 @@ function MedicalLinks() {
   const [open, setOpen] = React.useState(false);
   const [checked, setChecked] = React.useState(true);
   const containerRef = React.useRef(null);
- 
 
   const handleChange = () => {
     setChecked((prev) => !prev);
@@ -74,10 +76,26 @@ function MedicalLinks() {
     //fetch all medical links from database
     //dispatch someting
     dispatch({ type: "FETCH_MEDICAL_LINKS" });
+    return () => {
+      clearTimeout(timer.current);
+    };
   }, []);
 
   let imgpath = "./images/vifidefault.jpeg";
   let noImagePath = "";
+
+  const [loading, setLoading] = React.useState(false);
+  const [success, setSuccess] = React.useState(false);
+  const timer = React.useRef();
+
+  const buttonSx = {
+    ...(success && {
+      bgcolor: green[500],
+      "&:hover": {
+        bgcolor: green[700],
+      },
+    }),
+  };
 
   return (
     <Box>
@@ -142,136 +160,225 @@ function MedicalLinks() {
             </AccordionDetails>
           </Accordion>
         </Grid>
-        <Grid container>
+        <Grid
+          container
+          style={{
+            borderStyle: "solid",
+            borderWidth: "1px",
+            borderColor: "white",
+          }}
+        >
           {/* this is where I am, sunday morning make a imagelist of avatars, also maybe look at image size from the api for get icons */}
-          <Grid item xs={1.8}>
-            <select
-              className="dropdown"
-              defaultValue={result[0]}
-              onChange={(e) => {
-                setSelected(e.target.value);
-                dispatch({
-                  type: "SET_MEDICAL_LOGO_URL",
-                  payload: e.target.value,
-                });
-              }}
+          <Grid item xs={6}>
+            {/* select used to be here */}
+            <Grid
+              container
+              justifyContent={"flex-start"}
             >
-              <option key={"sdfs"} disabled>
-                Choose One
-              </option>
-              <option key={noImagePath}>{noImagePath}</option>
-              <option key={imgpath}>{imgpath}</option>
-              {result.map((icon) => (
-                <option key={icon} value={icon}>
-                  {icon}
-                </option>
-              ))}
-            </select>
+              <Grid
+                item
+                xs={"auto"}
+                style={{
+                  borderStyle: "solid",
+                  borderWidth: "0px",
+                  borderColor: "white",
+                }}
+                textAlign={"start"}
+              >
+                <Box sx={{ m: 0, position: "relative", p:0 }}>
+                  <Button
+                    onClick={() => {
+                      if (!loading) {
+                        setSuccess(false);
+                        setLoading(true);
+                        timer.current = window.setTimeout(async() => {
+                          const url = new URL(addMedLinks.url);
+                          const result = await axios.get(
+                        `https://favicongrabber.com/api/grab/${url.hostname}`
+                      );
+                         console.log(result.data);
+                          setResult(result.data.icons.map((icon) => icon.src));
+                          setOpen(true);
+                          setSuccess(true);
+                          setLoading(false);
+                        }, 1000);
+                      }
+                      
+                    }}
+                    variant="contained"
+                    disabled={loading}
+                    // sx={buttonSx}
+                  >
+                    get icons
+                  </Button>
+                  {loading && (
+                    <CircularProgress
+                      size={24}
+                      sx={{
+                        color: green[500],
+                        position: "absolute",
+                        top: "50%",
+                        left: "50%",
+                        marginTop: "-12px",
+                        marginLeft: "-12px",
+                      }}
+                    />
+                  )}
+                  {/* this is where I am at lunch sunday, add avatars to the virtual health aswell, then make the icon viewer for all components */}
+                </Box>
+              </Grid>
+              <Grid
+                item
+                xs={"auto"}
+                my={1}
+                sx={{ display: "flex", justifyContent: "start" }}
+              >
+                {open && (
+                  <Box
+                    sx={{
+                      display: "flex",
+                      flexWrap: "wrap",
+                      "& > :not(style)": {
+                        m: 1,
+                        width: 400,
+                        height: 200,
+                      },
+                    }}
+                  >
+                    <Paper elevation={2}>
+                      <ImageList sx={{ width: 400, height: 200 }} cols={7}>
+                        <ImageListItem key={noImagePath}>
+                          <ListItemButton
+                            onMouseOver={() => {
+                              setSelected(noImagePath);
+                              dispatch({
+                                type: "SET_MEDICAL_LOGO_URL",
+                                payload: noImagePath,
+                              });
+                            }}
+                            onClick={() => setOpen(false)}
+                          >
+                            <Avatar
+                              alt=""
+                              src={noImagePath}
+                              sx={{ bgcolor: "white" }}
+                            />
+                          </ListItemButton>
+                        </ImageListItem>
+                        <ImageListItem key={imgpath}>
+                          <ListItemButton
+                            onMouseOver={() => {
+                              setSelected(imgpath);
+                              dispatch({
+                                type: "SET_MEDICAL_LOGO_URL",
+                                payload: imgpath,
+                              });
+                            }}
+                            onClick={() => setOpen(false)}
+                          >
+                            <Avatar
+                              alt=""
+                              src={imgpath}
+                              sx={{ bgcolor: "white" }}
+                            />
+                          </ListItemButton>
+                        </ImageListItem>
+                        {result.map((icon) => (
+                          <ImageListItem key={icon}>
+                            <ListItemButton
+                              onMouseOver={() => {
+                                setSelected(icon);
+                                dispatch({
+                                  type: "SET_MEDICAL_LOGO_URL",
+                                  payload: icon,
+                                });
+                              }}
+                              onClick={() => setOpen(false)}
+                            >
+                              <Avatar
+                                alt=""
+                                src={icon}
+                                sx={{ bgcolor: "white" }}
+                              />
+                            </ListItemButton>
+                          </ImageListItem>
+                        ))}
+                      </ImageList>
+                    </Paper>
+                  </Box>
+                )}
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item xs={7.2}>
-            <Box sx={{ m: 1, position: "relative" }}>
-              <Button
-                onClick={async () => {
-                  const url = new URL(addMedLinks.url);
-
-                  const result = await axios.get(
-                    `https://favicongrabber.com/api/grab/${url.hostname}`
-                  );
-                  console.log(result.data);
-                  setResult(result.data.icons.map((icon) => icon.src));
-                  setOpen(true);
+          <Grid item xs={6}>
+            <Grid
+              container
+              alignItems={"center"}
+              justifyContent={"flex-end"}
+              style={{
+                borderStyle: "solid",
+                borderWidth: "1px",
+                borderColor: "white",
+              }}
+              textAlign="end"
+            >
+              <Grid
+                item
+                xs={"auto"}
+                textAlign={"end"}
+                style={{
+                  borderStyle: "solid",
+                  borderWidth: "1px",
+                  borderColor: "white",
                 }}
               >
-                get icons
-              </Button>
-              {/* this is where I am at lunch sunday, add avatars to the virtual health aswell, then make the icon viewer for all components */}
-              
-            </Box>
+                <ToggleButton onClick={handleChange} selected={checked}>
+                  <Tooltip title={checked ? "Close" : "Preview"}>
+                    <PhoneAndroidIcon />
+                  </Tooltip>
+                </ToggleButton>
+              </Grid>
+              <Grid
+                item
+                xs={"auto"}
+                textAlign={"end"}
+                style={{
+                  borderStyle: "solid",
+                  borderWidth: "1px",
+                  borderColor: "white",
+                }}
+                ml={1}
+              >
+                <Button variant="contained" onClick={handleAddMedLink}>
+                  Add Medical Link
+                </Button>
+              </Grid>
+              <Grid
+                item
+                xs={11}
+                my={1}
+                sx={{ display: "flex", justifyContent: "end" }}
+                style={{
+                  borderStyle: "solid",
+                  borderWidth: "1px",
+                  borderColor: "white",
+                }}
+              >
+                {checked && (
+                  <Slide
+                    direction="up"
+                    in={checked}
+                    container={containerRef.current}
+                  >
+                    {<PreviewAddMedicalLinkCard addMedicalLink={addMedLinks} />}
+                  </Slide>
+                )}
+              </Grid>
+            </Grid>
           </Grid>
-          <Grid item xs={1.5} textAlign={"end"}>
-            <ToggleButton onClick={handleChange} selected={checked}>
-              <Tooltip title={checked ? "Close" : "Preview"}>
-                <PhoneAndroidIcon />
-              </Tooltip>
-            </ToggleButton>
-          </Grid>
-          <Grid item xs={1.5} textAlign={"end"}>
-            <Button variant="contained" onClick={handleAddMedLink}>
-              Add Medical Link
-            </Button>
-          </Grid>
-        </Grid>
-        <Grid container></Grid>
-        <Grid
-          item
-          xs={11}
-          my={1}
-          sx={{ display: "flex", justifyContent: "end" }}
-        >
-          {checked && (
-            <Slide direction="up" in={checked} container={containerRef.current}>
-              {<PreviewAddMedicalLinkCard addMedicalLink={addMedLinks} />}
-            </Slide>
-          )}
-        </Grid>
-        <Grid 
-        item
-        xs={6}
-          my={1}
-          sx={{ display: "flex", justifyContent: "start" }}
-        >
-        {open && (
-                <ImageList sx={{ width: 400, height: 200 }} cols={7} >
-                  <ImageListItem key={noImagePath}>
-                    <ListItemButton  
-                    onMouseOver={() => {
-                        setSelected(noImagePath);
-                        dispatch({
-                          type: "SET_MEDICAL_LOGO_URL",
-                          payload: noImagePath,
-                        });
-                      }}
-                      onClick={() => setOpen(false)}
-                      >
-                      <Avatar alt="" src={noImagePath} sx={{ bgcolor: "white" }} />
-                    </ListItemButton>
-                  </ImageListItem>
-                  <ImageListItem key={imgpath}>
-                    <ListItemButton  
-                    onMouseOver={() => {
-                        setSelected(imgpath);
-                        dispatch({
-                          type: "SET_MEDICAL_LOGO_URL",
-                          payload: imgpath,
-                        });
-                      }}
-                      onClick={() => setOpen(false)}
-                      >
-                      <Avatar alt="" src={imgpath} sx={{ bgcolor: "white" }} />
-                    </ListItemButton>
-                  </ImageListItem>
-                {result.map((icon) => (
-                  <ImageListItem key={icon}>
-                    <ListItemButton  
-                    onMouseOver={() => {
-                        setSelected(icon);
-                        dispatch({
-                          type: "SET_MEDICAL_LOGO_URL",
-                          payload: icon,
-                        });
-                      }}
-                      onClick={() => setOpen(false)}
-                      >
-                      <Avatar alt="" src={icon} sx={{ bgcolor: "white" }} />
-                    </ListItemButton>
-                  </ImageListItem>
-                ))}
-              </ImageList>
-
-              )}
         </Grid>
       </Grid>
-    
+
       <Box sx={{ mx: 2, marginTop: 10 }}>
         <Typography variant="h3"> Medical Links </Typography>
         {/* render all medical links from database */}
