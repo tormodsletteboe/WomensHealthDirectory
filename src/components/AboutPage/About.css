@@ -15,13 +15,13 @@
     height:200px;
     object-fit:cover;
     border-radius:50%;
-    border: 5px solid gray;
+    border: 1px solid gray;
     display: flex;
     margin: 0 auto;
 }
 
 .imageContainer {
-    background-color: lightgrey;
+    background-color: #8EBBA7;
     padding: 10px;
 }
 
