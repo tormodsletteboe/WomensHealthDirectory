@@ -37,7 +37,7 @@ function MedicalLinks() {
   const [result, setResult] = useState([addMedLinks.logo_url]);
   const [selected, setSelected] = useState(addMedLinks.logo_url);
   const [open, setOpen] = React.useState(false);
-  const [checked, setChecked] = React.useState(true);
+  const [checked, setChecked] = React.useState(false);
   const containerRef = React.useRef(null);
 
   const handleChange = () => {
@@ -88,14 +88,7 @@ function MedicalLinks() {
   const [success, setSuccess] = React.useState(false);
   const timer = React.useRef();
 
-  const buttonSx = {
-    ...(success && {
-      bgcolor: green[500],
-      "&:hover": {
-        bgcolor: green[700],
-      },
-    }),
-  };
+
 
   return (
     <Box>
