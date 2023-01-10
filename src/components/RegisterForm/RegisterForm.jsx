@@ -31,10 +31,10 @@ function RegisterForm() {
   }; // end registerUser
   
   function autfillRegister() {
-    setUsername("Aina Robertson");
-    setPassword("aina123");
-    setEmail("ainaR@gmail.com");
-    setAge("39");
+    setUsername("Tia Theisen");
+    setPassword("tia123");
+    setEmail("tiatheisen@gmail.com");
+    setAge("35");
     setZip("55401");
   }
 
