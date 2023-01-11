@@ -20,6 +20,7 @@ const AddPreviewMedicalLinkCard = React.forwardRef((props,ref) => {
             sx={addMedicalLink.logo_url ? { bgcolor: "white" }:{ bgcolor: "#8EBBA7" } }
           />
         }
+        sx={{textAlign:'left'}}
         title={addMedicalLink.title && <Typography variant="body" >{addMedicalLink.title}</Typography>}
       />
       
