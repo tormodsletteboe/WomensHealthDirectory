@@ -33,57 +33,47 @@ import Swal from "sweetalert2";
 import { Grid } from "@mui/material";
 
 function AdminLandingPage() {
-  //add code comment
-  // hooks
-  const dispatch = useDispatch();
-  const history = useHistory();
+	//add code comment
+	// hooks
+	const dispatch = useDispatch();
+	const history = useHistory();
 
-  // selectors
-  const newsletterEmails = useSelector((store) => store.newsletterEmails);
+	// selectors
+	const newsletterEmails = useSelector((store) => store.newsletterEmails);
 
-  const headers = [{ label: "Email Address", key: "email" }];
-  const [heading, setHeading] = useState("Admin Landing Page");
-  const [isEmailListClicked, setClicked] = useState(false);
-  const [isEditorClicked, setEditorClicked] = useState(false);
+	const headers = [{ label: "Email Address", key: "email" }];
+	const [heading, setHeading] = useState("Admin Landing Page");
+	const [isEmailListClicked, setClicked] = useState(false);
+	const [isEditorClicked, setEditorClicked] = useState(false);
 
-  const [editorState, setEditorState] = useState("");
+	const [editorState, setEditorState] = useState("");
 
-  useEffect(() => {
-    dispatch({ type: "FETCH_NEWSLETTER_EMAILS" });
-  }, []);
+	useEffect(() => {
+		dispatch({ type: "FETCH_NEWSLETTER_EMAILS" });
+	}, []);
 
-  function handleEmailClick() {
-    setClicked(!isEmailListClicked);
-    // console.log('clicked?', isEmailListClicked)
-  }
+	function handleEmailClick() {
+		setClicked(!isEmailListClicked);
+	}
 
-  function handleEditorClick() {
-    setEditorClicked(!isEditorClicked);
-    // console.log('clicked?', isEditorClicked)
-  }
+	function handleEditorClick() {
+		setEditorClicked(!isEditorClicked);
+	}
 
-  const handleChange = (editorContent) => {
-    setEditorState(editorContent);
-    console.log(editorState);
-  };
-
-  // sunEditor handling image upload
-  // currently unused
-  // const handleImageUpload = (targetImgElement, index, state, imageInfo, remainingFilesCount) => {
-  // 		console.log(targetImgElement, index, state, imageInfo, remainingFilesCount)
-  // }
+	const handleChange = (editorContent) => {
+		setEditorState(editorContent);
+	};
 
 	const handleViewFeedback = () => {
 		history.push('/adminfeedbackview');
 	}
 
+	// sends newsletter to email list
 	function handleEditorSave() {
-		console.log("in save button, content html:", editorState);
 		let emailList = [];
 		for (let email of newsletterEmails) {
 		  emailList.push(email.email);
 		}
-		console.log("email list is:", emailList);
 		dispatch({
 		  type: "SEND_NEWSLETTER",
 		  payload: { htmlToSend: editorState, emailList: emailList },
@@ -96,53 +86,6 @@ function AdminLandingPage() {
 		});
 		handleEditorClick();
 	  }
-
-	function handleNewsletterDemoClick() {
-		console.log('clicked');
-		SunEditor.defaultValue = `<h1>Welcome to the ViFi Newsletter!</h1>
-
-		<p>Thank you for signing up! Now you will find all the latest women&apos;s health news in your inbox!</p>
-		
-		<div class="se-component se-image-container __se__float-none" contenteditable="false" style="">      
-		  <figure style="margin: 0px;">
-						<img src="https://post.healthline.com/wp-content/uploads/2020/09/Female_iPhone_Chair_1296x728-header-1296x729.jpg" alt="" data-rotate="" data-proportion="true" data-rotatex="" data-rotatey="" data-size="794px,446px" data-align="none" data-index="0" data-file-name="Female_iPhone_Chair_1296x728-header-1296x729.jpg" data-file-size="0" data-origin="," style="width: 794px; height: 446px;">
-		  </figure>
-		</div>
-		
-		<div>
-		<h2>2022 Nurx Review: Is It Right for You?</h2>
-		
-		<p><br>
-		</p>
-		</div>
-		<div>
-		<h3>What is Nurx?</h3>
-		
-		<p>Nurx is a telemedicine company that offers birth control prescriptions, emergency contraception, and home testing kits. All prescriptions are written by a licensed healthcare professional in your state and delivered directly to you.</p>
-		
-		<h3>What services does Nurx offer?</h3>
-		
-		<ul>
-		  <li>birth control prescriptions and fulfillment </li>
-		  <li>emergency contraception</li>
-		  <li>skin care treatment for acne, rosacea, and aging</li>
-		  <li>migraine medications</li>
-		  <li>sexual health management, including STI testing, HPV screening and treatment, and UTI treatment</li>
-		  <li>UTI treatment</li>
-		  <li>COVID-19 testing<br>
-		  </li>
-		</ul>
-		</div>
-		<div>
-		<p>
-		All prescriptions are written by a licensed healthcare professional in your state and delivered directly to you. Nurx uses an accredited lab for sample testing. It also uses licensed pharmacies, which you can double-check here.
-		
-		While Nurx shouldn’t replace your regular doctor, it can still be a convenient way to access basic healthcare when you need it. Here’s what else you should know about Nurx.
-		</p>
-		</div>
-		
-		<footer align="center">Copyright 2023 ViFi</footer>`
-	}
 
   return (
     <Container >
@@ -216,7 +159,6 @@ function AdminLandingPage() {
 					width='80%' height='400px'
 					autoFocus={true}
 					onChange={handleChange}
-					// onImageUpload={handleImageUpload}
 					setOptions={{ buttonList: buttonList.formatting, 
 					plugins: [
 						font,

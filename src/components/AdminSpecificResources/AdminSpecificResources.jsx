@@ -1,8 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
-import AddEditForm from "../AdminAddEditForm/AdminAddEditForm";
-import { createTheme, ThemeProvider } from '@mui/material/styles';
 import Button from '@mui/material/Button';
 import Breadcrumbs from '@mui/material/Breadcrumbs';
 import Typography from '@mui/material/Typography';
@@ -16,7 +14,6 @@ function AdminSpecificResources() {
 
     // hooks
     const dispatch = useDispatch();
-
     const params = useParams();
 
     // selectors
@@ -39,14 +36,11 @@ function AdminSpecificResources() {
 
     const handleDelete = (evt, x) => {
         evt.preventDefault();
-        // console.log('deleting x', x);
         dispatch({type: 'DELETE_RESOURCE', 
             payload: {id: x.id, categoryId: params.categoryId}});
-        
     }
 
-     const addEditForm =  (                   
-    //     <form 
+    const addEditForm =  (                   
           <TableRow key={resourceToEdit.id}>
                 <TableCell align="center"><TextField 
                 multiline
@@ -54,21 +48,24 @@ function AdminSpecificResources() {
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_FIELD',
                     payload: {name: evt.target.value}
-                })}/></TableCell>
+                })}/>
+                </TableCell>
                 <TableCell align="center"><TextField 
                 multiline
                 value={resourceToEdit.description}
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_FIELD',
                     payload: {description: evt.target.value}
-                })}/></TableCell>
+                })}/>
+                </TableCell>
                 <TableCell align="center"><TextField 
                 multiline
                 value={resourceToEdit.link}
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_FIELD',
                     payload: {link: evt.target.value}
-                })}/></TableCell>
+                })}/>
+                </TableCell>
                 <TableCell>
                     <Button variant="contained" size="small" 
                         onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: {}})}>
@@ -83,34 +80,11 @@ function AdminSpecificResources() {
                 </TableCell>
         </TableRow>
 
-             //* <input  */}
-    //             value={resourceToEdit.name}
-    //             onChange={(evt) => dispatch({
-    //                 type: 'UPDATE_FIELD',
-    //                 payload: {name: evt.target.value}
-    //         })}/>
-    //         <input 
-    //             value={resourceToEdit.description}
-    //             onChange={(evt) => dispatch({
-    //                 type: 'UPDATE_FIELD',
-    //                 payload: {description: evt.target.value}
-    //         })}/>
-    //         <input 
-    //             value={resourceToEdit.link}
-    //             onChange={(evt) => dispatch({
-    //                 type: 'UPDATE_FIELD',
-    //                 payload: {link: evt.target.value}
-    //         })}/>
-    //         <button onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: {}})}>
-    //             Cancel
-    //         </button>
-    //         <button type="submit" onClick={updateOrAddResource}>Save</button>
     )
 
     function updateOrAddResource(evt) {
         evt.preventDefault();
         const updateDetailPayload = {...resourceToEdit, categoryId: params.categoryId, sectionName: params.sectionName}
-        console.log(updateDetailPayload);
 
         if (resourceToEdit.id === 0) {
             dispatch({ type: 'ADD_RESOURCE', payload: updateDetailPayload});

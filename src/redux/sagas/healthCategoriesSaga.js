@@ -16,7 +16,7 @@ function* fetchHealthCategories() {
         });
 
     } catch (err) {
-        console.log('Error with fetching health categories', err);
+        console.error('Error with fetching health categories', err);
     }
 
 }

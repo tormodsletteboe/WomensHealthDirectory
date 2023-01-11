@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 
@@ -17,7 +17,6 @@ function AddEditFormSpecR() {
     function updateOrAddResource(evt) {
         evt.preventDefault();
         const updateResoursePayload = {...resourceToEdit, categoryId: params.categoryId}
-        console.log(updateResoursePayload);
 
         if (resourceToEdit.id > specificResources[specificResources.length-1].id) {
             dispatch({ type: 'ADD_RESOURCE', payload: updateResoursePayload});

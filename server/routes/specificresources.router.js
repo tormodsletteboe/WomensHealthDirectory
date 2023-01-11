@@ -6,12 +6,11 @@ const {
   rejectUnauthenticated,
 } = require("../modules/authentication-middleware");
 
+
+// GET router to get all resources for the selected health category
 router.get('/:categoryId', rejectUnauthenticated, (req, res) => {
 
   const categoryId = req.params.categoryId;
-  // const ageRangeId = req.params.ageRangeId;
-
-  console.log('in get request for specific resources, id', categoryId);
 
   const sqlText = 
   `
@@ -28,11 +27,12 @@ router.get('/:categoryId', rejectUnauthenticated, (req, res) => {
       res.send(dbRes.rows);
     })
     .catch(error => {
-      console.log(error);
+      console.error(error);
       res.sendStatus(500);
     })
 });
 
+// POST router to add a resource for the selected health category
 router.post('/:categoryId', rejectUnauthenticated, (req, res) => {
 
   const categoryId = req.params.categoryId;
@@ -44,19 +44,18 @@ router.post('/:categoryId', rejectUnauthenticated, (req, res) => {
     `;
 
   const sqlParams = [req.body.name, req.body.link, req.body.description, categoryId];
-  
-  console.log('sql params are', sqlParams);
 
   pool.query(sqlText, sqlParams)
   .then(dbRes => {
     res.sendStatus(201);
   })
   .catch(error => {
-    console.log(error);
+    console.error(error);
     res.sendStatus(500);
   })
 });
 
+// PUT router to edit a resource for the selected health category
 router.put('/:categoryId', rejectUnauthenticated, (req, res) => {
 
   const categoryId = req.params.categoryId;
@@ -69,19 +68,18 @@ router.put('/:categoryId', rejectUnauthenticated, (req, res) => {
     `;
 
   const sqlParams = [req.body.name, req.body.link, req.body.description, req.body.id, categoryId];
-  
-  console.log('sql params are', sqlParams);
 
   pool.query(sqlText, sqlParams)
   .then(dbRes => {
     res.sendStatus(204);
   })
   .catch(error => {
-    console.log(error);
+    console.error(error);
     res.sendStatus(500);
   })
 });
 
+// DELETE router to edit a resource for the selected health category
 router.delete('/:categoryId', rejectUnauthenticated, (req, res) => {
   const categoryId = req.body.categoryId;
 
@@ -98,7 +96,7 @@ router.delete('/:categoryId', rejectUnauthenticated, (req, res) => {
     res.sendStatus(204);
   })
   .catch(error => {
-    console.log(error);
+    console.error(error);
     res.sendStatus(500);
   })
 });
