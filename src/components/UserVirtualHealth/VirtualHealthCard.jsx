@@ -12,6 +12,7 @@ import Collapse from "@mui/material/Collapse";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 
+// Cost/Coverage expand button and animation
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <Button {...other}>Cost/Coverage</Button>;
@@ -23,6 +24,7 @@ const ExpandMore = styled((props) => {
 //   }),
 }));
 
+// VirtualHealthCard component
 function VirtualHealthCard({ virthealthlink }) {
   const [expanded, setExpanded] = React.useState(false);
 
