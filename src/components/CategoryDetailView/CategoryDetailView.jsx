@@ -23,6 +23,7 @@ function CategoryDetailView() {
   const dispatch = useDispatch();
   let params = useParams();
 
+    const selectedHealthCategory = useSelector(store => store.selectedHealthCategory);
 
   useEffect(() => {
     dispatch({

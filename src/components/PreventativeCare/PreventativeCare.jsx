@@ -46,6 +46,8 @@ function PreventativeCare() {
 
     //When a health category button is clicked, display a detail view of that health category
     const handleCategoryClick = (category) => {
+
+        dispatch({ type: "SET_SELECTED_CATEGORY", payload: category });
         history.push(`./preventativecare/${category.id}/ages/${age}`);
     }
 
