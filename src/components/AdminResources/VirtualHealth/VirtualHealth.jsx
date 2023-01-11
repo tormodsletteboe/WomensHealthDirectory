@@ -94,6 +94,7 @@ function VirtualHealth() {
     });
     setResult([]);
     setSelected("");
+    setChecked(false);
    
   };
 

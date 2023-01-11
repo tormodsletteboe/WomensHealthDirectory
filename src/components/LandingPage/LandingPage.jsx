@@ -140,7 +140,6 @@ function LandingPage() {
             </Card>
           </Box>
         </Modal>
-
       </div>
     </div>
   );
