@@ -57,7 +57,7 @@ function AdminCategoryDetailView() {
     // functions
     const handleAddClick = () => {
 		
-		// calculate how many fields to show in the add form
+		// calculate how many fields to show in the add form, based on the health category selected
 		const newObjectItemsNumber = (Object.keys(detailContent[0]).length) - 1;
 		console.log('new add object fields', newObjectItemsNumber);
 

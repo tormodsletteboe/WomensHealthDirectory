@@ -3,21 +3,13 @@ const pool = require('../modules/pool');
 const router = express.Router();
 const transporter = require('../modules/transporter');
 
-/**
- * GET route template
- */
-router.get('/', (req, res) => {
-  // GET route code here
-});
-
-/**
- * POST route template
- */
 router.post('/', (req, res) => {
   const htmlToSend = req.body.htmlToSend;
   const emailList = req.body.emailList;
 
   console.log('email list is:', req.body);
+
+  // define options for the newsletter email
   const options = {
       from: '"vifiexample01@gmail.com" <vifiexample01@gmail.com>', // sender address
       bcc: emailList, // list of receivers
@@ -26,6 +18,8 @@ router.post('/', (req, res) => {
       html: htmlToSend, // html body
   }
 
+
+// transporter sends the data to the email server based on options above
   transporter.sendMail(options, function (err, info) {
     if(err){
         console.log(err);
@@ -35,11 +29,6 @@ router.post('/', (req, res) => {
     res.sendStatus(204);
     console.log("sent", info.response);
   })
-  // .then(res => {sendStatus(204)})
-  // .catch(error => {
-  //   console.error(error);
-  //   res.sendStatus(500);
-  // })
 });
 
 module.exports = router;

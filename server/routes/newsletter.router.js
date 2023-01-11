@@ -2,7 +2,7 @@ const express = require('express');
 const pool = require('../modules/pool');
 const router = express.Router();
 
-// gets all email from database
+// GET route will get all emails from database
 router.get('/', (req, res) => {
   pool.query(`SELECT * from "newsletter"
   ORDER BY "id" ASC
@@ -11,22 +11,23 @@ router.get('/', (req, res) => {
     res.send(dbRes.rows);
   })
   .catch(err => {
-    console.error('Unable to get email table', err);
+    console.error('Error in getting email table', err);
     res.sendStatus(500);
   })
 });
 
+
+// POST route to add email to database when user signs up
 router.post('/', (req, res) => {
   pool.query(`
     INSERT INTO "newsletter" ("email")
     VALUES ($1);
   `, [req.body.email])
     .then(dbRes => {
-      console.log('---- Added new email to newsletter table');
       res.sendStatus(201);
     })
     .catch(err => {
-      console.log('Unable to add new email to newsletter table', err);
+      console.error('Error adding email', err);
       res.sendStatus(500);
     })
 });
