@@ -2,20 +2,22 @@ import { put, takeLatest } from "@redux-saga/core/effects";
 import axios from "axios";
 
 
-// fetches category detail from database
+// GET health category details from database
+//Based on age range id and category id
 function* fetchCategoryDetail(action) {
 
-    let catId = action.payload.catId;    
+    let catId = action.payload.catId;
+
     let ageId = action.payload.ageId;
 
     try {
 
         const response = yield axios.get(`/api/preventativecare/${catId}/ages/${ageId}/`);
 
-        yield put({ 
+        yield put({
             type: 'SET_CATEGORY_DETAIL',
             payload: response.data
-    });
+        });
 
     } catch (err) {
         console.error('Error with fetching category detail', err);
@@ -32,10 +34,10 @@ function* fetchSpecificCategoryDetail(action) {
 
         const response = yield axios.get(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`);
 
-        yield put({ 
+        yield put({
             type: 'SET_CATEGORY_DETAIL',
             payload: response.data
-    });
+        });
 
     } catch (err) {
         console.error('Error with fetching category detail', err);
@@ -43,17 +45,19 @@ function* fetchSpecificCategoryDetail(action) {
 }
 
 function* updateCategoryDetail(action) {
-    
+
     try {
         const catId = action.payload.catId;
         const ageId = action.payload.ageId;
         const sectionName = action.payload.sectionName;
         const dataToSend = action.payload;
 
-        yield axios.put(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`,  dataToSend );
+        yield axios.put(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`, dataToSend);
 
-        yield put({type: 'FETCH_SPECIFIC_CATEGORY_DETAIL' , 
-                payload: {catId: catId , ageId: ageId, sectionName: sectionName}});
+        yield put({
+            type: 'FETCH_SPECIFIC_CATEGORY_DETAIL',
+            payload: { catId: catId, ageId: ageId, sectionName: sectionName }
+        });
     } catch (err) {
         console.error('Error updating specific resource', err);
     }
@@ -66,10 +70,12 @@ function* addCategoryDetail(action) {
         const sectionName = action.payload.sectionName;
         const dataToSend = action.payload;
 
-        yield axios.post(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`,  dataToSend );
+        yield axios.post(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`, dataToSend);
 
-        yield put({type: 'FETCH_SPECIFIC_CATEGORY_DETAIL' , 
-                payload: {catId: catId , ageId: ageId, sectionName: sectionName}});
+        yield put({
+            type: 'FETCH_SPECIFIC_CATEGORY_DETAIL',
+            payload: { catId: catId, ageId: ageId, sectionName: sectionName }
+        });
     } catch (err) {
         console.error('Error adding specific category detail', err);
     }
@@ -80,14 +86,16 @@ function* deleteCategoryDetail(action) {
         const catId = action.payload.catId;
         const ageId = action.payload.ageId;
         const sectionName = action.payload.sectionName;
-       
-        yield axios.delete(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`,  {data: action.payload} );
 
-        yield put({type: 'FETCH_SPECIFIC_CATEGORY_DETAIL' , 
-                payload: {catId: catId , ageId: ageId, sectionName: sectionName}});
+        yield axios.delete(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`, { data: action.payload });
+
+        yield put({
+            type: 'FETCH_SPECIFIC_CATEGORY_DETAIL',
+            payload: { catId: catId, ageId: ageId, sectionName: sectionName }
+        });
     } catch (err) {
         console.error('Error deleting specific category detail', err);
-    } 
+    }
 }
 
 function* categoryDetailSaga() {
