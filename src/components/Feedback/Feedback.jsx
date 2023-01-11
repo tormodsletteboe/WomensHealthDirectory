@@ -16,6 +16,7 @@ function Feedback() {
             'What is the MOST CONFUSING aspect of managing your healthcare?',
         ])
 
+    // array of dropdown answers and radio choice questions.
     const [[dropdownA, setDropA], [dropdownB, setDropB], [multi, setMulti]] =
         [
             useState([
@@ -39,21 +40,24 @@ function Feedback() {
             ])
         ]
 
-    const [answers, setAnswers] = useState({
+    const [answers, setAnswers] = useState({ // object that keeps track of current selection of answers
         '1': '', '2': '', '3': '', '4': '',
         '5': '', '6': '', '7': '', '8': '', '9': ''
     });
 
+    // array of common local state to track and render the DOM effectively
     const [[page, setPage],
         [radio, setRadio],
         [comment, setComment],
         [rating, setRating]
     ] = [useState(1), useState(1), useState(''), useState(0)];
 
+    // updates the answer object with passed object property
     const saveAnswer = (answer) => {
         setAnswers({ ...answers, ...answer });
     }
 
+    // changes pagination page according to the update. next is +1, prev is -1.
     const changePage = (update) => {
         if (page + update > 0 && page + update < 11) {
             setRadio(answers[page + update]);
@@ -61,6 +65,7 @@ function Feedback() {
         }
     }
 
+    // tracks radio answer choices in answer object
     const setRadioAnswer = (e) => {
         switch (page) {
             case 4: setAnswers({ ...answers, '4': e.target.value }); break;
@@ -74,6 +79,7 @@ function Feedback() {
         setRadio(e.target.value);
     }
 
+    // submits the survey to database. any empty / skipped answers are replaced with 'N/A'
     const submitSurvey = () => {
         
         let tempAnswers = {...answers};
@@ -81,8 +87,6 @@ function Feedback() {
         for(const question in tempAnswers) {
             if(tempAnswers[question] == '') tempAnswers[question] = 'N/A';
         }
-
-        console.log(tempAnswers);
 
         dispatch({
             type: 'SUBMIT_SURVEY', payload: {
@@ -94,10 +98,6 @@ function Feedback() {
         })
         history.push('/home');
     }
-
-    
-
-    // console.log(answers);
 
     return (
         <Container sx={({  })}>
@@ -115,8 +115,16 @@ function Feedback() {
                         </Typography>
                     </Box>
                     <Box>
-                    <Typography paragraph sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'textAlign':'center' })}>{questions[0]}</Typography>
-                        <Select value={answers['1']} onChange={(e) => saveAnswer({ '1': e.target.value })} sx={({ 'width':'100%' })}>
+                    <Typography 
+                        paragraph 
+                        sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'textAlign':'center' })}
+                    >{questions[0]}
+                    </Typography>
+                        <Select 
+                            value={answers['1']} 
+                            onChange={(e) => saveAnswer({ '1': e.target.value })} 
+                            sx={({ 'width':'100%' })}
+                        >
                             <MenuItem value={dropdownA[0]}>{dropdownA[0]}</MenuItem>
                             <MenuItem value={dropdownA[1]}>{dropdownA[1]}</MenuItem>
                             <MenuItem value={dropdownA[2]}>{dropdownA[2]}</MenuItem>
@@ -129,8 +137,16 @@ function Feedback() {
             {page == 2 &&
                 <Container>
                     <Box>
-                        <Typography paragraph sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'textAlign':'center' })}>{questions[1]}</Typography>
-                        <Select value={answers['2']} onChange={(e) => saveAnswer({ '2': e.target.value })} sx={({ 'width':'100%' })}>
+                        <Typography 
+                            paragraph 
+                            sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'textAlign':'center' })}
+                        >{questions[1]}
+                        </Typography>
+                        <Select 
+                            value={answers['2']} 
+                            onChange={(e) => saveAnswer({ '2': e.target.value })} 
+                            sx={({ 'width':'100%' })}
+                        >
                             <MenuItem value={dropdownA[0]}>{dropdownA[0]}</MenuItem>
                             <MenuItem value={dropdownA[1]}>{dropdownA[1]}</MenuItem>
                             <MenuItem value={dropdownA[2]}>{dropdownA[2]}</MenuItem>
@@ -143,8 +159,16 @@ function Feedback() {
             {page == 3 &&
                 <Container>
                     <Box>
-                        <Typography paragraph sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'textAlign':'center' })}>{questions[2]}</Typography>
-                        <Select value={answers['3']} onChange={(e) => saveAnswer({ '3': e.target.value })} sx={({ 'width':'100%' })}>
+                        <Typography 
+                            paragraph 
+                            sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'textAlign':'center' })}
+                        >{questions[2]}
+                        </Typography>
+                        <Select 
+                            value={answers['3']} 
+                            onChange={(e) => saveAnswer({ '3': e.target.value })} 
+                            sx={({ 'width':'100%' })}
+                        >
                             <MenuItem value={dropdownB[0]}>{dropdownB[0]}</MenuItem>
                             <MenuItem value={dropdownB[1]}>{dropdownB[1]}</MenuItem>
                             <MenuItem value={dropdownB[2]}>{dropdownB[2]}</MenuItem>
@@ -157,9 +181,21 @@ function Feedback() {
                 <Box>
                     <Typography paragraph>{questions[3]}</Typography>
                     <Typography paragraph>Please rate from 1 (least confusing) to 5 (most confusing)</Typography>
-                    <Typography paragraph textAlign={'center'} borderBottom={'1px solid black'} fontSize={'18px'} paddingTop={'3vh'}>{multi[page - 4]}</Typography>
+                    <Typography 
+                        paragraph 
+                        textAlign={'center'} 
+                        borderBottom={'1px solid black'} 
+                        fontSize={'18px'} 
+                        paddingTop={'3vh'}
+                    >{multi[page - 4]}
+                    </Typography>
                     <Box>
-                        <RadioGroup row sx={({ 'justifyContent': 'space-evenly' })} onChange={(e) => setRadioAnswer(e)} value={radio}>
+                        <RadioGroup 
+                            row 
+                            sx={({ 'justifyContent': 'space-evenly' })} 
+                            onChange={(e) => setRadioAnswer(e)} 
+                            value={radio}
+                        >
                             <FormControlLabel value={'1'} control={<Radio />} label='1' labelPlacement="top" sx={({ 'margin': 0 })} />
                             <FormControlLabel value={'2'} control={<Radio />} label='2' labelPlacement="top" sx={({ 'margin': 0 })} />
                             <FormControlLabel value={'3'} control={<Radio />} label='3' labelPlacement="top" sx={({ 'margin': 0 })} />
@@ -175,9 +211,19 @@ function Feedback() {
                         Thank you for completing the survey!
                         Leave a comment and a rating about your overall experience using The Vifi!
                     </Typography>
-                    <TextField label={'Leave a comment!'} value={comment} onChange={(e) => setComment(e.target.value)} sx={({ 'width': '100%' })}></TextField>
+                    <TextField 
+                        label={'Leave a comment!'} 
+                        value={comment} 
+                        onChange={(e) => setComment(e.target.value)} 
+                        sx={({ 'width': '100%' })}
+                    ></TextField>
                     <Box sx={({ 'textAlign':'center' })}>
-                        <Typography paragraph sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'marginTop':'5%' })}>How do you rate your overall experience?</Typography>
+                        <Typography 
+                            paragraph 
+                            sx={({ 'fontSize': '18px', 'borderBottom':'1px solid black', 'marginTop':'5%' })}
+                        >How do you rate your overall experience?
+                        </Typography>
+                        {/* The same radio select is used for all radio questions */}
                         <Select value={rating} onChange={(e) => setRating(e.target.value)}>
                             <MenuItem value={0}>0</MenuItem>
                             <MenuItem value={1}>1</MenuItem>
@@ -193,11 +239,27 @@ function Feedback() {
                 </Box>
             }
             <Box sx={({ 'textAlign': 'center', 'paddingTop':'30vh', 'paddingBottom':'3vh' })}>
-                <Button onClick={() => changePage(-1)} variant='contained' sx={({ 'marginRight': '2em' })}>PREV</Button>
-                <Button onClick={() => changePage(1)} variant='contained' sx={({ 'marginLeft': '2em' })}>NEXT</Button>
+                <Button 
+                    onClick={() => changePage(-1)} 
+                    variant='contained' 
+                    sx={({ 'marginRight': '2em' })}
+                >PREV</Button>
+                <Button 
+                    onClick={() => changePage(1)} 
+                    variant='contained' 
+                    sx={({ 'marginLeft': '2em' })}
+                >NEXT</Button>
             </Box>
             <Box sx={({ 'alignContent': 'center' })}>
-                <Pagination count={10} page={page} onChange={(e, v) => setPage(v)} hideNextButton hidePrevButton size="large" siblingCount={1}></Pagination>
+                <Pagination 
+                    count={10} 
+                    page={page} 
+                    onChange={(e, v) => setPage(v)} 
+                    hideNextButton 
+                    hidePrevButton 
+                    size="large" 
+                    siblingCount={1}
+                ></Pagination>
             </Box>
         </Container>
     )
