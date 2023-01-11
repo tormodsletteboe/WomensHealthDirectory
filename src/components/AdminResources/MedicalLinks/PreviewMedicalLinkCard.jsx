@@ -8,6 +8,7 @@ import Link from "@mui/material/Link";
 import { CardHeader } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 
+//preview used for the toggle buttons in the list of medical links and when in edit mode
 const PreviewMedicalLinkCard = React.forwardRef((props,ref) => {
   const {medicallink} = props;
   return (

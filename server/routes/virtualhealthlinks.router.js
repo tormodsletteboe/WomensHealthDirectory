@@ -1,3 +1,5 @@
+//router for virtual health links on admin page resoureces
+
 const express = require('express');
 const {
     rejectUnauthenticated,

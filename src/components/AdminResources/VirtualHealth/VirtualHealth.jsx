@@ -30,21 +30,37 @@ import PreviewAddVirtualHealthCard from "./PreviewAddVirtualHealthCard";
 
 function VirtualHealth() {
   const dispatch = useDispatch();
+
+  //reducer for the add virtual health link, as the user is typing into the input fields the values are stored in this reducer
   const addVirtualHealthLinks = useSelector(
     (store) => store.addVirtualHealthLinks
   );
+
+  //reducer for the virtual health links from the database
   const virtualhealthlinks = useSelector((store) => store.virtualhealth_links);
+
+  //reducer for the resource to edit, this is used to populate the edit accordion
   const resourceToEdit = useSelector((store) => store.resourceToEdit);
 
-  //this is used with the get ICONS button
+  //state for the icon result from the icon api favicongrabber
   const [result, setResult] = useState([addVirtualHealthLinks.logo_url]);
+  
+  //selected icon state
   const [selected, setSelected] = useState(addVirtualHealthLinks.logo_url);
 
+  //used to fake a loading state when clicking the GET ICON button
   const [loading, setLoading] = React.useState(false);
+
+  //intended to be used with the get icon button on success api return call
   const [success, setSuccess] = React.useState(false);
+
+  //used to fake a loading state when clicking the GET ICON in the add virtual health accordion
   const timer = React.useRef();
+
+  //used to conditionally render the imagelist of returned icons from the api favicongrabber
   const [open, setOpen] = React.useState(false);
 
+  //state of the preview toggle button
   const [checked, setChecked] = React.useState(false);
   const containerRef = React.useRef(null);
   const handleChange = () => {

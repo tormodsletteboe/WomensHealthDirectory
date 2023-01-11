@@ -17,19 +17,25 @@ import PreviewMedicalLinkCard from "./PreviewMedicalLinkCard";
 import Swal from "sweetalert2";
 
 function MedicalLinksAccordion({ medicallink }) {
-  //   const store = useSelector((store) => store);
+  //state for the preview toggle button
   const [checked, setChecked] = React.useState(false);
+  
+  //ref for the preview card
   const containerRef = React.useRef(null);
 
+  //function to handle the toggle button
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
+
   const dispatch = useDispatch();
+
   return (
     <>
       <Accordion sx={{ my: 2 }}>
         <AccordionSummary expandIcon={<ExpandMoreIcon />}>
           <Grid container>
+            {/* icon */}
             <Grid item xs={2}>
               <Avatar
                 alt=""
@@ -38,9 +44,11 @@ function MedicalLinksAccordion({ medicallink }) {
               />
               {/* <img src={medicallink.logo_url} /> */}
             </Grid>
+            {/* title */}
             <Grid item xs={4} my={1} textAlign={"start"}>
               <Typography textAlign={"start"}>{medicallink.name}</Typography>
             </Grid>
+            {/* url */}
             <Grid item xs={6} my={1} textAlign={"end"}>
               <Typography textAlign={"start"} sx={{ color: "text.secondary" }}>
                 {medicallink.link}
@@ -49,15 +57,18 @@ function MedicalLinksAccordion({ medicallink }) {
           </Grid>
         </AccordionSummary>
         <AccordionDetails>
+          {/* description */}
           <Typography textAlign={"start"} sx={{ width: "33%", flexShrink: 0 }}>
             {medicallink.description}
           </Typography>
+          {/* preview toggle button, Edit button, delete button */}
           <Grid item textAlign={"end"}>
             <ToggleButton onClick={handleChange} selected={checked}>
               <Tooltip title={checked ? "Close" : "Preview"}>
                 <PhoneAndroidIcon />
               </Tooltip>
             </ToggleButton>
+            {/* edit button */}
             <Button
               onClick={() =>
                 dispatch({ type: "SET_RESOURCE_TO_EDIT", payload: medicallink })
@@ -65,6 +76,7 @@ function MedicalLinksAccordion({ medicallink }) {
             >
               Edit
             </Button>
+            {/* delete button */}
             <Button
               onClick={() => {
                 Swal.fire({
@@ -93,6 +105,7 @@ function MedicalLinksAccordion({ medicallink }) {
         </AccordionDetails>
       </Accordion>
 
+      {/* preview card when toggle button is checked */}
       <Grid item mr={10} sx={{ display: "flex", justifyContent: "end" }}>
         {checked && (
           <Slide direction="up" in={checked} container={containerRef.current}>

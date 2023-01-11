@@ -8,6 +8,8 @@ import Link from "@mui/material/Link";
 import { CardHeader } from "@mui/material";
 import Avatar from "@mui/material/Avatar";
 
+
+//preview add medical link card
 const AddPreviewMedicalLinkCard = React.forwardRef((props,ref) => {
   const {addMedicalLink} = props;
   return (

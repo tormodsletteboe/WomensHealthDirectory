@@ -19,7 +19,9 @@ const newsletterRouter = require('./routes/newsletter.router');
 const nodemailerRouter = require('./routes/transporter.router');
 const specificResourcesRouter = require('./routes/specificresources.router');
 
+//medical links router
 const medicalLinksRouter = require('./routes/medicallinks.router');
+//virtual health links router
 const virtualHealthLinksRouter = require('./routes/virtualhealthlinks.router');
 
 // Body parser middleware
@@ -40,10 +42,8 @@ app.use('/api/preventativecare', preventativecareRouter);
 app.use('/api/agerange', ageRangeRouter);
 app.use('/api/newsletter', newsletterRouter);
 app.use('/api/adminprevcare/specificresources', specificResourcesRouter);
-
 app.use('/api/medicallinks', medicalLinksRouter);
 app.use('/api/virtualhealthlinks', virtualHealthLinksRouter);
-
 app.use('/api/nodemailer', nodemailerRouter);
 
 // Serve static files

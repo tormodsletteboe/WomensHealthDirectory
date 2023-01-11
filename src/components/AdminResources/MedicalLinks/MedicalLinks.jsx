@@ -30,20 +30,38 @@ import PreviewAddMedicalLinkCard from "./PreviewAddMedicalLinkCard";
 
 function MedicalLinks() {
   const dispatch = useDispatch();
+
+  //use selector for the "add medical links" view
   const addMedLinks = useSelector((store) => store.addMedicalLinks);
+
+  //use selector for medical links thats in the database
   const medicallinks = useSelector((store) => store.medicallinks);
+
+  //use selector for the "edit medical links" view
   const resourceToEdit = useSelector((store) => store.resourceToEdit);
 
+  //use state for icon urls returned by the icon api favicongrabber
   const [result, setResult] = useState([addMedLinks.logo_url]);
+
+  //use state for the selected icon url
   const [selected, setSelected] = useState(addMedLinks.logo_url);
+
+  //used to conditionally render imagelist of icons returned by the icon api favicongrabber
   const [open, setOpen] = React.useState(false);
+
+  //used to conditionally render the preview card, ie the state of the togglebutton
   const [checked, setChecked] = React.useState(false);
+
+  //used to render the preview card,
   const containerRef = React.useRef(null);
 
+  //turn on and off the preview card
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
 
+
+  //add new medlink to the database
   const handleAddMedLink = () => {
     dispatch({
       type: "ADD_MEDICAL_LINK",
@@ -55,6 +73,7 @@ function MedicalLinks() {
       },
     });
 
+    //clear the inputs
     dispatch({ type: "CLEAR_ADD_MEDICAL_LINKS" });
     dispatch({
       type: "SET_MEDICAL_TITLE",
@@ -74,18 +93,25 @@ function MedicalLinks() {
 
   useEffect(() => {
     //fetch all medical links from database
-    //dispatch someting
+    
     dispatch({ type: "FETCH_MEDICAL_LINKS" });
     return () => {
       clearTimeout(timer.current);
     };
   }, []);
 
+  //default vifi logo
   let imgpath = "./images/vifidefault.jpeg";
+  //default no image path
   let noImagePath = "";
 
+  //while waiting on the icon api to return the icon url, display a circular progress
   const [loading, setLoading] = React.useState(false);
+
+  //intended to be used with the su
   const [success, setSuccess] = React.useState(false);
+
+  //used to fake a loading state while waiting on the icon api to return the icon url
   const timer = React.useRef();
 
 
@@ -94,14 +120,17 @@ function MedicalLinks() {
     <Box>
       <Typography variant="h5">Add New Medical Link</Typography>
       <Grid container>
+        {/* add new medical link part of the ui */}
         <Grid item xs={12} my={1}>
           <Accordion expanded>
             <AccordionSummary>
               <Grid container columnSpacing={1}>
+                {/* icon */}
                 <Grid item xs={1} className="centerthis">
                   <Avatar alt="" src={selected} sx={{ bgcolor: "white" }} />
-                  {/* <img src={selected} /> */}
+                  
                 </Grid>
+                {/* title */}
                 <Grid item xs={4} px={1} className="centerthis">
                   <TextField
                     label="Title"
@@ -117,6 +146,7 @@ function MedicalLinks() {
                     sx={{ justifyContent: "start" }}
                   />
                 </Grid>
+                {/* url */}
                 <Grid item xs={7} className="centerthis">
                   <TextField
                     label="Url"
@@ -134,6 +164,7 @@ function MedicalLinks() {
               </Grid>
             </AccordionSummary>
             <AccordionDetails>
+              {/* description */}
               <Grid item xs={11}>
                 <TextField
                   variant="outlined"
@@ -161,13 +192,13 @@ function MedicalLinks() {
             borderColor: "white",
           }}
         >
-          {/* this is where I am, sunday morning make a imagelist of avatars, also maybe look at image size from the api for get icons */}
+          {/* 6 columns for the GET ICONS part */}
           <Grid item xs={6}>
-            {/* select used to be here */}
             <Grid
               container
               justifyContent={"flex-start"}
             >
+              {/* GET ICON button */}
               <Grid
                 item
                 xs={"auto"}
@@ -220,6 +251,7 @@ function MedicalLinks() {
                   {/* this is where I am at lunch sunday, add avatars to the virtual health aswell, then make the icon viewer for all components */}
                 </Box>
               </Grid>
+              {/* Image list of icons, displayed after clicking GET ICONS */}
               <Grid
                 item
                 xs={"auto"}
@@ -303,6 +335,7 @@ function MedicalLinks() {
               </Grid>
             </Grid>
           </Grid>
+          {/* 6 columns for the ADD MEDICAL LINK and preview button */}
           <Grid item xs={6}>
             <Grid
               container
@@ -372,10 +405,12 @@ function MedicalLinks() {
         </Grid>
       </Grid>
 
+{/* render all medical links from database */}
       <Box sx={{ mx: 2, marginTop: 10 }}>
         <Typography variant="h3"> Medical Links </Typography>
-        {/* render all medical links from database */}
+        
         {medicallinks.map((medlink) =>
+        // if medlink is in edit mode render the edit component, otherwise render the normal component
           medlink.id === resourceToEdit.id ? (
             <EditMedicalLinksAccordion
               key={medlink.id}
