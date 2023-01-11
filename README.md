@@ -13,11 +13,11 @@ To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.he
 
 ## Screen Shot
 
-[Vifi Landing Page](./documentation/images/ViFiLanding.png)
-[Vifi Preventative Care Page](./documentation/images/ViFiPreventativeCare.png)
-[Vifi Admin Landing Page](./documentation/images/ViFiAdminLanding.png)
-[Vifi Admin Resources Page](./documentation/images/ViFiAdminResources.png)
-[Vifi Admin Preventative Care Page](./documentation/images/ViFiAdminPreventativeCare.png)
+![Vifi Landing Page](./documentation/images/ViFiLanding.png)
+![Vifi Preventative Care Page](./documentation/images/ViFiPreventativeCare.png)
+![Vifi Admin Landing Page](./documentation/images/ViFiAdminLanding.png)
+![Vifi Admin Resources Page](./documentation/images/ViFiAdminResources.png)
+![Vifi Admin Preventative Care Page](./documentation/images/ViFiAdminPreventativeCare.png)
 
 ### Prerequisites
 
