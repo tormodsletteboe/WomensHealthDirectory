@@ -34,9 +34,11 @@ import UserVirtualHealth from "../UserVirtualHealth/UserVirtualHealth";
 import AdminFeedbackView from "../AdminFeedbackView/AdminFeedbackView";
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+
+//Add Google Analystics Tracking-id below to initialize it in the app
 import ReactGA from 'react-ga';
-const TRACKING_ID = "UA-253396643-2"; // OUR_TRACKING_ID
-ReactGA.initialize(TRACKING_ID);
+const TRACKING_ID = // YOUR_TRACKING_ID
+  ReactGA.initialize(TRACKING_ID);
 
 
 //function used to redirect if its admin loggin in or user logging in
