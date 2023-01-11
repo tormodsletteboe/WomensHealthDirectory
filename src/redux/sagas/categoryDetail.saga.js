@@ -2,19 +2,15 @@ import { put, takeLatest } from "@redux-saga/core/effects";
 import axios from "axios";
 
 
-// GET request to request FAQ from database
+// fetches category detail from database
 function* fetchCategoryDetail(action) {
 
-    let catId = action.payload.catId;
-    console.log('catId is', catId);
-    
+    let catId = action.payload.catId;    
     let ageId = action.payload.ageId;
-    console.log('ageid is', ageId);
 
     try {
 
         const response = yield axios.get(`/api/preventativecare/${catId}/ages/${ageId}/`);
-        console.log('response.data is', response.data);
 
         yield put({ 
             type: 'SET_CATEGORY_DETAIL',
@@ -22,25 +18,19 @@ function* fetchCategoryDetail(action) {
     });
 
     } catch (err) {
-        console.log('Error with fetching category detail', err);
+        console.error('Error with fetching category detail', err);
     }
 }
 
 function* fetchSpecificCategoryDetail(action) {
 
-    let catId = action.payload.catId;
-    console.log('catId is', catId);
-    
+    let catId = action.payload.catId;    
     let ageId = action.payload.ageId;
-    console.log('ageid is', ageId);
-
     let sectionName = action.payload.sectionName;
-    console.log('sectionName is', sectionName);
 
     try {
 
         const response = yield axios.get(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`);
-        console.log('response.data is', response.data);
 
         yield put({ 
             type: 'SET_CATEGORY_DETAIL',
@@ -48,7 +38,7 @@ function* fetchSpecificCategoryDetail(action) {
     });
 
     } catch (err) {
-        console.log('Error with fetching category detail', err);
+        console.error('Error with fetching category detail', err);
     }
 }
 
@@ -59,7 +49,6 @@ function* updateCategoryDetail(action) {
         const ageId = action.payload.ageId;
         const sectionName = action.payload.sectionName;
         const dataToSend = action.payload;
-        console.log('data is', dataToSend);
 
         yield axios.put(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`,  dataToSend );
 
@@ -76,7 +65,6 @@ function* addCategoryDetail(action) {
         const ageId = action.payload.ageId;
         const sectionName = action.payload.sectionName;
         const dataToSend = action.payload;
-        console.log('data is', dataToSend);
 
         yield axios.post(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`,  dataToSend );
 
