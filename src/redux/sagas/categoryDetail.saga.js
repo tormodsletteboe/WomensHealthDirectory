@@ -2,24 +2,22 @@ import { put, takeLatest } from "@redux-saga/core/effects";
 import axios from "axios";
 
 
-// GET request to request FAQ from database
+// GET health category details from database
+//Based on age range id and category id
 function* fetchCategoryDetail(action) {
 
     let catId = action.payload.catId;
-    console.log('catId is', catId);
-    
+
     let ageId = action.payload.ageId;
-    console.log('ageid is', ageId);
 
     try {
 
         const response = yield axios.get(`/api/preventativecare/${catId}/ages/${ageId}/`);
-        console.log('response.data is', response.data);
 
-        yield put({ 
+        yield put({
             type: 'SET_CATEGORY_DETAIL',
             payload: response.data
-    });
+        });
 
     } catch (err) {
         console.log('Error with fetching category detail', err);
@@ -30,7 +28,7 @@ function* fetchSpecificCategoryDetail(action) {
 
     let catId = action.payload.catId;
     console.log('catId is', catId);
-    
+
     let ageId = action.payload.ageId;
     console.log('ageid is', ageId);
 
@@ -42,10 +40,10 @@ function* fetchSpecificCategoryDetail(action) {
         const response = yield axios.get(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`);
         console.log('response.data is', response.data);
 
-        yield put({ 
+        yield put({
             type: 'SET_CATEGORY_DETAIL',
             payload: response.data
-    });
+        });
 
     } catch (err) {
         console.log('Error with fetching category detail', err);
@@ -53,7 +51,7 @@ function* fetchSpecificCategoryDetail(action) {
 }
 
 function* updateCategoryDetail(action) {
-    
+
     try {
         const catId = action.payload.catId;
         const ageId = action.payload.ageId;
@@ -61,10 +59,12 @@ function* updateCategoryDetail(action) {
         const dataToSend = action.payload;
         console.log('data is', dataToSend);
 
-        yield axios.put(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`,  dataToSend );
+        yield axios.put(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`, dataToSend);
 
-        yield put({type: 'FETCH_SPECIFIC_CATEGORY_DETAIL' , 
-                payload: {catId: catId , ageId: ageId, sectionName: sectionName}});
+        yield put({
+            type: 'FETCH_SPECIFIC_CATEGORY_DETAIL',
+            payload: { catId: catId, ageId: ageId, sectionName: sectionName }
+        });
     } catch (err) {
         console.error('Error updating specific resource', err);
     }
@@ -78,10 +78,12 @@ function* addCategoryDetail(action) {
         const dataToSend = action.payload;
         console.log('data is', dataToSend);
 
-        yield axios.post(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`,  dataToSend );
+        yield axios.post(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`, dataToSend);
 
-        yield put({type: 'FETCH_SPECIFIC_CATEGORY_DETAIL' , 
-                payload: {catId: catId , ageId: ageId, sectionName: sectionName}});
+        yield put({
+            type: 'FETCH_SPECIFIC_CATEGORY_DETAIL',
+            payload: { catId: catId, ageId: ageId, sectionName: sectionName }
+        });
     } catch (err) {
         console.error('Error adding specific category detail', err);
     }
@@ -92,14 +94,16 @@ function* deleteCategoryDetail(action) {
         const catId = action.payload.catId;
         const ageId = action.payload.ageId;
         const sectionName = action.payload.sectionName;
-       
-        yield axios.delete(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`,  {data: action.payload} );
 
-        yield put({type: 'FETCH_SPECIFIC_CATEGORY_DETAIL' , 
-                payload: {catId: catId , ageId: ageId, sectionName: sectionName}});
+        yield axios.delete(`/api/preventativecare/${catId}/ages/${ageId}/${sectionName}`, { data: action.payload });
+
+        yield put({
+            type: 'FETCH_SPECIFIC_CATEGORY_DETAIL',
+            payload: { catId: catId, ageId: ageId, sectionName: sectionName }
+        });
     } catch (err) {
         console.error('Error deleting specific category detail', err);
-    } 
+    }
 }
 
 function* categoryDetailSaga() {
