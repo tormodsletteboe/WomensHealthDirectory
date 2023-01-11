@@ -43,7 +43,7 @@ const PreviewAddVirtualHealthCard = React.forwardRef((props,ref) => {
         }
         title={addVirtualHealthLink.title && <Typography variant="body" >{addVirtualHealthLink.title}</Typography>}
         subheader={addVirtualHealthLink.specialty}
-        
+        sx={{textAlign:'left'}}
       />
       {addVirtualHealthLink.description && (
         <CardContent>

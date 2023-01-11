@@ -13,7 +13,7 @@ import Slide from "@mui/material/Slide";
 import Tooltip from "@mui/material/Tooltip";
 import PhoneAndroidIcon from "@mui/icons-material/PhoneAndroid";
 import ToggleButton from "@mui/material/ToggleButton";
-
+import Avatar from "@mui/material/Avatar";
 import PreviewMedicalLinkCard from "./PreviewMedicalLinkCard";
 
 function EditMedicalLinksAccordion() {
@@ -57,7 +57,8 @@ function EditMedicalLinksAccordion() {
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Grid container columnSpacing={1}>
               <Grid item xs={1} className="centerthis">
-                <img src={selected} />
+              <Avatar alt="" src={selected} sx={{ bgcolor: "white" }} />
+                {/* <img src={selected} /> */}
               </Grid>
               <Grid item xs={4} px={1} className="centerthis">
                 <TextField
