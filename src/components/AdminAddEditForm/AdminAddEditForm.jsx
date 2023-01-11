@@ -1,30 +1,26 @@
-import React, { useEffect } from "react";
+import React from "react";
 import { useDispatch, useSelector } from 'react-redux';
 import { useParams } from "react-router-dom";
 
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
+import { TableRow, TableCell } from '@mui/material';
 
 
 function AddEditForm() {
     
     // hooks
     const dispatch = useDispatch();
-
     const params = useParams();
 
     // selectors
-    const specificResources = useSelector(store => store.specificResources);
     const resourceToEdit = useSelector(store => store.resourceToEdit);
-    const detailContent = useSelector(store => store.categoryDetail);
     const columnNames = useSelector(store => store.columnNames);
 
-    // update or add resource function
+    // update or add resource function, dispatches resourceToEdit object to either add or edit Saga
     function updateOrAddResource(evt) {
         evt.preventDefault();
         const updateDetailPayload = {...resourceToEdit, catId: params.catId, ageId: params.ageId, sectionName: params.sectionName}
-        console.log(updateDetailPayload);
 
         if (resourceToEdit.id === 0) {
             dispatch({ type: 'ADD_CATEGORY_DETAIL', payload: updateDetailPayload});
@@ -35,12 +31,11 @@ function AddEditForm() {
         dispatch({ type: 'SET_RESOURCE_TO_EDIT', payload: {}});
     }
 
-    return(
+    return (
         <>
-            {/* {addList(resourceToEdit)} */}
             <TableRow>
-            {/* <form> */}
-            <TableCell align="center"><TextField 
+            <TableCell align="center">
+                <TextField 
                 multiline
                 label={columnNames[0]}
                 fullWidth={true}
@@ -48,9 +43,10 @@ function AddEditForm() {
                 onChange={(evt) => dispatch({
                     type: 'UPDATE_FIELD',
                     payload: {field01: evt.target.value}
-            })}/></TableCell>
+            })}/>
+            </TableCell>
                 <TableCell>
-                <TextField 
+                    <TextField 
                     multiline   
                     fullWidth={true}
                     label={columnNames[1]}
@@ -58,7 +54,10 @@ function AddEditForm() {
                     onChange={(evt) => dispatch({
                         type: 'UPDATE_FIELD',
                         payload: {field02: evt.target.value}
-                })}/></TableCell>
+                })}/>
+            </TableCell>
+            {/* conditional rendering for input fields 3 and 4, 
+            based on number of fields in the in the resource being edited */}
             {Object.keys(resourceToEdit).length > 3 ? 
             <TableCell>
                 <TextField 
@@ -95,7 +94,6 @@ function AddEditForm() {
                         Save
                     </Button>
                 </TableCell>
-                {/* </form> */}
             </TableRow>
         
         </>

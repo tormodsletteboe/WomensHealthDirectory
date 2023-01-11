@@ -5,13 +5,13 @@ const transporter = require('../modules/transporter');
 
 // POST route to send newsletter to the list of recepients in "newsletter" table
 router.post('/', (req, res) => {
-  
+
   const htmlToSend = req.body.htmlToSend;
   const emailList = req.body.emailList;
 
   // define options for the newsletter email
   const options = {
-      from: '"vifiexample01@gmail.com" <vifiexample01@gmail.com>', // sender address
+      from: `"${process.env.NODE_MAILER_USER}@gmail.com" <vifiexample01@gmail.com>`, // sender address
       bcc: emailList, // list of receivers
       subject: "Vifi Newsletter", // Subject line
       text: "Vifi Newsletter", // plain text body
