@@ -51,16 +51,11 @@ If your application has secret keys (for example --  Twilio), make sure you tell
 8. Go to the given URL of your domain!
 
 ## Usage
-How does someone use this application? Tell a user story here.
+Watch this How To Video to learn how to use this app.
 
-1. xxx
-2. xxx
-3. xxx
-4. xxx
-5. xxx
-6. xxx
 
-( Tia can put her example video here! )
+[How To Use The Vifi](https://www.youtube.com/watch?v=an4AMletbvU)
+
 
 ## Built With
 
