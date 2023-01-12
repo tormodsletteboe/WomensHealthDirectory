@@ -8,6 +8,8 @@ import Link from '@mui/material/Link';
 import Stack from '@mui/material/Stack';
 import NavigateNextIcon from '@mui/icons-material/NavigateNext';
 import TextField from '@mui/material/TextField';
+import Container from "@mui/material/Container";
+
 import { TableContainer, Table, TableHead, TableBody, TableRow, TableCell } from '@mui/material';
 
 function AdminSpecificResources() {
@@ -79,7 +81,6 @@ function AdminSpecificResources() {
                     </Button>
                 </TableCell>
         </TableRow>
-
     )
 
     function updateOrAddResource(evt) {
@@ -119,19 +120,20 @@ function AdminSpecificResources() {
     return (
         <> 
             {/* MUI Breadcrumbs */}
-            <Stack spacing={2}>
+            <Stack spacing={2} ml={5}>
                 <Breadcrumbs
                     separator={<NavigateNextIcon fontSize="small" />}
                     aria-label="breadcrumb"
+                    sx={{ color: "black", marginLeft: "10px" }}
                 >
                     {breadcrumbs}
                 </Breadcrumbs>
             </Stack>
-
+            <Container maxWidth="xl" sx={{marginTop:"20px"}}>
             <Typography align="center" component="h1" variant="h3">
                 Specific Resources
             </Typography>
-            <TableContainer>
+            
             <TableBody className="specificResources">
                 {specificResources.map(x => (
                     x.id === resourceToEdit.id ? 
@@ -173,7 +175,8 @@ function AdminSpecificResources() {
                 }
                 
             </TableBody>
-            </TableContainer>
+            
+        </Container>
         </>
     )
 }

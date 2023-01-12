@@ -9,7 +9,7 @@ _Duration: 2 Week Sprint_
 
 The Vifi is our client Laina Latterner's solution to the challenges of women’s health. The goal of the app is to educate and support our targeted users, mainly women, with access to key info about health topics in easy, concise, and timely manner as well as preparation for doctor appointments so women can better advocate for themselves and feel more confident about their healthcare choices. As a mobile webapp, the ViFi is designed to be accessible anytime anywhere as an educative resource so women can take hold of their healthcare.
 
-To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](www.heroku.com)
+To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](https://womens-health-app-vifi.herokuapp.com)
 
 ## Screen Shot
 
@@ -44,9 +44,11 @@ If your application has secret keys (for example --  Twilio), make sure you tell
 1. Create a database named `womens_health_app` in a PostgreSQL-based database
 2. Import the queries in the `database.sql` file to your database (i.e. bit.io)
 3. Create a .env file in the root folder and set a SERVER_SESSION_SECRET variable.
-4. Deploy the webapp. The recommended domain is [heroku](www.heroku.com). 
-5. Follow deploying steps given by the website including connections to your database
-6. Go to the given URL of your domain!
+4. Set NODE_MAILER_USER and NODE_MAILER_USER_KEY variables.
+5. If deploying to Heroku, set a DATABASE_URL variable in heroku config.
+6. Deploy the webapp. The recommended domain is [heroku](www.heroku.com). 
+7. Follow deploying steps given by the website including connections to your database
+8. Go to the given URL of your domain!
 
 ## Usage
 How does someone use this application? Tell a user story here.
