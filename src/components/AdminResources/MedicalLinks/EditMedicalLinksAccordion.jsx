@@ -160,12 +160,12 @@ function EditMedicalLinksAccordion() {
           <Button
             onClick={async () => {
               const url = new URL(resourceToEdit.link);
-              console.log(url.hostname);
+              
               const result = await axios.get(
                 `https://favicongrabber.com/api/grab/${url.hostname}`
               );
               setResult(result.data.icons.map((icon) => icon.src));
-              console.log(result.data.icons.map((icon) => icon.src));
+              
             }}
           >
             get icons

@@ -24,7 +24,7 @@ function* fetchMedicalLinks() {
 function* updateMedicalLink(action){
     try {
         const dataToSend = action.payload;
-        console.log('data is', dataToSend);
+       
 
         //update the medical link in question
         yield axios.put(`/api/medicallinks/${action.payload.id}`,dataToSend);

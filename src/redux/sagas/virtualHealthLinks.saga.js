@@ -21,7 +21,7 @@ function* fetchVirtualHealthLinks() {
 function* updateVirtualHealthLink(action) {
   try {
     const dataToSend = action.payload;
-    console.log("data is", dataToSend);
+   
 
     //update the virtual health link in question
     yield axios.put(`/api/virtualhealthlinks/${action.payload.id}`, dataToSend);
