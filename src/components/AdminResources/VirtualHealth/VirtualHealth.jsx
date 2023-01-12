@@ -119,6 +119,7 @@ function VirtualHealth() {
     setResult([]);
     //clear the selected icon
     setSelected("");
+    setChecked(false);
    
   };
 

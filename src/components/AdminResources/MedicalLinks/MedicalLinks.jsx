@@ -89,6 +89,7 @@ function MedicalLinks() {
     });
     setResult([]);
     setSelected("");
+    setChecked(false);
   };
 
   useEffect(() => {
