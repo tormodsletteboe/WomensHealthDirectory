@@ -212,6 +212,7 @@ function Feedback() {
                         Leave a comment and a rating about your overall experience using The Vifi!
                     </Typography>
                     <TextField 
+                        multiline
                         label={'Leave a comment!'} 
                         value={comment} 
                         onChange={(e) => setComment(e.target.value)} 
