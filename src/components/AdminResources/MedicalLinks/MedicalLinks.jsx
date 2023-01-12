@@ -60,7 +60,6 @@ function MedicalLinks() {
     setChecked((prev) => !prev);
   };
 
-
   //add new medlink to the database
   const handleAddMedLink = () => {
     dispatch({
@@ -94,7 +93,7 @@ function MedicalLinks() {
 
   useEffect(() => {
     //fetch all medical links from database
-    
+
     dispatch({ type: "FETCH_MEDICAL_LINKS" });
     return () => {
       clearTimeout(timer.current);
@@ -115,8 +114,6 @@ function MedicalLinks() {
   //used to fake a loading state while waiting on the icon api to return the icon url
   const timer = React.useRef();
 
-
-
   return (
     <Box>
       <Typography variant="h5">Add New Medical Link</Typography>
@@ -129,7 +126,6 @@ function MedicalLinks() {
                 {/* icon */}
                 <Grid item xs={1} className="centerthis">
                   <Avatar alt="" src={selected} sx={{ bgcolor: "white" }} />
-                  
                 </Grid>
                 {/* title */}
                 <Grid item xs={4} px={1} className="centerthis">
@@ -195,10 +191,7 @@ function MedicalLinks() {
         >
           {/* 6 columns for the GET ICONS part */}
           <Grid item xs={6}>
-            <Grid
-              container
-              justifyContent={"flex-start"}
-            >
+            <Grid container justifyContent={"flex-start"}>
               {/* GET ICON button */}
               <Grid
                 item
@@ -210,25 +203,32 @@ function MedicalLinks() {
                 }}
                 textAlign={"start"}
               >
-                <Box sx={{ m: 0, position: "relative", p:0 }}>
+                <Box sx={{ m: 0, position: "relative", p: 0 }}>
                   <Button
                     onClick={() => {
                       if (!loading) {
+                        setOpen(false);
                         setSuccess(false);
                         setLoading(true);
-                        timer.current = window.setTimeout(async() => {
-                          const url = new URL(addMedLinks.url);
-                          const result = await axios.get(
-                        `https://favicongrabber.com/api/grab/${url.hostname}`
-                      );
-                         
-                          setResult(result.data.icons.map((icon) => icon.src));
-                          setOpen(true);
-                          setSuccess(true);
-                          setLoading(false);
+                        timer.current = window.setTimeout(async () => {
+                          try {
+                            const url = new URL(addMedLinks.url);
+                            const result = await axios.get(
+                              `https://favicongrabber.com/api/grab/${url.hostname}`
+                            );
+                            console.log(result);
+                            setResult(
+                              result.data.icons.map((icon) => icon.src)
+                            );
+                            setOpen(true);
+                            setSuccess(true);
+                            setLoading(false);
+                          } catch (error) {
+                            console.log("failed to get icons ", error);
+                            setLoading(false);
+                          }
                         }, 1000);
                       }
-                      
                     }}
                     variant="contained"
                     disabled={loading}
@@ -406,12 +406,12 @@ function MedicalLinks() {
         </Grid>
       </Grid>
 
-{/* render all medical links from database */}
+      {/* render all medical links from database */}
       <Box sx={{ mx: 2, marginTop: 10 }}>
         <Typography variant="h3"> Medical Links </Typography>
-        
+
         {medicallinks.map((medlink) =>
-        // if medlink is in edit mode render the edit component, otherwise render the normal component
+          // if medlink is in edit mode render the edit component, otherwise render the normal component
           medlink.id === resourceToEdit.id ? (
             <EditMedicalLinksAccordion
               key={medlink.id}

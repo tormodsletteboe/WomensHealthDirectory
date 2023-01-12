@@ -28,7 +28,6 @@ import VirtualHealthAccordion from "./VirtualHealthAccordion";
 import EditVirtualHealthLinksAccordion from "./EditVirtualHealthAccordion";
 import PreviewAddVirtualHealthCard from "./PreviewAddVirtualHealthCard";
 
-
 // render the virtual health component, which is the Add part at the top of the page, and the list of accordions.
 function VirtualHealth() {
   const dispatch = useDispatch();
@@ -46,7 +45,7 @@ function VirtualHealth() {
 
   //state for the icon result from the icon api favicongrabber
   const [result, setResult] = useState([addVirtualHealthLinks.logo_url]);
-  
+
   //selected icon state
   const [selected, setSelected] = useState(addVirtualHealthLinks.logo_url);
 
@@ -89,7 +88,7 @@ function VirtualHealth() {
 
     //clear the add virtual health link reducer
     dispatch({ type: "CLEAR_ADD_VIRTUALHEALTH_LINKS" });
-   
+
     //clear add fields
     dispatch({
       type: "SET_VIRTUALHEALTH_TITLE",
@@ -120,12 +119,11 @@ function VirtualHealth() {
     //clear the selected icon
     setSelected("");
     setChecked(false);
-   
   };
 
   useEffect(() => {
     //fetch all virtual health links from database
-    
+
     dispatch({ type: "FETCH_VIRTUALHEALTH_LINKS" });
 
     //clear the timer on unmount
@@ -149,8 +147,7 @@ function VirtualHealth() {
               <Grid container columnSpacing={1}>
                 {/* icon */}
                 <Grid item xs={1} className="centerthis">
-                <Avatar alt="" src={selected} sx={{ bgcolor: "white" }} />
-                 
+                  <Avatar alt="" src={selected} sx={{ bgcolor: "white" }} />
                 </Grid>
                 {/* title */}
                 <Grid item xs={4} px={1} className="centerthis">
@@ -248,10 +245,7 @@ function VirtualHealth() {
           {/* left 6 columns, GET icons button and imagelist of icons */}
           <Grid item xs={6}>
             {/* select used to be here */}
-            <Grid
-              container
-              justifyContent={"flex-start"}
-            >
+            <Grid container justifyContent={"flex-start"}>
               {/* GET icons button */}
               <Grid
                 item
@@ -263,26 +257,33 @@ function VirtualHealth() {
                 }}
                 textAlign={"start"}
               >
-                <Box sx={{ m: 0, position: "relative", p:0 }}>
+                <Box sx={{ m: 0, position: "relative", p: 0 }}>
                   {/* GET ICONS button */}
                   <Button
                     onClick={() => {
                       if (!loading) {
+                        setOpen(false);
                         setSuccess(false);
                         setLoading(true);
-                        timer.current = window.setTimeout(async() => {
-                          const url = new URL(addVirtualHealthLinks.link);
-                          const result = await axios.get(
-                        `https://favicongrabber.com/api/grab/${url.hostname}`
-                      );
-                         
-                          setResult(result.data.icons.map((icon) => icon.src));
-                          setOpen(true);
-                          setSuccess(true);
-                          setLoading(false);
+                        timer.current = window.setTimeout(async () => {
+                          try {
+                            const url = new URL(addVirtualHealthLinks.link);
+                            const result = await axios.get(
+                              `https://favicongrabber.com/api/grab/${url.hostname}`
+                            );
+
+                            setResult(
+                              result.data.icons.map((icon) => icon.src)
+                            );
+                            setOpen(true);
+                            setSuccess(true);
+                            setLoading(false);
+                          } catch (error) {
+                            console.log("failed to get icons ", error);
+                            setLoading(false);
+                          }
                         }, 1000);
                       }
-                      
                     }}
                     variant="contained"
                     disabled={loading}
@@ -303,7 +304,6 @@ function VirtualHealth() {
                       }}
                     />
                   )}
-                  
                 </Box>
               </Grid>
               {/* image list with icons */}
@@ -457,21 +457,24 @@ function VirtualHealth() {
                     in={checked}
                     container={containerRef.current}
                   >
-                    {<PreviewAddVirtualHealthCard addVirtualHealthLink={addVirtualHealthLinks} />}
+                    {
+                      <PreviewAddVirtualHealthCard
+                        addVirtualHealthLink={addVirtualHealthLinks}
+                      />
+                    }
                   </Slide>
                 )}
               </Grid>
             </Grid>
           </Grid>
         </Grid>
-
       </Grid>
       {/* list all the virtual health links */}
       <Box sx={{ mx: 2, marginTop: 10 }}>
         <Typography variant="h3"> Virtual Health </Typography>
         {/* render all virtual health links from database */}
         {virtualhealthlinks.map((virtualhealthlink) =>
-        // render the virtual health link that is being edited in edit mode, otherwise just render the accordion
+          // render the virtual health link that is being edited in edit mode, otherwise just render the accordion
           virtualhealthlink.id === resourceToEdit.id ? (
             <EditVirtualHealthLinksAccordion
               key={virtualhealthlink.id}
