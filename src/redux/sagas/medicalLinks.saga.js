@@ -1,6 +1,8 @@
 import axios from "axios";
 import { put, takeLatest } from "redux-saga/effects";
 
+
+// worker Saga: will be fired on "FETCH_MEDICAL_LINKS" actions
 function* fetchMedicalLinks() {
   try {
     //axios here
@@ -18,6 +20,7 @@ function* fetchMedicalLinks() {
   }
 }
 
+// worker Saga: will be fired on "UPDATE_MEDICAL_LINK" actions
 function* updateMedicalLink(action){
     try {
         const dataToSend = action.payload;
@@ -34,6 +37,8 @@ function* updateMedicalLink(action){
     }
 
 }
+
+// worker Saga: will be fired on "ADD_MEDICAL_LINK" actions
 function* addMedicalLink(action){
   try {
         const dataToSend = action.payload;
@@ -49,6 +54,7 @@ function* addMedicalLink(action){
   }
 }
 
+// worker Saga: will be fired on "DELETE_MEDICAL_LINK" actions
 function* deleteMedicalLink(action){
   try {
     

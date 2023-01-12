@@ -1,3 +1,5 @@
+//reducer for add virtual health links admin side only
+
 const addVirtualHealthLinks = (state = {}, action) => {
   switch (action.type) {
     case "SET_VIRTUALHEALTH_TITLE":
@@ -19,6 +21,5 @@ const addVirtualHealthLinks = (state = {}, action) => {
   }
 };
 
-// user will be on the redux state at:
-// state.user
+
 export default addVirtualHealthLinks;

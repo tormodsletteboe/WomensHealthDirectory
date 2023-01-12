@@ -1,3 +1,5 @@
+//reducer for add medical links admin side only
+
 const addMedicalLinks = (state = {}, action) => {
   switch (action.type) {
     case "SET_MEDICAL_TITLE":
@@ -15,6 +17,4 @@ const addMedicalLinks = (state = {}, action) => {
   }
 };
 
-// user will be on the redux state at:
-// state.user
 export default addMedicalLinks;
