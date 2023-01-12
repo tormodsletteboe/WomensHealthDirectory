@@ -1,3 +1,5 @@
+//medical links reducer, user side and admin side
+
 const medicallinks = (state = [], action) => {
     switch (action.type) {
       case 'SET_MEDICAL_LINKS':

@@ -28,29 +28,52 @@ import VirtualHealthAccordion from "./VirtualHealthAccordion";
 import EditVirtualHealthLinksAccordion from "./EditVirtualHealthAccordion";
 import PreviewAddVirtualHealthCard from "./PreviewAddVirtualHealthCard";
 
+
+// render the virtual health component, which is the Add part at the top of the page, and the list of accordions.
 function VirtualHealth() {
   const dispatch = useDispatch();
+
+  //reducer for the add virtual health link, as the user is typing into the input fields the values are stored in this reducer
   const addVirtualHealthLinks = useSelector(
     (store) => store.addVirtualHealthLinks
   );
+
+  //reducer for the virtual health links from the database
   const virtualhealthlinks = useSelector((store) => store.virtualhealth_links);
+
+  //reducer for the resource to edit, this is used to populate the edit accordion
   const resourceToEdit = useSelector((store) => store.resourceToEdit);
 
-  //this is used with the get ICONS button
+  //state for the icon result from the icon api favicongrabber
   const [result, setResult] = useState([addVirtualHealthLinks.logo_url]);
+  
+  //selected icon state
   const [selected, setSelected] = useState(addVirtualHealthLinks.logo_url);
 
+  //used to fake a loading state when clicking the GET ICON button
   const [loading, setLoading] = React.useState(false);
+
+  //intended to be used with the get icon button on success api return call
   const [success, setSuccess] = React.useState(false);
+
+  //used to fake a loading state when clicking the GET ICON in the add virtual health accordion
   const timer = React.useRef();
+
+  //used to conditionally render the imagelist of returned icons from the api favicongrabber
   const [open, setOpen] = React.useState(false);
 
+  //state of the preview toggle button
   const [checked, setChecked] = React.useState(false);
+
+  //ref for the preview card
   const containerRef = React.useRef(null);
+
+  //set the state of the preview toggle button
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
 
+  //add virtual health link to the database
   const handleAddVirtualHealth = () => {
     dispatch({
       type: "ADD_VIRTUALHEALTH_LINK",
@@ -64,8 +87,10 @@ function VirtualHealth() {
       },
     });
 
+    //clear the add virtual health link reducer
     dispatch({ type: "CLEAR_ADD_VIRTUALHEALTH_LINKS" });
-    //TODO: clear the add virtual health link reducer
+   
+    //clear add fields
     dispatch({
       type: "SET_VIRTUALHEALTH_TITLE",
       payload: "",
@@ -90,20 +115,25 @@ function VirtualHealth() {
       type: "SET_VIRTUALHEALTH_INFO_COST",
       payload: "",
     });
+    //clear the icon result
     setResult([]);
+    //clear the selected icon
     setSelected("");
    
   };
 
   useEffect(() => {
     //fetch all virtual health links from database
-    //dispatch someting
+    
     dispatch({ type: "FETCH_VIRTUALHEALTH_LINKS" });
+
+    //clear the timer on unmount
     return () => {
       clearTimeout(timer.current);
     };
   }, []);
 
+  //default vifi logo
   let imgpath = "./images/vifidefault.jpeg";
   let noImagePath = "";
 
@@ -111,14 +141,17 @@ function VirtualHealth() {
     <Box>
       <Typography variant="h5">Add New Virtual Health</Typography>
       <Grid container>
+        {/* add virtual healh inputs */}
         <Grid item xs={12} my={1}>
           <Accordion expanded>
             <AccordionSummary>
               <Grid container columnSpacing={1}>
+                {/* icon */}
                 <Grid item xs={1} className="centerthis">
                 <Avatar alt="" src={selected} sx={{ bgcolor: "white" }} />
-                  {/* <img src={selected} /> */}
+                 
                 </Grid>
+                {/* title */}
                 <Grid item xs={4} px={1} className="centerthis">
                   <TextField
                     label="Title"
@@ -133,6 +166,7 @@ function VirtualHealth() {
                     }
                   />
                 </Grid>
+                {/* url */}
                 <Grid item xs={7} className="centerthis">
                   <TextField
                     label="Url"
@@ -147,6 +181,7 @@ function VirtualHealth() {
                     }
                   />
                 </Grid>
+                {/* Specialty */}
                 <Grid item xs={4} px={1} pt={2} className="centerthis">
                   <TextField
                     label="Specialty"
@@ -161,6 +196,7 @@ function VirtualHealth() {
                     }
                   />
                 </Grid>
+                {/* Cost/Coverage */}
                 <Grid item xs={8} px={1} pt={2} className="centerthis">
                   <TextField
                     label="Cost/Coverage"
@@ -178,6 +214,7 @@ function VirtualHealth() {
               </Grid>
             </AccordionSummary>
             <AccordionDetails>
+              {/* description */}
               <Grid item xs={11}>
                 <TextField
                   variant="outlined"
@@ -207,12 +244,14 @@ function VirtualHealth() {
             borderColor: "white",
           }}
         >
+          {/* left 6 columns, GET icons button and imagelist of icons */}
           <Grid item xs={6}>
             {/* select used to be here */}
             <Grid
               container
               justifyContent={"flex-start"}
             >
+              {/* GET icons button */}
               <Grid
                 item
                 xs={"auto"}
@@ -224,6 +263,7 @@ function VirtualHealth() {
                 textAlign={"start"}
               >
                 <Box sx={{ m: 0, position: "relative", p:0 }}>
+                  {/* GET ICONS button */}
                   <Button
                     onClick={() => {
                       if (!loading) {
@@ -234,7 +274,7 @@ function VirtualHealth() {
                           const result = await axios.get(
                         `https://favicongrabber.com/api/grab/${url.hostname}`
                       );
-                         console.log(result.data);
+                         
                           setResult(result.data.icons.map((icon) => icon.src));
                           setOpen(true);
                           setSuccess(true);
@@ -265,6 +305,7 @@ function VirtualHealth() {
                   
                 </Box>
               </Grid>
+              {/* image list with icons */}
               <Grid
                 item
                 xs={"auto"}
@@ -285,6 +326,7 @@ function VirtualHealth() {
                   >
                     <Paper elevation={2}>
                       <ImageList sx={{ width: 400, height: 200 }} cols={7}>
+                        {/* no image */}
                         <ImageListItem key={noImagePath}>
                           <ListItemButton
                             onMouseOver={() => {
@@ -303,6 +345,7 @@ function VirtualHealth() {
                             />
                           </ListItemButton>
                         </ImageListItem>
+                        {/* default vifi logo */}
                         <ImageListItem key={imgpath}>
                           <ListItemButton
                             onMouseOver={() => {
@@ -321,6 +364,7 @@ function VirtualHealth() {
                             />
                           </ListItemButton>
                         </ImageListItem>
+                        {/* all icons from favicongrabber api */}
                         {result.map((icon) => (
                           <ImageListItem key={icon}>
                             <ListItemButton
@@ -348,6 +392,7 @@ function VirtualHealth() {
               </Grid>
             </Grid>
           </Grid>
+          {/* right 6 columns, preview toggle button, preview card, add virtual health button */}
           <Grid item xs={6}>
             <Grid
               container
@@ -360,6 +405,7 @@ function VirtualHealth() {
               }}
               textAlign="end"
             >
+              {/* preview toggle button */}
               <Grid
                 item
                 xs={"auto"}
@@ -376,6 +422,7 @@ function VirtualHealth() {
                   </Tooltip>
                 </ToggleButton>
               </Grid>
+              {/* Add virtual health button */}
               <Grid
                 item
                 xs={"auto"}
@@ -391,6 +438,7 @@ function VirtualHealth() {
                   Add Virtual Health
                 </Button>
               </Grid>
+              {/* preview card */}
               <Grid
                 item
                 xs={11}
@@ -417,10 +465,12 @@ function VirtualHealth() {
         </Grid>
 
       </Grid>
+      {/* list all the virtual health links */}
       <Box sx={{ mx: 2, marginTop: 10 }}>
         <Typography variant="h3"> Virtual Health </Typography>
         {/* render all virtual health links from database */}
         {virtualhealthlinks.map((virtualhealthlink) =>
+        // render the virtual health link that is being edited in edit mode, otherwise just render the accordion
           virtualhealthlink.id === resourceToEdit.id ? (
             <EditVirtualHealthLinksAccordion
               key={virtualhealthlink.id}

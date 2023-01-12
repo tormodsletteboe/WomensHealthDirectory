@@ -1,3 +1,5 @@
+//router for medical links page in admin view
+
 const express = require('express');
 const {
     rejectUnauthenticated,
@@ -24,6 +26,8 @@ router.get('/',rejectUnauthenticated,(req,res)=>{
 
 });
 
+
+//update a specific medical link
 router.put('/:medlinkId',rejectUnauthenticated,(req,res)=>{
 
     const medlinkId = req.params.medlinkId;
@@ -47,6 +51,7 @@ router.put('/:medlinkId',rejectUnauthenticated,(req,res)=>{
 
 });
 
+//delete a specific medical link
 router.delete('/:medlinkId',rejectUnauthenticated,(req,res)=>{
 
     const medlinkId = req.params.medlinkId;
@@ -68,6 +73,7 @@ router.delete('/:medlinkId',rejectUnauthenticated,(req,res)=>{
     });
 
 });
+//add a new medical link
 router.post('/',rejectUnauthenticated,(req,res)=>{
 
    

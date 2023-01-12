@@ -41,10 +41,9 @@ function AdminLandingPage() {
 	// selectors
 	const newsletterEmails = useSelector((store) => store.newsletterEmails);
 
-	const headers = [{ label: "Email Address", key: "email" }];
-	const [heading, setHeading] = useState("Admin Landing Page");
-	const [isEmailListClicked, setClicked] = useState(false);
-	const [isEditorClicked, setEditorClicked] = useState(false);
+  const headers = [{ label: "Email Address", key: "email" }];
+  const [isEmailListClicked, setClicked] = useState(false);
+  const [isEditorClicked, setEditorClicked] = useState(false);
 
 	const [editorState, setEditorState] = useState("");
 

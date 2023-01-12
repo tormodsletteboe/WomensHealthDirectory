@@ -12,6 +12,7 @@ import Collapse from "@mui/material/Collapse";
 import { styled } from "@mui/material/styles";
 import Button from "@mui/material/Button";
 
+// Cost/Coverage expand button and animation
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
   return <Button {...other}>Cost/Coverage</Button>;
@@ -23,6 +24,7 @@ const ExpandMore = styled((props) => {
 //   }),
 }));
 
+// VirtualHealthCard component
 function VirtualHealthCard({ virthealthlink }) {
   const [expanded, setExpanded] = React.useState(false);
 
@@ -32,6 +34,7 @@ function VirtualHealthCard({ virthealthlink }) {
 
   return (
     <Card sx={{ minWidth: 275, marginBottom: 2 }}>
+      {/* icon, title, subtitle */}
       <CardHeader
         avatar={
           <Avatar
@@ -44,13 +47,14 @@ function VirtualHealthCard({ virthealthlink }) {
         subheader={virthealthlink.specialty}
         
       />
+      {/* description */}
       {virthealthlink.description && (
         <CardContent>
           <Typography variant="body2" sx={{textAlign:'left'}} >{virthealthlink.description}</Typography>
         </CardContent>
       )}
       <CardActions disableSpacing sx={{justifyContent:'space-between'}} >
-       
+       {/* cost/coverage button */}
         {virthealthlink.info_cost && (
           <ExpandMore
             expand={expanded}
@@ -62,10 +66,12 @@ function VirtualHealthCard({ virthealthlink }) {
             <ExpandMoreIcon />
           </ExpandMore>
         )}
+        {/* learn more */}
          <Link mr={1} ml={0} pl={1} variant="button" underline="none" href={virthealthlink.link} target="_blank">
           learn more
         </Link>
       </CardActions>
+      {/* cost/coverage expanded */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography variant="body2" sx={{ mb: 1.5,textAlign:'left' }} >

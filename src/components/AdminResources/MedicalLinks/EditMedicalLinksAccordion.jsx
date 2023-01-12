@@ -17,26 +17,38 @@ import Avatar from "@mui/material/Avatar";
 import PreviewMedicalLinkCard from "./PreviewMedicalLinkCard";
 
 function EditMedicalLinksAccordion() {
-  //   const store = useSelector((store) => store);
+  
+  //state for the preview toggle button
   const [checked, setChecked] = React.useState(true);
+
+  //ref for the preview card
   const containerRef = React.useRef(null);
 
+  //function to handle the toggle button
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
 
   const dispatch = useDispatch();
+
+  //reducer for the resource to edit
   const resourceToEdit = useSelector((store) => store.resourceToEdit);
+
+  //state for which icon is selected
   const [selected, setSelected] = useState(resourceToEdit.logo_url);
+
+  //array of all icons urls returned from the icon api favicongrabber
   const [result, setResult] = useState([resourceToEdit.logo_url]);
+
+  //default image path
   let imgpath = "./images/vifidefault.jpeg";
+
   let noImagePath = "";
 
-  //console.log("resource to edit", medLinkToEdit);
 
+//update the database with edited info
   function updateResource(evt) {
    
-
     //update the database with edited info
     dispatch({
       type: "UPDATE_MEDICAL_LINK",
@@ -48,18 +60,21 @@ function EditMedicalLinksAccordion() {
         description: resourceToEdit.description,
       },
     });
+    //clear the resource to edit
     dispatch({ type: "SET_RESOURCE_TO_EDIT", payload: {} });
   }
   return (
     <Grid container>
+      {/* main edit form */}
       <Grid item xs={12} my={1}>
         <Accordion expanded>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Grid container columnSpacing={1}>
+              {/* icon */}
               <Grid item xs={1} className="centerthis">
               <Avatar alt="" src={selected} sx={{ bgcolor: "white" }} />
-                {/* <img src={selected} /> */}
               </Grid>
+              {/* title */}
               <Grid item xs={4} px={1} className="centerthis">
                 <TextField
                   label="Title"
@@ -74,6 +89,7 @@ function EditMedicalLinksAccordion() {
                   }
                 />
               </Grid>
+              {/* url */}
               <Grid item xs={7} className="centerthis">
                 <TextField
                   label="Url"
@@ -91,6 +107,7 @@ function EditMedicalLinksAccordion() {
             </Grid>
           </AccordionSummary>
           <AccordionDetails>
+            {/* description */}
             <Grid item xs={11}>
               <TextField
                 variant="outlined"
@@ -110,7 +127,9 @@ function EditMedicalLinksAccordion() {
           </AccordionDetails>
         </Accordion>
       </Grid>
+      {/* GET ICON and Preview button, cancel and update buttons */}
       <Grid container>
+        {/* dropdown select icon url */}
         <Grid item xs={1.8} textAlign="start">
           <select
             onChange={(e) => {
@@ -136,21 +155,23 @@ function EditMedicalLinksAccordion() {
             )}
           </select>
         </Grid>
+        {/* get icon button */}
         <Grid item xs={7.2}>
           <Button
             onClick={async () => {
               const url = new URL(resourceToEdit.link);
-              console.log(url.hostname);
+              
               const result = await axios.get(
                 `https://favicongrabber.com/api/grab/${url.hostname}`
               );
               setResult(result.data.icons.map((icon) => icon.src));
-              console.log(result.data.icons.map((icon) => icon.src));
+              
             }}
           >
             get icons
           </Button>
         </Grid>
+        {/* preview toggle button */}
         <Grid item xs={1} textAlign={"end"}>
           <ToggleButton onClick={handleChange} selected={checked}>
             <Tooltip title={checked ? "Close":"Preview"} placement="top">
@@ -159,6 +180,7 @@ function EditMedicalLinksAccordion() {
           </ToggleButton>
         </Grid>
 
+        {/* cancel button */}
         <Grid item xs={0.8} textAlign="end">
           <Button
             onClick={() =>
@@ -168,9 +190,12 @@ function EditMedicalLinksAccordion() {
             Cancel
           </Button>
         </Grid>
+
+        {/* update button */}
         <Grid item xs={1.2} textAlign={"end"}>
           <Button variant="contained" onClick={updateResource}>Update Link</Button>
         </Grid>
+        {/* preview card */}
         <Grid
           item
           xs={10}

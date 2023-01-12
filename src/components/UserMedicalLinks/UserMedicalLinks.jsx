@@ -8,14 +8,17 @@ import MedicalLinkCard from "./MedicalLinkCard";
 
 
 
-//test
+// UserMedicalLinks component, displays all medical links for a user in cards
 function UserMedicalLinks() {
+
+  //all medical links form database
   const medicallinks = useSelector((store) => store.medicallinks);
   const dispatch = useDispatch();
 
   
 
   useEffect(() => {
+    //get all medical links from database
     dispatch({ type: "FETCH_MEDICAL_LINKS" });
   }, []);
 
@@ -26,6 +29,7 @@ function UserMedicalLinks() {
       <div className="medicalLinksTitle">
         <h3>Medical Links</h3>
       </div>
+      {/* list of all medical links in mui.com cards */}
       <ul style={{padding:0}} >
         {medicallinks.map((medlink) => (
           <li key={medlink.id}>

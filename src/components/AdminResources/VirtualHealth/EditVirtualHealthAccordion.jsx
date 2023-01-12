@@ -18,29 +18,37 @@ import Avatar from "@mui/material/Avatar";
 import PreviewVirtualHealthCard from "./PreviewVirtualHealthCard";
 
 
+//when a virtual healt accordion edit button is clicked, this component is rendered
 function EditVirtualHealthLinksAccordion() {
-  //   const store = useSelector((store) => store);
+  //state for the preview toggle button
   const [checked, setChecked] = React.useState(true);
+
+  //ref for the preview card
   const containerRef = React.useRef(null);
+
+  //function to handle the toggle button
   const handleChange = () => {
     setChecked((prev) => !prev);
   };
  
   const dispatch = useDispatch();
+
+  //get the resource to edit from the store
   const resourceToEdit = useSelector((store) => store.resourceToEdit);
 
-  //used for the get icons button
+  //state for which icon is selected
   const [selected, setSelected] = useState(resourceToEdit.logo_url);
+
+  //array of all icons urls returned from the icon api favicongrabber
   const [result, setResult] = useState([resourceToEdit.logo_url]);
 
+  //default image path
   let imgpath = "./images/vifidefault.jpeg";
   let noImagePath = "";
 
-//console.log("resource to edit", medLinkToEdit);
 
+//update the database with edited info
   function updateResource(evt) {
-    
-
     //update the database with edited info
     dispatch({
       type: "UPDATE_VIRTUALHEALTH_LINK",
@@ -54,19 +62,23 @@ function EditVirtualHealthLinksAccordion() {
         description: resourceToEdit.description
       },
     });
+    //clear the resource to edit
     dispatch({ type: "SET_RESOURCE_TO_EDIT", payload: {} });
   }
   return (
     <Grid container>
+      {/* main edit form */}
       <Grid item xs={12} my={1}>
         <Accordion
         expanded>
           <AccordionSummary expandIcon={<ExpandMoreIcon />}>
             <Grid container columnSpacing={1}>
+              {/* icon */}
               <Grid item xs={1} className="centerthis">
               <Avatar alt="" src={selected} sx={{ bgcolor: "white" }} />
-                {/* <img src={selected} /> */}
+               
               </Grid>
+              {/* title */}
               <Grid item xs={4} px={1} className="centerthis">
                 <TextField
                   label="Title"
@@ -82,6 +94,7 @@ function EditVirtualHealthLinksAccordion() {
                   
                 />
               </Grid>
+              {/* url */}
               <Grid item xs={7} className="centerthis">
                 <TextField
                   label="Url"
@@ -96,6 +109,7 @@ function EditVirtualHealthLinksAccordion() {
                   }
                 />
               </Grid>
+              {/* specialty */}
               <Grid item xs={4} px={1} pt={2} className="centerthis">
                 <TextField
                   label="Specialty"
@@ -111,6 +125,7 @@ function EditVirtualHealthLinksAccordion() {
                   
                 />
               </Grid>
+              {/* Cost/Coverage */}
               <Grid item xs={8} px={1} pt={2} className="centerthis">
                 <TextField
                   label="Cost/Coverage"
@@ -129,6 +144,7 @@ function EditVirtualHealthLinksAccordion() {
             </Grid>
           </AccordionSummary>
           <AccordionDetails>
+            {/* description */}
             <Grid item xs={11}>
               <TextField
                 variant="outlined"
@@ -149,6 +165,7 @@ function EditVirtualHealthLinksAccordion() {
         </Accordion>
       </Grid>
       <Grid container>
+        {/* dropdown for icon urls */}
         <Grid item xs={1.8} textAlign={"start"}>
           <select
             onChange={(e) => {
@@ -171,21 +188,21 @@ function EditVirtualHealthLinksAccordion() {
             ))}
           </select>
         </Grid>
+        {/* button to get icon urls */}
         <Grid item xs={7.2}>
           <Button
             onClick={async () => {
               const url = new URL(resourceToEdit.link);
-              console.log(url.hostname);
               const result = await axios.get(
                 `https://favicongrabber.com/api/grab/${url.hostname}`
               );
               setResult(result.data.icons.map((icon) => icon.src));
-              console.log(result.data.icons.map((icon) => icon.src));
             }}
           >
             get icons
           </Button>
         </Grid>
+        {/* toggle button to preview or close preview */}
         <Grid item xs={1} textAlign={"end"}>
           <ToggleButton onClick={handleChange} selected={checked}>
             <Tooltip title={checked ? "Close":"Preview"} placement="top">
@@ -193,6 +210,7 @@ function EditVirtualHealthLinksAccordion() {
             </Tooltip>
           </ToggleButton>
         </Grid>
+        {/* cancel button */}
         <Grid item xs={0.8} textAlign={"end"}>
           <Button
             onClick={() =>
@@ -202,9 +220,11 @@ function EditVirtualHealthLinksAccordion() {
             Cancel
           </Button>
         </Grid>
+        {/* update button */}
         <Grid item xs={1.2} textAlign={"end"}>
           <Button variant="contained" onClick={updateResource}>Update Link</Button>
         </Grid>
+        {/* preview */}
         <Grid
           item
           xs={10}

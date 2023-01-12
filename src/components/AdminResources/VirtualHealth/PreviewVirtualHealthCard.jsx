@@ -23,6 +23,8 @@ const ExpandMore = styled((props) => {
 //   }),
 }));
 
+
+//this preview card is for the virtual health links that are already in the database, and when editing them
 const PreviewVirtualHealthCard = React.forwardRef((props,ref) => {
   const { virthealthlink } =props;
   const [expanded, setExpanded] = React.useState(false);
@@ -33,6 +35,7 @@ const PreviewVirtualHealthCard = React.forwardRef((props,ref) => {
 
   return (
     <Card sx={{ minWidth: 345, marginBottom: 2, maxWidth:345 }} ref={ref} {...props}>
+      {/* icon,title, subtitle */}
       <CardHeader
         avatar={
           <Avatar
@@ -45,13 +48,14 @@ const PreviewVirtualHealthCard = React.forwardRef((props,ref) => {
         subheader={virthealthlink.specialty}
         
       />
+      {/* description */}
       {virthealthlink.description && (
         <CardContent>
           <Typography variant="body2" sx={{textAlign:'left',wordBreak: "break-word"}} >{virthealthlink.description}</Typography>
         </CardContent>
       )}
       <CardActions disableSpacing sx={{justifyContent:'space-between'}} >
-       
+       {/* cost/coverage button */}
         {virthealthlink.info_cost && (
           <ExpandMore
             expand={expanded}
@@ -63,10 +67,12 @@ const PreviewVirtualHealthCard = React.forwardRef((props,ref) => {
             <ExpandMoreIcon />
           </ExpandMore>
         )}
+        {/* lean more button, takes user to the link */}
          <Link mr={1} ml={0} pl={1} variant="button" underline="none" href={virthealthlink.link}>
           learn more
         </Link>
       </CardActions>
+      {/* cost/coverage info expanded view */}
       <Collapse in={expanded} timeout="auto" unmountOnExit>
         <CardContent>
           <Typography variant="body2" sx={{ mb: 1.5,textAlign:'left' }} >
