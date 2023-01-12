@@ -1,7 +1,7 @@
 import { put, takeLatest } from "@redux-saga/core/effects";
 import axios from "axios";
 
-// GET request to send age to database
+// fetches all resources in the specific health category
 function* fetchSpecificResources(action) {
 
     try {
@@ -17,12 +17,12 @@ function* fetchSpecificResources(action) {
     }
 }
 
+// adds resource in the specific health category
 function* addResource(action) {
     
     try {
         const categoryId = action.payload.categoryId;
         const dataToSend = action.payload;
-        console.log('data is', dataToSend);
 
         yield axios.post(`/api/adminprevcare/specificresources/${action.payload.categoryId}`,  dataToSend );
 
@@ -32,12 +32,12 @@ function* addResource(action) {
     }
 }
 
+// updates resource in the specific health category
 function* updateResource(action) {
     
     try {
         const categoryId = action.payload.categoryId;
         const dataToSend = action.payload;
-        console.log('data is', dataToSend);
 
         yield axios.put(`/api/adminprevcare/specificresources/${action.payload.categoryId}`,  dataToSend );
 
@@ -47,6 +47,7 @@ function* updateResource(action) {
     }
 }
 
+// deletes resource in the specific health category
 function* deleteResource(action) {
     try {
         const categoryId = action.payload.categoryId;

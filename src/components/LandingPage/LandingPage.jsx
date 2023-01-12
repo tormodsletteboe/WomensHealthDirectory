@@ -22,13 +22,13 @@ const style = {  // modal styling
 
 function LandingPage() {
   const [heading, setHeading] = useState('Welcome to the ViFi!');
-  const [[modalOpen, setModal], [text, setText]] = [useState(false), useState('')];
+  const [[modalOpen, setModal], [text, setText]] = [useState(false), useState('')]; 
   const [history, dispatch] = [useHistory(), useDispatch()];
 
   //Google Analytics tracking for buttons
   const gaEventTracker = useAnalyticsEventTracker('Learn More');
 
-  const submitEmail = () => {
+  const submitEmail = () => { //add new email to newsletter database
     dispatch({ type: 'ADD_TO_NEWSLETTER', payload: text });
     setModal(false);
   }
@@ -104,10 +104,6 @@ function LandingPage() {
         </Card>
 
         <Card variant='outlined' className='grid-col_12' id='newsletter'>
-          {/* <h1>Subscribe to our Newsletter!</h1>
-          <Typography paragraph>Get weekly news and updates of how to advocate for your health!</Typography>
-          <Button sx={({ '&:hover': { opacity: 0.7 } })} variant='outlined' style={{ backgroundColor: "#8EBBA7", color: "white" }} 
-          onClick={handleSubscribeClick}>Subscribe</Button> */}
           <CardMedia
             component="img"
             alt="newsletter"

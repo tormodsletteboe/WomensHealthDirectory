@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from 'react-redux';
-import { useHistory, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import AddEditForm from "../AdminAddEditForm/AdminAddEditForm";
 
 import { createTheme, ThemeProvider } from '@mui/material/styles';
@@ -19,7 +19,6 @@ function AdminCategoryDetailView() {
 
     // hooks
     const dispatch = useDispatch();
-    const history = useHistory();
     const params = useParams();
 
     // selectors
@@ -57,20 +56,16 @@ function AdminCategoryDetailView() {
     // functions
     const handleAddClick = () => {
 		
-		// calculate how many fields to show in the add form
+		// calculate how many fields to show in the add form, based on the health category selected
 		const newObjectItemsNumber = (Object.keys(detailContent[0]).length) - 1;
-		console.log('new add object fields', newObjectItemsNumber);
 
 		// create object and add in empty fields based on the above number
 		let objToAdd = {id: 0};
         let columnName = Object.keys(detailContent[0])
 		for (let i = 1; i <= newObjectItemsNumber; i++ ){
-			// let newName = 'field0' + i;
             let newName = columnName[i];
 			objToAdd[newName] = "";
 		}
-
-		console.log('new add object', objToAdd);
 
         dispatch({type: 'SET_RESOURCE_TO_EDIT', 
             payload: objToAdd})
@@ -78,7 +73,6 @@ function AdminCategoryDetailView() {
 
     const handleDelete = (evt, x) => {
         evt.preventDefault();
-        // console.log('deleting x', x);
         dispatch({type: 'DELETE_CATEGORY_DETAIL', 
             payload: {id: x.id, catId: params.catId, ageId: params.ageId, 
                 sectionName: params.sectionName}});
@@ -147,17 +141,17 @@ function AdminCategoryDetailView() {
                 {breadcrumbs}
             </Breadcrumbs>
         </Stack>
-    <Container maxWidth="xl" sx={{marginTop:"20px"}}>
-        <Typography  align="center" component="h1" variant="h3">{params.sectionName}</Typography>
-        <section>
-        <TableContainer>
-        <TableRow>
+        <Container maxWidth="xl" sx={{marginTop:"20px"}}>
+            <Typography  align="center" component="h1" variant="h3">{params.sectionName}</Typography>
+            <section>
+            <TableContainer>
+            <TableRow>
                 <TableCell><Typography variant="detailField01">{columnNames[0]} </Typography></TableCell> 
                 <TableCell><Typography variant="body2">{columnNames[1]} 
                     </Typography>
                 </TableCell>
-                    {detailContent[0] && Object.keys(detailContent[0]).length > 3 ? <TableCell><Typography>Grade</Typography></TableCell> : null} 
-                    {detailContent[0] && Object.keys(detailContent[0]).length > 4 ? <TableCell><Typography>Date</Typography></TableCell> : null}
+                    {detailContent[0] && Object.keys(detailContent[0]).length > 3 ? <TableCell><Typography>{columnNames[2]}</Typography></TableCell> : null} 
+                    {detailContent[0] && Object.keys(detailContent[0]).length > 4 ? <TableCell><Typography>{columnNames[3]}</Typography></TableCell> : null}
                 <TableCell>Edit</TableCell>
                 <TableCell>Delete</TableCell>
             </TableRow>
@@ -172,7 +166,7 @@ function AdminCategoryDetailView() {
                         <TableCell><Typography variant="detailField01">{x.field01} </Typography></TableCell>
                         <TableCell><Typography variant="body2">{x.field02} </Typography></TableCell>
                         {x.field03 ? <TableCell><Typography>{x.field03}</Typography></TableCell> : null} 
-						{x.field04 ? <TableCell><Typography>{x.field04}</Typography></TableCell>: null}
+						{x.field04 ? <TableCell><Typography>{x.field04}</Typography></TableCell> : null}
                         <TableCell>
                         <Button variant="contained" size="small" color="primary" 
 						onClick={()=>dispatch({type: 'SET_RESOURCE_TO_EDIT', payload: x})}>
@@ -190,7 +184,7 @@ function AdminCategoryDetailView() {
                 	<TableRow> 
                     <TableCell align="center" colSpan={6}>
                     {/* Creates Add button
-                    Clicking Add button will send a file with 3 empty lines to edit, 
+                    Clicking Add button will send a file with empty lines to edit, 
                     and id will be zero
                     */}                    
                      <Button variant="contained" size="small"

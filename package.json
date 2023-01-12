@@ -1,6 +1,6 @@
 {
-  "name": "prime-solo-project",
-  "version": "0.1.0",
+  "name": "womens-health-directory-vifi",
+  "version": "1.0.0",
   "private": true,
   "proxy": "http://localhost:5000",
   "engines": {

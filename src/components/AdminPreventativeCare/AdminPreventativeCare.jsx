@@ -1,12 +1,8 @@
 import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useHistory, useParams } from "react-router-dom";
+import { useHistory } from "react-router-dom";
 
-import Box from "@mui/material/Box";
-import InputLabel from "@mui/material/InputLabel";
-import MenuItem from "@mui/material/MenuItem";
-import FormControl from "@mui/material/FormControl";
-import Select from "@mui/material/Select";
+// import MUI components
 import Button from "@mui/material/Button";
 import Breadcrumbs from "@mui/material/Breadcrumbs";
 import Typography from "@mui/material/Typography";
@@ -15,12 +11,10 @@ import Stack from "@mui/material/Stack";
 import NavigateNextIcon from "@mui/icons-material/NavigateNext";
 import Container from "@mui/material/Container";
 import Grid from "@mui/material/Grid";
-import "./AdminPreventativeCare.css";
 
 function AdminPreventativeCare() {
   const dispatch = useDispatch();
   const history = useHistory();
-  const params = useParams();
 
   // reducers
   const ageRanges = useSelector((store) => store.ageRanges);
@@ -85,87 +79,87 @@ function AdminPreventativeCare() {
 
   return (
     <>
-  {/* MUI Breadcrumbs */}
-  <Stack spacing={2} mb={10} marginLeft={2}>
-    <Breadcrumbs
-      separator={<NavigateNextIcon fontSize="small" />}
-      aria-label="breadcrumb"
-      sx={{ color: "black", marginLeft: "10px" }}
-      className="breadcrumbs"
-    >
-      {breadcrumbs}
-    </Breadcrumbs>
-  </Stack>
-  <Container maxWidth="md">
-      <Grid container spacing={2} direction="column">
-        <Grid item marginLeft={2}>
-          <Typography variant="h6">
-            <label htmlFor="ageRange">Choose Your Age Range </label>
-          </Typography>
-        </Grid>
-        <Grid item>
-          <select
-            name="ageRange"
-            id="ageRangeSelect"
-            onChange={(event) => handleAgeSelection(event)}
-            style={{ marginBottom: "30px" }}
-          >
-            {ageRanges.map((ageRange) => (
-              <option key={ageRange.id} value={JSON.stringify(ageRange)}>
-                {ageRange.low} - {ageRange.high}
-              </option>
-            ))}
-          </select>
-        </Grid>
-        <Grid container direction="row">
-          <Grid item xs={6}>
-            <section>
-              <ul>
-                {selectedAgeRange.id &&
-                  healthCategories.map((category) => (
-                    <li key={category.id}>
-                      <Button
-                        onClick={() => handleCategoryClick(category)}
-                        variant="contained"
-                        style={{
-                          backgroundColor: "#8EBBA7",
-                          marginBottom: "10px",
-                        }}
-                        size="large"
-                      >
-                        {category.category}
-                      </Button>
-                    </li>
-                  ))}
-              </ul>
-            </section>
+    {/* MUI Breadcrumbs */}
+      <Stack spacing={2} mb={10} marginLeft={2}>
+        <Breadcrumbs
+          separator={<NavigateNextIcon fontSize="small" />}
+          aria-label="breadcrumb"
+          sx={{ color: "black", marginLeft: "10px" }}
+          className="breadcrumbs"
+        >
+          {breadcrumbs}
+        </Breadcrumbs>
+      </Stack>
+      <Container maxWidth="md">
+        <Grid container spacing={2} direction="column">
+          <Grid item marginLeft={2}>
+            <Typography variant="h6">
+              <label htmlFor="ageRange">Choose Your Age Range </label>
+            </Typography>
           </Grid>
-          <Grid item xs={6}>
-            {selectedAgeRange.id && selectedHealthCategory.id ? (
+          <Grid item>
+            <select
+              name="ageRange"
+              id="ageRangeSelect"
+              onChange={(event) => handleAgeSelection(event)}
+              style={{ marginBottom: "30px" }}
+            >
+              {ageRanges.map((ageRange) => (
+                <option key={ageRange.id} value={JSON.stringify(ageRange)}>
+                  {ageRange.low} - {ageRange.high}
+                </option>
+              ))}
+            </select>
+          </Grid>
+          <Grid container direction="row">
+            <Grid item xs={6}>
               <section>
                 <ul>
-                  {categorySections.map((section) => (
-                    <li key={section.name}>
-                      <Button
-                        onClick={() => handleSectionClick(section)}
-                        variant="contained"
-                        size="large"
-                        style={{
-                          backgroundColor: "#89C489",
-                          marginBottom: "10px",
-                        }}
-                      >
-                        {section.name}
-                      </Button>
-                    </li>
-                  ))}
+                  {selectedAgeRange.id &&
+                    healthCategories.map((category) => (
+                      <li key={category.id}>
+                        <Button
+                          onClick={() => handleCategoryClick(category)}
+                          variant="contained"
+                          style={{
+                            backgroundColor: "#8EBBA7",
+                            marginBottom: "10px",
+                          }}
+                          size="large"
+                        >
+                          {category.category}
+                        </Button>
+                      </li>
+                    ))}
                 </ul>
               </section>
-            ) : null}
             </Grid>
+            <Grid item xs={6}>
+              {selectedAgeRange.id && selectedHealthCategory.id ? (
+                <section>
+                  <ul>
+                    {categorySections.map((section) => (
+                      <li key={section.name}>
+                        <Button
+                          onClick={() => handleSectionClick(section)}
+                          variant="contained"
+                          size="large"
+                          style={{
+                            backgroundColor: "#89C489",
+                            marginBottom: "10px",
+                          }}
+                        >
+                          {section.name}
+                        </Button>
+                      </li>
+                    ))}
+                  </ul>
+                </section>
+              ) : null}
+              </Grid>
+          </Grid>
         </Grid>
-      </Grid>
-    </Container>
+      </Container>
     </>
   );
 }
