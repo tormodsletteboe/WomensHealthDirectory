@@ -26,10 +26,6 @@ To see the fully functional site, please visit: [DEPLOYED VERSION OF APP](https:
 
 ## Installation
 
-How do you get your application up and running? This is a step by step list for how another developer could get this project up and running. The good target audience in terms of knowledge, would be a fellow Primer from another cohort being able to spin up this project. Note that you do not need a paragraph here to intro Installation. It should be step-by-step.
-
-If your application has secret keys (for example --  Twilio), make sure you tell them how to set that up, both in getting the key and then what to call it in the `.env` file.
-
 ### Local Use
 
 1. Create a database named `womens_health_app` in PostgreSQL,
@@ -70,6 +66,7 @@ Sweetalert2
 Passport
 Suneditor
 Nodemailer
+react-csv
 
 ## License
 [MIT](https://choosealicense.com/licenses/mit/)
